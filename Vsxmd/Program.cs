@@ -1,33 +1,46 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text.RegularExpressions;
-using System.Xml;
-using System.Xml.Linq;
+﻿//-----------------------------------------------------------------------
+// <copyright file="Program.cs" company="Junle Li">
+//     Copyright (c) Junle Li. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
 
 namespace Vsxmd
 {
-    class Program
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Text.RegularExpressions;
+    using System.Xml;
+    using System.Xml.Linq;
+
+    /// <summary>
+    /// Program entry.
+    /// </summary>
+    internal class Program
     {
-        static void Main(string[] args)
+        private Dictionary<string, string> context;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Program"/> class.
+        /// </summary>
+        internal Program()
+        {
+            this.context = new Dictionary<string, string>();
+            this.context["lastNode"] = null;
+        }
+
+        /// <summary>
+        /// Program main function entry.
+        /// </summary>
+        /// <param name="args">Program arguments.</param>
+        internal static void Main(string[] args)
         {
             Program app = new Program();
             string md = app.ToMarkdown(args[0]);
             Console.WriteLine(md);
         }
 
-
-
-        private Dictionary<string, string> context;
-
-
-        public Program()
-        {
-            context = new Dictionary<string, string>();
-            context["lastNode"] = null;
-        }
-
-        public string ToMarkdown(string filePath)
+        private string ToMarkdown(string filePath)
         {
             var xdoc = XDocument.Load(filePath);
             var sw = new StringWriter();
@@ -35,14 +48,13 @@ namespace Vsxmd
             return sw.ToString();
         }
 
-
-
         private void ToMarkdown(StringWriter sw, XElement root)
         {
-            if (root.Name != "param" && context["lastNode"] == "param")
+            if (root.Name != "param" && this.context["lastNode"] == "param")
             {
                 sw.WriteLine();
             }
+
             if (root.Name == "doc")
             {
                 foreach (var node in root.Nodes())
@@ -50,12 +62,12 @@ namespace Vsxmd
                     var elem = (XElement)node;
                     if (elem.Name == "assembly")
                     {
-                        context["assembly"] = elem.Element("name").Value;
-                        sw.WriteLine("\n# {0}\n", context["assembly"]);
+                        this.context["assembly"] = elem.Element("name").Value;
+                        sw.WriteLine("\n# {0}\n", this.context["assembly"]);
                     }
                     else if (elem.Name == "members")
                     {
-                        ToMarkdown(sw, elem);
+                        this.ToMarkdown(sw, elem);
                     }
                 }
             }
@@ -69,7 +81,7 @@ namespace Vsxmd
 
                 foreach (var member in members)
                 {
-                    ToMarkdown(sw, member);
+                    this.ToMarkdown(sw, member);
                 }
             }
             else if (root.Name == "member")
@@ -79,23 +91,27 @@ namespace Vsxmd
 
                 if (memberType == 'M')
                 {
-                    memberName = RearrangeParametersInContext(root);
+                    memberName = this.RearrangeParametersInContext(root);
                 }
 
                 if (memberType == 'T')
                 {
-                    string remove = String.Format("T:{0}.", context["assembly"]);
-                    string shortMemberName = memberName.Replace(remove, "");
+                    string remove = string.Format("T:{0}.", this.context["assembly"]);
+                    string shortMemberName = memberName.Replace(remove, string.Empty);
                     sw.WriteLine("\n## {0}\n", shortMemberName);
-                    context["typeName"] = shortMemberName;
+                    this.context["typeName"] = shortMemberName;
                 }
                 else
                 {
-                    string shortMemberName = memberName.Replace("P:" + context["assembly"], "").Replace(context["typeName"] + ".", "");
+                    string shortMemberName = memberName
+                        .Replace("P:" + this.context["assembly"], string.Empty)
+                        .Replace(this.context["typeName"] + ".", string.Empty);
+
                     if (shortMemberName.StartsWith("#ctor"))
                     {
                         shortMemberName = shortMemberName.Replace("#ctor", "Constructor");
                     }
+
                     sw.WriteLine("\n### {0}\n", shortMemberName);
                 }
 
@@ -103,7 +119,7 @@ namespace Vsxmd
                 {
                     if (node.NodeType == XmlNodeType.Element)
                     {
-                        ToMarkdown(sw, (XElement)node);
+                        this.ToMarkdown(sw, (XElement)node);
                     }
                 }
             }
@@ -114,18 +130,18 @@ namespace Vsxmd
             }
             else if (root.Name == "param")
             {
-                if (context["lastNode"] != "param")
+                if (this.context["lastNode"] != "param")
                 {
                     sw.WriteLine("| Name | Description |");
                     sw.WriteLine("| ---- | ----------- |");
                 }
 
                 string paramName = root.Attribute(XName.Get("name")).Value;
-                if (context.ContainsKey(paramName))
+                if (this.context.ContainsKey(paramName))
                 {
                     sw.WriteLine("| {0} | *{1}*<br>{2} |",
                         paramName,
-                        context[paramName],
+                        this.context[paramName],
                         Regex.Replace(root.Value, "\\s+", " ", RegexOptions.Multiline));
                 }
                 else
@@ -134,7 +150,6 @@ namespace Vsxmd
                         paramName,
                         Regex.Replace(root.Value, "\\s+", " ", RegexOptions.Multiline));
                 }
-
             }
             else if (root.Name == "returns")
             {
@@ -149,23 +164,21 @@ namespace Vsxmd
             else if (root.Name == "exception")
             {
                 string exName = root.Attribute("cref").Value.Substring(2);
-                exName = exName.Replace(context["assembly"] + ".", "");
-                exName = exName.Replace(context["typeName"] + ".", "");
+                exName = exName.Replace(this.context["assembly"] + ".", string.Empty);
+                exName = exName.Replace(this.context["typeName"] + ".", string.Empty);
                 sw.WriteLine("*{0}:* {1}\n",
                     exName,
                     Regex.Replace(root.Value, "\\s+", " ", RegexOptions.Multiline));
             }
 
-            context["lastNode"] = root.Name.ToString();
+            this.context["lastNode"] = root.Name.ToString();
         }
-
-
 
         private string RearrangeParametersInContext(XElement methodMember)
         {
             string methodPrototype = methodMember.Attribute(XName.Get("name")).Value;
             Match match = Regex.Match(methodPrototype, "\\((.*)\\)");
-            string parameterString = match.Groups[1].Value.Replace(" ", "");
+            string parameterString = match.Groups[1].Value.Replace(" ", string.Empty);
             string[] parameterTypes = parameterString.Split(',');
 
             if (parameterTypes.Length == 0)
@@ -181,18 +194,19 @@ namespace Vsxmd
                 return methodPrototype;
             }
 
-            string newParamString = "";
+            string newParamString = string.Empty;
             for (int i = 0; i < paramElems.Count; i++)
             {
                 XElement paramElem = paramElems[i];
                 string paramName = paramElem.Attribute(XName.Get("name")).Value;
                 string paramType = parameterTypes[i];
-                if (newParamString != "")
+                if (newParamString != string.Empty)
                 {
                     newParamString += ", ";
                 }
+
                 newParamString += paramName;
-                context[paramName] = paramType;
+                this.context[paramName] = paramType;
             }
 
             string newMethodPrototype = Regex.Replace(methodPrototype,
@@ -201,7 +215,5 @@ namespace Vsxmd
 
             return newMethodPrototype;
         }
-
     }
-
 }
