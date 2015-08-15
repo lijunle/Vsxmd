@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Vsxmd</name>
+    </assembly>
+    <members>
+        <member name="T:Vsxmd.Program">
+            <summary>
+            Program entry.
+            </summary>
+        </member>
+        <member name="M:Vsxmd.Program.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Vsxmd.Program"/> class.
+            </summary>
+        </member>
+        <member name="M:Vsxmd.Program.Main(System.String[])">
+            <summary>
+            Program main function entry.
+            </summary>
+            <param name="args">Program arguments.</param>
+        </member>
+    </members>
+</doc>
