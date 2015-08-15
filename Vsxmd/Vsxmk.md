@@ -19,4 +19,3 @@ Program main function entry.
 | Name | Description |
 | ---- | ----------- |
 | args | *System.String[]*<br>Program arguments. |
-

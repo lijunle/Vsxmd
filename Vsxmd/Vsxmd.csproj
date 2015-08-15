@@ -91,6 +91,6 @@
   <Target Name="BeforeBuild">
   </Target>
   <Target Name="AfterBuild">
-    <Exec Command="$(TargetPath) $(DocumentationFile) > $(DocumentationFile.Replace(`.xml`, `.md`))" />
+    <Exec Command="$(TargetPath) $(DocumentationFile)" />
   </Target>
 </Project>

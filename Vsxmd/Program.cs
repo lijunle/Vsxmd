@@ -9,6 +9,7 @@ namespace Vsxmd
     using System;
     using System.Collections.Generic;
     using System.IO;
+    using System.Linq;
     using System.Text.RegularExpressions;
     using System.Xml;
     using System.Xml.Linq;
@@ -35,9 +36,24 @@ namespace Vsxmd
         /// <param name="args">Program arguments.</param>
         internal static void Main(string[] args)
         {
-            Program app = new Program();
-            string md = app.ToMarkdown(args[0]);
-            Console.WriteLine(md);
+            if (args.Length < 1)
+            {
+                Console.Error.WriteLine($"Usage: {AppDomain.CurrentDomain.FriendlyName} <input-XML-path> [output-Markdown-path]");
+                Environment.Exit(1);
+            }
+
+            string xmlPath = args[0];
+            string markdownPath = args.ElementAtOrDefault(1);
+
+            if (markdownPath == null)
+            {
+                // replace the `xml` extension with `md` extension
+                markdownPath = Regex.Replace(xmlPath, @"\.xml$", ".md", RegexOptions.IgnoreCase);
+            }
+
+            Program program = new Program();
+            string markdown = program.ToMarkdown(xmlPath);
+            File.WriteAllText(markdownPath, markdown);
         }
 
         private string ToMarkdown(string filePath)
