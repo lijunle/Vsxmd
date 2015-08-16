@@ -224,6 +224,31 @@
         <member name="M:Vsxmd.Units.MemberUnit.MemberUnitComparer.Compare(Vsxmd.Units.MemberUnit,Vsxmd.Units.MemberUnit)">
             <inheritdoc />
         </member>
+        <member name="T:Vsxmd.Units.ParamUnit">
+            <summary>
+            Param unit.
+            </summary>
+        </member>
+        <member name="M:Vsxmd.Units.ParamUnit.#ctor(System.Xml.Linq.XElement,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Vsxmd.Units.ParamUnit"/> class.
+            </summary>
+            <param name="element">The param XML element.</param>
+            <param name="paramType">The paramter type corresponding to the param XML element.</param>
+            <exception cref="T:System.ArgumentException">Throw if XML element name is not <c>param</c>.</exception>
+        </member>
+        <member name="M:Vsxmd.Units.ParamUnit.ToMarkdown">
+            <inheritdoc />
+        </member>
+        <member name="M:Vsxmd.Units.ParamUnit.ToMarkdown(System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement},System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Convert the param XML element to Markdown safely.
+            If elemnt is <value>null</value>, return empty string.
+            </summary>
+            <param name="elements">The param XML element list.</param>
+            <param name="paramTypes">The paramater type names.</param>
+            <returns>The generated Markdown.</returns>
+        </member>
         <member name="T:Vsxmd.Units.ReturnsUnit">
             <summary>
             Returns unit.

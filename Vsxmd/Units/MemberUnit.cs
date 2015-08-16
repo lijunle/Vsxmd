@@ -150,6 +150,12 @@ namespace Vsxmd.Units
         private IEnumerable<string> Returns =>
             ReturnsUnit.ToMarkdown(this.Element.Element("returns"));
 
+        private IEnumerable<string> Params =>
+            ParamUnit.ToMarkdown(this.Element.Elements("param"), this.ParamTypes);
+
+        private IEnumerable<string> ParamTypes =>
+            this.Name.Split('(').Last().Trim(')').Split(',');
+
         /// <inheritdoc />
         public override IEnumerable<string> ToMarkdown()
         {
@@ -173,7 +179,8 @@ namespace Vsxmd.Units
                     }
                     .Concat(this.InheritDoc)
                     .Concat(this.Summary)
-                    .Concat(this.Returns);
+                    .Concat(this.Returns)
+                    .Concat(this.Params);
                 default:
                     return Enumerable.Empty<string>();
             }

@@ -75,6 +75,7 @@
     <Compile Include="Units\IUnit.cs" />
     <Compile Include="Units\MemberKind.cs" />
     <Compile Include="Units\MemberUnit.cs" />
+    <Compile Include="Units\ParamUnit.cs" />
     <Compile Include="Units\ReturnsUnit.cs" />
     <Compile Include="Units\SummaryUnit.cs" />
   </ItemGroup>
