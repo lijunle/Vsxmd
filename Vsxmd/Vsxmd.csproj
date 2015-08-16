@@ -72,6 +72,8 @@
     <Compile Include="Units\AssemblyUnit.cs" />
     <Compile Include="Units\BaseUnit.cs" />
     <Compile Include="Units\IUnit.cs" />
+    <Compile Include="Units\MemberKind.cs" />
+    <Compile Include="Units\MemberUnit.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

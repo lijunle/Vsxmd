@@ -43,7 +43,18 @@ namespace Vsxmd
             var assemblyUnit = new AssemblyUnit(docElement.Element("assembly"));
             var assemblyMarkdown = assemblyUnit.ToMarkdown();
 
-            return assemblyMarkdown;
+            // member units
+            var memberUnits = docElement
+                .Element("members")
+                .Elements("member")
+                .Select(element => new MemberUnit(element))
+                .Where(member => member.Kind != MemberKind.NotSupported);
+
+            var memberMarkdowns = memberUnits
+                .OrderBy(member => member, MemberUnit.Comparer)
+                .SelectMany(member => member.ToMarkdown());
+
+            return assemblyMarkdown.Concat(memberMarkdowns);
         }
     }
 }

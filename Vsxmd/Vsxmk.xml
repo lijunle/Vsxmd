@@ -85,5 +85,98 @@
             </summary>
             <returns>The generated Markdown content.</returns>
         </member>
+        <member name="T:Vsxmd.Units.MemberKind">
+            <summary>
+            The member kind.
+            </summary>
+        </member>
+        <member name="F:Vsxmd.Units.MemberKind.NotSupported">
+            <summary>
+            Not supported member kind.
+            </summary>
+        </member>
+        <member name="F:Vsxmd.Units.MemberKind.Type">
+            <summary>
+            Type.
+            </summary>
+        </member>
+        <member name="F:Vsxmd.Units.MemberKind.Constructor">
+            <summary>
+            Constructor.
+            </summary>
+        </member>
+        <member name="F:Vsxmd.Units.MemberKind.Constants">
+            <summary>
+            Constants
+            </summary>
+        </member>
+        <member name="F:Vsxmd.Units.MemberKind.Property">
+            <summary>
+            Property.
+            </summary>
+        </member>
+        <member name="F:Vsxmd.Units.MemberKind.Method">
+            <summary>
+            Method.
+            </summary>
+        </member>
+        <member name="T:Vsxmd.Units.MemberUnit">
+            <summary>
+            Member unit.
+            </summary>
+        </member>
+        <member name="M:Vsxmd.Units.MemberUnit.#ctor(System.Xml.Linq.XElement)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Vsxmd.Units.MemberUnit"/> class.
+            </summary>
+            <param name="element">The member XML element.</param>
+            <exception cref="T:System.ArgumentException">Throw if XML element name is not <c>member</c>.</exception>
+        </member>
+        <member name="P:Vsxmd.Units.MemberUnit.Comparer">
+            <summary>
+            Gets the member unit comparer.
+            </summary>
+            <value>The member unit comparer.</value>
+        </member>
+        <member name="P:Vsxmd.Units.MemberUnit.Name">
+            <summary>
+            Gets the name.
+            </summary>
+            <value>The member name</value>
+            <example><c>Vsxmd.Units.TypeUnit</c>, <c>Vsxmd.Units.TypeUnit.#ctor(System.Xml.Linq.XElement)</c>, <c>Vsxmd.Units.TypeUnit.TypeName</c>.</example>
+        </member>
+        <member name="P:Vsxmd.Units.MemberUnit.TypeFullName">
+            <summary>
+            Gets the type full name.
+            </summary>
+            <value>The the type full name.</value>
+            <example><c>Vsxmd.Program</c>, <c>Vsxmd.Units.TypeUnit</c>.</example>
+        </member>
+        <member name="P:Vsxmd.Units.MemberUnit.Kind">
+            <summary>
+            Gets the member kind, one of <see cref="T:Vsxmd.Units.MemberKind"/>.
+            </summary>
+            <value>The member kind.</value>
+        </member>
+        <member name="P:Vsxmd.Units.MemberUnit.TypeName">
+            <summary>
+            Gets the type name.
+            </summary>
+            <value>The type name.</value>
+            <example><c>Program</c>, <c>Converter</c>.</example>
+        </member>
+        <member name="P:Vsxmd.Units.MemberUnit.NamespaceName">
+            <summary>
+            Gets the namespace name.
+            </summary>
+            <value>The namespace name.</value>
+            <example><c>Vsxmd</c>, <c>Vsxmd.Units</c>.</example>
+        </member>
+        <member name="M:Vsxmd.Units.MemberUnit.ToMarkdown">
+            <inheritdoc />
+        </member>
+        <member name="M:Vsxmd.Units.MemberUnit.MemberUnitComparer.Compare(Vsxmd.Units.MemberUnit,Vsxmd.Units.MemberUnit)">
+            <inheritdoc />
+        </member>
     </members>
 </doc>
