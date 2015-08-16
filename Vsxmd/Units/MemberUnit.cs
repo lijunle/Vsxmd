@@ -139,6 +139,9 @@ namespace Vsxmd.Units
         private IEnumerable<string> NameSegments =>
             this.Name.Split('(').First().Split('.');
 
+        private IEnumerable<string> Summary =>
+            SummaryUnit.ToMarkdown(this.Element.Element("summary"));
+
         /// <inheritdoc />
         public override IEnumerable<string> ToMarkdown()
         {
@@ -150,14 +153,16 @@ namespace Vsxmd.Units
                         $"## {this.TypeName}",
                         $"##### Namespace",
                         $"{this.NamespaceName}"
-                    };
+                    }
+                    .Concat(this.Summary);
                 case F:
                 case P:
                 case M:
                     return new[]
                     {
                         $"### {this.NameSegments.Last().Escape()} `{this.KindString}`"
-                    };
+                    }
+                    .Concat(this.Summary);
                 default:
                     return Enumerable.Empty<string>();
             }

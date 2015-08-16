@@ -112,6 +112,14 @@
             <param name="count">The number to except.</param>
             <returns>The generated enumerable.</returns>
         </member>
+        <member name="M:Vsxmd.Units.Extensions.ToMarkdownText(System.Xml.Linq.XElement)">
+            <summary>
+            Convert the inline XML nodes to Markdown text.
+            For example, it works for <c>summary</c> and <c>returns</c> elements.
+            </summary>
+            <param name="element">The XML element.</param>
+            <returns>The generated Markdwon content.</returns>
+        </member>
         <member name="T:Vsxmd.Units.IUnit">
             <summary>
             <see cref="T:Vsxmd.Units.IUnit"/> is wrapper to handle XML elements.
@@ -215,6 +223,29 @@
         </member>
         <member name="M:Vsxmd.Units.MemberUnit.MemberUnitComparer.Compare(Vsxmd.Units.MemberUnit,Vsxmd.Units.MemberUnit)">
             <inheritdoc />
+        </member>
+        <member name="T:Vsxmd.Units.SummaryUnit">
+            <summary>
+            Summary unit.
+            </summary>
+        </member>
+        <member name="M:Vsxmd.Units.SummaryUnit.#ctor(System.Xml.Linq.XElement)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Vsxmd.Units.SummaryUnit"/> class.
+            </summary>
+            <param name="element">The summary XML element.</param>
+            <exception cref="T:System.ArgumentException">Throw if XML element name is not <c>summary</c>.</exception>
+        </member>
+        <member name="M:Vsxmd.Units.SummaryUnit.ToMarkdown">
+            <inheritdoc />
+        </member>
+        <member name="M:Vsxmd.Units.SummaryUnit.ToMarkdown(System.Xml.Linq.XElement)">
+            <summary>
+            Convert the summary XML element to Markdown safely.
+            If elemnt is <value>null</value>, return empty string.
+            </summary>
+            <param name="element">The summary XML element.</param>
+            <returns>The generated Markdown.</returns>
         </member>
     </members>
 </doc>
