@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Target Name="Vsxmd" AfterTargets="Build">
+    <Message Text="Vsxmd starts to convert XML to Markdown." />
+    <Error Condition=" '$(DocumentationFile)' == '' " Text="Project has not configure to output XML documentation file." />
+    <Exec Command=" &quot;$(MSBuildThisFileDirectory)\..\lib\net452\Vsxmd.exe&quot; &quot;$(DocumentationFile)&quot; " />
+    <Message Text="Vsxmd finishs conversion." />
+  </Target>
+</Project>
