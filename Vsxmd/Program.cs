@@ -51,8 +51,9 @@ namespace Vsxmd
                 markdownPath = Regex.Replace(xmlPath, @"\.xml$", ".md", RegexOptions.IgnoreCase);
             }
 
-            Program program = new Program();
-            string markdown = program.ToMarkdown(xmlPath);
+            var converter = new Converter(xmlPath);
+            var markdown = converter.ToMarkdown();
+
             File.WriteAllText(markdownPath, markdown);
         }
 

@@ -4,6 +4,23 @@
         <name>Vsxmd</name>
     </assembly>
     <members>
+        <member name="T:Vsxmd.Converter">
+            <summary>
+            Convert from XML docuement to Markdown syntax.
+            </summary>
+        </member>
+        <member name="M:Vsxmd.Converter.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Vsxmd.Converter"/> class.
+            </summary>
+            <param name="xmlPath">The XML document path.</param>
+        </member>
+        <member name="M:Vsxmd.Converter.ToMarkdown">
+            <summary>
+            Convert to Markdown syntax.
+            </summary>
+            <returns>The generated Markdown content.</returns>
+        </member>
         <member name="T:Vsxmd.Program">
             <summary>
             Program entry.
@@ -19,6 +36,185 @@
             Program main function entry.
             </summary>
             <param name="args">Program arguments.</param>
+        </member>
+        <member name="T:Vsxmd.Units.AssemblyUnit">
+            <summary>
+            Assembly unit.
+            </summary>
+        </member>
+        <member name="M:Vsxmd.Units.AssemblyUnit.#ctor(System.Xml.Linq.XElement)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Vsxmd.Units.AssemblyUnit"/> class.
+            </summary>
+            <param name="element">The assembly XML element.</param>
+            <exception cref="T:System.ArgumentException">Throw if XML element name is not <c>assembly</c>.</exception>
+        </member>
+        <member name="M:Vsxmd.Units.AssemblyUnit.ToMarkdown">
+            <inheritdoc />
+        </member>
+        <member name="T:Vsxmd.Units.BaseUnit">
+            <summary>
+            The base unit.
+            </summary>
+        </member>
+        <member name="M:Vsxmd.Units.BaseUnit.#ctor(System.Xml.Linq.XElement,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Vsxmd.Units.BaseUnit"/> class.
+            </summary>
+            <param name="element">The XML element.</param>
+            <param name="elementName">The expected XML element name.</param>
+            <exception cref="T:System.ArgumentException">Throw if XML <paramref name="element"/> name not matches the expected <paramref name="elementName"/>.</exception>
+        </member>
+        <member name="P:Vsxmd.Units.BaseUnit.Element">
+            <summary>
+            Gets the XML element.
+            </summary>
+            <value>The XML element.</value>
+        </member>
+        <member name="M:Vsxmd.Units.BaseUnit.ToMarkdown">
+            <inheritdoc />
+        </member>
+        <member name="T:Vsxmd.Units.Extensions">
+            <summary>
+            Extensions helper.
+            </summary>
+        </member>
+        <member name="M:Vsxmd.Units.Extensions.Join(System.Collections.Generic.IEnumerable{System.String},System.String)">
+            <summary>
+            Concatenates the <paramref name="value"/>s with the <paramref name="separator"/>.
+            </summary>
+            <param name="value">The string values.</param>
+            <param name="separator">The separator.</param>
+            <returns>The concatenated string.</returns>
+        </member>
+        <member name="M:Vsxmd.Units.Extensions.Escape(System.String)">
+            <summary>
+            Escape the content to keep it raw in Markdown syntax.
+            </summary>
+            <param name="content">The content.</param>
+            <returns>The escaped content.</returns>
+        </member>
+        <member name="M:Vsxmd.Units.Extensions.NthLastOrDefault``1(System.Collections.Generic.IEnumerable{``0},System.Int32)">
+            <summary>
+            Gets the n-th last element from the <paramref name="source"/>.
+            </summary>
+            <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
+            <param name="source">The source enumerable.</param>
+            <param name="index">The index for the n-th last.</param>
+            <returns>The target element, default(<typeparamref name="TSource"/>) if not found.</returns>
+        </member>
+        <member name="M:Vsxmd.Units.Extensions.TakeAllButLast``1(System.Collections.Generic.IEnumerable{``0},System.Int32)">
+            <summary>
+            Take all element except the last <paramref name="count"/>.
+            </summary>
+            <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
+            <param name="source">The source enumerable.</param>
+            <param name="count">The number to except.</param>
+            <returns>The generated enumerable.</returns>
+        </member>
+        <member name="T:Vsxmd.Units.IUnit">
+            <summary>
+            <see cref="T:Vsxmd.Units.IUnit"/> is wrapper to handle XML elements.
+            </summary>
+        </member>
+        <member name="M:Vsxmd.Units.IUnit.ToMarkdown">
+            <summary>
+            Represent the XML element content as Markdown syntax.
+            </summary>
+            <returns>The generated Markdown content.</returns>
+        </member>
+        <member name="T:Vsxmd.Units.MemberKind">
+            <summary>
+            The member kind.
+            </summary>
+        </member>
+        <member name="F:Vsxmd.Units.MemberKind.NotSupported">
+            <summary>
+            Not supported member kind.
+            </summary>
+        </member>
+        <member name="F:Vsxmd.Units.MemberKind.Type">
+            <summary>
+            Type.
+            </summary>
+        </member>
+        <member name="F:Vsxmd.Units.MemberKind.Constructor">
+            <summary>
+            Constructor.
+            </summary>
+        </member>
+        <member name="F:Vsxmd.Units.MemberKind.Constants">
+            <summary>
+            Constants
+            </summary>
+        </member>
+        <member name="F:Vsxmd.Units.MemberKind.Property">
+            <summary>
+            Property.
+            </summary>
+        </member>
+        <member name="F:Vsxmd.Units.MemberKind.Method">
+            <summary>
+            Method.
+            </summary>
+        </member>
+        <member name="T:Vsxmd.Units.MemberUnit">
+            <summary>
+            Member unit.
+            </summary>
+        </member>
+        <member name="M:Vsxmd.Units.MemberUnit.#ctor(System.Xml.Linq.XElement)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Vsxmd.Units.MemberUnit"/> class.
+            </summary>
+            <param name="element">The member XML element.</param>
+            <exception cref="T:System.ArgumentException">Throw if XML element name is not <c>member</c>.</exception>
+        </member>
+        <member name="P:Vsxmd.Units.MemberUnit.Comparer">
+            <summary>
+            Gets the member unit comparer.
+            </summary>
+            <value>The member unit comparer.</value>
+        </member>
+        <member name="P:Vsxmd.Units.MemberUnit.Name">
+            <summary>
+            Gets the name.
+            </summary>
+            <value>The member name</value>
+            <example><c>Vsxmd.Units.TypeUnit</c>, <c>Vsxmd.Units.TypeUnit.#ctor(System.Xml.Linq.XElement)</c>, <c>Vsxmd.Units.TypeUnit.TypeName</c>.</example>
+        </member>
+        <member name="P:Vsxmd.Units.MemberUnit.TypeFullName">
+            <summary>
+            Gets the type full name.
+            </summary>
+            <value>The the type full name.</value>
+            <example><c>Vsxmd.Program</c>, <c>Vsxmd.Units.TypeUnit</c>.</example>
+        </member>
+        <member name="P:Vsxmd.Units.MemberUnit.Kind">
+            <summary>
+            Gets the member kind, one of <see cref="T:Vsxmd.Units.MemberKind"/>.
+            </summary>
+            <value>The member kind.</value>
+        </member>
+        <member name="P:Vsxmd.Units.MemberUnit.TypeName">
+            <summary>
+            Gets the type name.
+            </summary>
+            <value>The type name.</value>
+            <example><c>Program</c>, <c>Converter</c>.</example>
+        </member>
+        <member name="P:Vsxmd.Units.MemberUnit.NamespaceName">
+            <summary>
+            Gets the namespace name.
+            </summary>
+            <value>The namespace name.</value>
+            <example><c>Vsxmd</c>, <c>Vsxmd.Units</c>.</example>
+        </member>
+        <member name="M:Vsxmd.Units.MemberUnit.ToMarkdown">
+            <inheritdoc />
+        </member>
+        <member name="M:Vsxmd.Units.MemberUnit.MemberUnitComparer.Compare(Vsxmd.Units.MemberUnit,Vsxmd.Units.MemberUnit)">
+            <inheritdoc />
         </member>
     </members>
 </doc>
