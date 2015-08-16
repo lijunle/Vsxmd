@@ -72,6 +72,7 @@
     <Compile Include="Units\AssemblyUnit.cs" />
     <Compile Include="Units\BaseUnit.cs" />
     <Compile Include="Units\ExampleUnit.cs" />
+    <Compile Include="Units\ExceptionUnit.cs" />
     <Compile Include="Units\Extensions.cs" />
     <Compile Include="Units\IUnit.cs" />
     <Compile Include="Units\MemberKind.cs" />

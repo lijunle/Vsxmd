@@ -1,0 +1,71 @@
+﻿//-----------------------------------------------------------------------
+// <copyright file="ExceptionUnit.cs" company="Junle Li">
+//     Copyright (c) Junle Li. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+
+namespace Vsxmd.Units
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Xml.Linq;
+
+    /// <summary>
+    /// Exception unit.
+    /// </summary>
+    internal class ExceptionUnit : BaseUnit
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ExceptionUnit"/> class.
+        /// </summary>
+        /// <param name="element">The exception XML element.</param>
+        /// <exception cref="ArgumentException">Throw if XML element name is not <c>exception</c>.</exception>
+        public ExceptionUnit(XElement element)
+            : base(element, "exception")
+        {
+        }
+
+        private string ExceptionName => this.Element.Attribute("cref").Value.Substring(2);
+
+        private string ExceptionDescription => this.Element.ToMarkdownText();
+
+        /// <inheritdoc />
+        public override IEnumerable<string> ToMarkdown() =>
+            new[]
+            {
+                $"| {this.ExceptionName} | {this.ExceptionDescription} |"
+            };
+
+        /// <summary>
+        /// Convert the exception XML element to Markdown safely.
+        /// If elemnt is <value>null</value>, return empty string.
+        /// </summary>
+        /// <param name="elements">The exception XML element list.</param>
+        /// <returns>The generated Markdown.</returns>
+        internal static IEnumerable<string> ToMarkdown(IEnumerable<XElement> elements)
+        {
+            if (!elements.Any())
+            {
+                return Enumerable.Empty<string>();
+            }
+
+            var exceptionMarkdowns = elements
+                .Select(element => new ExceptionUnit(element))
+                .SelectMany(unit => unit.ToMarkdown());
+
+            var paramTable = new[]
+            {
+                "| Name | Description |",
+                "| ---- | ----------- |"
+            }
+            .Concat(exceptionMarkdowns);
+
+            return new[]
+            {
+                "##### Exceptions",
+                string.Join("\n", paramTable)
+            };
+        }
+    }
+}

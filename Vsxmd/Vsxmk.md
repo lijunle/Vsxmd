@@ -22,6 +22,12 @@ Initializes a new instance of the `AssemblyUnit` class.
 | ---- | ---- | ----------- |
 | element | System.Xml.Linq.XElement | The assembly XML element. |
 
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| System.ArgumentException | Throw if XML element name is not `assembly`. |
+
 ### ToMarkdown `method`
 
 Inherit documentation from parent.
@@ -52,6 +58,12 @@ Initializes a new instance of the `BaseUnit` class.
 | ---- | ---- | ----------- |
 | element | System.Xml.Linq.XElement | The XML element. |
 | elementName | System.String | The expected XML element name. |
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| System.ArgumentException | Throw if XML `element` name not matches the expected `elementName`. |
 
 ### Element `property`
 
@@ -129,6 +141,12 @@ Initializes a new instance of the `ExampleUnit` class.
 | ---- | ---- | ----------- |
 | element | System.Xml.Linq.XElement | The example XML element. |
 
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| System.ArgumentException | Throw if XML element name is not `example`. |
+
 ### ToMarkdown `method`
 
 Inherit documentation from parent.
@@ -152,6 +170,58 @@ The generated Markdown.
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | element | System.Xml.Linq.XElement | The example XML element. |
+
+## ExceptionUnit
+
+##### Namespace
+
+Vsxmd.Units
+
+##### Summary
+
+Exception unit.
+
+### #ctor `constructor`
+
+##### Summary
+
+Initializes a new instance of the `ExceptionUnit` class.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| element | System.Xml.Linq.XElement | The exception XML element. |
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| System.ArgumentException | Throw if XML element name is not `exception`. |
+
+### ToMarkdown `method`
+
+Inherit documentation from parent.
+
+##### Parameters
+
+This method has no parameters.
+
+### ToMarkdown `method`
+
+##### Summary
+
+Convert the exception XML element to Markdown safely. If elemnt is `null`, return empty string.
+
+##### Returns
+
+The generated Markdown.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| elements | System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement} | The exception XML element list. |
 
 ## Extensions
 
@@ -388,6 +458,12 @@ Initializes a new instance of the `MemberUnit` class.
 | ---- | ---- | ----------- |
 | element | System.Xml.Linq.XElement | The member XML element. |
 
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| System.ArgumentException | Throw if XML element name is not `member`. |
+
 ### Comparer `property`
 
 ##### Summary
@@ -503,6 +579,12 @@ Initializes a new instance of the `ParamUnit` class.
 | element | System.Xml.Linq.XElement | The param XML element. |
 | paramType | System.String | The paramter type corresponding to the param XML element. |
 
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| System.ArgumentException | Throw if XML element name is not `param`. |
+
 ### ToMarkdown `method`
 
 Inherit documentation from parent.
@@ -582,6 +664,12 @@ Initializes a new instance of the `ReturnsUnit` class.
 | ---- | ---- | ----------- |
 | element | System.Xml.Linq.XElement | The returns XML element. |
 
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| System.ArgumentException | Throw if XML element name is not `returns`. |
+
 ### ToMarkdown `method`
 
 Inherit documentation from parent.
@@ -628,6 +716,12 @@ Initializes a new instance of the `SummaryUnit` class.
 | ---- | ---- | ----------- |
 | element | System.Xml.Linq.XElement | The summary XML element. |
 
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| System.ArgumentException | Throw if XML element name is not `summary`. |
+
 ### ToMarkdown `method`
 
 Inherit documentation from parent.
@@ -673,6 +767,12 @@ Initializes a new instance of the `TypeparamUnit` class.
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | element | System.Xml.Linq.XElement | The typeparam XML element. |
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| System.ArgumentException | Throw if XML element name is not `typeparam`. |
 
 ### ToMarkdown `method`
 

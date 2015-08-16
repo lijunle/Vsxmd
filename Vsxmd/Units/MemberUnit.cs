@@ -159,6 +159,9 @@ namespace Vsxmd.Units
         private IEnumerable<string> Typeparams =>
             TypeparamUnit.ToMarkdown(this.Element.Elements("typeparam"));
 
+        private IEnumerable<string> Exceptions =>
+            ExceptionUnit.ToMarkdown(this.Element.Elements("exception"));
+
         private IEnumerable<string> Example =>
             ExampleUnit.ToMarkdown(this.Element.Element("example"));
 
@@ -188,6 +191,7 @@ namespace Vsxmd.Units
                     .Concat(this.Returns)
                     .Concat(this.Params)
                     .Concat(this.Typeparams)
+                    .Concat(this.Exceptions)
                     .Concat(this.Example);
                 default:
                     return Enumerable.Empty<string>();
