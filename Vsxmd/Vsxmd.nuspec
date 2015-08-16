@@ -1,0 +1,16 @@
+﻿<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>https://github.com/lijunle/Vsxmd/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/lijunle/Vsxmd</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <copyright>Copyright 2015</copyright>
+    <tags>Vsxmd VS XML document Markdown</tags>
+  </metadata>
+</package>
