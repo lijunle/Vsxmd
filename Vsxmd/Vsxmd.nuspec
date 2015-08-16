@@ -11,6 +11,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <copyright>Copyright 2015</copyright>
+    <developmentDependency>true</developmentDependency>
     <tags>Vsxmd VS XML document Markdown</tags>
   </metadata>
 </package>
