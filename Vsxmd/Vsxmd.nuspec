@@ -14,4 +14,7 @@
     <developmentDependency>true</developmentDependency>
     <tags>Vsxmd VS XML document Markdown</tags>
   </metadata>
+  <files>
+    <file src="targets\*" target="build" />
+  </files>
 </package>
