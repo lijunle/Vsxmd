@@ -139,6 +139,11 @@ namespace Vsxmd.Units
         private IEnumerable<string> NameSegments =>
             this.Name.Split('(').First().Split('.');
 
+        private IEnumerable<string> InheritDoc =>
+            this.Element.Element("inheritdoc") != null
+                ? new[] { "Inherit documentation from parent." }
+                : Enumerable.Empty<string>();
+
         private IEnumerable<string> Summary =>
             SummaryUnit.ToMarkdown(this.Element.Element("summary"));
 
@@ -157,6 +162,7 @@ namespace Vsxmd.Units
                         $"##### Namespace",
                         $"{this.NamespaceName}"
                     }
+                    .Concat(this.InheritDoc)
                     .Concat(this.Summary);
                 case F:
                 case P:
@@ -165,6 +171,7 @@ namespace Vsxmd.Units
                     {
                         $"### {this.NameSegments.Last().Escape()} `{this.KindString}`"
                     }
+                    .Concat(this.InheritDoc)
                     .Concat(this.Summary)
                     .Concat(this.Returns);
                 default:

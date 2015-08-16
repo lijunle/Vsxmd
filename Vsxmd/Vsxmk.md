@@ -18,6 +18,8 @@ Initializes a new instance of the `AssemblyUnit` class.
 
 ### ToMarkdown `method`
 
+Inherit documentation from parent.
+
 ## BaseUnit
 
 ##### Namespace
@@ -41,6 +43,8 @@ Initializes a new instance of the `BaseUnit` class.
 Gets the XML element.
 
 ### ToMarkdown `method`
+
+Inherit documentation from parent.
 
 ## Converter
 
@@ -248,7 +252,11 @@ Gets the type name.
 
 ### ToMarkdown `method`
 
+Inherit documentation from parent.
+
 ### Compare `method`
+
+Inherit documentation from parent.
 
 ## Program
 
@@ -290,6 +298,8 @@ Initializes a new instance of the `ReturnsUnit` class.
 
 ### ToMarkdown `method`
 
+Inherit documentation from parent.
+
 ### ToMarkdown `method`
 
 ##### Summary
@@ -317,6 +327,8 @@ Summary unit.
 Initializes a new instance of the `SummaryUnit` class.
 
 ### ToMarkdown `method`
+
+Inherit documentation from parent.
 
 ### ToMarkdown `method`
 
