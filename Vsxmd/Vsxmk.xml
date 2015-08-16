@@ -4,6 +4,23 @@
         <name>Vsxmd</name>
     </assembly>
     <members>
+        <member name="T:Vsxmd.Converter">
+            <summary>
+            Convert from XML docuement to Markdown syntax.
+            </summary>
+        </member>
+        <member name="M:Vsxmd.Converter.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Vsxmd.Converter"/> class.
+            </summary>
+            <param name="xmlPath">The XML document path.</param>
+        </member>
+        <member name="M:Vsxmd.Converter.ToMarkdown">
+            <summary>
+            Convert to Markdown syntax.
+            </summary>
+            <returns>The generated Markdown content.</returns>
+        </member>
         <member name="T:Vsxmd.Program">
             <summary>
             Program entry.
@@ -19,6 +36,32 @@
             Program main function entry.
             </summary>
             <param name="args">Program arguments.</param>
+        </member>
+        <member name="T:Vsxmd.Units.AssemblyUnit">
+            <summary>
+            Assembly unit.
+            </summary>
+        </member>
+        <member name="M:Vsxmd.Units.AssemblyUnit.#ctor(System.Xml.Linq.XElement)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Vsxmd.Units.AssemblyUnit"/> class.
+            </summary>
+            <param name="element">The assembly XML element.</param>
+            <exception cref="T:System.ArgumentException">Throw if XML element name is not <c>assembly</c>.</exception>
+        </member>
+        <member name="M:Vsxmd.Units.AssemblyUnit.ToMarkdown">
+            <inheritdoc />
+        </member>
+        <member name="T:Vsxmd.Units.IUnit">
+            <summary>
+            <see cref="T:Vsxmd.Units.IUnit"/> is wrapper to handle XML elements.
+            </summary>
+        </member>
+        <member name="M:Vsxmd.Units.IUnit.ToMarkdown">
+            <summary>
+            Represent the XML element content as Markdown syntax.
+            </summary>
+            <returns>The generated Markdown content.</returns>
         </member>
     </members>
 </doc>
