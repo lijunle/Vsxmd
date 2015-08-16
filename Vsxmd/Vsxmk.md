@@ -620,16 +620,6 @@ Vsxmd
 
 Program entry.
 
-### #ctor `constructor`
-
-##### Summary
-
-Initializes a new instance of the `Program` class.
-
-##### Parameters
-
-This method has no parameters.
-
 ### Main `method`
 
 ##### Summary

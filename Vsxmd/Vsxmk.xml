@@ -26,11 +26,6 @@
             Program entry.
             </summary>
         </member>
-        <member name="M:Vsxmd.Program.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:Vsxmd.Program"/> class.
-            </summary>
-        </member>
         <member name="M:Vsxmd.Program.Main(System.String[])">
             <summary>
             Program main function entry.
