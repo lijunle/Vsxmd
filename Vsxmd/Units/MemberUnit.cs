@@ -18,6 +18,12 @@ namespace Vsxmd.Units
     {
         private const char T = 'T';
 
+        private const char F = 'F';
+
+        private const char P = 'P';
+
+        private const char M = 'M';
+
         private readonly char type;
 
         static MemberUnit()
@@ -68,6 +74,14 @@ namespace Vsxmd.Units
                 {
                     case T:
                         return MemberKind.Type;
+                    case F:
+                        return MemberKind.Constants;
+                    case P:
+                        return MemberKind.Property;
+                    case M:
+                        return this.Name.Contains(".#ctor")
+                            ? MemberKind.Constructor
+                            : MemberKind.Method;
                     default:
                         return MemberKind.NotSupported;
                 }
@@ -87,6 +101,10 @@ namespace Vsxmd.Units
                 {
                     case T:
                         return this.Name.Split('.').Last();
+                    case F:
+                    case P:
+                    case M:
+                        return this.NameSegments.NthLastOrDefault(1);
                     default:
                         return string.Empty;
                 }
@@ -106,11 +124,20 @@ namespace Vsxmd.Units
                 {
                     case T:
                         return this.Name.Substring(0, this.Name.Length - this.TypeName.Length - 1);
+                    case F:
+                    case P:
+                    case M:
+                        return this.NameSegments.TakeAllButLast(2).Join(".");
                     default:
                         return string.Empty;
                 }
             }
         }
+
+        private string KindString => this.Kind.ToString().ToLower();
+
+        private IEnumerable<string> NameSegments =>
+            this.Name.Split('(').First().Split('.');
 
         /// <inheritdoc />
         public override IEnumerable<string> ToMarkdown()
@@ -123,6 +150,13 @@ namespace Vsxmd.Units
                         $"## {this.TypeName}",
                         $"##### Namespace",
                         $"{this.NamespaceName}"
+                    };
+                case F:
+                case P:
+                case M:
+                    return new[]
+                    {
+                        $"### {this.NameSegments.Last().Escape()} `{this.KindString}`"
                     };
                 default:
                     return Enumerable.Empty<string>();

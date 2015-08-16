@@ -74,6 +74,44 @@
         <member name="M:Vsxmd.Units.BaseUnit.ToMarkdown">
             <inheritdoc />
         </member>
+        <member name="T:Vsxmd.Units.Extensions">
+            <summary>
+            Extensions helper.
+            </summary>
+        </member>
+        <member name="M:Vsxmd.Units.Extensions.Join(System.Collections.Generic.IEnumerable{System.String},System.String)">
+            <summary>
+            Concatenates the <paramref name="value"/>s with the <paramref name="separator"/>.
+            </summary>
+            <param name="value">The string values.</param>
+            <param name="separator">The separator.</param>
+            <returns>The concatenated string.</returns>
+        </member>
+        <member name="M:Vsxmd.Units.Extensions.Escape(System.String)">
+            <summary>
+            Escape the content to keep it raw in Markdown syntax.
+            </summary>
+            <param name="content">The content.</param>
+            <returns>The escaped content.</returns>
+        </member>
+        <member name="M:Vsxmd.Units.Extensions.NthLastOrDefault``1(System.Collections.Generic.IEnumerable{``0},System.Int32)">
+            <summary>
+            Gets the n-th last element from the <paramref name="source"/>.
+            </summary>
+            <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
+            <param name="source">The source enumerable.</param>
+            <param name="index">The index for the n-th last.</param>
+            <returns>The target element, default(<typeparamref name="TSource"/>) if not found.</returns>
+        </member>
+        <member name="M:Vsxmd.Units.Extensions.TakeAllButLast``1(System.Collections.Generic.IEnumerable{``0},System.Int32)">
+            <summary>
+            Take all element except the last <paramref name="count"/>.
+            </summary>
+            <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
+            <param name="source">The source enumerable.</param>
+            <param name="count">The number to except.</param>
+            <returns>The generated enumerable.</returns>
+        </member>
         <member name="T:Vsxmd.Units.IUnit">
             <summary>
             <see cref="T:Vsxmd.Units.IUnit"/> is wrapper to handle XML elements.
