@@ -137,7 +137,7 @@ The escaped content.
 
 ##### Summary
 
-Concatenates the s with the .
+Concatenates the `value`s with the `separator`.
 
 ##### Returns
 
@@ -154,7 +154,7 @@ The concatenated string.
 
 ##### Summary
 
-Gets the n-th last element from the .
+Gets the n-th last element from the `source`.
 
 ##### Returns
 
@@ -167,11 +167,17 @@ The target element, default(`TSource`) if not found.
 | source | System.Collections.Generic.IEnumerable{``0} | The source enumerable. |
 | index | System.Int32 | The index for the n-th last. |
 
+##### Generic Types
+
+| Name | Description |
+| ---- | ----------- |
+| TSource | The type of the elements of `source`. |
+
 ### TakeAllButLast\`\`1 `method`
 
 ##### Summary
 
-Take all element except the last .
+Take all element except the last `count`.
 
 ##### Returns
 
@@ -183,6 +189,12 @@ The generated enumerable.
 | ---- | ---- | ----------- |
 | source | System.Collections.Generic.IEnumerable{``0} | The source enumerable. |
 | count | System.Int32 | The number to except. |
+
+##### Generic Types
+
+| Name | Description |
+| ---- | ----------- |
+| TSource | The type of the elements of `source`. |
 
 ### ToMarkdownText `method`
 
@@ -563,3 +575,49 @@ The generated Markdown.
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | element | System.Xml.Linq.XElement | The summary XML element. |
+
+## TypeparamUnit
+
+##### Namespace
+
+Vsxmd.Units
+
+##### Summary
+
+Typeparam unit.
+
+### #ctor `constructor`
+
+##### Summary
+
+Initializes a new instance of the `TypeparamUnit` class.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| element | System.Xml.Linq.XElement | The typeparam XML element. |
+
+### ToMarkdown `method`
+
+Inherit documentation from parent.
+
+##### Parameters
+
+This method has no parameters.
+
+### ToMarkdown `method`
+
+##### Summary
+
+Convert the param XML element to Markdown safely. If elemnt is `null`, return empty string.
+
+##### Returns
+
+The generated Markdown.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| elements | System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement} | The param XML element list. |

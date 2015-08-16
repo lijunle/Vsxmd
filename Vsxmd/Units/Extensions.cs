@@ -79,6 +79,7 @@ namespace Vsxmd.Units
                     {
                         case "see":
                             return $"`{child.Attribute("cref").Value.Split('.').Last()}`";
+                        case "paramref":
                         case "typeparamref":
                             return $"`{child.Attribute("name").Value}`";
                         case "c":

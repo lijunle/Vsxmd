@@ -156,6 +156,9 @@ namespace Vsxmd.Units
         private IEnumerable<string> ParamTypes =>
             this.Name.Split('(').Last().Trim(')').Split(',');
 
+        private IEnumerable<string> Typeparams =>
+            TypeparamUnit.ToMarkdown(this.Element.Elements("typeparam"));
+
         /// <inheritdoc />
         public override IEnumerable<string> ToMarkdown()
         {
@@ -180,7 +183,8 @@ namespace Vsxmd.Units
                     .Concat(this.InheritDoc)
                     .Concat(this.Summary)
                     .Concat(this.Returns)
-                    .Concat(this.Params);
+                    .Concat(this.Params)
+                    .Concat(this.Typeparams);
                 default:
                     return Enumerable.Empty<string>();
             }

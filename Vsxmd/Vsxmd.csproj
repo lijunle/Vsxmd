@@ -78,6 +78,7 @@
     <Compile Include="Units\ParamUnit.cs" />
     <Compile Include="Units\ReturnsUnit.cs" />
     <Compile Include="Units\SummaryUnit.cs" />
+    <Compile Include="Units\TypeparamUnit.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
