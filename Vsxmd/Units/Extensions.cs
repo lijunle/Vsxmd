@@ -6,8 +6,11 @@
 
 namespace Vsxmd.Units
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Text.RegularExpressions;
+    using System.Xml.Linq;
 
     /// <summary>
     /// Extensions helper.
@@ -53,5 +56,63 @@ namespace Vsxmd.Units
             this IEnumerable<TSource> source,
             int count) =>
             source.Reverse().Skip(count).Reverse();
+
+        /// <summary>
+        /// Convert the inline XML nodes to Markdown text.
+        /// For example, it works for <c>summary</c> and <c>returns</c> elements.
+        /// </summary>
+        /// <param name="element">The XML element.</param>
+        /// <returns>The generated Markdwon content.</returns>
+        /// <example>
+        /// This method converts the following <c>summary</c> element
+        /// <code>
+        /// <summary>The <paramref name="element" /> value is <value>null</value>, it throws <c>ArgumentException</c>. For more, see <see cref="ToMarkdownText"/>.</summary>
+        /// </code>
+        /// To the below Markdown content.
+        /// <code>
+        /// The `element` value is `null`, it throws `ArgumentException`. For more, see `ToMarkdownText`.
+        /// </code>
+        /// </example>
+        internal static string ToMarkdownText(this XElement element) =>
+            element.Nodes()
+                .Select(ToMarkdownText)
+                .Aggregate((x, y) =>
+                    x.EndsWith("\n")
+                        ? $"{x}{y.TrimStart()}"
+                        : y.StartsWith("\n")
+                        ? $"{x.TrimEnd()}{y}"
+                        : $"{x}{y}")
+                .Trim();
+
+        private static string ToMarkdownText(XNode node)
+        {
+            var text = node as XText;
+            if (text != null)
+            {
+                return Regex.Replace(text.Value, @"\s+", " ", RegexOptions.Multiline);
+            }
+
+            var child = node as XElement;
+            if (child != null)
+            {
+                switch (child.Name.ToString())
+                {
+                    case "see":
+                        return $"`{child.Attribute("cref").Value.Split('.').Last()}`";
+                    case "paramref":
+                    case "typeparamref":
+                        return $"`{child.Attribute("name").Value}`";
+                    case "c":
+                    case "value":
+                        return $"`{child.Value}`";
+                    case "code":
+                        return $"\n\n```\n{string.Concat(child.Nodes()).Trim()}\n```\n\n";
+                    default:
+                        return string.Empty;
+                }
+            }
+
+            return string.Empty;
+        }
     }
 }

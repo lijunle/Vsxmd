@@ -74,6 +74,52 @@
         <member name="M:Vsxmd.Units.BaseUnit.ToMarkdown">
             <inheritdoc />
         </member>
+        <member name="T:Vsxmd.Units.ExampleUnit">
+            <summary>
+            Example unit.
+            </summary>
+        </member>
+        <member name="M:Vsxmd.Units.ExampleUnit.#ctor(System.Xml.Linq.XElement)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Vsxmd.Units.ExampleUnit"/> class.
+            </summary>
+            <param name="element">The example XML element.</param>
+            <exception cref="T:System.ArgumentException">Throw if XML element name is not <c>example</c>.</exception>
+        </member>
+        <member name="M:Vsxmd.Units.ExampleUnit.ToMarkdown">
+            <inheritdoc />
+        </member>
+        <member name="M:Vsxmd.Units.ExampleUnit.ToMarkdown(System.Xml.Linq.XElement)">
+            <summary>
+            Convert the example XML element to Markdown safely.
+            If elemnt is <value>null</value>, return empty string.
+            </summary>
+            <param name="element">The example XML element.</param>
+            <returns>The generated Markdown.</returns>
+        </member>
+        <member name="T:Vsxmd.Units.ExceptionUnit">
+            <summary>
+            Exception unit.
+            </summary>
+        </member>
+        <member name="M:Vsxmd.Units.ExceptionUnit.#ctor(System.Xml.Linq.XElement)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Vsxmd.Units.ExceptionUnit"/> class.
+            </summary>
+            <param name="element">The exception XML element.</param>
+            <exception cref="T:System.ArgumentException">Throw if XML element name is not <c>exception</c>.</exception>
+        </member>
+        <member name="M:Vsxmd.Units.ExceptionUnit.ToMarkdown">
+            <inheritdoc />
+        </member>
+        <member name="M:Vsxmd.Units.ExceptionUnit.ToMarkdown(System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement})">
+            <summary>
+            Convert the exception XML element to Markdown safely.
+            If elemnt is <value>null</value>, return empty string.
+            </summary>
+            <param name="elements">The exception XML element list.</param>
+            <returns>The generated Markdown.</returns>
+        </member>
         <member name="T:Vsxmd.Units.Extensions">
             <summary>
             Extensions helper.
@@ -111,6 +157,24 @@
             <param name="source">The source enumerable.</param>
             <param name="count">The number to except.</param>
             <returns>The generated enumerable.</returns>
+        </member>
+        <member name="M:Vsxmd.Units.Extensions.ToMarkdownText(System.Xml.Linq.XElement)">
+            <summary>
+            Convert the inline XML nodes to Markdown text.
+            For example, it works for <c>summary</c> and <c>returns</c> elements.
+            </summary>
+            <param name="element">The XML element.</param>
+            <returns>The generated Markdwon content.</returns>
+            <example>
+            This method converts the following <c>summary</c> element
+            <code>
+            <summary>The <paramref name="element" /> value is <value>null</value>, it throws <c>ArgumentException</c>. For more, see <see cref="M:Vsxmd.Units.Extensions.ToMarkdownText(System.Xml.Linq.XElement)"/>.</summary>
+            </code>
+            To the below Markdown content.
+            <code>
+            The `element` value is `null`, it throws `ArgumentException`. For more, see `ToMarkdownText`.
+            </code>
+            </example>
         </member>
         <member name="T:Vsxmd.Units.IUnit">
             <summary>
@@ -215,6 +279,100 @@
         </member>
         <member name="M:Vsxmd.Units.MemberUnit.MemberUnitComparer.Compare(Vsxmd.Units.MemberUnit,Vsxmd.Units.MemberUnit)">
             <inheritdoc />
+        </member>
+        <member name="T:Vsxmd.Units.ParamUnit">
+            <summary>
+            Param unit.
+            </summary>
+        </member>
+        <member name="M:Vsxmd.Units.ParamUnit.#ctor(System.Xml.Linq.XElement,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Vsxmd.Units.ParamUnit"/> class.
+            </summary>
+            <param name="element">The param XML element.</param>
+            <param name="paramType">The paramter type corresponding to the param XML element.</param>
+            <exception cref="T:System.ArgumentException">Throw if XML element name is not <c>param</c>.</exception>
+        </member>
+        <member name="M:Vsxmd.Units.ParamUnit.ToMarkdown">
+            <inheritdoc />
+        </member>
+        <member name="M:Vsxmd.Units.ParamUnit.ToMarkdown(System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement},System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Convert the param XML element to Markdown safely.
+            If elemnt is <value>null</value>, return empty string.
+            </summary>
+            <param name="elements">The param XML element list.</param>
+            <param name="paramTypes">The paramater type names.</param>
+            <returns>The generated Markdown.</returns>
+        </member>
+        <member name="T:Vsxmd.Units.ReturnsUnit">
+            <summary>
+            Returns unit.
+            </summary>
+        </member>
+        <member name="M:Vsxmd.Units.ReturnsUnit.#ctor(System.Xml.Linq.XElement)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Vsxmd.Units.ReturnsUnit"/> class.
+            </summary>
+            <param name="element">The returns XML element.</param>
+            <exception cref="T:System.ArgumentException">Throw if XML element name is not <c>returns</c>.</exception>
+        </member>
+        <member name="M:Vsxmd.Units.ReturnsUnit.ToMarkdown">
+            <inheritdoc />
+        </member>
+        <member name="M:Vsxmd.Units.ReturnsUnit.ToMarkdown(System.Xml.Linq.XElement)">
+            <summary>
+            Convert the returns XML element to Markdown safely.
+            If elemnt is <value>null</value>, return empty string.
+            </summary>
+            <param name="element">The returns XML element.</param>
+            <returns>The generated Markdown.</returns>
+        </member>
+        <member name="T:Vsxmd.Units.SummaryUnit">
+            <summary>
+            Summary unit.
+            </summary>
+        </member>
+        <member name="M:Vsxmd.Units.SummaryUnit.#ctor(System.Xml.Linq.XElement)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Vsxmd.Units.SummaryUnit"/> class.
+            </summary>
+            <param name="element">The summary XML element.</param>
+            <exception cref="T:System.ArgumentException">Throw if XML element name is not <c>summary</c>.</exception>
+        </member>
+        <member name="M:Vsxmd.Units.SummaryUnit.ToMarkdown">
+            <inheritdoc />
+        </member>
+        <member name="M:Vsxmd.Units.SummaryUnit.ToMarkdown(System.Xml.Linq.XElement)">
+            <summary>
+            Convert the summary XML element to Markdown safely.
+            If elemnt is <value>null</value>, return empty string.
+            </summary>
+            <param name="element">The summary XML element.</param>
+            <returns>The generated Markdown.</returns>
+        </member>
+        <member name="T:Vsxmd.Units.TypeparamUnit">
+            <summary>
+            Typeparam unit.
+            </summary>
+        </member>
+        <member name="M:Vsxmd.Units.TypeparamUnit.#ctor(System.Xml.Linq.XElement)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Vsxmd.Units.TypeparamUnit"/> class.
+            </summary>
+            <param name="element">The typeparam XML element.</param>
+            <exception cref="T:System.ArgumentException">Throw if XML element name is not <c>typeparam</c>.</exception>
+        </member>
+        <member name="M:Vsxmd.Units.TypeparamUnit.ToMarkdown">
+            <inheritdoc />
+        </member>
+        <member name="M:Vsxmd.Units.TypeparamUnit.ToMarkdown(System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement})">
+            <summary>
+            Convert the param XML element to Markdown safely.
+            If elemnt is <value>null</value>, return empty string.
+            </summary>
+            <param name="elements">The param XML element list.</param>
+            <returns>The generated Markdown.</returns>
         </member>
     </members>
 </doc>

@@ -139,6 +139,32 @@ namespace Vsxmd.Units
         private IEnumerable<string> NameSegments =>
             this.Name.Split('(').First().Split('.');
 
+        private IEnumerable<string> InheritDoc =>
+            this.Element.Element("inheritdoc") != null
+                ? new[] { "Inherit documentation from parent." }
+                : Enumerable.Empty<string>();
+
+        private IEnumerable<string> Summary =>
+            SummaryUnit.ToMarkdown(this.Element.Element("summary"));
+
+        private IEnumerable<string> Returns =>
+            ReturnsUnit.ToMarkdown(this.Element.Element("returns"));
+
+        private IEnumerable<string> Params =>
+            ParamUnit.ToMarkdown(this.Element.Elements("param"), this.ParamTypes);
+
+        private IEnumerable<string> ParamTypes =>
+            this.Name.Split('(').Last().Trim(')').Split(',');
+
+        private IEnumerable<string> Typeparams =>
+            TypeparamUnit.ToMarkdown(this.Element.Elements("typeparam"));
+
+        private IEnumerable<string> Exceptions =>
+            ExceptionUnit.ToMarkdown(this.Element.Elements("exception"));
+
+        private IEnumerable<string> Example =>
+            ExampleUnit.ToMarkdown(this.Element.Element("example"));
+
         /// <inheritdoc />
         public override IEnumerable<string> ToMarkdown()
         {
@@ -150,14 +176,23 @@ namespace Vsxmd.Units
                         $"## {this.TypeName}",
                         $"##### Namespace",
                         $"{this.NamespaceName}"
-                    };
+                    }
+                    .Concat(this.InheritDoc)
+                    .Concat(this.Summary);
                 case F:
                 case P:
                 case M:
                     return new[]
                     {
                         $"### {this.NameSegments.Last().Escape()} `{this.KindString}`"
-                    };
+                    }
+                    .Concat(this.InheritDoc)
+                    .Concat(this.Summary)
+                    .Concat(this.Returns)
+                    .Concat(this.Params)
+                    .Concat(this.Typeparams)
+                    .Concat(this.Exceptions)
+                    .Concat(this.Example);
                 default:
                     return Enumerable.Empty<string>();
             }

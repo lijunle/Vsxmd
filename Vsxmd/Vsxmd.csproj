@@ -71,10 +71,16 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Units\AssemblyUnit.cs" />
     <Compile Include="Units\BaseUnit.cs" />
+    <Compile Include="Units\ExampleUnit.cs" />
+    <Compile Include="Units\ExceptionUnit.cs" />
     <Compile Include="Units\Extensions.cs" />
     <Compile Include="Units\IUnit.cs" />
     <Compile Include="Units\MemberKind.cs" />
     <Compile Include="Units\MemberUnit.cs" />
+    <Compile Include="Units\ParamUnit.cs" />
+    <Compile Include="Units\ReturnsUnit.cs" />
+    <Compile Include="Units\SummaryUnit.cs" />
+    <Compile Include="Units\TypeparamUnit.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
