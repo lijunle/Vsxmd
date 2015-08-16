@@ -107,6 +107,52 @@ The generated Markdown content.
 
 This method has no parameters.
 
+## ExampleUnit
+
+##### Namespace
+
+Vsxmd.Units
+
+##### Summary
+
+Example unit.
+
+### #ctor `constructor`
+
+##### Summary
+
+Initializes a new instance of the `ExampleUnit` class.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| element | System.Xml.Linq.XElement | The example XML element. |
+
+### ToMarkdown `method`
+
+Inherit documentation from parent.
+
+##### Parameters
+
+This method has no parameters.
+
+### ToMarkdown `method`
+
+##### Summary
+
+Convert the example XML element to Markdown safely. If elemnt is `null`, return empty string.
+
+##### Returns
+
+The generated Markdown.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| element | System.Xml.Linq.XElement | The example XML element. |
+
 ## Extensions
 
 ##### Namespace
@@ -211,6 +257,20 @@ The generated Markdwon content.
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | element | System.Xml.Linq.XElement | The XML element. |
+
+##### Example
+
+This method converts the following `summary` element
+
+```
+<summary>The <paramref name="element" /> value is <value>null</value>, it throws <c>ArgumentException</c>. For more, see <see cref="M:Vsxmd.Units.Extensions.ToMarkdownText(System.Xml.Linq.XElement)" />.</summary>
+```
+
+To the below Markdown content.
+
+```
+The `element` value is `null`, it throws `ArgumentException`. For more, see `ToMarkdownText`.
+```
 
 ## IUnit
 
@@ -358,6 +418,10 @@ Gets the name.
 
 This method has no parameters.
 
+##### Example
+
+`Vsxmd.Units.TypeUnit`, `Vsxmd.Units.TypeUnit.#ctor(System.Xml.Linq.XElement)`, `Vsxmd.Units.TypeUnit.TypeName`.
+
 ### NamespaceName `property`
 
 ##### Summary
@@ -367,6 +431,10 @@ Gets the namespace name.
 ##### Parameters
 
 This method has no parameters.
+
+##### Example
+
+`Vsxmd`, `Vsxmd.Units`.
 
 ### TypeFullName `property`
 
@@ -378,6 +446,10 @@ Gets the type full name.
 
 This method has no parameters.
 
+##### Example
+
+`Vsxmd.Program`, `Vsxmd.Units.TypeUnit`.
+
 ### TypeName `property`
 
 ##### Summary
@@ -387,6 +459,10 @@ Gets the type name.
 ##### Parameters
 
 This method has no parameters.
+
+##### Example
+
+`Program`, `Converter`.
 
 ### ToMarkdown `method`
 

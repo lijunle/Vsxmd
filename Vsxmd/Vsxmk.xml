@@ -74,6 +74,29 @@
         <member name="M:Vsxmd.Units.BaseUnit.ToMarkdown">
             <inheritdoc />
         </member>
+        <member name="T:Vsxmd.Units.ExampleUnit">
+            <summary>
+            Example unit.
+            </summary>
+        </member>
+        <member name="M:Vsxmd.Units.ExampleUnit.#ctor(System.Xml.Linq.XElement)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Vsxmd.Units.ExampleUnit"/> class.
+            </summary>
+            <param name="element">The example XML element.</param>
+            <exception cref="T:System.ArgumentException">Throw if XML element name is not <c>example</c>.</exception>
+        </member>
+        <member name="M:Vsxmd.Units.ExampleUnit.ToMarkdown">
+            <inheritdoc />
+        </member>
+        <member name="M:Vsxmd.Units.ExampleUnit.ToMarkdown(System.Xml.Linq.XElement)">
+            <summary>
+            Convert the example XML element to Markdown safely.
+            If elemnt is <value>null</value>, return empty string.
+            </summary>
+            <param name="element">The example XML element.</param>
+            <returns>The generated Markdown.</returns>
+        </member>
         <member name="T:Vsxmd.Units.Extensions">
             <summary>
             Extensions helper.
@@ -119,6 +142,16 @@
             </summary>
             <param name="element">The XML element.</param>
             <returns>The generated Markdwon content.</returns>
+            <example>
+            This method converts the following <c>summary</c> element
+            <code>
+            <summary>The <paramref name="element" /> value is <value>null</value>, it throws <c>ArgumentException</c>. For more, see <see cref="M:Vsxmd.Units.Extensions.ToMarkdownText(System.Xml.Linq.XElement)"/>.</summary>
+            </code>
+            To the below Markdown content.
+            <code>
+            The `element` value is `null`, it throws `ArgumentException`. For more, see `ToMarkdownText`.
+            </code>
+            </example>
         </member>
         <member name="T:Vsxmd.Units.IUnit">
             <summary>

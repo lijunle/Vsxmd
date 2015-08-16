@@ -159,6 +159,9 @@ namespace Vsxmd.Units
         private IEnumerable<string> Typeparams =>
             TypeparamUnit.ToMarkdown(this.Element.Elements("typeparam"));
 
+        private IEnumerable<string> Example =>
+            ExampleUnit.ToMarkdown(this.Element.Element("example"));
+
         /// <inheritdoc />
         public override IEnumerable<string> ToMarkdown()
         {
@@ -184,7 +187,8 @@ namespace Vsxmd.Units
                     .Concat(this.Summary)
                     .Concat(this.Returns)
                     .Concat(this.Params)
-                    .Concat(this.Typeparams);
+                    .Concat(this.Typeparams)
+                    .Concat(this.Example);
                 default:
                     return Enumerable.Empty<string>();
             }
