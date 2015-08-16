@@ -224,6 +224,29 @@
         <member name="M:Vsxmd.Units.MemberUnit.MemberUnitComparer.Compare(Vsxmd.Units.MemberUnit,Vsxmd.Units.MemberUnit)">
             <inheritdoc />
         </member>
+        <member name="T:Vsxmd.Units.ReturnsUnit">
+            <summary>
+            Returns unit.
+            </summary>
+        </member>
+        <member name="M:Vsxmd.Units.ReturnsUnit.#ctor(System.Xml.Linq.XElement)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Vsxmd.Units.ReturnsUnit"/> class.
+            </summary>
+            <param name="element">The returns XML element.</param>
+            <exception cref="T:System.ArgumentException">Throw if XML element name is not <c>returns</c>.</exception>
+        </member>
+        <member name="M:Vsxmd.Units.ReturnsUnit.ToMarkdown">
+            <inheritdoc />
+        </member>
+        <member name="M:Vsxmd.Units.ReturnsUnit.ToMarkdown(System.Xml.Linq.XElement)">
+            <summary>
+            Convert the returns XML element to Markdown safely.
+            If elemnt is <value>null</value>, return empty string.
+            </summary>
+            <param name="element">The returns XML element.</param>
+            <returns>The generated Markdown.</returns>
+        </member>
         <member name="T:Vsxmd.Units.SummaryUnit">
             <summary>
             Summary unit.

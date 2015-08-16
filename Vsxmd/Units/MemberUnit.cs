@@ -142,6 +142,9 @@ namespace Vsxmd.Units
         private IEnumerable<string> Summary =>
             SummaryUnit.ToMarkdown(this.Element.Element("summary"));
 
+        private IEnumerable<string> Returns =>
+            ReturnsUnit.ToMarkdown(this.Element.Element("returns"));
+
         /// <inheritdoc />
         public override IEnumerable<string> ToMarkdown()
         {
@@ -162,7 +165,8 @@ namespace Vsxmd.Units
                     {
                         $"### {this.NameSegments.Last().Escape()} `{this.KindString}`"
                     }
-                    .Concat(this.Summary);
+                    .Concat(this.Summary)
+                    .Concat(this.Returns);
                 default:
                     return Enumerable.Empty<string>();
             }

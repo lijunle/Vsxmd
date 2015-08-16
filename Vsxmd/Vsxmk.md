@@ -64,6 +64,10 @@ Initializes a new instance of the `Converter` class.
 
 Convert to Markdown syntax.
 
+##### Returns
+
+The generated Markdown content.
+
 ## Extensions
 
 ##### Namespace
@@ -80,11 +84,19 @@ Extensions helper.
 
 Escape the content to keep it raw in Markdown syntax.
 
+##### Returns
+
+The escaped content.
+
 ### Join `method`
 
 ##### Summary
 
 Concatenates the s with the .
+
+##### Returns
+
+The concatenated string.
 
 ### NthLastOrDefault\`\`1 `method`
 
@@ -92,17 +104,29 @@ Concatenates the s with the .
 
 Gets the n-th last element from the .
 
+##### Returns
+
+The target element, default(`TSource`) if not found.
+
 ### TakeAllButLast\`\`1 `method`
 
 ##### Summary
 
 Take all element except the last .
 
+##### Returns
+
+The generated enumerable.
+
 ### ToMarkdownText `method`
 
 ##### Summary
 
 Convert the inline XML nodes to Markdown text. For example, it works for `summary` and `returns` elements.
+
+##### Returns
+
+The generated Markdwon content.
 
 ## IUnit
 
@@ -119,6 +143,10 @@ Vsxmd.Units
 ##### Summary
 
 Represent the XML element content as Markdown syntax.
+
+##### Returns
+
+The generated Markdown content.
 
 ## MemberKind
 
@@ -244,6 +272,34 @@ Initializes a new instance of the `Program` class.
 
 Program main function entry.
 
+## ReturnsUnit
+
+##### Namespace
+
+Vsxmd.Units
+
+##### Summary
+
+Returns unit.
+
+### #ctor `constructor`
+
+##### Summary
+
+Initializes a new instance of the `ReturnsUnit` class.
+
+### ToMarkdown `method`
+
+### ToMarkdown `method`
+
+##### Summary
+
+Convert the returns XML element to Markdown safely. If elemnt is `null`, return empty string.
+
+##### Returns
+
+The generated Markdown.
+
 ## SummaryUnit
 
 ##### Namespace
@@ -267,3 +323,7 @@ Initializes a new instance of the `SummaryUnit` class.
 ##### Summary
 
 Convert the summary XML element to Markdown safely. If elemnt is `null`, return empty string.
+
+##### Returns
+
+The generated Markdown.
