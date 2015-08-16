@@ -8,9 +8,9 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("Vsxmd")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("VS XML documentation -> Markdown syntax.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Junle Li")]
 [assembly: AssemblyProduct("Vsxmd")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
