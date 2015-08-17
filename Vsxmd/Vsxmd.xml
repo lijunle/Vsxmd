@@ -258,41 +258,6 @@
             </summary>
             <returns>The generated Markdown content.</returns>
         </member>
-        <member name="T:Vsxmd.Units.MemberKind">
-            <summary>
-            The member kind.
-            </summary>
-        </member>
-        <member name="F:Vsxmd.Units.MemberKind.NotSupported">
-            <summary>
-            Not supported member kind.
-            </summary>
-        </member>
-        <member name="F:Vsxmd.Units.MemberKind.Type">
-            <summary>
-            Type.
-            </summary>
-        </member>
-        <member name="F:Vsxmd.Units.MemberKind.Constructor">
-            <summary>
-            Constructor.
-            </summary>
-        </member>
-        <member name="F:Vsxmd.Units.MemberKind.Constants">
-            <summary>
-            Constants
-            </summary>
-        </member>
-        <member name="F:Vsxmd.Units.MemberKind.Property">
-            <summary>
-            Property.
-            </summary>
-        </member>
-        <member name="F:Vsxmd.Units.MemberKind.Method">
-            <summary>
-            Method.
-            </summary>
-        </member>
         <member name="T:Vsxmd.Units.MemberUnit">
             <summary>
             Member unit.
@@ -304,6 +269,36 @@
             </summary>
             <param name="element">The member XML element.</param>
             <exception cref="T:System.ArgumentException">Throw if XML element name is not <c>member</c>.</exception>
+        </member>
+        <member name="F:Vsxmd.Units.MemberUnit.MemberKind.NotSupported">
+            <summary>
+            Not supported member kind.
+            </summary>
+        </member>
+        <member name="F:Vsxmd.Units.MemberUnit.MemberKind.Type">
+            <summary>
+            Type.
+            </summary>
+        </member>
+        <member name="F:Vsxmd.Units.MemberUnit.MemberKind.Constructor">
+            <summary>
+            Constructor.
+            </summary>
+        </member>
+        <member name="F:Vsxmd.Units.MemberUnit.MemberKind.Constants">
+            <summary>
+            Constants
+            </summary>
+        </member>
+        <member name="F:Vsxmd.Units.MemberUnit.MemberKind.Property">
+            <summary>
+            Property.
+            </summary>
+        </member>
+        <member name="F:Vsxmd.Units.MemberUnit.MemberKind.Method">
+            <summary>
+            Method.
+            </summary>
         </member>
         <member name="P:Vsxmd.Units.MemberUnit.Comparer">
             <summary>

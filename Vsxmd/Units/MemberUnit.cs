@@ -16,14 +16,6 @@ namespace Vsxmd.Units
     /// </summary>
     internal class MemberUnit : BaseUnit
     {
-        private const char T = 'T';
-
-        private const char F = 'F';
-
-        private const char P = 'P';
-
-        private const char M = 'M';
-
         private readonly char type;
 
         static MemberUnit()
@@ -40,6 +32,39 @@ namespace Vsxmd.Units
             : base(element, "member")
         {
             this.type = this.GetAttribute("name").First();
+        }
+
+        private enum MemberKind
+        {
+            /// <summary>
+            /// Not supported member kind.
+            /// </summary>
+            NotSupported,
+
+            /// <summary>
+            /// Type.
+            /// </summary>
+            Type,
+
+            /// <summary>
+            /// Constructor.
+            /// </summary>
+            Constructor,
+
+            /// <summary>
+            /// Constants
+            /// </summary>
+            Constants,
+
+            /// <summary>
+            /// Property.
+            /// </summary>
+            Property,
+
+            /// <summary>
+            /// Method.
+            /// </summary>
+            Method
         }
 
         /// <summary>
@@ -65,13 +90,14 @@ namespace Vsxmd.Units
         {
             get
             {
-                switch (this.type)
+                switch (this.Kind)
                 {
-                    case T:
+                    case MemberKind.Type:
                         return this.Name.Split('.').Last();
-                    case F:
-                    case P:
-                    case M:
+                    case MemberKind.Constants:
+                    case MemberKind.Property:
+                    case MemberKind.Constructor:
+                    case MemberKind.Method:
                         return this.NameSegments.NthLastOrDefault(1);
                     default:
                         return string.Empty;
@@ -83,13 +109,14 @@ namespace Vsxmd.Units
         {
             get
             {
-                switch (this.type)
+                switch (this.Kind)
                 {
-                    case T:
+                    case MemberKind.Type:
                         return this.Name.Substring(0, this.Name.Length - this.TypeShortName.Length - 1);
-                    case F:
-                    case P:
-                    case M:
+                    case MemberKind.Constants:
+                    case MemberKind.Property:
+                    case MemberKind.Constructor:
+                    case MemberKind.Method:
                         return this.NameSegments.TakeAllButLast(2).Join(".");
                     default:
                         return string.Empty;
@@ -103,13 +130,13 @@ namespace Vsxmd.Units
             {
                 switch (this.type)
                 {
-                    case T:
+                    case 'T':
                         return MemberKind.Type;
-                    case F:
+                    case 'F':
                         return MemberKind.Constants;
-                    case P:
+                    case 'P':
                         return MemberKind.Property;
-                    case M:
+                    case 'M':
                         return this.Name.Contains(".#ctor")
                             ? MemberKind.Constructor
                             : MemberKind.Method;
@@ -169,7 +196,7 @@ namespace Vsxmd.Units
 
         /// <inheritdoc />
         public override IEnumerable<string> ToMarkdown() =>
-            this.GetCaption(this.type)
+            this.GetCaption(this.Kind)
                 .Concat(this.InheritDoc)
                 .Concat(this.Summary)
                 .Concat(this.Returns)
@@ -198,20 +225,21 @@ namespace Vsxmd.Units
                 new XElement("member",
                     new XAttribute("name", $"T:{typeName}")));
 
-        private IEnumerable<string> GetCaption(char type)
+        private IEnumerable<string> GetCaption(MemberKind kind)
         {
-            switch (type)
+            switch (kind)
             {
-                case T:
+                case MemberKind.Type:
                     return new[]
                     {
                         $"## {this.TypeShortName}",
                         $"##### Namespace",
                         $"{this.NamespaceName}"
                     };
-                case F:
-                case P:
-                case M:
+                case MemberKind.Constants:
+                case MemberKind.Property:
+                case MemberKind.Constructor:
+                case MemberKind.Method:
                     return new[]
                     {
                         $"### {this.NameSegments.Last().Escape()} `{this.KindString}`"
