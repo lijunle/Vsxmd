@@ -171,6 +171,15 @@
             <param name="content">The content.</param>
             <returns>The escaped content.</returns>
         </member>
+        <member name="M:Vsxmd.Units.Extensions.AsCode(System.String)">
+            <summary>
+            Wrap the <paramref name="code"/> into Markdown backtick safely.
+            <para>The backtick characters inside the <paramref name="code"/> reverse as it is.</para>
+            </summary>
+            <param name="code">The code span.</param>
+            <returns>The Markdwon code span.</returns>
+            <remarks>Reference: http://meta.stackexchange.com/questions/55437/how-can-the-backtick-character-be-included-in-code </remarks>
+        </member>
         <member name="M:Vsxmd.Units.Extensions.NthLastOrDefault``1(System.Collections.Generic.IEnumerable{``0},System.Int32)">
             <summary>
             Gets the n-th last element from the <paramref name="source"/>.

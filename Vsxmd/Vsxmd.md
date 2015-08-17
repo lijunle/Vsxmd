@@ -117,7 +117,7 @@ Returns a collection of the child elements of this element or document, in docum
 
 ##### Returns
 
-An `IEnumerable`1` of `XElement` containing the children that have a matching `XName`, in document order.
+An ``IEnumerable`1`` of `XElement` containing the children that have a matching `XName`, in document order.
 
 ##### Parameters
 
@@ -282,6 +282,28 @@ Vsxmd.Units
 ##### Summary
 
 Extensions helper.
+
+### AsCode `method`
+
+##### Summary
+
+Wrap the `code` into Markdown backtick safely.
+
+The backtick characters inside the `code` reverse as it is.
+
+##### Returns
+
+The Markdwon code span.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| code | System.String | The code span. |
+
+##### Remarks
+
+Reference: http://meta.stackexchange.com/questions/55437/how-can-the-backtick-character-be-included-in-code
 
 ### Escape `method`
 

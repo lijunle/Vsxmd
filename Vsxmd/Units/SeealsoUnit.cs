@@ -32,7 +32,7 @@ namespace Vsxmd.Units
         public override IEnumerable<string> ToMarkdown() =>
             new[]
             {
-                $"- `{this.Reference}`"
+                $"- {this.Reference.AsCode()}"
             };
 
         /// <summary>
