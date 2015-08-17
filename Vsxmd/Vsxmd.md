@@ -376,7 +376,7 @@ The target element, default(`TSource`) if not found.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| source | System.Collections.Generic.IEnumerable{``0} | The source enumerable. |
+| source | System.Collections.Generic.IEnumerable{\`\`0} | The source enumerable. |
 | index | System.Int32 | The index for the n-th last. |
 
 ##### Generic Types
@@ -399,7 +399,7 @@ The generated enumerable.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| source | System.Collections.Generic.IEnumerable{``0} | The source enumerable. |
+| source | System.Collections.Generic.IEnumerable{\`\`0} | The source enumerable. |
 | count | System.Int32 | The number to except. |
 
 ##### Generic Types
@@ -1011,7 +1011,7 @@ Nothing.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| expression | System.Linq.Expressions.Expression{System.Func{``0,``1,System.String}} | The linq expression. |
+| expression | System.Linq.Expressions.Expression{System.Func{\`\`0,\`\`1,System.String}} | The linq expression. |
 
 ##### Generic Types
 
@@ -1038,7 +1038,7 @@ This method has no parameters.
 
 | Name | Description |
 | ---- | ----------- |
-| Vsxmd.Program.Test.TestComplexParameter``2(System.Linq.Expressions.Expression{System.Func{``0,``1,System.String}}) | Just for test. |
+| Vsxmd.Program.Test.TestComplexParameter\`\`2(System.Linq.Expressions.Expression{System.Func{\`\`0,\`\`1,System.String}}) | Just for test. |
 
 ### TestGenericPermission `method`
 
@@ -1058,7 +1058,7 @@ This method has no parameters.
 
 | Name | Description |
 | ---- | ----------- |
-| Vsxmd.Program.Test.TestComplexParameter``2(System.Linq.Expressions.Expression{System.Func{``0,``1,System.String}}) | Just for test. |
+| Vsxmd.Program.Test.TestComplexParameter\`\`2(System.Linq.Expressions.Expression{System.Func{\`\`0,\`\`1,System.String}}) | Just for test. |
 
 ### TestRefenceComplex `method`
 

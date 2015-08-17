@@ -34,7 +34,7 @@ namespace Vsxmd.Units
         public override IEnumerable<string> ToMarkdown() =>
             new[]
             {
-                $"| {this.Name} | {this.Description} |"
+                $"| {this.Name.Escape()} | {this.Description} |"
             };
 
         /// <summary>
