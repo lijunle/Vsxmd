@@ -25,7 +25,11 @@ cache:
   - packages -> **\packages.config
 
 before_build:
-  - ps: nuget restore "$env:APPVEYOR_BUILD_FOLDER\Vsxmd.sln"
+  - ps: nuget restore Vsxmd.sln
+  - ps: Vsxmd\Test.ps1 -Prepare
+
+test_script:
+  - ps: Vsxmd\Test.ps1 -Run
 
 artifacts:
   - path: 'Vsxmd\**\*.nupkg'
