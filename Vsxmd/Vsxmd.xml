@@ -348,6 +348,14 @@
         <member name="M:Vsxmd.Units.MemberUnit.ToMarkdown">
             <inheritdoc />
         </member>
+        <member name="M:Vsxmd.Units.MemberUnit.ComplementType(System.Collections.Generic.IEnumerable{Vsxmd.Units.MemberUnit})">
+            <summary>
+            Complement a type unit if the member unit <paramref name="group"/> does not have one.
+            One member unit group has the same <see cref="P:Vsxmd.Units.MemberUnit.TypeFullName"/>.
+            </summary>
+            <param name="group">The member unit group.</param>
+            <returns>The complemented member unit group.</returns>
+        </member>
         <member name="M:Vsxmd.Units.MemberUnit.MemberUnitComparer.Compare(Vsxmd.Units.MemberUnit,Vsxmd.Units.MemberUnit)">
             <inheritdoc />
         </member>

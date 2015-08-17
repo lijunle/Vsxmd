@@ -632,6 +632,22 @@ Gets the type name.
 
 `Program`, `Converter`.
 
+### ComplementType `method`
+
+##### Summary
+
+Complement a type unit if the member unit `group` does not have one. One member unit group has the same `TypeFullName`.
+
+##### Returns
+
+The complemented member unit group.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| group | System.Collections.Generic.IEnumerable{Vsxmd.Units.MemberUnit} | The member unit group. |
+
 ### ToMarkdown `method`
 
 ##### Summary
@@ -641,6 +657,12 @@ Gets the type name.
 ##### Parameters
 
 This method has no parameters.
+
+## MemberUnitComparer
+
+##### Namespace
+
+Vsxmd.Units.MemberUnit
 
 ### Compare `method`
 
@@ -1026,6 +1048,12 @@ The generated Markdown.
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | element | System.Xml.Linq.XElement | The summary XML element. |
+
+## Test
+
+##### Namespace
+
+Vsxmd.Program
 
 ### TestComplexParameter\`\`2 `method`
 

@@ -192,6 +192,23 @@ namespace Vsxmd.Units
                 .Concat(this.Remarks)
                 .Concat(this.Seealsos);
 
+        /// <summary>
+        /// Complement a type unit if the member unit <paramref name="group"/> does not have one.
+        /// One member unit group has the same <see cref="TypeFullName"/>.
+        /// </summary>
+        /// <param name="group">The member unit group.</param>
+        /// <returns>The complemented member unit group.</returns>
+        internal static IEnumerable<MemberUnit> ComplementType(
+            IEnumerable<MemberUnit> group) =>
+            group.Any(unit => unit.Kind == MemberKind.Type)
+                ? group
+                : group.Concat(new[] { Create(group.First().TypeFullName) });
+
+        private static MemberUnit Create(string typeName) =>
+            new MemberUnit(
+                new XElement("member",
+                    new XAttribute("name", $"T:{typeName}")));
+
         private IEnumerable<string> GetCaption(char type)
         {
             switch (type)
