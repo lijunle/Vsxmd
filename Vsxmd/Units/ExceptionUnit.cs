@@ -50,21 +50,21 @@ namespace Vsxmd.Units
                 return Enumerable.Empty<string>();
             }
 
-            var exceptionMarkdowns = elements
+            var markdowns = elements
                 .Select(element => new ExceptionUnit(element))
                 .SelectMany(unit => unit.ToMarkdown());
 
-            var paramTable = new[]
+            var table = new[]
             {
                 "| Name | Description |",
                 "| ---- | ----------- |"
             }
-            .Concat(exceptionMarkdowns);
+            .Concat(markdowns);
 
             return new[]
             {
                 "##### Exceptions",
-                string.Join("\n", paramTable)
+                string.Join("\n", table)
             };
         }
     }

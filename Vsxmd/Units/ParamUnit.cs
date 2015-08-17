@@ -52,22 +52,22 @@ namespace Vsxmd.Units
             IEnumerable<XElement> elements,
             IEnumerable<string> paramTypes)
         {
-            var paramMarkdowns = elements
+            var markdowns = elements
                 .Zip(paramTypes, (element, type) => new ParamUnit(element, type))
                 .SelectMany(unit => unit.ToMarkdown());
 
-            var paramTable = new[]
+            var table = new[]
             {
                 "| Name | Type | Description |",
                 "| ---- | ---- | ----------- |"
             }
-            .Concat(paramMarkdowns);
+            .Concat(markdowns);
 
             return new[]
             {
                 "##### Parameters",
-                paramMarkdowns.Any()
-                    ? string.Join("\n", paramTable)
+                markdowns.Any()
+                    ? string.Join("\n", table)
                     : "This method has no parameters."
             };
         }
