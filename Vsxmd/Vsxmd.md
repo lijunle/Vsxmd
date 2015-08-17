@@ -71,6 +71,60 @@ Initializes a new instance of the `BaseUnit` class.
 
 Gets the XML element.
 
+### ElementContent `property`
+
+##### Summary
+
+Gets the Markdown content representing the element.
+
+### GetAttribute `method`
+
+##### Summary
+
+Returns the `XAttribute` value of this `XElement` that has the specified `name`.
+
+##### Returns
+
+An `XAttribute` value that has the specified `name`; `null` if there is no attribute with the specified `name`.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| name | System.Xml.Linq.XName | The `XName` of the `XAttribute` to get. |
+
+### GetChild `method`
+
+##### Summary
+
+Gets the first (in document order) child element with the specified `name`.
+
+##### Returns
+
+A `XName` that matches the specified `name`, or `null`.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| name | System.Xml.Linq.XName | The `XName` to match. |
+
+### GetChildren `method`
+
+##### Summary
+
+Returns a collection of the child elements of this element or document, in document order. Only elements that have a matching `XName` are included in the collection.
+
+##### Returns
+
+An `IEnumerable`1` of `XElement` containing the children that have a matching `XName`, in document order.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| name | System.Xml.Linq.XName | The `XName` to match. |
+
 ### ToMarkdown `method`
 
 Inherit documentation from parent.

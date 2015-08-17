@@ -39,7 +39,7 @@ namespace Vsxmd.Units
         public MemberUnit(XElement element)
             : base(element, "member")
         {
-            this.type = this.Element.Attribute("name").Value.First();
+            this.type = this.GetAttribute("name").First();
         }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace Vsxmd.Units
         /// </summary>
         /// <value>The member name</value>
         /// <example><c>Vsxmd.Units.TypeUnit</c>, <c>Vsxmd.Units.TypeUnit.#ctor(System.Xml.Linq.XElement)</c>, <c>Vsxmd.Units.TypeUnit.TypeName</c>.</example>
-        public string Name => this.Element.Attribute("name").Value.Substring(2);
+        public string Name => this.GetAttribute("name").Substring(2);
 
         /// <summary>
         /// Gets the type full name.
@@ -140,40 +140,40 @@ namespace Vsxmd.Units
             this.Name.Split('(').First().Split('.');
 
         private IEnumerable<string> InheritDoc =>
-            this.Element.Element("inheritdoc") != null
+            this.GetChild("inheritdoc") != null
                 ? new[] { "Inherit documentation from parent." }
                 : Enumerable.Empty<string>();
 
         private IEnumerable<string> Summary =>
-            SummaryUnit.ToMarkdown(this.Element.Element("summary"));
+            SummaryUnit.ToMarkdown(this.GetChild("summary"));
 
         private IEnumerable<string> Returns =>
-            ReturnsUnit.ToMarkdown(this.Element.Element("returns"));
+            ReturnsUnit.ToMarkdown(this.GetChild("returns"));
 
         private IEnumerable<string> Params =>
             ParamUnit.ToMarkdown(
-                this.Element.Elements("param"), this.ParamTypes, this.Kind);
+                this.GetChildren("param"), this.ParamTypes, this.Kind);
 
         private IEnumerable<string> ParamTypes =>
             this.Name.Split('(').Last().Trim(')').Split(',');
 
         private IEnumerable<string> Typeparams =>
-            TypeparamUnit.ToMarkdown(this.Element.Elements("typeparam"));
+            TypeparamUnit.ToMarkdown(this.GetChildren("typeparam"));
 
         private IEnumerable<string> Exceptions =>
-            ExceptionUnit.ToMarkdown(this.Element.Elements("exception"));
+            ExceptionUnit.ToMarkdown(this.GetChildren("exception"));
 
         private IEnumerable<string> Permissions =>
-            PermissionUnit.ToMarkdown(this.Element.Elements("permission"));
+            PermissionUnit.ToMarkdown(this.GetChildren("permission"));
 
         private IEnumerable<string> Example =>
-            ExampleUnit.ToMarkdown(this.Element.Element("example"));
+            ExampleUnit.ToMarkdown(this.GetChild("example"));
 
         private IEnumerable<string> Remarks =>
-            RemarksUnit.ToMarkdown(this.Element.Element("remarks"));
+            RemarksUnit.ToMarkdown(this.GetChild("remarks"));
 
         private IEnumerable<string> Seealsos =>
-            SeealsoUnit.ToMarkdown(this.Element.Elements("seealso"));
+            SeealsoUnit.ToMarkdown(this.GetChildren("seealso"));
 
         /// <inheritdoc />
         public override IEnumerable<string> ToMarkdown() =>

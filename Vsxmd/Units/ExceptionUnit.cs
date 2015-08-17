@@ -26,9 +26,9 @@ namespace Vsxmd.Units
         {
         }
 
-        private string Name => this.Element.Attribute("cref").Value.Substring(2);
+        private string Name => this.GetAttribute("cref").Substring(2);
 
-        private string Description => this.Element.ToMarkdownText();
+        private string Description => this.ElementContent;
 
         /// <inheritdoc />
         public override IEnumerable<string> ToMarkdown() =>

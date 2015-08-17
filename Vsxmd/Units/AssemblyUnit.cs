@@ -25,7 +25,7 @@ namespace Vsxmd.Units
         {
         }
 
-        private string AssemblyName => this.Element.Element("name").Value;
+        private string AssemblyName => this.GetChild("name").Value;
 
         /// <inheritdoc />
         public override IEnumerable<string> ToMarkdown() =>

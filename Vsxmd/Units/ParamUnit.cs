@@ -30,9 +30,9 @@ namespace Vsxmd.Units
             this.paramType = paramType;
         }
 
-        private string Name => this.Element.Attribute("name").Value;
+        private string Name => this.GetAttribute("name");
 
-        private string Description => this.Element.ToMarkdownText();
+        private string Description => this.ElementContent;
 
         /// <inheritdoc />
         public override IEnumerable<string> ToMarkdown() =>
