@@ -354,17 +354,17 @@
         <member name="M:Vsxmd.Units.ParamUnit.ToMarkdown">
             <inheritdoc />
         </member>
-        <member name="M:Vsxmd.Units.ParamUnit.ToMarkdown(System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement},System.Collections.Generic.IEnumerable{System.String},Vsxmd.Units.MemberKind)">
+        <member name="M:Vsxmd.Units.ParamUnit.ToMarkdown(System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement},System.Collections.Generic.IEnumerable{System.String},System.Boolean)">
             <summary>
             Convert the param XML element to Markdown safely.
             </summary>
             <param name="elements">The param XML element list.</param>
             <param name="paramTypes">The paramater type names.</param>
-            <param name="memberKind">The member kind of the parent element.</param>
+            <param name="isParameterKind">Indicates if the member kind have parameters, which is constructor or methods.</param>
             <returns>The generated Markdown.</returns>
             <remarks>
             When the parameter (a.k.a <paramref name="elements"/>) list is empty:
-            <para>If parent element kind is <see cref="F:Vsxmd.Units.MemberKind.Constructor"/> or <see cref="F:Vsxmd.Units.MemberKind.Method"/>, it returns a hint about "no parameters".</para>
+            <para>If parent element kind is constructor or method, it returns a hint about "no parameters".</para>
             <para>If parent element kind is not the value mentioned above, it returns an empty string.</para>
             </remarks>
         </member>

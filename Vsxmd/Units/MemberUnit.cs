@@ -142,7 +142,9 @@ namespace Vsxmd.Units
 
         private IEnumerable<string> Params =>
             ParamUnit.ToMarkdown(
-                this.GetChildren("param"), this.ParamTypes, this.Kind);
+                this.GetChildren("param"),
+                this.ParamTypes,
+                this.Kind == MemberKind.Constructor || this.Kind == MemberKind.Method);
 
         private IEnumerable<string> ParamTypes =>
             this.Name.GetParamTypes();

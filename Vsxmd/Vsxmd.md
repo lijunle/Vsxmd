@@ -498,19 +498,11 @@ The member kind.
 
 Constants
 
-##### Parameters
-
-This method has no parameters.
-
 ### Constructor `constants`
 
 ##### Summary
 
 Constructor.
-
-##### Parameters
-
-This method has no parameters.
 
 ### Method `constants`
 
@@ -518,19 +510,11 @@ This method has no parameters.
 
 Method.
 
-##### Parameters
-
-This method has no parameters.
-
 ### NotSupported `constants`
 
 ##### Summary
 
 Not supported member kind.
-
-##### Parameters
-
-This method has no parameters.
 
 ### Property `constants`
 
@@ -538,19 +522,11 @@ This method has no parameters.
 
 Property.
 
-##### Parameters
-
-This method has no parameters.
-
 ### Type `constants`
 
 ##### Summary
 
 Type.
-
-##### Parameters
-
-This method has no parameters.
 
 ## MemberUnit
 
@@ -699,13 +675,13 @@ The generated Markdown.
 | ---- | ---- | ----------- |
 | elements | System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement} | The param XML element list. |
 | paramTypes | System.Collections.Generic.IEnumerable{System.String} | The paramater type names. |
-| memberKind | Vsxmd.Units.MemberKind | The member kind of the parent element. |
+| isParameterKind | System.Boolean | Indicates if the member kind have parameters, which is constructor or methods. |
 
 ##### Remarks
 
 When the parameter (a.k.a `elements`) list is empty:
 
-If parent element kind is `Constructor` or `Method`, it returns a hint about "no parameters".
+If parent element kind is constructor or method, it returns a hint about "no parameters".
 
 If parent element kind is not the value mentioned above, it returns an empty string.
 
