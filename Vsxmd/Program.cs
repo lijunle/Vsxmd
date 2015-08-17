@@ -9,6 +9,7 @@ namespace Vsxmd
     using System;
     using System.IO;
     using System.Linq;
+    using System.Linq.Expressions;
     using System.Security;
     using System.Text.RegularExpressions;
 
@@ -50,6 +51,27 @@ namespace Vsxmd
             var markdown = converter.ToMarkdown();
 
             File.WriteAllText(markdownPath, markdown);
+        }
+
+        private class Test
+        {
+            /// <summary>
+            /// Test reference complex type.
+            /// <para>See <see cref="TestComplexParameter{T1, T2}(Expression{Func{T1, T2, string}})"/>.</para>
+            /// </summary>
+            /// <returns>Nothing.</returns>
+            internal string TestRefenceComplex() => null;
+
+            /// <summary>
+            /// Test complex parameter type.
+            /// </summary>
+            /// <typeparam name="T1">Generic type 1.</typeparam>
+            /// <typeparam name="T2">Generic type 2.</typeparam>
+            /// <param name="expression">The linq expression.</param>
+            /// <returns>Nothing.</returns>
+            internal string TestComplexParameter<T1, T2>(
+                Expression<Func<T1, T2, string>> expression) =>
+                null;
         }
     }
 }

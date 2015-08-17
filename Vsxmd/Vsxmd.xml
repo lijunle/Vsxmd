@@ -40,6 +40,22 @@
             <param name="args">Program arguments.</param>
             <seealso cref="T:Vsxmd.Program"/>
         </member>
+        <member name="M:Vsxmd.Program.Test.TestRefenceComplex">
+            <summary>
+            Test reference complex type.
+            <para>See <see cref="M:Vsxmd.Program.Test.TestComplexParameter``2(System.Linq.Expressions.Expression{System.Func{``0,``1,System.String}})"/>.</para>
+            </summary>
+            <returns>Nothing.</returns>
+        </member>
+        <member name="M:Vsxmd.Program.Test.TestComplexParameter``2(System.Linq.Expressions.Expression{System.Func{``0,``1,System.String}})">
+            <summary>
+            Test complex parameter type.
+            </summary>
+            <typeparam name="T1">Generic type 1.</typeparam>
+            <typeparam name="T2">Generic type 2.</typeparam>
+            <param name="expression">The linq expression.</param>
+            <returns>Nothing.</returns>
+        </member>
         <member name="T:Vsxmd.Units.AssemblyUnit">
             <summary>
             Assembly unit.

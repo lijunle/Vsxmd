@@ -991,6 +991,45 @@ The generated Markdown.
 | ---- | ---- | ----------- |
 | element | System.Xml.Linq.XElement | The summary XML element. |
 
+### TestComplexParameter\`\`2 `method`
+
+##### Summary
+
+Test complex parameter type.
+
+##### Returns
+
+Nothing.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| expression | System.Linq.Expressions.Expression{System.Func{``0 | The linq expression. |
+
+##### Generic Types
+
+| Name | Description |
+| ---- | ----------- |
+| T1 | Generic type 1. |
+| T2 | Generic type 2. |
+
+### TestRefenceComplex `method`
+
+##### Summary
+
+Test reference complex type.
+
+See `String}})`.
+
+##### Returns
+
+Nothing.
+
+##### Parameters
+
+This method has no parameters.
+
 ## TypeparamUnit
 
 ##### Namespace
