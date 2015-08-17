@@ -176,9 +176,22 @@ namespace Vsxmd.Units
             SeealsoUnit.ToMarkdown(this.Element.Elements("seealso"));
 
         /// <inheritdoc />
-        public override IEnumerable<string> ToMarkdown()
+        public override IEnumerable<string> ToMarkdown() =>
+            this.GetCaption(this.type)
+                .Concat(this.InheritDoc)
+                .Concat(this.Summary)
+                .Concat(this.Returns)
+                .Concat(this.Params)
+                .Concat(this.Typeparams)
+                .Concat(this.Exceptions)
+                .Concat(this.Permissions)
+                .Concat(this.Example)
+                .Concat(this.Remarks)
+                .Concat(this.Seealsos);
+
+        private IEnumerable<string> GetCaption(char type)
         {
-            switch (this.type)
+            switch (type)
             {
                 case T:
                     return new[]
@@ -186,29 +199,14 @@ namespace Vsxmd.Units
                         $"## {this.TypeName}",
                         $"##### Namespace",
                         $"{this.NamespaceName}"
-                    }
-                    .Concat(this.InheritDoc)
-                    .Concat(this.Summary)
-                    .Concat(this.Permissions)
-                    .Concat(this.Remarks)
-                    .Concat(this.Seealsos);
+                    };
                 case F:
                 case P:
                 case M:
                     return new[]
                     {
                         $"### {this.NameSegments.Last().Escape()} `{this.KindString}`"
-                    }
-                    .Concat(this.InheritDoc)
-                    .Concat(this.Summary)
-                    .Concat(this.Returns)
-                    .Concat(this.Params)
-                    .Concat(this.Typeparams)
-                    .Concat(this.Exceptions)
-                    .Concat(this.Permissions)
-                    .Concat(this.Example)
-                    .Concat(this.Remarks)
-                    .Concat(this.Seealsos);
+                    };
                 default:
                     return Enumerable.Empty<string>();
             }
