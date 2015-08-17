@@ -71,10 +71,6 @@ Initializes a new instance of the `BaseUnit` class.
 
 Gets the XML element.
 
-##### Parameters
-
-This method has no parameters.
-
 ### ToMarkdown `method`
 
 Inherit documentation from parent.
@@ -470,29 +466,17 @@ Initializes a new instance of the `MemberUnit` class.
 
 Gets the member unit comparer.
 
-##### Parameters
-
-This method has no parameters.
-
 ### Kind `property`
 
 ##### Summary
 
 Gets the member kind, one of `MemberKind`.
 
-##### Parameters
-
-This method has no parameters.
-
 ### Name `property`
 
 ##### Summary
 
 Gets the name.
-
-##### Parameters
-
-This method has no parameters.
 
 ##### Example
 
@@ -504,10 +488,6 @@ This method has no parameters.
 
 Gets the namespace name.
 
-##### Parameters
-
-This method has no parameters.
-
 ##### Example
 
 `Vsxmd`, `Vsxmd.Units`.
@@ -518,10 +498,6 @@ This method has no parameters.
 
 Gets the type full name.
 
-##### Parameters
-
-This method has no parameters.
-
 ##### Example
 
 `Vsxmd.Program`, `Vsxmd.Units.TypeUnit`.
@@ -531,10 +507,6 @@ This method has no parameters.
 ##### Summary
 
 Gets the type name.
-
-##### Parameters
-
-This method has no parameters.
 
 ##### Example
 
@@ -597,7 +569,7 @@ This method has no parameters.
 
 ##### Summary
 
-Convert the param XML element to Markdown safely. If elemnt is `null`, return empty string.
+Convert the param XML element to Markdown safely.
 
 ##### Returns
 
@@ -609,6 +581,15 @@ The generated Markdown.
 | ---- | ---- | ----------- |
 | elements | System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement} | The param XML element list. |
 | paramTypes | System.Collections.Generic.IEnumerable{System.String} | The paramater type names. |
+| memberKind | Vsxmd.Units.MemberKind | The member kind of the parent element. |
+
+##### Remarks
+
+When the parameter (a.k.a `elements`) list is empty:
+
+If parent element kind is `Constructor` or `Method`, it returns a hint about "no parameters".
+
+If parent element kind is not the value mentioned above, it returns an empty string.
 
 ## PermissionUnit
 

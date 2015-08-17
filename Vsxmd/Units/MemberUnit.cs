@@ -151,7 +151,8 @@ namespace Vsxmd.Units
             ReturnsUnit.ToMarkdown(this.Element.Element("returns"));
 
         private IEnumerable<string> Params =>
-            ParamUnit.ToMarkdown(this.Element.Elements("param"), this.ParamTypes);
+            ParamUnit.ToMarkdown(
+                this.Element.Elements("param"), this.ParamTypes, this.Kind);
 
         private IEnumerable<string> ParamTypes =>
             this.Name.Split('(').Last().Trim(')').Split(',');
