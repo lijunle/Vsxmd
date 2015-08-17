@@ -1,4 +1,6 @@
-version: 0.2.0.{build}
+version: 0.0.0.{build}
+
+shallow_clone: true
 
 init:
   - ps: if ($env:APPVEYOR_REPO_TAG_NAME) { Update-AppveyorBuild -Version $env:APPVEYOR_REPO_TAG_NAME.Substring(1) }
@@ -23,7 +25,11 @@ cache:
   - packages -> **\packages.config
 
 before_build:
-  - ps: nuget restore "$env:APPVEYOR_BUILD_FOLDER\Vsxmd.sln"
+  - ps: nuget restore Vsxmd.sln
+  - ps: Vsxmd\Test.ps1 -Prepare
+
+test_script:
+  - ps: Vsxmd\Test.ps1 -Run
 
 artifacts:
   - path: 'Vsxmd\**\*.nupkg'

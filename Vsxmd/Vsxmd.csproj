@@ -86,6 +86,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Test.ps1" />
     <None Include="Vsxmd.nuspec" />
     <None Include="packages.config" />
     <None Include="targets\Vsxmd.targets" />
