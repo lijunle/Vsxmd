@@ -329,6 +329,22 @@ The escaped content.
 | ---- | ---- | ----------- |
 | content | System.String | The content. |
 
+### GetParamTypes `method`
+
+##### Summary
+
+Gets the method parameter type names from the member unit `name`.
+
+##### Returns
+
+The method parameter type name list.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| name | System.String | The member unit name. |
+
 ### Join `method`
 
 ##### Summary
@@ -422,6 +438,26 @@ To the below Markdown content.
 The `element` value is `null`, it throws `ArgumentException`. For more, see `ToMarkdownText`.
 ```
 
+### ToNameSegments `method`
+
+##### Summary
+
+Split the member unit `name` to segments.
+
+##### Returns
+
+The name segments.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| name | System.String | The member unit name. |
+
+##### Example
+
+Split `M:Vsxmd.Converter.#ctor(System.String)` to `["Vsxmd", "Converter", "#ctor"]` string list.
+
 ## IUnit
 
 ##### Namespace
@@ -450,11 +486,7 @@ This method has no parameters.
 
 ##### Namespace
 
-Vsxmd.Units
-
-##### Summary
-
-The member kind.
+Vsxmd.Units.MemberUnit
 
 ### Constants `constants`
 
@@ -462,19 +494,11 @@ The member kind.
 
 Constants
 
-##### Parameters
-
-This method has no parameters.
-
 ### Constructor `constants`
 
 ##### Summary
 
 Constructor.
-
-##### Parameters
-
-This method has no parameters.
 
 ### Method `constants`
 
@@ -482,19 +506,11 @@ This method has no parameters.
 
 Method.
 
-##### Parameters
-
-This method has no parameters.
-
 ### NotSupported `constants`
 
 ##### Summary
 
 Not supported member kind.
-
-##### Parameters
-
-This method has no parameters.
 
 ### Property `constants`
 
@@ -502,19 +518,11 @@ This method has no parameters.
 
 Property.
 
-##### Parameters
-
-This method has no parameters.
-
 ### Type `constants`
 
 ##### Summary
 
 Type.
-
-##### Parameters
-
-This method has no parameters.
 
 ## MemberUnit
 
@@ -550,41 +558,11 @@ Initializes a new instance of the `MemberUnit` class.
 
 Gets the member unit comparer.
 
-### Kind `property`
+### IsSupported `property`
 
 ##### Summary
 
-Gets the member kind, one of `MemberKind`.
-
-### Name `property`
-
-##### Summary
-
-Gets the name.
-
-##### Example
-
-`Vsxmd.Units.TypeUnit`, `Vsxmd.Units.TypeUnit.#ctor(System.Xml.Linq.XElement)`, `Vsxmd.Units.TypeUnit.TypeName`.
-
-### NamespaceName `property`
-
-##### Summary
-
-Gets the namespace name.
-
-##### Example
-
-`Vsxmd`, `Vsxmd.Units`.
-
-### TypeFullName `property`
-
-##### Summary
-
-Gets the type full name.
-
-##### Example
-
-`Vsxmd.Program`, `Vsxmd.Units.TypeUnit`.
+Gets if this member type is supported.
 
 ### TypeName `property`
 
@@ -594,7 +572,23 @@ Gets the type name.
 
 ##### Example
 
-`Program`, `Converter`.
+`Vsxmd.Program`, `Vsxmd.Units.TypeUnit`.
+
+### ComplementType `method`
+
+##### Summary
+
+Complement a type unit if the member unit `group` does not have one. One member unit group has the same `TypeName`.
+
+##### Returns
+
+The complemented member unit group.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| group | System.Collections.Generic.IEnumerable{Vsxmd.Units.MemberUnit} | The member unit group. |
 
 ### ToMarkdown `method`
 
@@ -605,6 +599,12 @@ Gets the type name.
 ##### Parameters
 
 This method has no parameters.
+
+## MemberUnitComparer
+
+##### Namespace
+
+Vsxmd.Units.MemberUnit
 
 ### Compare `method`
 
@@ -671,13 +671,13 @@ The generated Markdown.
 | ---- | ---- | ----------- |
 | elements | System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement} | The param XML element list. |
 | paramTypes | System.Collections.Generic.IEnumerable{System.String} | The paramater type names. |
-| memberKind | Vsxmd.Units.MemberKind | The member kind of the parent element. |
+| isParameterKind | System.Boolean | Indicates if the member kind have parameters, which is constructor or methods. |
 
 ##### Remarks
 
 When the parameter (a.k.a `elements`) list is empty:
 
-If parent element kind is `Constructor` or `Method`, it returns a hint about "no parameters".
+If parent element kind is constructor or method, it returns a hint about "no parameters".
 
 If parent element kind is not the value mentioned above, it returns an empty string.
 
@@ -990,6 +990,51 @@ The generated Markdown.
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | element | System.Xml.Linq.XElement | The summary XML element. |
+
+## Test
+
+##### Namespace
+
+Vsxmd.Program
+
+### TestComplexParameter\`\`2 `method`
+
+##### Summary
+
+Test complex parameter type.
+
+##### Returns
+
+Nothing.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| expression | System.Linq.Expressions.Expression{System.Func{``0,``1,System.String}} | The linq expression. |
+
+##### Generic Types
+
+| Name | Description |
+| ---- | ----------- |
+| T1 | Generic type 1. |
+| T2 | Generic type 2. |
+
+### TestRefenceComplex `method`
+
+##### Summary
+
+Test reference complex type.
+
+See ```TestComplexParameter``2```.
+
+##### Returns
+
+Nothing.
+
+##### Parameters
+
+This method has no parameters.
 
 ## TypeparamUnit
 

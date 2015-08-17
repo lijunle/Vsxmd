@@ -40,6 +40,22 @@
             <param name="args">Program arguments.</param>
             <seealso cref="T:Vsxmd.Program"/>
         </member>
+        <member name="M:Vsxmd.Program.Test.TestRefenceComplex">
+            <summary>
+            Test reference complex type.
+            <para>See <see cref="M:Vsxmd.Program.Test.TestComplexParameter``2(System.Linq.Expressions.Expression{System.Func{``0,``1,System.String}})"/>.</para>
+            </summary>
+            <returns>Nothing.</returns>
+        </member>
+        <member name="M:Vsxmd.Program.Test.TestComplexParameter``2(System.Linq.Expressions.Expression{System.Func{``0,``1,System.String}})">
+            <summary>
+            Test complex parameter type.
+            </summary>
+            <typeparam name="T1">Generic type 1.</typeparam>
+            <typeparam name="T2">Generic type 2.</typeparam>
+            <param name="expression">The linq expression.</param>
+            <returns>Nothing.</returns>
+        </member>
         <member name="T:Vsxmd.Units.AssemblyUnit">
             <summary>
             Assembly unit.
@@ -180,6 +196,21 @@
             <returns>The Markdwon code span.</returns>
             <remarks>Reference: http://meta.stackexchange.com/questions/55437/how-can-the-backtick-character-be-included-in-code </remarks>
         </member>
+        <member name="M:Vsxmd.Units.Extensions.ToNameSegments(System.String)">
+            <summary>
+            Split the member unit <paramref name="name"/> to segments.
+            </summary>
+            <param name="name">The member unit name.</param>
+            <returns>The name segments.</returns>
+            <example>Split <c>M:Vsxmd.Converter.#ctor(System.String)</c> to <c>["Vsxmd", "Converter", "#ctor"]</c> string list.</example>
+        </member>
+        <member name="M:Vsxmd.Units.Extensions.GetParamTypes(System.String)">
+            <summary>
+            Gets the method parameter type names from the member unit <paramref name="name"/>.
+            </summary>
+            <param name="name">The member unit name.</param>
+            <returns>The method parameter type name list.</returns>
+        </member>
         <member name="M:Vsxmd.Units.Extensions.NthLastOrDefault``1(System.Collections.Generic.IEnumerable{``0},System.Int32)">
             <summary>
             Gets the n-th last element from the <paramref name="source"/>.
@@ -227,41 +258,6 @@
             </summary>
             <returns>The generated Markdown content.</returns>
         </member>
-        <member name="T:Vsxmd.Units.MemberKind">
-            <summary>
-            The member kind.
-            </summary>
-        </member>
-        <member name="F:Vsxmd.Units.MemberKind.NotSupported">
-            <summary>
-            Not supported member kind.
-            </summary>
-        </member>
-        <member name="F:Vsxmd.Units.MemberKind.Type">
-            <summary>
-            Type.
-            </summary>
-        </member>
-        <member name="F:Vsxmd.Units.MemberKind.Constructor">
-            <summary>
-            Constructor.
-            </summary>
-        </member>
-        <member name="F:Vsxmd.Units.MemberKind.Constants">
-            <summary>
-            Constants
-            </summary>
-        </member>
-        <member name="F:Vsxmd.Units.MemberKind.Property">
-            <summary>
-            Property.
-            </summary>
-        </member>
-        <member name="F:Vsxmd.Units.MemberKind.Method">
-            <summary>
-            Method.
-            </summary>
-        </member>
         <member name="T:Vsxmd.Units.MemberUnit">
             <summary>
             Member unit.
@@ -274,48 +270,65 @@
             <param name="element">The member XML element.</param>
             <exception cref="T:System.ArgumentException">Throw if XML element name is not <c>member</c>.</exception>
         </member>
+        <member name="F:Vsxmd.Units.MemberUnit.MemberKind.NotSupported">
+            <summary>
+            Not supported member kind.
+            </summary>
+        </member>
+        <member name="F:Vsxmd.Units.MemberUnit.MemberKind.Type">
+            <summary>
+            Type.
+            </summary>
+        </member>
+        <member name="F:Vsxmd.Units.MemberUnit.MemberKind.Constructor">
+            <summary>
+            Constructor.
+            </summary>
+        </member>
+        <member name="F:Vsxmd.Units.MemberUnit.MemberKind.Constants">
+            <summary>
+            Constants
+            </summary>
+        </member>
+        <member name="F:Vsxmd.Units.MemberUnit.MemberKind.Property">
+            <summary>
+            Property.
+            </summary>
+        </member>
+        <member name="F:Vsxmd.Units.MemberUnit.MemberKind.Method">
+            <summary>
+            Method.
+            </summary>
+        </member>
         <member name="P:Vsxmd.Units.MemberUnit.Comparer">
             <summary>
             Gets the member unit comparer.
             </summary>
             <value>The member unit comparer.</value>
         </member>
-        <member name="P:Vsxmd.Units.MemberUnit.Name">
-            <summary>
-            Gets the name.
-            </summary>
-            <value>The member name</value>
-            <example><c>Vsxmd.Units.TypeUnit</c>, <c>Vsxmd.Units.TypeUnit.#ctor(System.Xml.Linq.XElement)</c>, <c>Vsxmd.Units.TypeUnit.TypeName</c>.</example>
-        </member>
-        <member name="P:Vsxmd.Units.MemberUnit.TypeFullName">
-            <summary>
-            Gets the type full name.
-            </summary>
-            <value>The the type full name.</value>
-            <example><c>Vsxmd.Program</c>, <c>Vsxmd.Units.TypeUnit</c>.</example>
-        </member>
-        <member name="P:Vsxmd.Units.MemberUnit.Kind">
-            <summary>
-            Gets the member kind, one of <see cref="T:Vsxmd.Units.MemberKind"/>.
-            </summary>
-            <value>The member kind.</value>
-        </member>
         <member name="P:Vsxmd.Units.MemberUnit.TypeName">
             <summary>
             Gets the type name.
             </summary>
-            <value>The type name.</value>
-            <example><c>Program</c>, <c>Converter</c>.</example>
+            <value>The the type name.</value>
+            <example><c>Vsxmd.Program</c>, <c>Vsxmd.Units.TypeUnit</c>.</example>
         </member>
-        <member name="P:Vsxmd.Units.MemberUnit.NamespaceName">
+        <member name="P:Vsxmd.Units.MemberUnit.IsSupported">
             <summary>
-            Gets the namespace name.
+            Gets if this member type is supported.
             </summary>
-            <value>The namespace name.</value>
-            <example><c>Vsxmd</c>, <c>Vsxmd.Units</c>.</example>
+            <value>If this member type is supported.</value>
         </member>
         <member name="M:Vsxmd.Units.MemberUnit.ToMarkdown">
             <inheritdoc />
+        </member>
+        <member name="M:Vsxmd.Units.MemberUnit.ComplementType(System.Collections.Generic.IEnumerable{Vsxmd.Units.MemberUnit})">
+            <summary>
+            Complement a type unit if the member unit <paramref name="group"/> does not have one.
+            One member unit group has the same <see cref="P:Vsxmd.Units.MemberUnit.TypeName"/>.
+            </summary>
+            <param name="group">The member unit group.</param>
+            <returns>The complemented member unit group.</returns>
         </member>
         <member name="M:Vsxmd.Units.MemberUnit.MemberUnitComparer.Compare(Vsxmd.Units.MemberUnit,Vsxmd.Units.MemberUnit)">
             <inheritdoc />
@@ -336,17 +349,17 @@
         <member name="M:Vsxmd.Units.ParamUnit.ToMarkdown">
             <inheritdoc />
         </member>
-        <member name="M:Vsxmd.Units.ParamUnit.ToMarkdown(System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement},System.Collections.Generic.IEnumerable{System.String},Vsxmd.Units.MemberKind)">
+        <member name="M:Vsxmd.Units.ParamUnit.ToMarkdown(System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement},System.Collections.Generic.IEnumerable{System.String},System.Boolean)">
             <summary>
             Convert the param XML element to Markdown safely.
             </summary>
             <param name="elements">The param XML element list.</param>
             <param name="paramTypes">The paramater type names.</param>
-            <param name="memberKind">The member kind of the parent element.</param>
+            <param name="isParameterKind">Indicates if the member kind have parameters, which is constructor or methods.</param>
             <returns>The generated Markdown.</returns>
             <remarks>
             When the parameter (a.k.a <paramref name="elements"/>) list is empty:
-            <para>If parent element kind is <see cref="F:Vsxmd.Units.MemberKind.Constructor"/> or <see cref="F:Vsxmd.Units.MemberKind.Method"/>, it returns a hint about "no parameters".</para>
+            <para>If parent element kind is constructor or method, it returns a hint about "no parameters".</para>
             <para>If parent element kind is not the value mentioned above, it returns an empty string.</para>
             </remarks>
         </member>

@@ -9,6 +9,7 @@ namespace Vsxmd.Units
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Text;
     using System.Text.RegularExpressions;
     using System.Xml.Linq;
 
@@ -52,6 +53,54 @@ namespace Vsxmd.Units
             return code.StartsWith("`") || code.EndsWith("`")
                 ? $"{backticks} {code} {backticks}"
                 : $"{backticks}{code}{backticks}";
+        }
+
+        /// <summary>
+        /// Split the member unit <paramref name="name"/> to segments.
+        /// </summary>
+        /// <param name="name">The member unit name.</param>
+        /// <returns>The name segments.</returns>
+        /// <example>Split <c>M:Vsxmd.Converter.#ctor(System.String)</c> to <c>["Vsxmd", "Converter", "#ctor"]</c> string list.</example>
+        internal static IEnumerable<string> ToNameSegments(this string name) =>
+            name.Split('(').First().Split(':').Last().Split('.');
+
+        /// <summary>
+        /// Gets the method parameter type names from the member unit <paramref name="name"/>.
+        /// </summary>
+        /// <param name="name">The member unit name.</param>
+        /// <returns>The method parameter type name list.</returns>
+        internal static IEnumerable<string> GetParamTypes(this string name)
+        {
+            var paramString = name.Split('(').Last().Trim(')');
+
+            var delta = 0;
+            var list = new List<StringBuilder>()
+            {
+                new StringBuilder()
+            };
+
+            foreach (var character in paramString)
+            {
+                if (character == '{')
+                {
+                    delta++;
+                }
+                else if (character == '}')
+                {
+                    delta--;
+                }
+                else if (character == ',' && delta == 0)
+                {
+                    list.Add(new StringBuilder());
+                }
+
+                if (character != ',' || delta != 0)
+                {
+                    list.Last().Append(character);
+                }
+            }
+
+            return list.Select(x => x.ToString());
         }
 
         /// <summary>
@@ -118,7 +167,7 @@ namespace Vsxmd.Units
                 switch (child.Name.ToString())
                 {
                     case "see":
-                        return $"{child.Attribute("cref").Value.Split('.').Last().AsCode()}";
+                        return $"{child.Attribute("cref").Value.ToNameSegments().Last().AsCode()}";
                     case "paramref":
                     case "typeparamref":
                         return $"{child.Attribute("name").Value.AsCode()}";

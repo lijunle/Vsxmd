@@ -46,29 +46,27 @@ namespace Vsxmd.Units
         /// </summary>
         /// <param name="elements">The param XML element list.</param>
         /// <param name="paramTypes">The paramater type names.</param>
-        /// <param name="memberKind">The member kind of the parent element.</param>
+        /// <param name="isParameterKind">Indicates if the member kind have parameters, which is constructor or methods.</param>
         /// <returns>The generated Markdown.</returns>
         /// <remarks>
         /// When the parameter (a.k.a <paramref name="elements"/>) list is empty:
-        /// <para>If parent element kind is <see cref="MemberKind.Constructor"/> or <see cref="MemberKind.Method"/>, it returns a hint about "no parameters".</para>
+        /// <para>If parent element kind is constructor or method, it returns a hint about "no parameters".</para>
         /// <para>If parent element kind is not the value mentioned above, it returns an empty string.</para>
         /// </remarks>
         internal static IEnumerable<string> ToMarkdown(
             IEnumerable<XElement> elements,
             IEnumerable<string> paramTypes,
-            MemberKind memberKind)
+            bool isParameterKind)
         {
             if (!elements.Any())
             {
-                return
-                    memberKind != MemberKind.Constants &&
-                    memberKind != MemberKind.Method
-                        ? Enumerable.Empty<string>()
-                        : new[]
-                        {
-                            "##### Parameters",
-                            "This method has no parameters."
-                        };
+                return !isParameterKind
+                    ? Enumerable.Empty<string>()
+                    : new[]
+                    {
+                        "##### Parameters",
+                        "This method has no parameters."
+                    };
             }
 
             var markdowns = elements

@@ -48,7 +48,10 @@ namespace Vsxmd
                 .Element("members")
                 .Elements("member")
                 .Select(element => new MemberUnit(element))
-                .Where(member => member.Kind != MemberKind.NotSupported);
+                .Where(member => member.IsSupported)
+                .GroupBy(unit => unit.TypeName)
+                .Select(MemberUnit.ComplementType)
+                .SelectMany(group => group);
 
             var memberMarkdowns = memberUnits
                 .OrderBy(member => member, MemberUnit.Comparer)
