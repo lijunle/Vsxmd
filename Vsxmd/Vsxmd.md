@@ -997,6 +997,26 @@ The generated Markdown.
 
 Vsxmd.Program
 
+### TestBacktickInSummary `method`
+
+##### Summary
+
+Test backtick characters in summary comment.
+
+See \`should not inside code block\`.
+
+See `` `backtick inside code block` ``
+
+See \``code block inside backtick`\`
+
+##### Returns
+
+Nothing.
+
+##### Parameters
+
+This method has no parameters.
+
 ### TestComplexParameter\`\`2 `method`
 
 ##### Summary

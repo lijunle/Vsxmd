@@ -70,6 +70,15 @@
             <returns>Nothing.</returns>
             <permission cref="M:Vsxmd.Program.Test.TestComplexParameter``2(System.Linq.Expressions.Expression{System.Func{``0,``1,System.String}})">Just for test.</permission>
         </member>
+        <member name="M:Vsxmd.Program.Test.TestBacktickInSummary">
+            <summary>
+            Test backtick characters in summary comment.
+            <para>See `should not inside code block`.</para>
+            <para>See <c>`backtick inside code block`</c></para>
+            <para>See `<c>code block inside backtick</c>`</para>
+            </summary>
+            <returns>Nothing.</returns>
+        </member>
         <member name="T:Vsxmd.Units.AssemblyUnit">
             <summary>
             Assembly unit.

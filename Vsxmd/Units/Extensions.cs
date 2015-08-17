@@ -158,7 +158,7 @@ namespace Vsxmd.Units
             var text = node as XText;
             if (text != null)
             {
-                return Regex.Replace(text.Value, @"\s+", " ", RegexOptions.Multiline);
+                return Regex.Replace(text.Value, @"\s+", " ", RegexOptions.Multiline).Escape();
             }
 
             var child = node as XElement;

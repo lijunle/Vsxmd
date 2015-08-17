@@ -86,6 +86,15 @@ namespace Vsxmd
             /// <returns>Nothing.</returns>
             /// <permission cref="TestComplexParameter{T1, T2}(Expression{Func{T1, T2, string}})">Just for test.</permission>
             internal string TestGenericPermission() => null;
+
+            /// <summary>
+            /// Test backtick characters in summary comment.
+            /// <para>See `should not inside code block`.</para>
+            /// <para>See <c>`backtick inside code block`</c></para>
+            /// <para>See `<c>code block inside backtick</c>`</para>
+            /// </summary>
+            /// <returns>Nothing.</returns>
+            internal string TestBacktickInSummary() => null;
         }
     }
 }
