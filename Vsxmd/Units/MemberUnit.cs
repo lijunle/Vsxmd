@@ -39,7 +39,7 @@ namespace Vsxmd.Units
         public MemberUnit(XElement element)
             : base(element, "member")
         {
-            this.type = this.Element.Attribute("name").Value.First();
+            this.type = this.GetAttribute("name").First();
         }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace Vsxmd.Units
         /// </summary>
         /// <value>The member name</value>
         /// <example><c>Vsxmd.Units.TypeUnit</c>, <c>Vsxmd.Units.TypeUnit.#ctor(System.Xml.Linq.XElement)</c>, <c>Vsxmd.Units.TypeUnit.TypeName</c>.</example>
-        public string Name => this.Element.Attribute("name").Value.Substring(2);
+        public string Name => this.GetAttribute("name").Substring(2);
 
         /// <summary>
         /// Gets the type full name.
@@ -140,44 +140,62 @@ namespace Vsxmd.Units
             this.Name.Split('(').First().Split('.');
 
         private IEnumerable<string> InheritDoc =>
-            this.Element.Element("inheritdoc") != null
-                ? new[] { "Inherit documentation from parent." }
-                : Enumerable.Empty<string>();
+            this.GetChild("inheritdoc") == null
+                ? Enumerable.Empty<string>()
+                : new[]
+                {
+                    "##### Summary",
+                    "*Inherit from parent.*"
+                };
 
         private IEnumerable<string> Summary =>
-            SummaryUnit.ToMarkdown(this.Element.Element("summary"));
+            SummaryUnit.ToMarkdown(this.GetChild("summary"));
 
         private IEnumerable<string> Returns =>
-            ReturnsUnit.ToMarkdown(this.Element.Element("returns"));
+            ReturnsUnit.ToMarkdown(this.GetChild("returns"));
 
         private IEnumerable<string> Params =>
-            ParamUnit.ToMarkdown(this.Element.Elements("param"), this.ParamTypes);
+            ParamUnit.ToMarkdown(
+                this.GetChildren("param"), this.ParamTypes, this.Kind);
 
         private IEnumerable<string> ParamTypes =>
             this.Name.Split('(').Last().Trim(')').Split(',');
 
         private IEnumerable<string> Typeparams =>
-            TypeparamUnit.ToMarkdown(this.Element.Elements("typeparam"));
+            TypeparamUnit.ToMarkdown(this.GetChildren("typeparam"));
 
         private IEnumerable<string> Exceptions =>
-            ExceptionUnit.ToMarkdown(this.Element.Elements("exception"));
+            ExceptionUnit.ToMarkdown(this.GetChildren("exception"));
 
         private IEnumerable<string> Permissions =>
-            PermissionUnit.ToMarkdown(this.Element.Elements("permission"));
+            PermissionUnit.ToMarkdown(this.GetChildren("permission"));
 
         private IEnumerable<string> Example =>
-            ExampleUnit.ToMarkdown(this.Element.Element("example"));
+            ExampleUnit.ToMarkdown(this.GetChild("example"));
 
         private IEnumerable<string> Remarks =>
-            RemarksUnit.ToMarkdown(this.Element.Element("remarks"));
+            RemarksUnit.ToMarkdown(this.GetChild("remarks"));
 
         private IEnumerable<string> Seealsos =>
-            SeealsoUnit.ToMarkdown(this.Element.Elements("seealso"));
+            SeealsoUnit.ToMarkdown(this.GetChildren("seealso"));
 
         /// <inheritdoc />
-        public override IEnumerable<string> ToMarkdown()
+        public override IEnumerable<string> ToMarkdown() =>
+            this.GetCaption(this.type)
+                .Concat(this.InheritDoc)
+                .Concat(this.Summary)
+                .Concat(this.Returns)
+                .Concat(this.Params)
+                .Concat(this.Typeparams)
+                .Concat(this.Exceptions)
+                .Concat(this.Permissions)
+                .Concat(this.Example)
+                .Concat(this.Remarks)
+                .Concat(this.Seealsos);
+
+        private IEnumerable<string> GetCaption(char type)
         {
-            switch (this.type)
+            switch (type)
             {
                 case T:
                     return new[]
@@ -185,29 +203,14 @@ namespace Vsxmd.Units
                         $"## {this.TypeName}",
                         $"##### Namespace",
                         $"{this.NamespaceName}"
-                    }
-                    .Concat(this.InheritDoc)
-                    .Concat(this.Summary)
-                    .Concat(this.Permissions)
-                    .Concat(this.Remarks)
-                    .Concat(this.Seealsos);
+                    };
                 case F:
                 case P:
                 case M:
                     return new[]
                     {
                         $"### {this.NameSegments.Last().Escape()} `{this.KindString}`"
-                    }
-                    .Concat(this.InheritDoc)
-                    .Concat(this.Summary)
-                    .Concat(this.Returns)
-                    .Concat(this.Params)
-                    .Concat(this.Typeparams)
-                    .Concat(this.Exceptions)
-                    .Concat(this.Permissions)
-                    .Concat(this.Example)
-                    .Concat(this.Remarks)
-                    .Concat(this.Seealsos);
+                    };
                 default:
                     return Enumerable.Empty<string>();
             }

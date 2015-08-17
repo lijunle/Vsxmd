@@ -74,8 +74,36 @@
             </summary>
             <value>The XML element.</value>
         </member>
+        <member name="P:Vsxmd.Units.BaseUnit.ElementContent">
+            <summary>
+            Gets the Markdown content representing the element.
+            </summary>
+            <value>The Markdown content.</value>
+        </member>
         <member name="M:Vsxmd.Units.BaseUnit.ToMarkdown">
             <inheritdoc />
+        </member>
+        <member name="M:Vsxmd.Units.BaseUnit.GetChild(System.Xml.Linq.XName)">
+            <summary>
+            Gets the first (in document order) child element with the specified <paramref name="name"/>.
+            </summary>
+            <param name="name">The <see cref="T:System.Xml.Linq.XName"/> to match.</param>
+            <returns>A <see cref="T:System.Xml.Linq.XName"/> that matches the specified <paramref name="name"/>, or <value>null</value>.</returns>
+        </member>
+        <member name="M:Vsxmd.Units.BaseUnit.GetChildren(System.Xml.Linq.XName)">
+            <summary>
+            Returns a collection of the child elements of this element or document, in document order.
+            Only elements that have a matching <see cref="T:System.Xml.Linq.XName"/> are included in the collection.
+            </summary>
+            <param name="name">The <see cref="T:System.Xml.Linq.XName"/> to match.</param>
+            <returns>An <see cref="T:System.Collections.Generic.IEnumerable`1"/> of <see cref="T:System.Xml.Linq.XElement"/> containing the children that have a matching <see cref="T:System.Xml.Linq.XName"/>, in document order.</returns>
+        </member>
+        <member name="M:Vsxmd.Units.BaseUnit.GetAttribute(System.Xml.Linq.XName)">
+            <summary>
+            Returns the <see cref="T:System.Xml.Linq.XAttribute"/> value of this <see cref="T:System.Xml.Linq.XElement"/> that has the specified <paramref name="name"/>.
+            </summary>
+            <param name="name">The <see cref="T:System.Xml.Linq.XName"/> of the <see cref="T:System.Xml.Linq.XAttribute"/> to get.</param>
+            <returns>An <see cref="T:System.Xml.Linq.XAttribute"/> value that has the specified <paramref name="name"/>; <value>null</value> if there is no attribute with the specified <paramref name="name"/>.</returns>
         </member>
         <member name="T:Vsxmd.Units.ExampleUnit">
             <summary>
@@ -142,6 +170,15 @@
             </summary>
             <param name="content">The content.</param>
             <returns>The escaped content.</returns>
+        </member>
+        <member name="M:Vsxmd.Units.Extensions.AsCode(System.String)">
+            <summary>
+            Wrap the <paramref name="code"/> into Markdown backtick safely.
+            <para>The backtick characters inside the <paramref name="code"/> reverse as it is.</para>
+            </summary>
+            <param name="code">The code span.</param>
+            <returns>The Markdwon code span.</returns>
+            <remarks>Reference: http://meta.stackexchange.com/questions/55437/how-can-the-backtick-character-be-included-in-code </remarks>
         </member>
         <member name="M:Vsxmd.Units.Extensions.NthLastOrDefault``1(System.Collections.Generic.IEnumerable{``0},System.Int32)">
             <summary>
@@ -299,14 +336,19 @@
         <member name="M:Vsxmd.Units.ParamUnit.ToMarkdown">
             <inheritdoc />
         </member>
-        <member name="M:Vsxmd.Units.ParamUnit.ToMarkdown(System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement},System.Collections.Generic.IEnumerable{System.String})">
+        <member name="M:Vsxmd.Units.ParamUnit.ToMarkdown(System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement},System.Collections.Generic.IEnumerable{System.String},Vsxmd.Units.MemberKind)">
             <summary>
             Convert the param XML element to Markdown safely.
-            If elemnt is <value>null</value>, return empty string.
             </summary>
             <param name="elements">The param XML element list.</param>
             <param name="paramTypes">The paramater type names.</param>
+            <param name="memberKind">The member kind of the parent element.</param>
             <returns>The generated Markdown.</returns>
+            <remarks>
+            When the parameter (a.k.a <paramref name="elements"/>) list is empty:
+            <para>If parent element kind is <see cref="F:Vsxmd.Units.MemberKind.Constructor"/> or <see cref="F:Vsxmd.Units.MemberKind.Method"/>, it returns a hint about "no parameters".</para>
+            <para>If parent element kind is not the value mentioned above, it returns an empty string.</para>
+            </remarks>
         </member>
         <member name="T:Vsxmd.Units.PermissionUnit">
             <summary>

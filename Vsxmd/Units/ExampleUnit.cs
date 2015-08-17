@@ -31,7 +31,7 @@ namespace Vsxmd.Units
             new[]
             {
                 $"##### Example",
-                $"{this.Element.ToMarkdownText()}"
+                $"{this.ElementContent}"
             };
 
         /// <summary>

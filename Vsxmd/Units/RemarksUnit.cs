@@ -32,7 +32,7 @@ namespace Vsxmd.Units
             new[]
             {
                 "##### Remarks",
-                this.Element.ToMarkdownText()
+                this.ElementContent
             };
 
         /// <summary>

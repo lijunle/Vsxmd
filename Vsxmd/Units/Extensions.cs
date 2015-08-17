@@ -35,6 +35,26 @@ namespace Vsxmd.Units
             content.Replace("`", @"\`");
 
         /// <summary>
+        /// Wrap the <paramref name="code"/> into Markdown backtick safely.
+        /// <para>The backtick characters inside the <paramref name="code"/> reverse as it is.</para>
+        /// </summary>
+        /// <param name="code">The code span.</param>
+        /// <returns>The Markdwon code span.</returns>
+        /// <remarks>Reference: http://meta.stackexchange.com/questions/55437/how-can-the-backtick-character-be-included-in-code </remarks>
+        internal static string AsCode(this string code)
+        {
+            string backticks = "`";
+            while (code.Contains(backticks))
+            {
+                backticks += "`";
+            }
+
+            return code.StartsWith("`") || code.EndsWith("`")
+                ? $"{backticks} {code} {backticks}"
+                : $"{backticks}{code}{backticks}";
+        }
+
+        /// <summary>
         /// Gets the n-th last element from the <paramref name="source"/>.
         /// </summary>
         /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
@@ -98,13 +118,13 @@ namespace Vsxmd.Units
                 switch (child.Name.ToString())
                 {
                     case "see":
-                        return $"`{child.Attribute("cref").Value.Split('.').Last()}`";
+                        return $"{child.Attribute("cref").Value.Split('.').Last().AsCode()}";
                     case "paramref":
                     case "typeparamref":
-                        return $"`{child.Attribute("name").Value}`";
+                        return $"{child.Attribute("name").Value.AsCode()}";
                     case "c":
                     case "value":
-                        return $"`{child.Value}`";
+                        return $"{child.Value.AsCode()}";
                     case "code":
                         return $"\n\n```\n{string.Concat(child.Nodes()).Trim()}\n```\n\n";
                     case "para":

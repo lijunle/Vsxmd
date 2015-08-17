@@ -30,7 +30,9 @@ Initializes a new instance of the `AssemblyUnit` class.
 
 ### ToMarkdown `method`
 
-Inherit documentation from parent.
+##### Summary
+
+*Inherit from parent.*
 
 ##### Parameters
 
@@ -71,13 +73,65 @@ Initializes a new instance of the `BaseUnit` class.
 
 Gets the XML element.
 
+### ElementContent `property`
+
+##### Summary
+
+Gets the Markdown content representing the element.
+
+### GetAttribute `method`
+
+##### Summary
+
+Returns the `XAttribute` value of this `XElement` that has the specified `name`.
+
+##### Returns
+
+An `XAttribute` value that has the specified `name`; `null` if there is no attribute with the specified `name`.
+
 ##### Parameters
 
-This method has no parameters.
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| name | System.Xml.Linq.XName | The `XName` of the `XAttribute` to get. |
+
+### GetChild `method`
+
+##### Summary
+
+Gets the first (in document order) child element with the specified `name`.
+
+##### Returns
+
+A `XName` that matches the specified `name`, or `null`.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| name | System.Xml.Linq.XName | The `XName` to match. |
+
+### GetChildren `method`
+
+##### Summary
+
+Returns a collection of the child elements of this element or document, in document order. Only elements that have a matching `XName` are included in the collection.
+
+##### Returns
+
+An ``IEnumerable`1`` of `XElement` containing the children that have a matching `XName`, in document order.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| name | System.Xml.Linq.XName | The `XName` to match. |
 
 ### ToMarkdown `method`
 
-Inherit documentation from parent.
+##### Summary
+
+*Inherit from parent.*
 
 ##### Parameters
 
@@ -149,7 +203,9 @@ Initializes a new instance of the `ExampleUnit` class.
 
 ### ToMarkdown `method`
 
-Inherit documentation from parent.
+##### Summary
+
+*Inherit from parent.*
 
 ##### Parameters
 
@@ -201,7 +257,9 @@ Initializes a new instance of the `ExceptionUnit` class.
 
 ### ToMarkdown `method`
 
-Inherit documentation from parent.
+##### Summary
+
+*Inherit from parent.*
 
 ##### Parameters
 
@@ -232,6 +290,28 @@ Vsxmd.Units
 ##### Summary
 
 Extensions helper.
+
+### AsCode `method`
+
+##### Summary
+
+Wrap the `code` into Markdown backtick safely.
+
+The backtick characters inside the `code` reverse as it is.
+
+##### Returns
+
+The Markdwon code span.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| code | System.String | The code span. |
+
+##### Remarks
+
+Reference: http://meta.stackexchange.com/questions/55437/how-can-the-backtick-character-be-included-in-code
 
 ### Escape `method`
 
@@ -470,29 +550,17 @@ Initializes a new instance of the `MemberUnit` class.
 
 Gets the member unit comparer.
 
-##### Parameters
-
-This method has no parameters.
-
 ### Kind `property`
 
 ##### Summary
 
 Gets the member kind, one of `MemberKind`.
 
-##### Parameters
-
-This method has no parameters.
-
 ### Name `property`
 
 ##### Summary
 
 Gets the name.
-
-##### Parameters
-
-This method has no parameters.
 
 ##### Example
 
@@ -504,10 +572,6 @@ This method has no parameters.
 
 Gets the namespace name.
 
-##### Parameters
-
-This method has no parameters.
-
 ##### Example
 
 `Vsxmd`, `Vsxmd.Units`.
@@ -517,10 +581,6 @@ This method has no parameters.
 ##### Summary
 
 Gets the type full name.
-
-##### Parameters
-
-This method has no parameters.
 
 ##### Example
 
@@ -532,17 +592,15 @@ This method has no parameters.
 
 Gets the type name.
 
-##### Parameters
-
-This method has no parameters.
-
 ##### Example
 
 `Program`, `Converter`.
 
 ### ToMarkdown `method`
 
-Inherit documentation from parent.
+##### Summary
+
+*Inherit from parent.*
 
 ##### Parameters
 
@@ -550,7 +608,9 @@ This method has no parameters.
 
 ### Compare `method`
 
-Inherit documentation from parent.
+##### Summary
+
+*Inherit from parent.*
 
 ##### Parameters
 
@@ -587,7 +647,9 @@ Initializes a new instance of the `ParamUnit` class.
 
 ### ToMarkdown `method`
 
-Inherit documentation from parent.
+##### Summary
+
+*Inherit from parent.*
 
 ##### Parameters
 
@@ -597,7 +659,7 @@ This method has no parameters.
 
 ##### Summary
 
-Convert the param XML element to Markdown safely. If elemnt is `null`, return empty string.
+Convert the param XML element to Markdown safely.
 
 ##### Returns
 
@@ -609,6 +671,15 @@ The generated Markdown.
 | ---- | ---- | ----------- |
 | elements | System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement} | The param XML element list. |
 | paramTypes | System.Collections.Generic.IEnumerable{System.String} | The paramater type names. |
+| memberKind | Vsxmd.Units.MemberKind | The member kind of the parent element. |
+
+##### Remarks
+
+When the parameter (a.k.a `elements`) list is empty:
+
+If parent element kind is `Constructor` or `Method`, it returns a hint about "no parameters".
+
+If parent element kind is not the value mentioned above, it returns an empty string.
 
 ## PermissionUnit
 
@@ -640,7 +711,9 @@ Initializes a new instance of the `PermissionUnit` class.
 
 ### ToMarkdown `method`
 
-Inherit documentation from parent.
+##### Summary
+
+*Inherit from parent.*
 
 ##### Parameters
 
@@ -732,7 +805,9 @@ Initializes a new instance of the `RemarksUnit` class.
 
 ### ToMarkdown `method`
 
-Inherit documentation from parent.
+##### Summary
+
+*Inherit from parent.*
 
 ##### Parameters
 
@@ -784,7 +859,9 @@ Initializes a new instance of the `ReturnsUnit` class.
 
 ### ToMarkdown `method`
 
-Inherit documentation from parent.
+##### Summary
+
+*Inherit from parent.*
 
 ##### Parameters
 
@@ -836,7 +913,9 @@ Initializes a new instance of the `SeealsoUnit` class.
 
 ### ToMarkdown `method`
 
-Inherit documentation from parent.
+##### Summary
+
+*Inherit from parent.*
 
 ##### Parameters
 
@@ -888,7 +967,9 @@ Initializes a new instance of the `SummaryUnit` class.
 
 ### ToMarkdown `method`
 
-Inherit documentation from parent.
+##### Summary
+
+*Inherit from parent.*
 
 ##### Parameters
 
@@ -940,7 +1021,9 @@ Initializes a new instance of the `TypeparamUnit` class.
 
 ### ToMarkdown `method`
 
-Inherit documentation from parent.
+##### Summary
+
+*Inherit from parent.*
 
 ##### Parameters
 
