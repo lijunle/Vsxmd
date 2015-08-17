@@ -678,6 +678,10 @@ Program entry.
 | ---- | ----------- |
 | System.Security.PermissionSet | Vsxmd provides no program APIs. |
 
+##### Remarks
+
+Usage syntax: `Vsxmd.exe <input-XML-path> [output-Markdown-path]`
+
 ### Main `method`
 
 ##### Summary
@@ -689,6 +693,58 @@ Program main function entry.
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | args | System.String[] | Program arguments. |
+
+## RemarksUnit
+
+##### Namespace
+
+Vsxmd.Units
+
+##### Summary
+
+Remarks unit.
+
+### #ctor `constructor`
+
+##### Summary
+
+Initializes a new instance of the `RemarksUnit` class.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| element | System.Xml.Linq.XElement | The remarks XML element. |
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| System.ArgumentException | Throw if XML element name is not `remarks`. |
+
+### ToMarkdown `method`
+
+Inherit documentation from parent.
+
+##### Parameters
+
+This method has no parameters.
+
+### ToMarkdown `method`
+
+##### Summary
+
+Convert the remarks XML element to Markdown safely. If elemnt is `null`, return empty string.
+
+##### Returns
+
+The generated Markdown.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| element | System.Xml.Linq.XElement | The remarks XML element. |
 
 ## ReturnsUnit
 

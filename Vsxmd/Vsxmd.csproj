@@ -79,6 +79,7 @@
     <Compile Include="Units\MemberUnit.cs" />
     <Compile Include="Units\ParamUnit.cs" />
     <Compile Include="Units\PermissionUnit.cs" />
+    <Compile Include="Units\RemarksUnit.cs" />
     <Compile Include="Units\ReturnsUnit.cs" />
     <Compile Include="Units\SummaryUnit.cs" />
     <Compile Include="Units\TypeparamUnit.cs" />
