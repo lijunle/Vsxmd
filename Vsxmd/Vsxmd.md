@@ -694,6 +694,10 @@ Program main function entry.
 | ---- | ---- | ----------- |
 | args | System.String[] | Program arguments. |
 
+##### See Also
+
+- `Vsxmd.Program`
+
 ## RemarksUnit
 
 ##### Namespace
@@ -797,6 +801,58 @@ The generated Markdown.
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | element | System.Xml.Linq.XElement | The returns XML element. |
+
+## SeealsoUnit
+
+##### Namespace
+
+Vsxmd.Units
+
+##### Summary
+
+Seealso unit.
+
+### #ctor `constructor`
+
+##### Summary
+
+Initializes a new instance of the `SeealsoUnit` class.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| element | System.Xml.Linq.XElement | The seealso XML element. |
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| System.ArgumentException | Throw if XML element name is not `seealso`. |
+
+### ToMarkdown `method`
+
+Inherit documentation from parent.
+
+##### Parameters
+
+This method has no parameters.
+
+### ToMarkdown `method`
+
+##### Summary
+
+Convert the seealso XML element to Markdown safely. If elemnt is `null`, return empty string.
+
+##### Returns
+
+The generated Markdown.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| elements | System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement} | The seealso XML element list. |
 
 ## SummaryUnit
 

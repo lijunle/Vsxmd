@@ -171,6 +171,9 @@ namespace Vsxmd.Units
         private IEnumerable<string> Remarks =>
             RemarksUnit.ToMarkdown(this.Element.Element("remarks"));
 
+        private IEnumerable<string> Seealsos =>
+            SeealsoUnit.ToMarkdown(this.Element.Elements("seealso"));
+
         /// <inheritdoc />
         public override IEnumerable<string> ToMarkdown()
         {
@@ -186,7 +189,8 @@ namespace Vsxmd.Units
                     .Concat(this.InheritDoc)
                     .Concat(this.Summary)
                     .Concat(this.Permissions)
-                    .Concat(this.Remarks);
+                    .Concat(this.Remarks)
+                    .Concat(this.Seealsos);
                 case F:
                 case P:
                 case M:
@@ -202,7 +206,8 @@ namespace Vsxmd.Units
                     .Concat(this.Exceptions)
                     .Concat(this.Permissions)
                     .Concat(this.Example)
-                    .Concat(this.Remarks);
+                    .Concat(this.Remarks)
+                    .Concat(this.Seealsos);
                 default:
                     return Enumerable.Empty<string>();
             }

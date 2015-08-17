@@ -81,6 +81,7 @@
     <Compile Include="Units\PermissionUnit.cs" />
     <Compile Include="Units\RemarksUnit.cs" />
     <Compile Include="Units\ReturnsUnit.cs" />
+    <Compile Include="Units\SeealsoUnit.cs" />
     <Compile Include="Units\SummaryUnit.cs" />
     <Compile Include="Units\TypeparamUnit.cs" />
   </ItemGroup>
