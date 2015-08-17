@@ -159,7 +159,7 @@ namespace Vsxmd.Units
                 this.GetChildren("param"), this.ParamTypes, this.Kind);
 
         private IEnumerable<string> ParamTypes =>
-            this.Name.Split('(').Last().Trim(')').Split(',');
+            this.Name.GetParamTypes();
 
         private IEnumerable<string> Typeparams =>
             TypeparamUnit.ToMarkdown(this.GetChildren("typeparam"));

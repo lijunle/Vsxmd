@@ -9,6 +9,7 @@ namespace Vsxmd.Units
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Text;
     using System.Text.RegularExpressions;
     using System.Xml.Linq;
 
@@ -52,6 +53,45 @@ namespace Vsxmd.Units
             return code.StartsWith("`") || code.EndsWith("`")
                 ? $"{backticks} {code} {backticks}"
                 : $"{backticks}{code}{backticks}";
+        }
+
+        /// <summary>
+        /// Gets the method parameter type names from the member unit <paramref name="name"/>.
+        /// </summary>
+        /// <param name="name">The member unit name.</param>
+        /// <returns>The method parameter type name list.</returns>
+        internal static IEnumerable<string> GetParamTypes(this string name)
+        {
+            var paramString = name.Split('(').Last().Trim(')');
+
+            var delta = 0;
+            var list = new List<StringBuilder>()
+            {
+                new StringBuilder()
+            };
+
+            foreach (var character in paramString)
+            {
+                if (character == '{')
+                {
+                    delta++;
+                }
+                else if (character == '}')
+                {
+                    delta--;
+                }
+                else if (character == ',' && delta == 0)
+                {
+                    list.Add(new StringBuilder());
+                }
+
+                if (character != ',' || delta != 0)
+                {
+                    list.Last().Append(character);
+                }
+            }
+
+            return list.Select(x => x.ToString());
         }
 
         /// <summary>

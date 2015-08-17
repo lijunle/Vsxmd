@@ -196,6 +196,13 @@
             <returns>The Markdwon code span.</returns>
             <remarks>Reference: http://meta.stackexchange.com/questions/55437/how-can-the-backtick-character-be-included-in-code </remarks>
         </member>
+        <member name="M:Vsxmd.Units.Extensions.GetParamTypes(System.String)">
+            <summary>
+            Gets the method parameter type names from the member unit <paramref name="name"/>.
+            </summary>
+            <param name="name">The member unit name.</param>
+            <returns>The method parameter type name list.</returns>
+        </member>
         <member name="M:Vsxmd.Units.Extensions.NthLastOrDefault``1(System.Collections.Generic.IEnumerable{``0},System.Int32)">
             <summary>
             Gets the n-th last element from the <paramref name="source"/>.

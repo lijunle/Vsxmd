@@ -329,6 +329,22 @@ The escaped content.
 | ---- | ---- | ----------- |
 | content | System.String | The content. |
 
+### GetParamTypes `method`
+
+##### Summary
+
+Gets the method parameter type names from the member unit `name`.
+
+##### Returns
+
+The method parameter type name list.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| name | System.String | The member unit name. |
+
 ### Join `method`
 
 ##### Summary
@@ -1005,7 +1021,7 @@ Nothing.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| expression | System.Linq.Expressions.Expression{System.Func{``0 | The linq expression. |
+| expression | System.Linq.Expressions.Expression{System.Func{``0,``1,System.String}} | The linq expression. |
 
 ##### Generic Types
 
