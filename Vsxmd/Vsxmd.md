@@ -1017,29 +1017,6 @@ Nothing.
 
 This method has no parameters.
 
-### TestComplexParameter\`\`2 `method`
-
-##### Summary
-
-Test complex parameter type.
-
-##### Returns
-
-Nothing.
-
-##### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| expression | System.Linq.Expressions.Expression{System.Func{\`\`0,\`\`1,System.String}} | The linq expression. |
-
-##### Generic Types
-
-| Name | Description |
-| ---- | ----------- |
-| T1 | Generic type 1. |
-| T2 | Generic type 2. |
-
 ### TestGenericException `method`
 
 ##### Summary
@@ -1058,7 +1035,30 @@ This method has no parameters.
 
 | Name | Description |
 | ---- | ----------- |
-| Vsxmd.Program.Test.TestComplexParameter\`\`2(System.Linq.Expressions.Expression{System.Func{\`\`0,\`\`1,System.String}}) | Just for test. |
+| Vsxmd.Program.Test.TestGenericParameter\`\`2(System.Linq.Expressions.Expression{System.Func{\`\`0,\`\`1,System.String}}) | Just for test. |
+
+### TestGenericParameter\`\`2 `method`
+
+##### Summary
+
+Test generic parameter type.
+
+##### Returns
+
+Nothing.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| expression | System.Linq.Expressions.Expression{System.Func{\`\`0,\`\`1,System.String}} | The linq expression. |
+
+##### Generic Types
+
+| Name | Description |
+| ---- | ----------- |
+| T1 | Generic type 1. |
+| T2 | Generic type 2. |
 
 ### TestGenericPermission `method`
 
@@ -1078,15 +1078,15 @@ This method has no parameters.
 
 | Name | Description |
 | ---- | ----------- |
-| Vsxmd.Program.Test.TestComplexParameter\`\`2(System.Linq.Expressions.Expression{System.Func{\`\`0,\`\`1,System.String}}) | Just for test. |
+| Vsxmd.Program.Test.TestGenericParameter\`\`2(System.Linq.Expressions.Expression{System.Func{\`\`0,\`\`1,System.String}}) | Just for test. |
 
-### TestRefenceComplex `method`
+### TestGenericRefence `method`
 
 ##### Summary
 
-Test reference complex type.
+Test generic reference type.
 
-See ```TestComplexParameter``2```.
+See ```TestGenericParameter``2```.
 
 ##### Returns
 
