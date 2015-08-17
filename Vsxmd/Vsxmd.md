@@ -586,41 +586,11 @@ Initializes a new instance of the `MemberUnit` class.
 
 Gets the member unit comparer.
 
-### Kind `property`
+### IsSupported `property`
 
 ##### Summary
 
-Gets the member kind, one of `MemberKind`.
-
-### Name `property`
-
-##### Summary
-
-Gets the name.
-
-##### Example
-
-`Vsxmd.Units.TypeUnit`, `Vsxmd.Units.TypeUnit.#ctor(System.Xml.Linq.XElement)`, `Vsxmd.Units.TypeUnit.TypeName`.
-
-### NamespaceName `property`
-
-##### Summary
-
-Gets the namespace name.
-
-##### Example
-
-`Vsxmd`, `Vsxmd.Units`.
-
-### TypeFullName `property`
-
-##### Summary
-
-Gets the type full name.
-
-##### Example
-
-`Vsxmd.Program`, `Vsxmd.Units.TypeUnit`.
+Gets if this member type is supported.
 
 ### TypeName `property`
 
@@ -630,13 +600,13 @@ Gets the type name.
 
 ##### Example
 
-`Program`, `Converter`.
+`Vsxmd.Program`, `Vsxmd.Units.TypeUnit`.
 
 ### ComplementType `method`
 
 ##### Summary
 
-Complement a type unit if the member unit `group` does not have one. One member unit group has the same `TypeFullName`.
+Complement a type unit if the member unit `group` does not have one. One member unit group has the same `TypeName`.
 
 ##### Returns
 

@@ -311,39 +311,18 @@
             </summary>
             <value>The member unit comparer.</value>
         </member>
-        <member name="P:Vsxmd.Units.MemberUnit.Name">
-            <summary>
-            Gets the name.
-            </summary>
-            <value>The member name</value>
-            <example><c>Vsxmd.Units.TypeUnit</c>, <c>Vsxmd.Units.TypeUnit.#ctor(System.Xml.Linq.XElement)</c>, <c>Vsxmd.Units.TypeUnit.TypeName</c>.</example>
-        </member>
-        <member name="P:Vsxmd.Units.MemberUnit.TypeFullName">
-            <summary>
-            Gets the type full name.
-            </summary>
-            <value>The the type full name.</value>
-            <example><c>Vsxmd.Program</c>, <c>Vsxmd.Units.TypeUnit</c>.</example>
-        </member>
-        <member name="P:Vsxmd.Units.MemberUnit.Kind">
-            <summary>
-            Gets the member kind, one of <see cref="T:Vsxmd.Units.MemberKind"/>.
-            </summary>
-            <value>The member kind.</value>
-        </member>
         <member name="P:Vsxmd.Units.MemberUnit.TypeName">
             <summary>
             Gets the type name.
             </summary>
-            <value>The type name.</value>
-            <example><c>Program</c>, <c>Converter</c>.</example>
+            <value>The the type name.</value>
+            <example><c>Vsxmd.Program</c>, <c>Vsxmd.Units.TypeUnit</c>.</example>
         </member>
-        <member name="P:Vsxmd.Units.MemberUnit.NamespaceName">
+        <member name="P:Vsxmd.Units.MemberUnit.IsSupported">
             <summary>
-            Gets the namespace name.
+            Gets if this member type is supported.
             </summary>
-            <value>The namespace name.</value>
-            <example><c>Vsxmd</c>, <c>Vsxmd.Units</c>.</example>
+            <value>If this member type is supported.</value>
         </member>
         <member name="M:Vsxmd.Units.MemberUnit.ToMarkdown">
             <inheritdoc />
@@ -351,7 +330,7 @@
         <member name="M:Vsxmd.Units.MemberUnit.ComplementType(System.Collections.Generic.IEnumerable{Vsxmd.Units.MemberUnit})">
             <summary>
             Complement a type unit if the member unit <paramref name="group"/> does not have one.
-            One member unit group has the same <see cref="P:Vsxmd.Units.MemberUnit.TypeFullName"/>.
+            One member unit group has the same <see cref="P:Vsxmd.Units.MemberUnit.TypeName"/>.
             </summary>
             <param name="group">The member unit group.</param>
             <returns>The complemented member unit group.</returns>

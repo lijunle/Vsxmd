@@ -48,8 +48,8 @@ namespace Vsxmd
                 .Element("members")
                 .Elements("member")
                 .Select(element => new MemberUnit(element))
-                .Where(member => member.Kind != MemberKind.NotSupported)
-                .GroupBy(unit => unit.TypeFullName)
+                .Where(member => member.IsSupported)
+                .GroupBy(unit => unit.TypeName)
                 .Select(MemberUnit.ComplementType)
                 .SelectMany(group => group);
 

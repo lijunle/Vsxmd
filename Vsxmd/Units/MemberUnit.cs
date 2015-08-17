@@ -49,24 +49,55 @@ namespace Vsxmd.Units
         public static IComparer<MemberUnit> Comparer { get; }
 
         /// <summary>
-        /// Gets the name.
+        /// Gets the type name.
         /// </summary>
-        /// <value>The member name</value>
-        /// <example><c>Vsxmd.Units.TypeUnit</c>, <c>Vsxmd.Units.TypeUnit.#ctor(System.Xml.Linq.XElement)</c>, <c>Vsxmd.Units.TypeUnit.TypeName</c>.</example>
-        public string Name => this.GetAttribute("name").Substring(2);
-
-        /// <summary>
-        /// Gets the type full name.
-        /// </summary>
-        /// <value>The the type full name.</value>
+        /// <value>The the type name.</value>
         /// <example><c>Vsxmd.Program</c>, <c>Vsxmd.Units.TypeUnit</c>.</example>
-        public string TypeFullName => $"{this.NamespaceName}.{this.TypeName}";
+        public string TypeName => $"{this.NamespaceName}.{this.TypeShortName}";
 
         /// <summary>
-        /// Gets the member kind, one of <see cref="MemberKind"/>.
+        /// Gets if this member type is supported.
         /// </summary>
-        /// <value>The member kind.</value>
-        public MemberKind Kind
+        /// <value>If this member type is supported.</value>
+        public bool IsSupported => this.Kind != MemberKind.NotSupported;
+
+        private string TypeShortName
+        {
+            get
+            {
+                switch (this.type)
+                {
+                    case T:
+                        return this.Name.Split('.').Last();
+                    case F:
+                    case P:
+                    case M:
+                        return this.NameSegments.NthLastOrDefault(1);
+                    default:
+                        return string.Empty;
+                }
+            }
+        }
+
+        private string NamespaceName
+        {
+            get
+            {
+                switch (this.type)
+                {
+                    case T:
+                        return this.Name.Substring(0, this.Name.Length - this.TypeShortName.Length - 1);
+                    case F:
+                    case P:
+                    case M:
+                        return this.NameSegments.TakeAllButLast(2).Join(".");
+                    default:
+                        return string.Empty;
+                }
+            }
+        }
+
+        private MemberKind Kind
         {
             get
             {
@@ -88,53 +119,9 @@ namespace Vsxmd.Units
             }
         }
 
-        /// <summary>
-        /// Gets the type name.
-        /// </summary>
-        /// <value>The type name.</value>
-        /// <example><c>Program</c>, <c>Converter</c>.</example>
-        public string TypeName
-        {
-            get
-            {
-                switch (this.type)
-                {
-                    case T:
-                        return this.Name.Split('.').Last();
-                    case F:
-                    case P:
-                    case M:
-                        return this.NameSegments.NthLastOrDefault(1);
-                    default:
-                        return string.Empty;
-                }
-            }
-        }
-
-        /// <summary>
-        /// Gets the namespace name.
-        /// </summary>
-        /// <value>The namespace name.</value>
-        /// <example><c>Vsxmd</c>, <c>Vsxmd.Units</c>.</example>
-        public string NamespaceName
-        {
-            get
-            {
-                switch (this.type)
-                {
-                    case T:
-                        return this.Name.Substring(0, this.Name.Length - this.TypeName.Length - 1);
-                    case F:
-                    case P:
-                    case M:
-                        return this.NameSegments.TakeAllButLast(2).Join(".");
-                    default:
-                        return string.Empty;
-                }
-            }
-        }
-
         private string KindString => this.Kind.ToString().ToLower();
+
+        private string Name => this.GetAttribute("name").Substring(2);
 
         private IEnumerable<string> NameSegments => this.Name.ToNameSegments();
 
@@ -194,7 +181,7 @@ namespace Vsxmd.Units
 
         /// <summary>
         /// Complement a type unit if the member unit <paramref name="group"/> does not have one.
-        /// One member unit group has the same <see cref="TypeFullName"/>.
+        /// One member unit group has the same <see cref="TypeName"/>.
         /// </summary>
         /// <param name="group">The member unit group.</param>
         /// <returns>The complemented member unit group.</returns>
@@ -202,7 +189,7 @@ namespace Vsxmd.Units
             IEnumerable<MemberUnit> group) =>
             group.Any(unit => unit.Kind == MemberKind.Type)
                 ? group
-                : group.Concat(new[] { Create(group.First().TypeFullName) });
+                : group.Concat(new[] { Create(group.First().TypeName) });
 
         private static MemberUnit Create(string typeName) =>
             new MemberUnit(
@@ -216,7 +203,7 @@ namespace Vsxmd.Units
                 case T:
                     return new[]
                     {
-                        $"## {this.TypeName}",
+                        $"## {this.TypeShortName}",
                         $"##### Namespace",
                         $"{this.NamespaceName}"
                     };
@@ -237,9 +224,9 @@ namespace Vsxmd.Units
             /// <inheritdoc />
             public int Compare(MemberUnit x, MemberUnit y)
             {
-                if (x.TypeName != y.TypeName)
+                if (x.TypeShortName != y.TypeShortName)
                 {
-                    return x.TypeName.CompareTo(y.TypeName);
+                    return x.TypeShortName.CompareTo(y.TypeShortName);
                 }
                 else if (x.Kind != y.Kind)
                 {
