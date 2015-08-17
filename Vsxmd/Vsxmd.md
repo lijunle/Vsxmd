@@ -1020,6 +1020,46 @@ Nothing.
 | T1 | Generic type 1. |
 | T2 | Generic type 2. |
 
+### TestGenericException `method`
+
+##### Summary
+
+Test generic exception type.
+
+##### Returns
+
+Nothing.
+
+##### Parameters
+
+This method has no parameters.
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| Vsxmd.Program.Test.TestComplexParameter``2(System.Linq.Expressions.Expression{System.Func{``0,``1,System.String}}) | Just for test. |
+
+### TestGenericPermission `method`
+
+##### Summary
+
+Test generic exception type.
+
+##### Returns
+
+Nothing.
+
+##### Parameters
+
+This method has no parameters.
+
+##### Permissions
+
+| Name | Description |
+| ---- | ----------- |
+| Vsxmd.Program.Test.TestComplexParameter``2(System.Linq.Expressions.Expression{System.Func{``0,``1,System.String}}) | Just for test. |
+
 ### TestRefenceComplex `method`
 
 ##### Summary

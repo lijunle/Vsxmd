@@ -56,6 +56,20 @@
             <param name="expression">The linq expression.</param>
             <returns>Nothing.</returns>
         </member>
+        <member name="M:Vsxmd.Program.Test.TestGenericException">
+            <summary>
+            Test generic exception type.
+            </summary>
+            <returns>Nothing.</returns>
+            <exception cref="M:Vsxmd.Program.Test.TestComplexParameter``2(System.Linq.Expressions.Expression{System.Func{``0,``1,System.String}})">Just for test.</exception>
+        </member>
+        <member name="M:Vsxmd.Program.Test.TestGenericPermission">
+            <summary>
+            Test generic exception type.
+            </summary>
+            <returns>Nothing.</returns>
+            <permission cref="M:Vsxmd.Program.Test.TestComplexParameter``2(System.Linq.Expressions.Expression{System.Func{``0,``1,System.String}})">Just for test.</permission>
+        </member>
         <member name="T:Vsxmd.Units.AssemblyUnit">
             <summary>
             Assembly unit.

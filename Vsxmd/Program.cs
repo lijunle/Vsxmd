@@ -72,6 +72,20 @@ namespace Vsxmd
             internal string TestComplexParameter<T1, T2>(
                 Expression<Func<T1, T2, string>> expression) =>
                 null;
+
+            /// <summary>
+            /// Test generic exception type.
+            /// </summary>
+            /// <returns>Nothing.</returns>
+            /// <exception cref="TestComplexParameter{T1, T2}(Expression{Func{T1, T2, string}})">Just for test.</exception>
+            internal string TestGenericException() => null;
+
+            /// <summary>
+            /// Test generic exception type.
+            /// </summary>
+            /// <returns>Nothing.</returns>
+            /// <permission cref="TestComplexParameter{T1, T2}(Expression{Func{T1, T2, string}})">Just for test.</permission>
+            internal string TestGenericPermission() => null;
         }
     }
 }
