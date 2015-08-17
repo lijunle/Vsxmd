@@ -136,8 +136,7 @@ namespace Vsxmd.Units
 
         private string KindString => this.Kind.ToString().ToLower();
 
-        private IEnumerable<string> NameSegments =>
-            this.Name.Split('(').First().Split('.');
+        private IEnumerable<string> NameSegments => this.Name.ToNameSegments();
 
         private IEnumerable<string> InheritDoc =>
             this.GetChild("inheritdoc") == null

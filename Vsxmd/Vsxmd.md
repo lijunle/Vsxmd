@@ -438,6 +438,26 @@ To the below Markdown content.
 The `element` value is `null`, it throws `ArgumentException`. For more, see `ToMarkdownText`.
 ```
 
+### ToNameSegments `method`
+
+##### Summary
+
+Split the member unit `name` to segments.
+
+##### Returns
+
+The name segments.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| name | System.String | The member unit name. |
+
+##### Example
+
+Split `M:Vsxmd.Converter.#ctor(System.String)` to `["Vsxmd", "Converter", "#ctor"]` string list.
+
 ## IUnit
 
 ##### Namespace
@@ -1036,7 +1056,7 @@ Nothing.
 
 Test reference complex type.
 
-See `String}})`.
+See ```TestComplexParameter``2```.
 
 ##### Returns
 

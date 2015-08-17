@@ -56,6 +56,15 @@ namespace Vsxmd.Units
         }
 
         /// <summary>
+        /// Split the member unit <paramref name="name"/> to segments.
+        /// </summary>
+        /// <param name="name">The member unit name.</param>
+        /// <returns>The name segments.</returns>
+        /// <example>Split <c>M:Vsxmd.Converter.#ctor(System.String)</c> to <c>["Vsxmd", "Converter", "#ctor"]</c> string list.</example>
+        internal static IEnumerable<string> ToNameSegments(this string name) =>
+            name.Split('(').First().Split(':').Last().Split('.');
+
+        /// <summary>
         /// Gets the method parameter type names from the member unit <paramref name="name"/>.
         /// </summary>
         /// <param name="name">The member unit name.</param>
@@ -158,7 +167,7 @@ namespace Vsxmd.Units
                 switch (child.Name.ToString())
                 {
                     case "see":
-                        return $"{child.Attribute("cref").Value.Split('.').Last().AsCode()}";
+                        return $"{child.Attribute("cref").Value.ToNameSegments().Last().AsCode()}";
                     case "paramref":
                     case "typeparamref":
                         return $"{child.Attribute("name").Value.AsCode()}";
