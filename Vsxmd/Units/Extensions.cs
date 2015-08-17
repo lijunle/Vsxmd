@@ -75,16 +75,16 @@ namespace Vsxmd.Units
         /// </example>
         internal static string ToMarkdownText(this XElement element) =>
             element.Nodes()
-                .Select(ToMarkdownText)
+                .Select(ToMarkdownSpan)
                 .Aggregate((x, y) =>
-                    x.EndsWith("\n")
+                    x.EndsWith("\n\n")
                         ? $"{x}{y.TrimStart()}"
-                        : y.StartsWith("\n")
+                        : y.StartsWith("\n\n")
                         ? $"{x.TrimEnd()}{y}"
                         : $"{x}{y}")
                 .Trim();
 
-        private static string ToMarkdownText(XNode node)
+        private static string ToMarkdownSpan(XNode node)
         {
             var text = node as XText;
             if (text != null)
@@ -107,6 +107,8 @@ namespace Vsxmd.Units
                         return $"`{child.Value}`";
                     case "code":
                         return $"\n\n```\n{string.Concat(child.Nodes()).Trim()}\n```\n\n";
+                    case "para":
+                        return $"\n\n{child.ToMarkdownText()}\n\n";
                     default:
                         return string.Empty;
                 }

@@ -682,6 +682,10 @@ Program entry.
 
 Usage syntax: `Vsxmd.exe <input-XML-path> [output-Markdown-path]`
 
+The `input-XML-path` argument is required. It references to the VS generated XML documentation file.
+
+The `output-Markdown-path` argument is optional. It indicates the file path for the Markdown output file. When not specific, it will be a `.md` file with same file name as the XML documentation file, path at the XML documentation folder.
+
 ### Main `method`
 
 ##### Summary
