@@ -30,15 +30,15 @@ namespace Vsxmd.Units
             this.paramType = paramType;
         }
 
-        private string ParamName => this.Element.Attribute("name").Value;
+        private string Name => this.Element.Attribute("name").Value;
 
-        private string ParamDescription => this.Element.ToMarkdownText();
+        private string Description => this.Element.ToMarkdownText();
 
         /// <inheritdoc />
         public override IEnumerable<string> ToMarkdown() =>
             new[]
             {
-                $"| {this.ParamName} | {this.paramType} | {this.ParamDescription} |"
+                $"| {this.Name} | {this.paramType} | {this.Description} |"
             };
 
         /// <summary>
@@ -52,22 +52,22 @@ namespace Vsxmd.Units
             IEnumerable<XElement> elements,
             IEnumerable<string> paramTypes)
         {
-            var paramMarkdowns = elements
+            var markdowns = elements
                 .Zip(paramTypes, (element, type) => new ParamUnit(element, type))
                 .SelectMany(unit => unit.ToMarkdown());
 
-            var paramTable = new[]
+            var table = new[]
             {
                 "| Name | Type | Description |",
                 "| ---- | ---- | ----------- |"
             }
-            .Concat(paramMarkdowns);
+            .Concat(markdowns);
 
             return new[]
             {
                 "##### Parameters",
-                paramMarkdowns.Any()
-                    ? string.Join("\n", paramTable)
+                markdowns.Any()
+                    ? string.Join("\n", table)
                     : "This method has no parameters."
             };
         }

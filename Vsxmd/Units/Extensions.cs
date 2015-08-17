@@ -66,7 +66,7 @@ namespace Vsxmd.Units
         /// <example>
         /// This method converts the following <c>summary</c> element
         /// <code>
-        /// <summary>The <paramref name="element" /> value is <value>null</value>, it throws <c>ArgumentException</c>. For more, see <see cref="ToMarkdownText"/>.</summary>
+        /// <summary>The <paramref name="element" /> value is <value>null</value>, it throws <c>ArgumentException</c>. For more, see <see cref="ToMarkdownText(XElement)"/>.</summary>
         /// </code>
         /// To the below Markdown content.
         /// <code>

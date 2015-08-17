@@ -26,15 +26,15 @@ namespace Vsxmd.Units
         {
         }
 
-        private string TypeName => this.Element.Attribute("name").Value;
+        private string Name => this.Element.Attribute("name").Value;
 
-        private string TypeDescription => this.Element.ToMarkdownText();
+        private string Description => this.Element.ToMarkdownText();
 
         /// <inheritdoc />
         public override IEnumerable<string> ToMarkdown() =>
             new[]
             {
-                $"| {this.TypeName} | {this.TypeDescription} |"
+                $"| {this.Name} | {this.Description} |"
             };
 
         /// <summary>
@@ -50,21 +50,21 @@ namespace Vsxmd.Units
                 return Enumerable.Empty<string>();
             }
 
-            var typeparamMarkdowns = elements
+            var markdowns = elements
                 .Select(element => new TypeparamUnit(element))
                 .SelectMany(unit => unit.ToMarkdown());
 
-            var paramTable = new[]
+            var table = new[]
             {
                 "| Name | Description |",
                 "| ---- | ----------- |"
             }
-            .Concat(typeparamMarkdowns);
+            .Concat(markdowns);
 
             return new[]
             {
                 "##### Generic Types",
-                string.Join("\n", paramTable)
+                string.Join("\n", table)
             };
         }
     }

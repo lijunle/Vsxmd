@@ -26,15 +26,15 @@ namespace Vsxmd.Units
         {
         }
 
-        private string ExceptionName => this.Element.Attribute("cref").Value.Substring(2);
+        private string Name => this.Element.Attribute("cref").Value.Substring(2);
 
-        private string ExceptionDescription => this.Element.ToMarkdownText();
+        private string Description => this.Element.ToMarkdownText();
 
         /// <inheritdoc />
         public override IEnumerable<string> ToMarkdown() =>
             new[]
             {
-                $"| {this.ExceptionName} | {this.ExceptionDescription} |"
+                $"| {this.Name} | {this.Description} |"
             };
 
         /// <summary>
@@ -50,21 +50,21 @@ namespace Vsxmd.Units
                 return Enumerable.Empty<string>();
             }
 
-            var exceptionMarkdowns = elements
+            var markdowns = elements
                 .Select(element => new ExceptionUnit(element))
                 .SelectMany(unit => unit.ToMarkdown());
 
-            var paramTable = new[]
+            var table = new[]
             {
                 "| Name | Description |",
                 "| ---- | ----------- |"
             }
-            .Concat(exceptionMarkdowns);
+            .Concat(markdowns);
 
             return new[]
             {
                 "##### Exceptions",
-                string.Join("\n", paramTable)
+                string.Join("\n", table)
             };
         }
     }
