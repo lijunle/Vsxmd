@@ -162,8 +162,17 @@ namespace Vsxmd.Units
         private IEnumerable<string> Exceptions =>
             ExceptionUnit.ToMarkdown(this.Element.Elements("exception"));
 
+        private IEnumerable<string> Permissions =>
+            PermissionUnit.ToMarkdown(this.Element.Elements("permission"));
+
         private IEnumerable<string> Example =>
             ExampleUnit.ToMarkdown(this.Element.Element("example"));
+
+        private IEnumerable<string> Remarks =>
+            RemarksUnit.ToMarkdown(this.Element.Element("remarks"));
+
+        private IEnumerable<string> Seealsos =>
+            SeealsoUnit.ToMarkdown(this.Element.Elements("seealso"));
 
         /// <inheritdoc />
         public override IEnumerable<string> ToMarkdown()
@@ -178,7 +187,10 @@ namespace Vsxmd.Units
                         $"{this.NamespaceName}"
                     }
                     .Concat(this.InheritDoc)
-                    .Concat(this.Summary);
+                    .Concat(this.Summary)
+                    .Concat(this.Permissions)
+                    .Concat(this.Remarks)
+                    .Concat(this.Seealsos);
                 case F:
                 case P:
                 case M:
@@ -192,7 +204,10 @@ namespace Vsxmd.Units
                     .Concat(this.Params)
                     .Concat(this.Typeparams)
                     .Concat(this.Exceptions)
-                    .Concat(this.Example);
+                    .Concat(this.Permissions)
+                    .Concat(this.Example)
+                    .Concat(this.Remarks)
+                    .Concat(this.Seealsos);
                 default:
                     return Enumerable.Empty<string>();
             }

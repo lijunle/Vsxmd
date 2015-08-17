@@ -610,6 +610,58 @@ The generated Markdown.
 | elements | System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement} | The param XML element list. |
 | paramTypes | System.Collections.Generic.IEnumerable{System.String} | The paramater type names. |
 
+## PermissionUnit
+
+##### Namespace
+
+Vsxmd.Units
+
+##### Summary
+
+Permission unit.
+
+### #ctor `constructor`
+
+##### Summary
+
+Initializes a new instance of the `PermissionUnit` class.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| element | System.Xml.Linq.XElement | The permission XML element. |
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| System.ArgumentException | Throw if XML element name is not `permission`. |
+
+### ToMarkdown `method`
+
+Inherit documentation from parent.
+
+##### Parameters
+
+This method has no parameters.
+
+### ToMarkdown `method`
+
+##### Summary
+
+Convert the permission XML element to Markdown safely. If elemnt is `null`, return empty string.
+
+##### Returns
+
+The generated Markdown.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| elements | System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement} | The permission XML element list. |
+
 ## Program
 
 ##### Namespace
@@ -619,6 +671,20 @@ Vsxmd
 ##### Summary
 
 Program entry.
+
+##### Permissions
+
+| Name | Description |
+| ---- | ----------- |
+| System.Security.PermissionSet | Vsxmd provides no program APIs. |
+
+##### Remarks
+
+Usage syntax: `Vsxmd.exe <input-XML-path> [output-Markdown-path]`
+
+The `input-XML-path` argument is required. It references to the VS generated XML documentation file.
+
+The `output-Markdown-path` argument is optional. It indicates the file path for the Markdown output file. When not specific, it will be a `.md` file with same file name as the XML documentation file, path at the XML documentation folder.
 
 ### Main `method`
 
@@ -631,6 +697,62 @@ Program main function entry.
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | args | System.String[] | Program arguments. |
+
+##### See Also
+
+- `Vsxmd.Program`
+
+## RemarksUnit
+
+##### Namespace
+
+Vsxmd.Units
+
+##### Summary
+
+Remarks unit.
+
+### #ctor `constructor`
+
+##### Summary
+
+Initializes a new instance of the `RemarksUnit` class.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| element | System.Xml.Linq.XElement | The remarks XML element. |
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| System.ArgumentException | Throw if XML element name is not `remarks`. |
+
+### ToMarkdown `method`
+
+Inherit documentation from parent.
+
+##### Parameters
+
+This method has no parameters.
+
+### ToMarkdown `method`
+
+##### Summary
+
+Convert the remarks XML element to Markdown safely. If elemnt is `null`, return empty string.
+
+##### Returns
+
+The generated Markdown.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| element | System.Xml.Linq.XElement | The remarks XML element. |
 
 ## ReturnsUnit
 
@@ -683,6 +805,58 @@ The generated Markdown.
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | element | System.Xml.Linq.XElement | The returns XML element. |
+
+## SeealsoUnit
+
+##### Namespace
+
+Vsxmd.Units
+
+##### Summary
+
+Seealso unit.
+
+### #ctor `constructor`
+
+##### Summary
+
+Initializes a new instance of the `SeealsoUnit` class.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| element | System.Xml.Linq.XElement | The seealso XML element. |
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| System.ArgumentException | Throw if XML element name is not `seealso`. |
+
+### ToMarkdown `method`
+
+Inherit documentation from parent.
+
+##### Parameters
+
+This method has no parameters.
+
+### ToMarkdown `method`
+
+##### Summary
+
+Convert the seealso XML element to Markdown safely. If elemnt is `null`, return empty string.
+
+##### Returns
+
+The generated Markdown.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| elements | System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement} | The seealso XML element list. |
 
 ## SummaryUnit
 
