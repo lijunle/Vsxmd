@@ -140,9 +140,13 @@ namespace Vsxmd.Units
             this.Name.Split('(').First().Split('.');
 
         private IEnumerable<string> InheritDoc =>
-            this.GetChild("inheritdoc") != null
-                ? new[] { "Inherit documentation from parent." }
-                : Enumerable.Empty<string>();
+            this.GetChild("inheritdoc") == null
+                ? Enumerable.Empty<string>()
+                : new[]
+                {
+                    "##### Summary",
+                    "*Inherit from parent.*"
+                };
 
         private IEnumerable<string> Summary =>
             SummaryUnit.ToMarkdown(this.GetChild("summary"));

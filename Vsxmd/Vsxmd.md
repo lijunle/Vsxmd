@@ -30,7 +30,9 @@ Initializes a new instance of the `AssemblyUnit` class.
 
 ### ToMarkdown `method`
 
-Inherit documentation from parent.
+##### Summary
+
+*Inherit from parent.*
 
 ##### Parameters
 
@@ -127,7 +129,9 @@ An ``IEnumerable`1`` of `XElement` containing the children that have a matching 
 
 ### ToMarkdown `method`
 
-Inherit documentation from parent.
+##### Summary
+
+*Inherit from parent.*
 
 ##### Parameters
 
@@ -199,7 +203,9 @@ Initializes a new instance of the `ExampleUnit` class.
 
 ### ToMarkdown `method`
 
-Inherit documentation from parent.
+##### Summary
+
+*Inherit from parent.*
 
 ##### Parameters
 
@@ -251,7 +257,9 @@ Initializes a new instance of the `ExceptionUnit` class.
 
 ### ToMarkdown `method`
 
-Inherit documentation from parent.
+##### Summary
+
+*Inherit from parent.*
 
 ##### Parameters
 
@@ -590,7 +598,9 @@ Gets the type name.
 
 ### ToMarkdown `method`
 
-Inherit documentation from parent.
+##### Summary
+
+*Inherit from parent.*
 
 ##### Parameters
 
@@ -598,7 +608,9 @@ This method has no parameters.
 
 ### Compare `method`
 
-Inherit documentation from parent.
+##### Summary
+
+*Inherit from parent.*
 
 ##### Parameters
 
@@ -635,7 +647,9 @@ Initializes a new instance of the `ParamUnit` class.
 
 ### ToMarkdown `method`
 
-Inherit documentation from parent.
+##### Summary
+
+*Inherit from parent.*
 
 ##### Parameters
 
@@ -697,7 +711,9 @@ Initializes a new instance of the `PermissionUnit` class.
 
 ### ToMarkdown `method`
 
-Inherit documentation from parent.
+##### Summary
+
+*Inherit from parent.*
 
 ##### Parameters
 
@@ -789,7 +805,9 @@ Initializes a new instance of the `RemarksUnit` class.
 
 ### ToMarkdown `method`
 
-Inherit documentation from parent.
+##### Summary
+
+*Inherit from parent.*
 
 ##### Parameters
 
@@ -841,7 +859,9 @@ Initializes a new instance of the `ReturnsUnit` class.
 
 ### ToMarkdown `method`
 
-Inherit documentation from parent.
+##### Summary
+
+*Inherit from parent.*
 
 ##### Parameters
 
@@ -893,7 +913,9 @@ Initializes a new instance of the `SeealsoUnit` class.
 
 ### ToMarkdown `method`
 
-Inherit documentation from parent.
+##### Summary
+
+*Inherit from parent.*
 
 ##### Parameters
 
@@ -945,7 +967,9 @@ Initializes a new instance of the `SummaryUnit` class.
 
 ### ToMarkdown `method`
 
-Inherit documentation from parent.
+##### Summary
+
+*Inherit from parent.*
 
 ##### Parameters
 
@@ -997,7 +1021,9 @@ Initializes a new instance of the `TypeparamUnit` class.
 
 ### ToMarkdown `method`
 
-Inherit documentation from parent.
+##### Summary
+
+*Inherit from parent.*
 
 ##### Parameters
 
