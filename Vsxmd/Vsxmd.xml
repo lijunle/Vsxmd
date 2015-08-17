@@ -40,20 +40,43 @@
             <param name="args">Program arguments.</param>
             <seealso cref="T:Vsxmd.Program"/>
         </member>
-        <member name="M:Vsxmd.Program.Test.TestRefenceComplex">
+        <member name="M:Vsxmd.Program.Test.TestGenericRefence">
             <summary>
-            Test reference complex type.
-            <para>See <see cref="M:Vsxmd.Program.Test.TestComplexParameter``2(System.Linq.Expressions.Expression{System.Func{``0,``1,System.String}})"/>.</para>
+            Test generic reference type.
+            <para>See <see cref="M:Vsxmd.Program.Test.TestGenericParameter``2(System.Linq.Expressions.Expression{System.Func{``0,``1,System.String}})"/>.</para>
             </summary>
             <returns>Nothing.</returns>
         </member>
-        <member name="M:Vsxmd.Program.Test.TestComplexParameter``2(System.Linq.Expressions.Expression{System.Func{``0,``1,System.String}})">
+        <member name="M:Vsxmd.Program.Test.TestGenericParameter``2(System.Linq.Expressions.Expression{System.Func{``0,``1,System.String}})">
             <summary>
-            Test complex parameter type.
+            Test generic parameter type.
             </summary>
             <typeparam name="T1">Generic type 1.</typeparam>
             <typeparam name="T2">Generic type 2.</typeparam>
             <param name="expression">The linq expression.</param>
+            <returns>Nothing.</returns>
+        </member>
+        <member name="M:Vsxmd.Program.Test.TestGenericException">
+            <summary>
+            Test generic exception type.
+            </summary>
+            <returns>Nothing.</returns>
+            <exception cref="M:Vsxmd.Program.Test.TestGenericParameter``2(System.Linq.Expressions.Expression{System.Func{``0,``1,System.String}})">Just for test.</exception>
+        </member>
+        <member name="M:Vsxmd.Program.Test.TestGenericPermission">
+            <summary>
+            Test generic exception type.
+            </summary>
+            <returns>Nothing.</returns>
+            <permission cref="M:Vsxmd.Program.Test.TestGenericParameter``2(System.Linq.Expressions.Expression{System.Func{``0,``1,System.String}})">Just for test.</permission>
+        </member>
+        <member name="M:Vsxmd.Program.Test.TestBacktickInSummary">
+            <summary>
+            Test backtick characters in summary comment.
+            <para>See `should not inside code block`.</para>
+            <para>See <c>`backtick inside code block`</c></para>
+            <para>See `<c>code block inside backtick</c>`</para>
+            </summary>
             <returns>Nothing.</returns>
         </member>
         <member name="T:Vsxmd.Units.AssemblyUnit">

@@ -376,7 +376,7 @@ The target element, default(`TSource`) if not found.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| source | System.Collections.Generic.IEnumerable{``0} | The source enumerable. |
+| source | System.Collections.Generic.IEnumerable{\`\`0} | The source enumerable. |
 | index | System.Int32 | The index for the n-th last. |
 
 ##### Generic Types
@@ -399,7 +399,7 @@ The generated enumerable.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| source | System.Collections.Generic.IEnumerable{``0} | The source enumerable. |
+| source | System.Collections.Generic.IEnumerable{\`\`0} | The source enumerable. |
 | count | System.Int32 | The number to except. |
 
 ##### Generic Types
@@ -997,11 +997,51 @@ The generated Markdown.
 
 Vsxmd.Program
 
-### TestComplexParameter\`\`2 `method`
+### TestBacktickInSummary `method`
 
 ##### Summary
 
-Test complex parameter type.
+Test backtick characters in summary comment.
+
+See \`should not inside code block\`.
+
+See `` `backtick inside code block` ``
+
+See \``code block inside backtick`\`
+
+##### Returns
+
+Nothing.
+
+##### Parameters
+
+This method has no parameters.
+
+### TestGenericException `method`
+
+##### Summary
+
+Test generic exception type.
+
+##### Returns
+
+Nothing.
+
+##### Parameters
+
+This method has no parameters.
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| Vsxmd.Program.Test.TestGenericParameter\`\`2(System.Linq.Expressions.Expression{System.Func{\`\`0,\`\`1,System.String}}) | Just for test. |
+
+### TestGenericParameter\`\`2 `method`
+
+##### Summary
+
+Test generic parameter type.
 
 ##### Returns
 
@@ -1011,7 +1051,7 @@ Nothing.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| expression | System.Linq.Expressions.Expression{System.Func{``0,``1,System.String}} | The linq expression. |
+| expression | System.Linq.Expressions.Expression{System.Func{\`\`0,\`\`1,System.String}} | The linq expression. |
 
 ##### Generic Types
 
@@ -1020,13 +1060,33 @@ Nothing.
 | T1 | Generic type 1. |
 | T2 | Generic type 2. |
 
-### TestRefenceComplex `method`
+### TestGenericPermission `method`
 
 ##### Summary
 
-Test reference complex type.
+Test generic exception type.
 
-See ```TestComplexParameter``2```.
+##### Returns
+
+Nothing.
+
+##### Parameters
+
+This method has no parameters.
+
+##### Permissions
+
+| Name | Description |
+| ---- | ----------- |
+| Vsxmd.Program.Test.TestGenericParameter\`\`2(System.Linq.Expressions.Expression{System.Func{\`\`0,\`\`1,System.String}}) | Just for test. |
+
+### TestGenericRefence `method`
+
+##### Summary
+
+Test generic reference type.
+
+See ```TestGenericParameter``2```.
 
 ##### Returns
 

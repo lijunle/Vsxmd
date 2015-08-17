@@ -56,22 +56,45 @@ namespace Vsxmd
         private class Test
         {
             /// <summary>
-            /// Test reference complex type.
-            /// <para>See <see cref="TestComplexParameter{T1, T2}(Expression{Func{T1, T2, string}})"/>.</para>
+            /// Test generic reference type.
+            /// <para>See <see cref="TestGenericParameter{T1, T2}(Expression{Func{T1, T2, string}})"/>.</para>
             /// </summary>
             /// <returns>Nothing.</returns>
-            internal string TestRefenceComplex() => null;
+            internal string TestGenericRefence() => null;
 
             /// <summary>
-            /// Test complex parameter type.
+            /// Test generic parameter type.
             /// </summary>
             /// <typeparam name="T1">Generic type 1.</typeparam>
             /// <typeparam name="T2">Generic type 2.</typeparam>
             /// <param name="expression">The linq expression.</param>
             /// <returns>Nothing.</returns>
-            internal string TestComplexParameter<T1, T2>(
+            internal string TestGenericParameter<T1, T2>(
                 Expression<Func<T1, T2, string>> expression) =>
                 null;
+
+            /// <summary>
+            /// Test generic exception type.
+            /// </summary>
+            /// <returns>Nothing.</returns>
+            /// <exception cref="TestGenericParameter{T1, T2}(Expression{Func{T1, T2, string}})">Just for test.</exception>
+            internal string TestGenericException() => null;
+
+            /// <summary>
+            /// Test generic exception type.
+            /// </summary>
+            /// <returns>Nothing.</returns>
+            /// <permission cref="TestGenericParameter{T1, T2}(Expression{Func{T1, T2, string}})">Just for test.</permission>
+            internal string TestGenericPermission() => null;
+
+            /// <summary>
+            /// Test backtick characters in summary comment.
+            /// <para>See `should not inside code block`.</para>
+            /// <para>See <c>`backtick inside code block`</c></para>
+            /// <para>See `<c>code block inside backtick</c>`</para>
+            /// </summary>
+            /// <returns>Nothing.</returns>
+            internal string TestBacktickInSummary() => null;
         }
     }
 }
