@@ -308,6 +308,29 @@
             <param name="paramTypes">The paramater type names.</param>
             <returns>The generated Markdown.</returns>
         </member>
+        <member name="T:Vsxmd.Units.PermissionUnit">
+            <summary>
+            Permission unit.
+            </summary>
+        </member>
+        <member name="M:Vsxmd.Units.PermissionUnit.#ctor(System.Xml.Linq.XElement)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Vsxmd.Units.PermissionUnit"/> class.
+            </summary>
+            <param name="element">The permission XML element.</param>
+            <exception cref="T:System.ArgumentException">Throw if XML element name is not <c>permission</c>.</exception>
+        </member>
+        <member name="M:Vsxmd.Units.PermissionUnit.ToMarkdown">
+            <inheritdoc />
+        </member>
+        <member name="M:Vsxmd.Units.PermissionUnit.ToMarkdown(System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement})">
+            <summary>
+            Convert the permission XML element to Markdown safely.
+            If elemnt is <value>null</value>, return empty string.
+            </summary>
+            <param name="elements">The permission XML element list.</param>
+            <returns>The generated Markdown.</returns>
+        </member>
         <member name="T:Vsxmd.Units.ReturnsUnit">
             <summary>
             Returns unit.

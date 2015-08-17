@@ -610,6 +610,58 @@ The generated Markdown.
 | elements | System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement} | The param XML element list. |
 | paramTypes | System.Collections.Generic.IEnumerable{System.String} | The paramater type names. |
 
+## PermissionUnit
+
+##### Namespace
+
+Vsxmd.Units
+
+##### Summary
+
+Permission unit.
+
+### #ctor `constructor`
+
+##### Summary
+
+Initializes a new instance of the `PermissionUnit` class.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| element | System.Xml.Linq.XElement | The permission XML element. |
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| System.ArgumentException | Throw if XML element name is not `permission`. |
+
+### ToMarkdown `method`
+
+Inherit documentation from parent.
+
+##### Parameters
+
+This method has no parameters.
+
+### ToMarkdown `method`
+
+##### Summary
+
+Convert the permission XML element to Markdown safely. If elemnt is `null`, return empty string.
+
+##### Returns
+
+The generated Markdown.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| elements | System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement} | The permission XML element list. |
+
 ## Program
 
 ##### Namespace
@@ -619,6 +671,12 @@ Vsxmd
 ##### Summary
 
 Program entry.
+
+##### Permissions
+
+| Name | Description |
+| ---- | ----------- |
+| System.Security.PermissionSet | Vsxmd provides no program APIs. |
 
 ### Main `method`
 

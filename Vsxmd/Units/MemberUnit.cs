@@ -162,6 +162,9 @@ namespace Vsxmd.Units
         private IEnumerable<string> Exceptions =>
             ExceptionUnit.ToMarkdown(this.Element.Elements("exception"));
 
+        private IEnumerable<string> Permissions =>
+            PermissionUnit.ToMarkdown(this.Element.Elements("permission"));
+
         private IEnumerable<string> Example =>
             ExampleUnit.ToMarkdown(this.Element.Element("example"));
 
@@ -178,7 +181,8 @@ namespace Vsxmd.Units
                         $"{this.NamespaceName}"
                     }
                     .Concat(this.InheritDoc)
-                    .Concat(this.Summary);
+                    .Concat(this.Summary)
+                    .Concat(this.Permissions);
                 case F:
                 case P:
                 case M:
@@ -192,6 +196,7 @@ namespace Vsxmd.Units
                     .Concat(this.Params)
                     .Concat(this.Typeparams)
                     .Concat(this.Exceptions)
+                    .Concat(this.Permissions)
                     .Concat(this.Example);
                 default:
                     return Enumerable.Empty<string>();
