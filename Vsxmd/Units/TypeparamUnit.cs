@@ -26,15 +26,15 @@ namespace Vsxmd.Units
         {
         }
 
-        private string TypeName => this.Element.Attribute("name").Value;
+        private string Name => this.Element.Attribute("name").Value;
 
-        private string TypeDescription => this.Element.ToMarkdownText();
+        private string Description => this.Element.ToMarkdownText();
 
         /// <inheritdoc />
         public override IEnumerable<string> ToMarkdown() =>
             new[]
             {
-                $"| {this.TypeName} | {this.TypeDescription} |"
+                $"| {this.Name} | {this.Description} |"
             };
 
         /// <summary>
