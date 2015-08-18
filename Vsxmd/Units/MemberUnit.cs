@@ -64,6 +64,12 @@ namespace Vsxmd.Units
             ? MemberKind.Method
             : MemberKind.NotSupported;
 
+        /// <summary>
+        /// Gets the link pointing to this member unit.
+        /// </summary>
+        /// <value>The link pointing to this member unit.</value>
+        internal string Link => $"[{this.FriendlyName}](#{this.Href})";
+
         private string Href => this.GetAttribute("name")
             .Replace(':', '-')
             .Replace('(', '-')

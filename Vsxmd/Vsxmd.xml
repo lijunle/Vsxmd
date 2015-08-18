@@ -85,6 +85,24 @@
             </summary>
             <returns>Nothing.</returns>
         </member>
+        <member name="T:Vsxmd.TableOfContents">
+            <summary>
+            Table of contents.
+            </summary>
+        </member>
+        <member name="M:Vsxmd.TableOfContents.#ctor(System.Linq.IOrderedEnumerable{Vsxmd.Units.MemberUnit})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Vsxmd.TableOfContents"/> class.
+            <para>It convert the table of contents from the <paramref name="memberUnits"/>.</para>
+            </summary>
+            <param name="memberUnits">The member unit list.</param>
+        </member>
+        <member name="M:Vsxmd.TableOfContents.ToMarkdown">
+            <summary>
+            Convert the table of contents to Markdown syntax.
+            </summary>
+            <returns>The table of contents in Markdown syntax.</returns>
+        </member>
         <member name="T:Vsxmd.Units.AssemblyUnit">
             <summary>
             Assembly unit.
@@ -373,6 +391,12 @@
             Gets the member kind, one of <see cref="T:Vsxmd.Units.MemberKind"/>.
             </summary>
             <value>The member kind.</value>
+        </member>
+        <member name="P:Vsxmd.Units.MemberUnit.Link">
+            <summary>
+            Gets the link pointing to this member unit.
+            </summary>
+            <value>The link pointing to this member unit.</value>
         </member>
         <member name="P:Vsxmd.Units.MemberUnit.FriendlyName">
             <summary>
