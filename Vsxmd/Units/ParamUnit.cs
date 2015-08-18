@@ -24,7 +24,7 @@ namespace Vsxmd.Units
         /// <param name="element">The param XML element.</param>
         /// <param name="paramType">The paramter type corresponding to the param XML element.</param>
         /// <exception cref="ArgumentException">Throw if XML element name is not <c>param</c>.</exception>
-        public ParamUnit(XElement element, string paramType)
+        internal ParamUnit(XElement element, string paramType)
             : base(element, "param")
         {
             this.paramType = paramType;
@@ -46,26 +46,28 @@ namespace Vsxmd.Units
         /// </summary>
         /// <param name="elements">The param XML element list.</param>
         /// <param name="paramTypes">The paramater type names.</param>
-        /// <param name="isParameterKind">Indicates if the member kind have parameters, which is constructor or methods.</param>
+        /// <param name="memberKind">The member kind of the parent element.</param>
         /// <returns>The generated Markdown.</returns>
         /// <remarks>
         /// When the parameter (a.k.a <paramref name="elements"/>) list is empty:
-        /// <para>If parent element kind is constructor or method, it returns a hint about "no parameters".</para>
+        /// <para>If parent element kind is <see cref="MemberKind.Constructor"/> or <see cref="MemberKind.Method"/>, it returns a hint about "no parameters".</para>
         /// <para>If parent element kind is not the value mentioned above, it returns an empty string.</para>
         /// </remarks>
         internal static IEnumerable<string> ToMarkdown(
             IEnumerable<XElement> elements,
             IEnumerable<string> paramTypes,
-            bool isParameterKind)
+            MemberKind memberKind)
         {
             if (!elements.Any())
             {
-                return !isParameterKind
+                return
+                    memberKind != MemberKind.Constructor &&
+                    memberKind != MemberKind.Method
                     ? Enumerable.Empty<string>()
                     : new[]
                     {
                         "##### Parameters",
-                        "This method has no parameters."
+                        $"This {memberKind.ToLowerString()} has no parameters."
                     };
             }
 

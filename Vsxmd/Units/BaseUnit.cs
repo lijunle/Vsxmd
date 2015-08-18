@@ -21,7 +21,7 @@ namespace Vsxmd.Units
         /// <param name="element">The XML element.</param>
         /// <param name="elementName">The expected XML element name.</param>
         /// <exception cref="ArgumentException">Throw if XML <paramref name="element"/> name not matches the expected <paramref name="elementName"/>.</exception>
-        public BaseUnit(XElement element, string elementName)
+        internal BaseUnit(XElement element, string elementName)
         {
             if (element.Name != elementName)
             {

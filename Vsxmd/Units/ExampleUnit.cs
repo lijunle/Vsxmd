@@ -21,7 +21,7 @@ namespace Vsxmd.Units
         /// </summary>
         /// <param name="element">The example XML element.</param>
         /// <exception cref="ArgumentException">Throw if XML element name is not <c>example</c>.</exception>
-        public ExampleUnit(XElement element)
+        internal ExampleUnit(XElement element)
             : base(element, "example")
         {
         }

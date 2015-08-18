@@ -362,7 +362,7 @@ The concatenated string.
 | value | System.Collections.Generic.IEnumerable{System.String} | The string values. |
 | separator | System.String | The separator. |
 
-### NthLastOrDefault\`\`1 `method`
+### NthLast\`\`1 `method`
 
 ##### Summary
 
@@ -370,7 +370,7 @@ Gets the n-th last element from the `source`.
 
 ##### Returns
 
-The target element, default(`TSource`) if not found.
+The element at the specified position in the `source` sequence.
 
 ##### Parameters
 
@@ -407,6 +407,22 @@ The generated enumerable.
 | Name | Description |
 | ---- | ----------- |
 | TSource | The type of the elements of `source`. |
+
+### ToLowerString `method`
+
+##### Summary
+
+Convert the `MemberKind` to its lowercase name.
+
+##### Returns
+
+The member kind's lowercase name.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| memberKind | Vsxmd.Units.MemberKind | The member kind. |
 
 ### ToMarkdownText `method`
 
@@ -486,7 +502,11 @@ This method has no parameters.
 
 ##### Namespace
 
-Vsxmd.Units.MemberUnit
+Vsxmd.Units
+
+##### Summary
+
+The member kind.
 
 ### Constants `constants`
 
@@ -558,11 +578,11 @@ Initializes a new instance of the `MemberUnit` class.
 
 Gets the member unit comparer.
 
-### IsSupported `property`
+### Kind `property`
 
 ##### Summary
 
-Gets if this member type is supported.
+Gets the member kind, one of `MemberKind`.
 
 ### TypeName `property`
 
@@ -671,13 +691,13 @@ The generated Markdown.
 | ---- | ---- | ----------- |
 | elements | System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement} | The param XML element list. |
 | paramTypes | System.Collections.Generic.IEnumerable{System.String} | The paramater type names. |
-| isParameterKind | System.Boolean | Indicates if the member kind have parameters, which is constructor or methods. |
+| memberKind | Vsxmd.Units.MemberKind | The member kind of the parent element. |
 
 ##### Remarks
 
 When the parameter (a.k.a `elements`) list is empty:
 
-If parent element kind is constructor or method, it returns a hint about "no parameters".
+If parent element kind is `Constructor` or `Method`, it returns a hint about "no parameters".
 
 If parent element kind is not the value mentioned above, it returns an empty string.
 
@@ -996,6 +1016,18 @@ The generated Markdown.
 ##### Namespace
 
 Vsxmd.Program
+
+### #ctor `constructor`
+
+##### Summary
+
+Initializes a new instance of the `Test` class.
+
+Test constructor without parameters.
+
+##### Parameters
+
+This constructor has no parameters.
 
 ### TestBacktickInSummary `method`
 

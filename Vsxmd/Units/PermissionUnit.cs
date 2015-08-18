@@ -21,7 +21,7 @@ namespace Vsxmd.Units
         /// </summary>
         /// <param name="element">The permission XML element.</param>
         /// <exception cref="ArgumentException">Throw if XML element name is not <c>permission</c>.</exception>
-        public PermissionUnit(XElement element)
+        internal PermissionUnit(XElement element)
             : base(element, "permission")
         {
         }

@@ -9,7 +9,6 @@ namespace Vsxmd.Units
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text.RegularExpressions;
     using System.Xml.Linq;
 
     /// <summary>
@@ -22,7 +21,7 @@ namespace Vsxmd.Units
         /// </summary>
         /// <param name="element">The remarks XML element.</param>
         /// <exception cref="ArgumentException">Throw if XML element name is not <c>remarks</c>.</exception>
-        public RemarksUnit(XElement element)
+        internal RemarksUnit(XElement element)
             : base(element, "remarks")
         {
         }
