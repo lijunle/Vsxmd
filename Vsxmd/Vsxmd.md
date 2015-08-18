@@ -486,7 +486,11 @@ This method has no parameters.
 
 ##### Namespace
 
-Vsxmd.Units.MemberUnit
+Vsxmd.Units
+
+##### Summary
+
+The member kind.
 
 ### Constants `constants`
 

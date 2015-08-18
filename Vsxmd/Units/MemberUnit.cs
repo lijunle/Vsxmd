@@ -34,39 +34,6 @@ namespace Vsxmd.Units
             this.type = this.GetAttribute("name").First();
         }
 
-        private enum MemberKind
-        {
-            /// <summary>
-            /// Not supported member kind.
-            /// </summary>
-            NotSupported,
-
-            /// <summary>
-            /// Type.
-            /// </summary>
-            Type,
-
-            /// <summary>
-            /// Constructor.
-            /// </summary>
-            Constructor,
-
-            /// <summary>
-            /// Constants
-            /// </summary>
-            Constants,
-
-            /// <summary>
-            /// Property.
-            /// </summary>
-            Property,
-
-            /// <summary>
-            /// Method.
-            /// </summary>
-            Method
-        }
-
         /// <summary>
         /// Gets the member unit comparer.
         /// </summary>
