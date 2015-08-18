@@ -71,7 +71,7 @@ namespace Vsxmd.Units
               this.Kind == MemberKind.Property ||
               this.Kind == MemberKind.Constructor ||
               this.Kind == MemberKind.Method
-            ? this.NameSegments.NthLastOrDefault(1)
+            ? this.NameSegments.NthLast(2)
             : string.Empty;
 
         private string NamespaceName =>
@@ -84,8 +84,6 @@ namespace Vsxmd.Units
             ? this.NameSegments.TakeAllButLast(2).Join(".")
             : string.Empty;
 
-        private string KindString => this.Kind.ToString().ToLower();
-
         private string Name => this.GetAttribute("name").Substring(2);
 
         private IEnumerable<string> NameSegments => this.Name.ToNameSegments();
@@ -97,7 +95,7 @@ namespace Vsxmd.Units
               this.Kind == MemberKind.Property ||
               this.Kind == MemberKind.Constructor ||
               this.Kind == MemberKind.Method
-            ? $"### {this.NameSegments.Last().Escape()} `{this.KindString}`"
+            ? $"### {this.NameSegments.Last().Escape()} `{this.Kind.ToLowerString()}`"
             : string.Empty;
 
         private IEnumerable<string> InheritDoc =>
@@ -128,7 +126,7 @@ namespace Vsxmd.Units
             ParamUnit.ToMarkdown(
                 this.GetChildren("param"),
                 this.ParamTypes,
-                this.Kind == MemberKind.Constructor || this.Kind == MemberKind.Method);
+                this.Kind);
 
         private IEnumerable<string> ParamTypes =>
             this.Name.GetParamTypes();

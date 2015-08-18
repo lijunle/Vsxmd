@@ -40,6 +40,12 @@
             <param name="args">Program arguments.</param>
             <seealso cref="T:Vsxmd.Program"/>
         </member>
+        <member name="M:Vsxmd.Program.Test.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Vsxmd.Program.Test"/> class.
+            <para>Test constructor without parameters.</para>
+            </summary>
+        </member>
         <member name="M:Vsxmd.Program.Test.TestGenericRefence">
             <summary>
             Test generic reference type.
@@ -195,6 +201,13 @@
             Extensions helper.
             </summary>
         </member>
+        <member name="M:Vsxmd.Units.Extensions.ToLowerString(Vsxmd.Units.MemberKind)">
+            <summary>
+            Convert the <see cref="T:Vsxmd.Units.MemberKind"/> to its lowercase name.
+            </summary>
+            <param name="memberKind">The member kind.</param>
+            <returns>The member kind's lowercase name.</returns>
+        </member>
         <member name="M:Vsxmd.Units.Extensions.Join(System.Collections.Generic.IEnumerable{System.String},System.String)">
             <summary>
             Concatenates the <paramref name="value"/>s with the <paramref name="separator"/>.
@@ -234,14 +247,14 @@
             <param name="name">The member unit name.</param>
             <returns>The method parameter type name list.</returns>
         </member>
-        <member name="M:Vsxmd.Units.Extensions.NthLastOrDefault``1(System.Collections.Generic.IEnumerable{``0},System.Int32)">
+        <member name="M:Vsxmd.Units.Extensions.NthLast``1(System.Collections.Generic.IEnumerable{``0},System.Int32)">
             <summary>
             Gets the n-th last element from the <paramref name="source"/>.
             </summary>
             <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
             <param name="source">The source enumerable.</param>
             <param name="index">The index for the n-th last.</param>
-            <returns>The target element, default(<typeparamref name="TSource"/>) if not found.</returns>
+            <returns>The element at the specified position in the <paramref name="source"/> sequence.</returns>
         </member>
         <member name="M:Vsxmd.Units.Extensions.TakeAllButLast``1(System.Collections.Generic.IEnumerable{``0},System.Int32)">
             <summary>
@@ -377,17 +390,17 @@
         <member name="M:Vsxmd.Units.ParamUnit.ToMarkdown">
             <inheritdoc />
         </member>
-        <member name="M:Vsxmd.Units.ParamUnit.ToMarkdown(System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement},System.Collections.Generic.IEnumerable{System.String},System.Boolean)">
+        <member name="M:Vsxmd.Units.ParamUnit.ToMarkdown(System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement},System.Collections.Generic.IEnumerable{System.String},Vsxmd.Units.MemberKind)">
             <summary>
             Convert the param XML element to Markdown safely.
             </summary>
             <param name="elements">The param XML element list.</param>
             <param name="paramTypes">The paramater type names.</param>
-            <param name="isParameterKind">Indicates if the member kind have parameters, which is constructor or methods.</param>
+            <param name="memberKind">The member kind of the parent element.</param>
             <returns>The generated Markdown.</returns>
             <remarks>
             When the parameter (a.k.a <paramref name="elements"/>) list is empty:
-            <para>If parent element kind is constructor or method, it returns a hint about "no parameters".</para>
+            <para>If parent element kind is <see cref="F:Vsxmd.Units.MemberKind.Constructor"/> or <see cref="F:Vsxmd.Units.MemberKind.Method"/>, it returns a hint about "no parameters".</para>
             <para>If parent element kind is not the value mentioned above, it returns an empty string.</para>
             </remarks>
         </member>

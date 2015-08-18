@@ -19,6 +19,14 @@ namespace Vsxmd.Units
     internal static class Extensions
     {
         /// <summary>
+        /// Convert the <see cref="MemberKind"/> to its lowercase name.
+        /// </summary>
+        /// <param name="memberKind">The member kind.</param>
+        /// <returns>The member kind's lowercase name.</returns>
+        internal static string ToLowerString(this MemberKind memberKind) =>
+            memberKind.ToString().ToLower();
+
+        /// <summary>
         /// Concatenates the <paramref name="value"/>s with the <paramref name="separator"/>.
         /// </summary>
         /// <param name="value">The string values.</param>
@@ -109,10 +117,10 @@ namespace Vsxmd.Units
         /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
         /// <param name="source">The source enumerable.</param>
         /// <param name="index">The index for the n-th last.</param>
-        /// <returns>The target element, default(<typeparamref name="TSource"/>) if not found.</returns>
-        internal static TSource NthLastOrDefault<TSource>(
+        /// <returns>The element at the specified position in the <paramref name="source"/> sequence.</returns>
+        internal static TSource NthLast<TSource>(
             this IEnumerable<TSource> source, int index) =>
-            source.Reverse().ElementAtOrDefault(index);
+            source.Reverse().ElementAt(index - 1);
 
         /// <summary>
         /// Take all element except the last <paramref name="count"/>.

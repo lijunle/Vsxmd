@@ -56,6 +56,12 @@ namespace Vsxmd
         private class Test
         {
             /// <summary>
+            /// Initializes a new instance of the <see cref="Test"/> class.
+            /// <para>Test constructor without parameters.</para>
+            /// </summary>
+            internal Test() { }
+
+            /// <summary>
             /// Test generic reference type.
             /// <para>See <see cref="TestGenericParameter{T1, T2}(Expression{Func{T1, T2, string}})"/>.</para>
             /// </summary>
