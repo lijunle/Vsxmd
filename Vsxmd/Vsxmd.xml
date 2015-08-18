@@ -341,11 +341,11 @@
             <value>The the type name.</value>
             <example><c>Vsxmd.Program</c>, <c>Vsxmd.Units.TypeUnit</c>.</example>
         </member>
-        <member name="P:Vsxmd.Units.MemberUnit.IsSupported">
+        <member name="P:Vsxmd.Units.MemberUnit.Kind">
             <summary>
-            Gets if this member type is supported.
+            Gets the member kind, one of <see cref="T:Vsxmd.Units.MemberKind"/>.
             </summary>
-            <value>If this member type is supported.</value>
+            <value>The member kind.</value>
         </member>
         <member name="M:Vsxmd.Units.MemberUnit.ToMarkdown">
             <inheritdoc />

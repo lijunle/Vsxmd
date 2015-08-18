@@ -562,11 +562,11 @@ Initializes a new instance of the `MemberUnit` class.
 
 Gets the member unit comparer.
 
-### IsSupported `property`
+### Kind `property`
 
 ##### Summary
 
-Gets if this member type is supported.
+Gets the member kind, one of `MemberKind`.
 
 ### TypeName `property`
 

@@ -48,10 +48,21 @@ namespace Vsxmd.Units
         public string TypeName => $"{this.NamespaceName}.{this.TypeShortName}";
 
         /// <summary>
-        /// Gets if this member type is supported.
+        /// Gets the member kind, one of <see cref="MemberKind"/>.
         /// </summary>
-        /// <value>If this member type is supported.</value>
-        public bool IsSupported => this.Kind != MemberKind.NotSupported;
+        /// <value>The member kind.</value>
+        public MemberKind Kind =>
+            this.type == 'T'
+            ? MemberKind.Type
+            : this.type == 'F'
+            ? MemberKind.Constants
+            : this.type == 'P'
+            ? MemberKind.Property
+            : this.type == 'M' && this.Name.Contains(".#ctor")
+            ? MemberKind.Constructor
+            : this.type == 'M' && !this.Name.Contains(".#ctor")
+            ? MemberKind.Method
+            : MemberKind.NotSupported;
 
         private string TypeShortName
         {
@@ -87,28 +98,6 @@ namespace Vsxmd.Units
                         return this.NameSegments.TakeAllButLast(2).Join(".");
                     default:
                         return string.Empty;
-                }
-            }
-        }
-
-        private MemberKind Kind
-        {
-            get
-            {
-                switch (this.type)
-                {
-                    case 'T':
-                        return MemberKind.Type;
-                    case 'F':
-                        return MemberKind.Constants;
-                    case 'P':
-                        return MemberKind.Property;
-                    case 'M':
-                        return this.Name.Contains(".#ctor")
-                            ? MemberKind.Constructor
-                            : MemberKind.Method;
-                    default:
-                        return MemberKind.NotSupported;
                 }
             }
         }
