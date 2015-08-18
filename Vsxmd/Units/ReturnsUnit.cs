@@ -21,7 +21,7 @@ namespace Vsxmd.Units
         /// </summary>
         /// <param name="element">The returns XML element.</param>
         /// <exception cref="ArgumentException">Throw if XML element name is not <c>returns</c>.</exception>
-        public ReturnsUnit(XElement element)
+        internal ReturnsUnit(XElement element)
             : base(element, "returns")
         {
         }

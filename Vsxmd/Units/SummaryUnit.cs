@@ -9,7 +9,6 @@ namespace Vsxmd.Units
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text.RegularExpressions;
     using System.Xml.Linq;
 
     /// <summary>
@@ -22,7 +21,7 @@ namespace Vsxmd.Units
         /// </summary>
         /// <param name="element">The summary XML element.</param>
         /// <exception cref="ArgumentException">Throw if XML element name is not <c>summary</c>.</exception>
-        public SummaryUnit(XElement element)
+        internal SummaryUnit(XElement element)
             : base(element, "summary")
         {
         }

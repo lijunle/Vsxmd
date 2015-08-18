@@ -24,7 +24,7 @@ namespace Vsxmd.Units
         /// <param name="element">The param XML element.</param>
         /// <param name="paramType">The paramter type corresponding to the param XML element.</param>
         /// <exception cref="ArgumentException">Throw if XML element name is not <c>param</c>.</exception>
-        public ParamUnit(XElement element, string paramType)
+        internal ParamUnit(XElement element, string paramType)
             : base(element, "param")
         {
             this.paramType = paramType;

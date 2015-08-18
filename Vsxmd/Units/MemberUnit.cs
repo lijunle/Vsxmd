@@ -28,7 +28,7 @@ namespace Vsxmd.Units
         /// </summary>
         /// <param name="element">The member XML element.</param>
         /// <exception cref="ArgumentException">Throw if XML element name is not <c>member</c>.</exception>
-        public MemberUnit(XElement element)
+        internal MemberUnit(XElement element)
             : base(element, "member")
         {
             this.type = this.GetAttribute("name").First();
@@ -38,20 +38,20 @@ namespace Vsxmd.Units
         /// Gets the member unit comparer.
         /// </summary>
         /// <value>The member unit comparer.</value>
-        public static IComparer<MemberUnit> Comparer { get; }
+        internal static IComparer<MemberUnit> Comparer { get; }
 
         /// <summary>
         /// Gets the type name.
         /// </summary>
         /// <value>The the type name.</value>
         /// <example><c>Vsxmd.Program</c>, <c>Vsxmd.Units.TypeUnit</c>.</example>
-        public string TypeName => $"{this.NamespaceName}.{this.TypeShortName}";
+        internal string TypeName => $"{this.NamespaceName}.{this.TypeShortName}";
 
         /// <summary>
         /// Gets the member kind, one of <see cref="MemberKind"/>.
         /// </summary>
         /// <value>The member kind.</value>
-        public MemberKind Kind =>
+        internal MemberKind Kind =>
             this.type == 'T'
             ? MemberKind.Type
             : this.type == 'F'

@@ -20,7 +20,7 @@ namespace Vsxmd.Units
         /// </summary>
         /// <param name="element">The assembly XML element.</param>
         /// <exception cref="ArgumentException">Throw if XML element name is not <c>assembly</c>.</exception>
-        public AssemblyUnit(XElement element)
+        internal AssemblyUnit(XElement element)
             : base(element, "assembly")
         {
         }

@@ -6,7 +6,6 @@
 
 namespace Vsxmd
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Xml.Linq;
@@ -23,7 +22,7 @@ namespace Vsxmd
         /// Initializes a new instance of the <see cref="Converter"/> class.
         /// </summary>
         /// <param name="xmlPath">The XML document path.</param>
-        public Converter(string xmlPath)
+        internal Converter(string xmlPath)
         {
             this.xmlPath = xmlPath;
         }
@@ -32,7 +31,7 @@ namespace Vsxmd
         /// Convert to Markdown syntax.
         /// </summary>
         /// <returns>The generated Markdown content.</returns>
-        public string ToMarkdown() =>
+        internal string ToMarkdown() =>
             $"{string.Join("\n\n", ToMarkdown(XDocument.Load(this.xmlPath)))}\n";
 
         private static IEnumerable<string> ToMarkdown(XDocument document)

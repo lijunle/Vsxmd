@@ -21,7 +21,7 @@ namespace Vsxmd.Units
         /// </summary>
         /// <param name="element">The seealso XML element.</param>
         /// <exception cref="ArgumentException">Throw if XML element name is not <c>seealso</c>.</exception>
-        public SeealsoUnit(XElement element)
+        internal SeealsoUnit(XElement element)
             : base(element, "seealso")
         {
         }

@@ -21,7 +21,7 @@ namespace Vsxmd.Units
         /// </summary>
         /// <param name="element">The typeparam XML element.</param>
         /// <exception cref="ArgumentException">Throw if XML element name is not <c>typeparam</c>.</exception>
-        public TypeparamUnit(XElement element)
+        internal TypeparamUnit(XElement element)
             : base(element, "typeparam")
         {
         }
