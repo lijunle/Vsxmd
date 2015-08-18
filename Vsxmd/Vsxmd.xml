@@ -314,6 +314,12 @@
             </summary>
             <param name="name">The member unit name.</param>
             <returns>The method parameter type name list.</returns>
+            <example>
+            It will prepend the type kind character (<c>T:</c>) to the type string.
+            <para>For <c>(System.String,System.Int32)</c>, returns <c>["T:System.String","T:System.Int32"]</c>.</para>
+            It also handle generic type.
+            <para>For <c>(System.Collections.Generic.IEnumerable{System.String})</c>, returns <c>["T:System.Collections.Generic.IEnumerable{System.String}"]</c>.</para>
+            </example>
         </member>
         <member name="M:Vsxmd.Units.Extensions.NthLast``1(System.Collections.Generic.IEnumerable{``0},System.Int32)">
             <summary>

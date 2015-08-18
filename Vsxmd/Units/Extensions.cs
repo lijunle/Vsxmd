@@ -104,6 +104,12 @@ namespace Vsxmd.Units
         /// </summary>
         /// <param name="name">The member unit name.</param>
         /// <returns>The method parameter type name list.</returns>
+        /// <example>
+        /// It will prepend the type kind character (<c>T:</c>) to the type string.
+        /// <para>For <c>(System.String,System.Int32)</c>, returns <c>["T:System.String","T:System.Int32"]</c>.</para>
+        /// It also handle generic type.
+        /// <para>For <c>(System.Collections.Generic.IEnumerable{System.String})</c>, returns <c>["T:System.Collections.Generic.IEnumerable{System.String}"]</c>.</para>
+        /// </example>
         internal static IEnumerable<string> GetParamTypes(this string name)
         {
             var paramString = name.Split('(').Last().Trim(')');
@@ -111,7 +117,7 @@ namespace Vsxmd.Units
             var delta = 0;
             var list = new List<StringBuilder>()
             {
-                new StringBuilder()
+                new StringBuilder("T:")
             };
 
             foreach (var character in paramString)
@@ -126,7 +132,7 @@ namespace Vsxmd.Units
                 }
                 else if (character == ',' && delta == 0)
                 {
-                    list.Add(new StringBuilder());
+                    list.Add(new StringBuilder("T:"));
                 }
 
                 if (character != ',' || delta != 0)
