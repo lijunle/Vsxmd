@@ -35,7 +35,7 @@
   - [ToLowerString](#M-Vsxmd.Units.Extensions.ToLowerString-Vsxmd.Units.MemberKind-)
   - [ToMarkdownText](#M-Vsxmd.Units.Extensions.ToMarkdownText-System.Xml.Linq.XElement-)
   - [ToNameSegments](#M-Vsxmd.Units.Extensions.ToNameSegments-System.String-)
-  - [ToReferenceLink](#M-Vsxmd.Units.Extensions.ToReferenceLink-System.String-)
+  - [ToReferenceLink](#M-Vsxmd.Units.Extensions.ToReferenceLink-System.String,System.Boolean-)
 - [IUnit](#T-Vsxmd.Units.IUnit)
   - [ToMarkdown](#M-Vsxmd.Units.IUnit.ToMarkdown)
 - [MemberKind](#T-Vsxmd.Units.MemberKind)
@@ -48,7 +48,7 @@
 - [MemberName](#T-Vsxmd.Units.MemberName)
   - [#ctor](#M-Vsxmd.Units.MemberName.#ctor-System.String-)
   - [Kind](#P-Vsxmd.Units.MemberName.Kind)
-  - [ToReferenceLink](#M-Vsxmd.Units.MemberName.ToReferenceLink)
+  - [ToReferenceLink](#M-Vsxmd.Units.MemberName.ToReferenceLink-System.Boolean-)
 - [MemberUnit](#T-Vsxmd.Units.MemberUnit)
   - [#ctor](#M-Vsxmd.Units.MemberUnit.#ctor-System.Xml.Linq.XElement-)
   - [Comparer](#P-Vsxmd.Units.MemberUnit.Comparer)
@@ -123,7 +123,7 @@ Assembly unit.
 
 ##### Summary
 
-Initializes a new instance of the `AssemblyUnit` class.
+Initializes a new instance of the [AssemblyUnit](#T-Vsxmd.Units.AssemblyUnit) class.
 
 ##### Parameters
 
@@ -164,7 +164,7 @@ The base unit.
 
 ##### Summary
 
-Initializes a new instance of the `BaseUnit` class.
+Initializes a new instance of the [BaseUnit](#T-Vsxmd.Units.BaseUnit) class.
 
 ##### Parameters
 
@@ -198,17 +198,17 @@ Gets the Markdown content representing the element.
 
 ##### Summary
 
-Returns the `XAttribute` value of this `XElement` that has the specified `name`.
+Returns the [XAttribute](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XAttribute) value of this [XElement](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XElement) that has the specified `name`.
 
 ##### Returns
 
-An `XAttribute` value that has the specified `name`; `null` if there is no attribute with the specified `name`.
+An [XAttribute](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XAttribute) value that has the specified `name`; `null` if there is no attribute with the specified `name`.
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| name | [System.Xml.Linq.XName](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XName) | The `XName` of the `XAttribute` to get. |
+| name | [System.Xml.Linq.XName](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XName) | The [XName](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XName) of the [XAttribute](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XAttribute) to get. |
 
 <a name='M-Vsxmd.Units.BaseUnit.GetChild-System.Xml.Linq.XName-'></a>
 ### GetChild `method` [#](#M-Vsxmd.Units.BaseUnit.GetChild-System.Xml.Linq.XName-) [^](#contents)
@@ -219,30 +219,30 @@ Gets the first (in document order) child element with the specified `name`.
 
 ##### Returns
 
-A `XName` that matches the specified `name`, or `null`.
+A [XName](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XName) that matches the specified `name`, or `null`.
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| name | [System.Xml.Linq.XName](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XName) | The `XName` to match. |
+| name | [System.Xml.Linq.XName](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XName) | The [XName](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XName) to match. |
 
 <a name='M-Vsxmd.Units.BaseUnit.GetChildren-System.Xml.Linq.XName-'></a>
 ### GetChildren `method` [#](#M-Vsxmd.Units.BaseUnit.GetChildren-System.Xml.Linq.XName-) [^](#contents)
 
 ##### Summary
 
-Returns a collection of the child elements of this element or document, in document order. Only elements that have a matching `XName` are included in the collection.
+Returns a collection of the child elements of this element or document, in document order. Only elements that have a matching [XName](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XName) are included in the collection.
 
 ##### Returns
 
-An ``IEnumerable`1`` of `XElement` containing the children that have a matching `XName`, in document order.
+An [IEnumerable\`1](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable`1) of [XElement](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XElement) containing the children that have a matching [XName](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XName), in document order.
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| name | [System.Xml.Linq.XName](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XName) | The `XName` to match. |
+| name | [System.Xml.Linq.XName](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XName) | The [XName](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XName) to match. |
 
 <a name='M-Vsxmd.Units.BaseUnit.ToMarkdown'></a>
 ### ToMarkdown `method` [#](#M-Vsxmd.Units.BaseUnit.ToMarkdown) [^](#contents)
@@ -271,7 +271,7 @@ Convert from XML docuement to Markdown syntax.
 
 ##### Summary
 
-Initializes a new instance of the `Converter` class.
+Initializes a new instance of the [Converter](#T-Vsxmd.Converter) class.
 
 ##### Parameters
 
@@ -310,7 +310,7 @@ Example unit.
 
 ##### Summary
 
-Initializes a new instance of the `ExampleUnit` class.
+Initializes a new instance of the [ExampleUnit](#T-Vsxmd.Units.ExampleUnit) class.
 
 ##### Parameters
 
@@ -368,7 +368,7 @@ Exception unit.
 
 ##### Summary
 
-Initializes a new instance of the `ExceptionUnit` class.
+Initializes a new instance of the [ExceptionUnit](#T-Vsxmd.Units.ExceptionUnit) class.
 
 ##### Parameters
 
@@ -593,7 +593,7 @@ The "to here" link for the `href`.
 
 ##### Summary
 
-Convert the `MemberKind` to its lowercase name.
+Convert the [MemberKind](#T-Vsxmd.Units.MemberKind) to its lowercase name.
 
 ##### Returns
 
@@ -657,8 +657,8 @@ The name segments.
 
 Split `M:Vsxmd.Converter.#ctor(System.String)` to `["Vsxmd", "Converter", "#ctor"]` string list.
 
-<a name='M-Vsxmd.Units.Extensions.ToReferenceLink-System.String-'></a>
-### ToReferenceLink `method` [#](#M-Vsxmd.Units.Extensions.ToReferenceLink-System.String-) [^](#contents)
+<a name='M-Vsxmd.Units.Extensions.ToReferenceLink-System.String,System.Boolean-'></a>
+### ToReferenceLink `method` [#](#M-Vsxmd.Units.Extensions.ToReferenceLink-System.String,System.Boolean-) [^](#contents)
 
 ##### Summary
 
@@ -673,6 +673,7 @@ The generated reference link.
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | memberName | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String) | The member name. |
+| useShortName | [System.Boolean](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Boolean) | Indicate if use short type name. |
 
 ##### Example
 
@@ -689,7 +690,7 @@ Vsxmd.Units
 
 ##### Summary
 
-`IUnit` is wrapper to handle XML elements.
+[IUnit](#T-Vsxmd.Units.IUnit) is wrapper to handle XML elements.
 
 <a name='M-Vsxmd.Units.IUnit.ToMarkdown'></a>
 ### ToMarkdown `method` [#](#M-Vsxmd.Units.IUnit.ToMarkdown) [^](#contents)
@@ -775,7 +776,7 @@ Member name.
 
 ##### Summary
 
-Initializes a new instance of the `MemberName` class.
+Initializes a new instance of the [MemberName](#T-Vsxmd.Units.MemberName) class.
 
 ##### Parameters
 
@@ -788,10 +789,10 @@ Initializes a new instance of the `MemberName` class.
 
 ##### Summary
 
-Gets the member kind, one of `MemberKind`.
+Gets the member kind, one of [MemberKind](#T-Vsxmd.Units.MemberKind).
 
-<a name='M-Vsxmd.Units.MemberName.ToReferenceLink'></a>
-### ToReferenceLink `method` [#](#M-Vsxmd.Units.MemberName.ToReferenceLink) [^](#contents)
+<a name='M-Vsxmd.Units.MemberName.ToReferenceLink-System.Boolean-'></a>
+### ToReferenceLink `method` [#](#M-Vsxmd.Units.MemberName.ToReferenceLink-System.Boolean-) [^](#contents)
 
 ##### Summary
 
@@ -807,7 +808,9 @@ The generated Markdown reference link.
 
 ##### Parameters
 
-This method has no parameters.
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| useShortName | [System.Boolean](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Boolean) | Indicate if use short type name. |
 
 <a name='T-Vsxmd.Units.MemberUnit'></a>
 ## MemberUnit [#](#T-Vsxmd.Units.MemberUnit) [^](#contents)
@@ -825,7 +828,7 @@ Member unit.
 
 ##### Summary
 
-Initializes a new instance of the `MemberUnit` class.
+Initializes a new instance of the [MemberUnit](#T-Vsxmd.Units.MemberUnit) class.
 
 ##### Parameters
 
@@ -858,7 +861,7 @@ Gets the user friendly name for the member. This name will be shown as caption.
 
 ##### Summary
 
-Gets the member kind, one of `MemberKind`.
+Gets the member kind, one of [MemberKind](#T-Vsxmd.Units.MemberKind).
 
 <a name='P-Vsxmd.Units.MemberUnit.Link'></a>
 ### Link `property` [#](#P-Vsxmd.Units.MemberUnit.Link) [^](#contents)
@@ -883,7 +886,7 @@ Gets the type name.
 
 ##### Summary
 
-Complement a type unit if the member unit `group` does not have one. One member unit group has the same `TypeName`.
+Complement a type unit if the member unit `group` does not have one. One member unit group has the same [TypeName](#P-Vsxmd.Units.MemberUnit.TypeName).
 
 ##### Returns
 
@@ -940,7 +943,7 @@ Param unit.
 
 ##### Summary
 
-Initializes a new instance of the `ParamUnit` class.
+Initializes a new instance of the [ParamUnit](#T-Vsxmd.Units.ParamUnit) class.
 
 ##### Parameters
 
@@ -989,7 +992,7 @@ The generated Markdown.
 
 When the parameter (a.k.a `elements`) list is empty:
 
-If parent element kind is `Constructor` or `Method`, it returns a hint about "no parameters".
+If parent element kind is [Constructor](#F-Vsxmd.Units.MemberKind.Constructor) or [Method](#F-Vsxmd.Units.MemberKind.Method), it returns a hint about "no parameters".
 
 If parent element kind is not the value mentioned above, it returns an empty string.
 
@@ -1009,7 +1012,7 @@ Permission unit.
 
 ##### Summary
 
-Initializes a new instance of the `PermissionUnit` class.
+Initializes a new instance of the [PermissionUnit](#T-Vsxmd.Units.PermissionUnit) class.
 
 ##### Parameters
 
@@ -1109,7 +1112,7 @@ Remarks unit.
 
 ##### Summary
 
-Initializes a new instance of the `RemarksUnit` class.
+Initializes a new instance of the [RemarksUnit](#T-Vsxmd.Units.RemarksUnit) class.
 
 ##### Parameters
 
@@ -1167,7 +1170,7 @@ Returns unit.
 
 ##### Summary
 
-Initializes a new instance of the `ReturnsUnit` class.
+Initializes a new instance of the [ReturnsUnit](#T-Vsxmd.Units.ReturnsUnit) class.
 
 ##### Parameters
 
@@ -1225,7 +1228,7 @@ Seealso unit.
 
 ##### Summary
 
-Initializes a new instance of the `SeealsoUnit` class.
+Initializes a new instance of the [SeealsoUnit](#T-Vsxmd.Units.SeealsoUnit) class.
 
 ##### Parameters
 
@@ -1283,7 +1286,7 @@ Summary unit.
 
 ##### Summary
 
-Initializes a new instance of the `SummaryUnit` class.
+Initializes a new instance of the [SummaryUnit](#T-Vsxmd.Units.SummaryUnit) class.
 
 ##### Parameters
 
@@ -1341,7 +1344,7 @@ Table of contents.
 
 ##### Summary
 
-Initializes a new instance of the `TableOfContents` class.
+Initializes a new instance of the [TableOfContents](#T-Vsxmd.TableOfContents) class.
 
 It convert the table of contents from the `memberUnits`.
 
@@ -1385,11 +1388,11 @@ Vsxmd.Program
 
 ##### Summary
 
-Initializes a new instance of the `Test` class.
+Initializes a new instance of the [Test](#T-Vsxmd.Program.Test) class.
 
 Test constructor without parameters.
 
-See `#ctor`
+See [Test.#ctor](#M-Vsxmd.Program.Test.#ctor)
 
 ##### Parameters
 
@@ -1491,7 +1494,7 @@ This method has no parameters.
 
 Test generic reference type.
 
-See ```TestGenericParameter``2```.
+See [TestGenericParameter\`\`2](#M-Vsxmd.Program.Test.TestGenericParameter``2-System.Linq.Expressions.Expression{System.Func{``0,``1,System.String}}-).
 
 ##### Returns
 
@@ -1512,7 +1515,7 @@ Vsxmd.Program
 
 Test generic type.
 
-See ``TestGenericType`2``.
+See [TestGenericType\`2](#T-Vsxmd.Program.TestGenericType`2).
 
 ##### Generic Types
 
@@ -1528,7 +1531,7 @@ See ``TestGenericType`2``.
 
 Test generic method.
 
-See ```TestGenericMethod``2```
+See [TestGenericMethod\`\`2](#M-Vsxmd.Program.TestGenericType`2.TestGenericMethod``2)
 
 ##### Returns
 
@@ -1561,7 +1564,7 @@ Typeparam unit.
 
 ##### Summary
 
-Initializes a new instance of the `TypeparamUnit` class.
+Initializes a new instance of the [TypeparamUnit](#T-Vsxmd.Units.TypeparamUnit) class.
 
 ##### Parameters
 

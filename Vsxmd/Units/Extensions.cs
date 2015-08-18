@@ -62,13 +62,14 @@ namespace Vsxmd.Units
         /// Generate the reference link for the <paramref name="memberName"/>.
         /// </summary>
         /// <param name="memberName">The member name.</param>
+        /// <param name="useShortName">Indicate if use short type name.</param>
         /// <returns>The generated reference link.</returns>
         /// <example>
         /// <para>For <c>T:Vsxmd.Units.MemberUnit</c>, convert it to <c>[MemberUnit](#T-Vsxmd.Units.MemberUnit)</c>.</para>
         /// <para>For <c>T:System.ArgumentException</c>, convert it to <c>[ArgumentException](http://msdn/path/to/System.ArgumentException)</c>.</para>
         /// </example>
-        internal static string ToReferenceLink(this string memberName) =>
-            new MemberName(memberName).ToReferenceLink();
+        internal static string ToReferenceLink(this string memberName, bool useShortName = false) =>
+            new MemberName(memberName).ToReferenceLink(useShortName);
 
         /// <summary>
         /// Wrap the <paramref name="code"/> into Markdown backtick safely.
@@ -208,7 +209,7 @@ namespace Vsxmd.Units
                 switch (child.Name.ToString())
                 {
                     case "see":
-                        return $"{child.Attribute("cref").Value.ToNameSegments().Last().AsCode()}";
+                        return $"{child.Attribute("cref").Value.ToReferenceLink(useShortName: true)}";
                     case "paramref":
                     case "typeparamref":
                         return $"{child.Attribute("name").Value.AsCode()}";

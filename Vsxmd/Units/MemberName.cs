@@ -79,15 +79,39 @@ namespace Vsxmd.Units
         private IEnumerable<string> NameSegments =>
             this.LongName.Split('.');
 
+        private string FriendlyName =>
+            this.Kind == MemberKind.Type
+            ? this.TypeShortName
+            : this.Kind == MemberKind.Constants ||
+              this.Kind == MemberKind.Property ||
+              this.Kind == MemberKind.Constructor ||
+              this.Kind == MemberKind.Method
+            ? this.NameSegments.Last()
+            : string.Empty;
+
         /// <summary>
         /// Convert the member name to Markdown reference link.
         /// <para>If then name is under <c>System</c> namespace, the link points to MSDN.</para>
         /// <para>Otherwise, the link points to this page anchor.</para>
         /// </summary>
+        /// <param name="useShortName">Indicate if use short type name.</param>
         /// <returns>The generated Markdown reference link.</returns>
-        internal string ToReferenceLink() =>
+        internal string ToReferenceLink(bool useShortName) =>
             $"{this.Namespace}.".StartsWith("System.")
-            ? $"[{this.LongName.Escape()}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:{this.MsdnName})"
-            : $"[{this.LongName.Escape()}](#{this.Href})";
+            ? $"[{this.GetReferenceName(useShortName).Escape()}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:{this.MsdnName})"
+            : $"[{this.GetReferenceName(useShortName).Escape()}](#{this.Href})";
+
+        private string GetReferenceName(bool useShortName) =>
+            !useShortName
+            ? this.LongName
+            : this.Kind == MemberKind.Type
+            ? this.TypeShortName
+            : this.Kind == MemberKind.Constants ||
+              this.Kind == MemberKind.Property ||
+              this.Kind == MemberKind.Method
+            ? this.FriendlyName
+            : this.Kind == MemberKind.Constructor
+            ? $"{this.TypeShortName}.{this.FriendlyName}"
+            : string.Empty;
     }
 }

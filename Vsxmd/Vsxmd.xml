@@ -280,11 +280,12 @@
             <param name="href">The href.</param>
             <returns>The "to here" link for the <paramref name="href"/>.</returns>
         </member>
-        <member name="M:Vsxmd.Units.Extensions.ToReferenceLink(System.String)">
+        <member name="M:Vsxmd.Units.Extensions.ToReferenceLink(System.String,System.Boolean)">
             <summary>
             Generate the reference link for the <paramref name="memberName"/>.
             </summary>
             <param name="memberName">The member name.</param>
+            <param name="useShortName">Indicate if use short type name.</param>
             <returns>The generated reference link.</returns>
             <example>
             <para>For <c>T:Vsxmd.Units.MemberUnit</c>, convert it to <c>[MemberUnit](#T-Vsxmd.Units.MemberUnit)</c>.</para>
@@ -420,12 +421,13 @@
             </summary>
             <value>The member kind.</value>
         </member>
-        <member name="M:Vsxmd.Units.MemberName.ToReferenceLink">
+        <member name="M:Vsxmd.Units.MemberName.ToReferenceLink(System.Boolean)">
             <summary>
             Convert the member name to Markdown reference link.
             <para>If then name is under <c>System</c> namespace, the link points to MSDN.</para>
             <para>Otherwise, the link points to this page anchor.</para>
             </summary>
+            <param name="useShortName">Indicate if use short type name.</param>
             <returns>The generated Markdown reference link.</returns>
         </member>
         <member name="T:Vsxmd.Units.MemberUnit">
