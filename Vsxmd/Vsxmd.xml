@@ -97,6 +97,12 @@
             </summary>
             <param name="memberUnits">The member unit list.</param>
         </member>
+        <member name="P:Vsxmd.TableOfContents.Link">
+            <summary>
+            Gets the link pointing to the table of contents.
+            </summary>
+            <value>The link pointing to the table of contents.</value>
+        </member>
         <member name="M:Vsxmd.TableOfContents.ToMarkdown">
             <summary>
             Convert the table of contents to Markdown syntax.

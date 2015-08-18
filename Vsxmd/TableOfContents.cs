@@ -27,6 +27,12 @@ namespace Vsxmd
             this.memberUnits = memberUnits;
         }
 
+        /// <summary>
+        /// Gets the link pointing to the table of contents.
+        /// </summary>
+        /// <value>The link pointing to the table of contents.</value>
+        internal static string Link => $"[^](#{Href})";
+
         private static string Href => "contents";
 
         /// <summary>

@@ -116,12 +116,12 @@ namespace Vsxmd.Units
 
         private string Caption =>
             this.Kind == MemberKind.Type
-            ? $"{this.Href.ToAnchor()}## {this.FriendlyName} {this.Href.ToHereLink()}"
+            ? $"{this.Href.ToAnchor()}## {this.FriendlyName} {this.Href.ToHereLink()} {TableOfContents.Link}"
             : this.Kind == MemberKind.Constants ||
               this.Kind == MemberKind.Property ||
               this.Kind == MemberKind.Constructor ||
               this.Kind == MemberKind.Method
-            ? $"{this.Href.ToAnchor()}### {this.FriendlyName} `{this.Kind.ToLowerString()}` {this.Href.ToHereLink()}"
+            ? $"{this.Href.ToAnchor()}### {this.FriendlyName} `{this.Kind.ToLowerString()}` {this.Href.ToHereLink()} {TableOfContents.Link}"
             : string.Empty;
 
         private IEnumerable<string> InheritDoc =>
