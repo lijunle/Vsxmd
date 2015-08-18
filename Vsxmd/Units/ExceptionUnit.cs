@@ -26,7 +26,7 @@ namespace Vsxmd.Units
         {
         }
 
-        private string Name => this.GetAttribute("cref").Substring(2);
+        private string Name => this.GetAttribute("cref").ToReferenceLink();
 
         private string Description => this.ElementContent;
 
@@ -34,7 +34,7 @@ namespace Vsxmd.Units
         public override IEnumerable<string> ToMarkdown() =>
             new[]
             {
-                $"| {this.Name.Escape()} | {this.Description} |"
+                $"| {this.Name} | {this.Description} |"
             };
 
         /// <summary>

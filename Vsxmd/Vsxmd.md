@@ -35,6 +35,7 @@
   - [ToLowerString](#M-Vsxmd.Units.Extensions.ToLowerString-Vsxmd.Units.MemberKind-)
   - [ToMarkdownText](#M-Vsxmd.Units.Extensions.ToMarkdownText-System.Xml.Linq.XElement-)
   - [ToNameSegments](#M-Vsxmd.Units.Extensions.ToNameSegments-System.String-)
+  - [ToReferenceLink](#M-Vsxmd.Units.Extensions.ToReferenceLink-System.String-)
 - [IUnit](#T-Vsxmd.Units.IUnit)
   - [ToMarkdown](#M-Vsxmd.Units.IUnit.ToMarkdown)
 - [MemberKind](#T-Vsxmd.Units.MemberKind)
@@ -44,6 +45,10 @@
   - [NotSupported](#F-Vsxmd.Units.MemberKind.NotSupported)
   - [Property](#F-Vsxmd.Units.MemberKind.Property)
   - [Type](#F-Vsxmd.Units.MemberKind.Type)
+- [MemberName](#T-Vsxmd.Units.MemberName)
+  - [#ctor](#M-Vsxmd.Units.MemberName.#ctor-System.String-)
+  - [Kind](#P-Vsxmd.Units.MemberName.Kind)
+  - [ToReferenceLink](#M-Vsxmd.Units.MemberName.ToReferenceLink)
 - [MemberUnit](#T-Vsxmd.Units.MemberUnit)
   - [#ctor](#M-Vsxmd.Units.MemberUnit.#ctor-System.Xml.Linq.XElement-)
   - [Comparer](#P-Vsxmd.Units.MemberUnit.Comparer)
@@ -130,7 +135,7 @@ Initializes a new instance of the `AssemblyUnit` class.
 
 | Name | Description |
 | ---- | ----------- |
-| System.ArgumentException | Throw if XML element name is not `assembly`. |
+| [System.ArgumentException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentException) | Throw if XML element name is not `assembly`. |
 
 <a name='M-Vsxmd.Units.AssemblyUnit.ToMarkdown'></a>
 ### ToMarkdown `method` [#](#M-Vsxmd.Units.AssemblyUnit.ToMarkdown) [^](#contents)
@@ -172,7 +177,7 @@ Initializes a new instance of the `BaseUnit` class.
 
 | Name | Description |
 | ---- | ----------- |
-| System.ArgumentException | Throw if XML `element` name not matches the expected `elementName`. |
+| [System.ArgumentException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentException) | Throw if XML `element` name not matches the expected `elementName`. |
 
 <a name='P-Vsxmd.Units.BaseUnit.Element'></a>
 ### Element `property` [#](#P-Vsxmd.Units.BaseUnit.Element) [^](#contents)
@@ -317,7 +322,7 @@ Initializes a new instance of the `ExampleUnit` class.
 
 | Name | Description |
 | ---- | ----------- |
-| System.ArgumentException | Throw if XML element name is not `example`. |
+| [System.ArgumentException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentException) | Throw if XML element name is not `example`. |
 
 <a name='M-Vsxmd.Units.ExampleUnit.ToMarkdown'></a>
 ### ToMarkdown `method` [#](#M-Vsxmd.Units.ExampleUnit.ToMarkdown) [^](#contents)
@@ -375,7 +380,7 @@ Initializes a new instance of the `ExceptionUnit` class.
 
 | Name | Description |
 | ---- | ----------- |
-| System.ArgumentException | Throw if XML element name is not `exception`. |
+| [System.ArgumentException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentException) | Throw if XML element name is not `exception`. |
 
 <a name='M-Vsxmd.Units.ExceptionUnit.ToMarkdown'></a>
 ### ToMarkdown `method` [#](#M-Vsxmd.Units.ExceptionUnit.ToMarkdown) [^](#contents)
@@ -642,6 +647,29 @@ The name segments.
 
 Split `M:Vsxmd.Converter.#ctor(System.String)` to `["Vsxmd", "Converter", "#ctor"]` string list.
 
+<a name='M-Vsxmd.Units.Extensions.ToReferenceLink-System.String-'></a>
+### ToReferenceLink `method` [#](#M-Vsxmd.Units.Extensions.ToReferenceLink-System.String-) [^](#contents)
+
+##### Summary
+
+Generate the reference link for the `memberName`.
+
+##### Returns
+
+The generated reference link.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| memberName | System.String | The member name. |
+
+##### Example
+
+For `T:Vsxmd.Units.MemberUnit`, convert it to `[MemberUnit](#T-Vsxmd.Units.MemberUnit)`.
+
+For `T:System.ArgumentException`, convert it to `[ArgumentException](http://msdn/path/to/System.ArgumentException)`.
+
 <a name='T-Vsxmd.Units.IUnit'></a>
 ## IUnit [#](#T-Vsxmd.Units.IUnit) [^](#contents)
 
@@ -721,6 +749,56 @@ Property.
 
 Type.
 
+<a name='T-Vsxmd.Units.MemberName'></a>
+## MemberName [#](#T-Vsxmd.Units.MemberName) [^](#contents)
+
+##### Namespace
+
+Vsxmd.Units
+
+##### Summary
+
+Member name.
+
+<a name='M-Vsxmd.Units.MemberName.#ctor-System.String-'></a>
+### #ctor `constructor` [#](#M-Vsxmd.Units.MemberName.#ctor-System.String-) [^](#contents)
+
+##### Summary
+
+Initializes a new instance of the `MemberName` class.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| name | System.String | The raw member name. For example, `T:Vsxmd.Units.MemberName`. |
+
+<a name='P-Vsxmd.Units.MemberName.Kind'></a>
+### Kind `property` [#](#P-Vsxmd.Units.MemberName.Kind) [^](#contents)
+
+##### Summary
+
+Gets the member kind, one of `MemberKind`.
+
+<a name='M-Vsxmd.Units.MemberName.ToReferenceLink'></a>
+### ToReferenceLink `method` [#](#M-Vsxmd.Units.MemberName.ToReferenceLink) [^](#contents)
+
+##### Summary
+
+Convert the member name to Markdown reference link.
+
+If then name is under `System` namespace, the link points to MSDN.
+
+Otherwise, the link points to this page anchor.
+
+##### Returns
+
+The generated Markdown reference link.
+
+##### Parameters
+
+This method has no parameters.
+
 <a name='T-Vsxmd.Units.MemberUnit'></a>
 ## MemberUnit [#](#T-Vsxmd.Units.MemberUnit) [^](#contents)
 
@@ -749,7 +827,7 @@ Initializes a new instance of the `MemberUnit` class.
 
 | Name | Description |
 | ---- | ----------- |
-| System.ArgumentException | Throw if XML element name is not `member`. |
+| [System.ArgumentException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentException) | Throw if XML element name is not `member`. |
 
 <a name='P-Vsxmd.Units.MemberUnit.Comparer'></a>
 ### Comparer `property` [#](#P-Vsxmd.Units.MemberUnit.Comparer) [^](#contents)
@@ -865,7 +943,7 @@ Initializes a new instance of the `ParamUnit` class.
 
 | Name | Description |
 | ---- | ----------- |
-| System.ArgumentException | Throw if XML element name is not `param`. |
+| [System.ArgumentException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentException) | Throw if XML element name is not `param`. |
 
 <a name='M-Vsxmd.Units.ParamUnit.ToMarkdown'></a>
 ### ToMarkdown `method` [#](#M-Vsxmd.Units.ParamUnit.ToMarkdown) [^](#contents)
@@ -933,7 +1011,7 @@ Initializes a new instance of the `PermissionUnit` class.
 
 | Name | Description |
 | ---- | ----------- |
-| System.ArgumentException | Throw if XML element name is not `permission`. |
+| [System.ArgumentException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentException) | Throw if XML element name is not `permission`. |
 
 <a name='M-Vsxmd.Units.PermissionUnit.ToMarkdown'></a>
 ### ToMarkdown `method` [#](#M-Vsxmd.Units.PermissionUnit.ToMarkdown) [^](#contents)
@@ -1033,7 +1111,7 @@ Initializes a new instance of the `RemarksUnit` class.
 
 | Name | Description |
 | ---- | ----------- |
-| System.ArgumentException | Throw if XML element name is not `remarks`. |
+| [System.ArgumentException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentException) | Throw if XML element name is not `remarks`. |
 
 <a name='M-Vsxmd.Units.RemarksUnit.ToMarkdown'></a>
 ### ToMarkdown `method` [#](#M-Vsxmd.Units.RemarksUnit.ToMarkdown) [^](#contents)
@@ -1091,7 +1169,7 @@ Initializes a new instance of the `ReturnsUnit` class.
 
 | Name | Description |
 | ---- | ----------- |
-| System.ArgumentException | Throw if XML element name is not `returns`. |
+| [System.ArgumentException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentException) | Throw if XML element name is not `returns`. |
 
 <a name='M-Vsxmd.Units.ReturnsUnit.ToMarkdown'></a>
 ### ToMarkdown `method` [#](#M-Vsxmd.Units.ReturnsUnit.ToMarkdown) [^](#contents)
@@ -1149,7 +1227,7 @@ Initializes a new instance of the `SeealsoUnit` class.
 
 | Name | Description |
 | ---- | ----------- |
-| System.ArgumentException | Throw if XML element name is not `seealso`. |
+| [System.ArgumentException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentException) | Throw if XML element name is not `seealso`. |
 
 <a name='M-Vsxmd.Units.SeealsoUnit.ToMarkdown'></a>
 ### ToMarkdown `method` [#](#M-Vsxmd.Units.SeealsoUnit.ToMarkdown) [^](#contents)
@@ -1207,7 +1285,7 @@ Initializes a new instance of the `SummaryUnit` class.
 
 | Name | Description |
 | ---- | ----------- |
-| System.ArgumentException | Throw if XML element name is not `summary`. |
+| [System.ArgumentException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentException) | Throw if XML element name is not `summary`. |
 
 <a name='M-Vsxmd.Units.SummaryUnit.ToMarkdown'></a>
 ### ToMarkdown `method` [#](#M-Vsxmd.Units.SummaryUnit.ToMarkdown) [^](#contents)
@@ -1347,7 +1425,7 @@ This method has no parameters.
 
 | Name | Description |
 | ---- | ----------- |
-| Vsxmd.Program.Test.TestGenericParameter\`\`2(System.Linq.Expressions.Expression{System.Func{\`\`0,\`\`1,System.String}}) | Just for test. |
+| [Vsxmd.Program.Test.TestGenericParameter\`\`2](#M-Vsxmd.Program.Test.TestGenericParameter``2-System.Linq.Expressions.Expression{System.Func{``0,``1,System.String}}-) | Just for test. |
 
 <a name='M-Vsxmd.Program.Test.TestGenericParameter``2-System.Linq.Expressions.Expression{System.Func{``0,``1,System.String}}-'></a>
 ### TestGenericParameter\`\`2 `method` [#](#M-Vsxmd.Program.Test.TestGenericParameter``2-System.Linq.Expressions.Expression{System.Func{``0,``1,System.String}}-) [^](#contents)
@@ -1485,7 +1563,7 @@ Initializes a new instance of the `TypeparamUnit` class.
 
 | Name | Description |
 | ---- | ----------- |
-| System.ArgumentException | Throw if XML element name is not `typeparam`. |
+| [System.ArgumentException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentException) | Throw if XML element name is not `typeparam`. |
 
 <a name='M-Vsxmd.Units.TypeparamUnit.ToMarkdown'></a>
 ### ToMarkdown `method` [#](#M-Vsxmd.Units.TypeparamUnit.ToMarkdown) [^](#contents)

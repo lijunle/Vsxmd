@@ -59,6 +59,18 @@ namespace Vsxmd.Units
             $"[#](#{href})";
 
         /// <summary>
+        /// Generate the reference link for the <paramref name="memberName"/>.
+        /// </summary>
+        /// <param name="memberName">The member name.</param>
+        /// <returns>The generated reference link.</returns>
+        /// <example>
+        /// <para>For <c>T:Vsxmd.Units.MemberUnit</c>, convert it to <c>[MemberUnit](#T-Vsxmd.Units.MemberUnit)</c>.</para>
+        /// <para>For <c>T:System.ArgumentException</c>, convert it to <c>[ArgumentException](http://msdn/path/to/System.ArgumentException)</c>.</para>
+        /// </example>
+        internal static string ToReferenceLink(this string memberName) =>
+            new MemberName(memberName).ToReferenceLink();
+
+        /// <summary>
         /// Wrap the <paramref name="code"/> into Markdown backtick safely.
         /// <para>The backtick characters inside the <paramref name="code"/> reverse as it is.</para>
         /// </summary>

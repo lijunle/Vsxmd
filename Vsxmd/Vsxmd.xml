@@ -280,6 +280,17 @@
             <param name="href">The href.</param>
             <returns>The "to here" link for the <paramref name="href"/>.</returns>
         </member>
+        <member name="M:Vsxmd.Units.Extensions.ToReferenceLink(System.String)">
+            <summary>
+            Generate the reference link for the <paramref name="memberName"/>.
+            </summary>
+            <param name="memberName">The member name.</param>
+            <returns>The generated reference link.</returns>
+            <example>
+            <para>For <c>T:Vsxmd.Units.MemberUnit</c>, convert it to <c>[MemberUnit](#T-Vsxmd.Units.MemberUnit)</c>.</para>
+            <para>For <c>T:System.ArgumentException</c>, convert it to <c>[ArgumentException](http://msdn/path/to/System.ArgumentException)</c>.</para>
+            </example>
+        </member>
         <member name="M:Vsxmd.Units.Extensions.AsCode(System.String)">
             <summary>
             Wrap the <paramref name="code"/> into Markdown backtick safely.
@@ -385,6 +396,31 @@
             <summary>
             Method.
             </summary>
+        </member>
+        <member name="T:Vsxmd.Units.MemberName">
+            <summary>
+            Member name.
+            </summary>
+        </member>
+        <member name="M:Vsxmd.Units.MemberName.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Vsxmd.Units.MemberName"/> class.
+            </summary>
+            <param name="name">The raw member name. For example, <c>T:Vsxmd.Units.MemberName</c>.</param>
+        </member>
+        <member name="P:Vsxmd.Units.MemberName.Kind">
+            <summary>
+            Gets the member kind, one of <see cref="T:Vsxmd.Units.MemberKind"/>.
+            </summary>
+            <value>The member kind.</value>
+        </member>
+        <member name="M:Vsxmd.Units.MemberName.ToReferenceLink">
+            <summary>
+            Convert the member name to Markdown reference link.
+            <para>If then name is under <c>System</c> namespace, the link points to MSDN.</para>
+            <para>Otherwise, the link points to this page anchor.</para>
+            </summary>
+            <returns>The generated Markdown reference link.</returns>
         </member>
         <member name="T:Vsxmd.Units.MemberUnit">
             <summary>
