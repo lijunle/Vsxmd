@@ -82,7 +82,7 @@ namespace Vsxmd.Units
         /// <value>The user friendly name for the member.</value>
         private string FriendlyName =>
             this.Kind == MemberKind.Type
-            ? this.TypeShortName
+            ? this.TypeShortName.Escape()
             : this.Kind == MemberKind.Constants ||
               this.Kind == MemberKind.Property ||
               this.Kind == MemberKind.Constructor ||

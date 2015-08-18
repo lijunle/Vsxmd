@@ -92,7 +92,7 @@
   - [TestGenericParameter\`\`2](#M-Vsxmd.Program.Test.TestGenericParameter``2-System.Linq.Expressions.Expression{System.Func{``0,``1,System.String}}-)
   - [TestGenericPermission](#M-Vsxmd.Program.Test.TestGenericPermission)
   - [TestGenericRefence](#M-Vsxmd.Program.Test.TestGenericRefence)
-- [TestGenericType`2](#T-Vsxmd.Program.TestGenericType`2)
+- [TestGenericType\`2](#T-Vsxmd.Program.TestGenericType`2)
   - [TestGenericMethod\`\`2](#M-Vsxmd.Program.TestGenericType`2.TestGenericMethod``2)
 - [TypeparamUnit](#T-Vsxmd.Units.TypeparamUnit)
   - [#ctor](#M-Vsxmd.Units.TypeparamUnit.#ctor-System.Xml.Linq.XElement-)
@@ -1414,7 +1414,7 @@ Nothing.
 This method has no parameters.
 
 <a name='T-Vsxmd.Program.TestGenericType`2'></a>
-## TestGenericType`2 [#](#T-Vsxmd.Program.TestGenericType`2) [^](#contents)
+## TestGenericType\`2 [#](#T-Vsxmd.Program.TestGenericType`2) [^](#contents)
 
 ##### Namespace
 
