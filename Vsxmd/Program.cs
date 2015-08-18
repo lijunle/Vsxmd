@@ -58,8 +58,11 @@ namespace Vsxmd
             /// <summary>
             /// Initializes a new instance of the <see cref="Test"/> class.
             /// <para>Test constructor without parameters.</para>
+            /// <para>See <see cref="Test()"/></para>
             /// </summary>
-            internal Test() { }
+            internal Test()
+            {
+            }
 
             /// <summary>
             /// Test generic reference type.
@@ -70,6 +73,7 @@ namespace Vsxmd
 
             /// <summary>
             /// Test generic parameter type.
+            /// <para>See <typeparamref name="T1"/> and <typeparamref name="T2"/>.</para>
             /// </summary>
             /// <typeparam name="T1">Generic type 1.</typeparam>
             /// <typeparam name="T2">Generic type 2.</typeparam>
@@ -101,6 +105,24 @@ namespace Vsxmd
             /// </summary>
             /// <returns>Nothing.</returns>
             internal string TestBacktickInSummary() => null;
+        }
+
+        /// <summary>
+        /// Test generic type.
+        /// <para>See <see cref="TestGenericType{T1, T2}"/>.</para>
+        /// </summary>
+        /// <typeparam name="T1">Generic type 1.</typeparam>
+        /// <typeparam name="T2">Generic type 2.</typeparam>
+        private class TestGenericType<T1, T2>
+        {
+            /// <summary>
+            /// Test generic method.
+            /// <para>See <see cref="TestGenericMethod{T3, T4}"/></para>
+            /// </summary>
+            /// <typeparam name="T3">Generic type 3.</typeparam>
+            /// <typeparam name="T4">Generic type 4.</typeparam>
+            /// <returns>Nothing.</returns>
+            internal string TestGenericMethod<T3, T4>() => null;
         }
     }
 }

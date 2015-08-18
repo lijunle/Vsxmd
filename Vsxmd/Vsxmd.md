@@ -92,6 +92,8 @@
   - [TestGenericParameter\`\`2](#M-Vsxmd.Program.Test.TestGenericParameter``2-System.Linq.Expressions.Expression{System.Func{``0,``1,System.String}}-)
   - [TestGenericPermission](#M-Vsxmd.Program.Test.TestGenericPermission)
   - [TestGenericRefence](#M-Vsxmd.Program.Test.TestGenericRefence)
+- [TestGenericType`2](#T-Vsxmd.Program.TestGenericType`2)
+  - [TestGenericMethod\`\`2](#M-Vsxmd.Program.TestGenericType`2.TestGenericMethod``2)
 - [TypeparamUnit](#T-Vsxmd.Units.TypeparamUnit)
   - [#ctor](#M-Vsxmd.Units.TypeparamUnit.#ctor-System.Xml.Linq.XElement-)
   - [ToMarkdown](#M-Vsxmd.Units.TypeparamUnit.ToMarkdown)
@@ -1299,6 +1301,8 @@ Initializes a new instance of the `Test` class.
 
 Test constructor without parameters.
 
+See `#ctor`
+
 ##### Parameters
 
 This constructor has no parameters.
@@ -1351,6 +1355,8 @@ This method has no parameters.
 ##### Summary
 
 Test generic parameter type.
+
+See `T1` and `T2`.
 
 ##### Returns
 
@@ -1406,6 +1412,50 @@ Nothing.
 ##### Parameters
 
 This method has no parameters.
+
+<a name='T-Vsxmd.Program.TestGenericType`2'></a>
+## TestGenericType`2 [#](#T-Vsxmd.Program.TestGenericType`2) [^](#contents)
+
+##### Namespace
+
+Vsxmd.Program
+
+##### Summary
+
+Test generic type.
+
+See ``TestGenericType`2``.
+
+##### Generic Types
+
+| Name | Description |
+| ---- | ----------- |
+| T1 | Generic type 1. |
+| T2 | Generic type 2. |
+
+<a name='M-Vsxmd.Program.TestGenericType`2.TestGenericMethod``2'></a>
+### TestGenericMethod\`\`2 `method` [#](#M-Vsxmd.Program.TestGenericType`2.TestGenericMethod``2) [^](#contents)
+
+##### Summary
+
+Test generic method.
+
+See ```TestGenericMethod``2```
+
+##### Returns
+
+Nothing.
+
+##### Parameters
+
+This method has no parameters.
+
+##### Generic Types
+
+| Name | Description |
+| ---- | ----------- |
+| T3 | Generic type 3. |
+| T4 | Generic type 4. |
 
 <a name='T-Vsxmd.Units.TypeparamUnit'></a>
 ## TypeparamUnit [#](#T-Vsxmd.Units.TypeparamUnit) [^](#contents)

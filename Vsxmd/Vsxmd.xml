@@ -44,6 +44,7 @@
             <summary>
             Initializes a new instance of the <see cref="T:Vsxmd.Program.Test"/> class.
             <para>Test constructor without parameters.</para>
+            <para>See <see cref="M:Vsxmd.Program.Test.#ctor"/></para>
             </summary>
         </member>
         <member name="M:Vsxmd.Program.Test.TestGenericRefence">
@@ -56,6 +57,7 @@
         <member name="M:Vsxmd.Program.Test.TestGenericParameter``2(System.Linq.Expressions.Expression{System.Func{``0,``1,System.String}})">
             <summary>
             Test generic parameter type.
+            <para>See <typeparamref name="T1"/> and <typeparamref name="T2"/>.</para>
             </summary>
             <typeparam name="T1">Generic type 1.</typeparam>
             <typeparam name="T2">Generic type 2.</typeparam>
@@ -83,6 +85,23 @@
             <para>See <c>`backtick inside code block`</c></para>
             <para>See `<c>code block inside backtick</c>`</para>
             </summary>
+            <returns>Nothing.</returns>
+        </member>
+        <member name="T:Vsxmd.Program.TestGenericType`2">
+            <summary>
+            Test generic type.
+            <para>See <see cref="T:Vsxmd.Program.TestGenericType`2"/>.</para>
+            </summary>
+            <typeparam name="T1">Generic type 1.</typeparam>
+            <typeparam name="T2">Generic type 2.</typeparam>
+        </member>
+        <member name="M:Vsxmd.Program.TestGenericType`2.TestGenericMethod``2">
+            <summary>
+            Test generic method.
+            <para>See <see cref="M:Vsxmd.Program.TestGenericType`2.TestGenericMethod``2"/></para>
+            </summary>
+            <typeparam name="T3">Generic type 3.</typeparam>
+            <typeparam name="T4">Generic type 4.</typeparam>
             <returns>Nothing.</returns>
         </member>
         <member name="T:Vsxmd.TableOfContents">
