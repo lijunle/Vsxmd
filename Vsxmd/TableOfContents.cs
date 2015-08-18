@@ -27,6 +27,8 @@ namespace Vsxmd
             this.memberUnits = memberUnits;
         }
 
+        private static string Href => "contents";
+
         /// <summary>
         /// Convert the table of contents to Markdown syntax.
         /// </summary>
@@ -34,7 +36,7 @@ namespace Vsxmd
         internal IEnumerable<string> ToMarkdown() =>
             new[]
             {
-                "# Contents",
+                $"{Href.ToAnchor()}# Contents {Href.ToHereLink()}",
                 this.memberUnits.Select(ToMarkdown).Join("\n")
             };
 

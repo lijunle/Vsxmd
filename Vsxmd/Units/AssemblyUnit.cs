@@ -25,13 +25,15 @@ namespace Vsxmd.Units
         {
         }
 
+        private static string Href => "assembly";
+
         private string AssemblyName => this.GetChild("name").Value;
 
         /// <inheritdoc />
         public override IEnumerable<string> ToMarkdown() =>
             new[]
             {
-                $"# {this.AssemblyName}"
+                $"{Href.ToAnchor()}# {this.AssemblyName} {Href.ToHereLink()}"
             };
     }
 }
