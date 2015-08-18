@@ -8,7 +8,6 @@ namespace Vsxmd.Units
 {
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
     using System.Text.RegularExpressions;
     using System.Xml.Linq;
 
@@ -89,60 +88,6 @@ namespace Vsxmd.Units
             return code.StartsWith("`") || code.EndsWith("`")
                 ? $"{backticks} {code} {backticks}"
                 : $"{backticks}{code}{backticks}";
-        }
-
-        /// <summary>
-        /// Split the member unit <paramref name="name"/> to segments.
-        /// </summary>
-        /// <param name="name">The member unit name.</param>
-        /// <returns>The name segments.</returns>
-        /// <example>Split <c>M:Vsxmd.Converter.#ctor(System.String)</c> to <c>["Vsxmd", "Converter", "#ctor"]</c> string list.</example>
-        internal static IEnumerable<string> ToNameSegments(this string name) =>
-            name.Split('(').First().Split(':').Last().Split('.');
-
-        /// <summary>
-        /// Gets the method parameter type names from the member unit <paramref name="name"/>.
-        /// </summary>
-        /// <param name="name">The member unit name.</param>
-        /// <returns>The method parameter type name list.</returns>
-        /// <example>
-        /// It will prepend the type kind character (<c>T:</c>) to the type string.
-        /// <para>For <c>(System.String,System.Int32)</c>, returns <c>["T:System.String","T:System.Int32"]</c>.</para>
-        /// It also handle generic type.
-        /// <para>For <c>(System.Collections.Generic.IEnumerable{System.String})</c>, returns <c>["T:System.Collections.Generic.IEnumerable{System.String}"]</c>.</para>
-        /// </example>
-        internal static IEnumerable<string> GetParamTypes(this string name)
-        {
-            var paramString = name.Split('(').Last().Trim(')');
-
-            var delta = 0;
-            var list = new List<StringBuilder>()
-            {
-                new StringBuilder("T:")
-            };
-
-            foreach (var character in paramString)
-            {
-                if (character == '{')
-                {
-                    delta++;
-                }
-                else if (character == '}')
-                {
-                    delta--;
-                }
-                else if (character == ',' && delta == 0)
-                {
-                    list.Add(new StringBuilder("T:"));
-                }
-
-                if (character != ',' || delta != 0)
-                {
-                    list.Last().Append(character);
-                }
-            }
-
-            return list.Select(x => x.ToString());
         }
 
         /// <summary>

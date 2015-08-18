@@ -6,13 +6,15 @@
 
 namespace Vsxmd.Units
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Text;
 
     /// <summary>
     /// Member name.
     /// </summary>
-    internal class MemberName
+    internal class MemberName : IComparable<MemberName>
     {
         private readonly string name;
 
@@ -32,7 +34,7 @@ namespace Vsxmd.Units
         /// Gets the member kind, one of <see cref="MemberKind"/>.
         /// </summary>
         /// <value>The member kind.</value>
-        private MemberKind Kind =>
+        internal MemberKind Kind =>
             this.type == 'T'
             ? MemberKind.Type
             : this.type == 'F'
@@ -45,7 +47,45 @@ namespace Vsxmd.Units
             ? MemberKind.Method
             : MemberKind.NotSupported;
 
-        private string Namespace =>
+        /// <summary>
+        /// Gets the link pointing to this member unit.
+        /// </summary>
+        /// <value>The link pointing to this member unit.</value>
+        internal string Link =>
+            $"[{this.FriendlyName.Escape()}](#{this.Href})";
+
+        /// <summary>
+        /// Gets the caption representation for this member name.
+        /// </summary>
+        /// <value>The caption.</value>
+        /// <example>
+        /// <para>For <see cref="MemberKind.Type"/>, show as <c>## Vsxmd.Units.MemberName [#](#here) [^](#contents)</c>.</para>
+        /// <para>For other kinds, show as <c>### Vsxmd.Units.MemberName.Caption [#](#here) [^](#contents)</c>.</para>
+        /// </example>
+        internal string Caption =>
+            this.Kind == MemberKind.Type
+            ? $"{this.Href.ToAnchor()}## {this.FriendlyName.Escape()} {this.Href.ToHereLink()} {TableOfContents.Link}"
+            : this.Kind == MemberKind.Constants ||
+              this.Kind == MemberKind.Property ||
+              this.Kind == MemberKind.Constructor ||
+              this.Kind == MemberKind.Method
+            ? $"{this.Href.ToAnchor()}### {this.FriendlyName.Escape()} `{this.Kind.ToLowerString()}` {this.Href.ToHereLink()} {TableOfContents.Link}"
+            : string.Empty;
+
+        /// <summary>
+        /// Gets the type name.
+        /// </summary>
+        /// <value>The type name.</value>
+        /// <example><c>Vsxmd.Program</c>, <c>Vsxmd.Units.TypeUnit</c>.</example>
+        internal string TypeName =>
+            $"{this.Namespace}.{this.TypeShortName}";
+
+        /// <summary>
+        /// Gets the namespace name.
+        /// </summary>
+        /// <value>The namespace name.</value>
+        /// <example><c>System</c>, <c>Vsxmd</c>, <c>Vsxmd.Units</c>.</example>
+        internal string Namespace =>
             this.Kind == MemberKind.Type
             ? this.NameSegments.TakeAllButLast(1).Join(".")
             : this.Kind == MemberKind.Constants ||
@@ -88,6 +128,58 @@ namespace Vsxmd.Units
               this.Kind == MemberKind.Method
             ? this.NameSegments.Last()
             : string.Empty;
+
+        /// <inheritdoc />
+        public int CompareTo(MemberName other) =>
+            this.TypeShortName != other.TypeShortName
+            ? this.TypeShortName.CompareTo(other.TypeShortName)
+            : this.Kind != other.Kind
+            ? this.Kind.CompareTo(other.Kind)
+            : this.LongName.CompareTo(other.LongName);
+
+        /// <summary>
+        /// Gets the method parameter type names from the member name.
+        /// </summary>
+        /// <returns>The method parameter type name list.</returns>
+        /// <example>
+        /// It will prepend the type kind character (<c>T:</c>) to the type string.
+        /// <para>For <c>(System.String,System.Int32)</c>, returns <c>["T:System.String","T:System.Int32"]</c>.</para>
+        /// It also handle generic type.
+        /// <para>For <c>(System.Collections.Generic.IEnumerable{System.String})</c>, returns <c>["T:System.Collections.Generic.IEnumerable{System.String}"]</c>.</para>
+        /// </example>
+        internal IEnumerable<string> GetParamTypes()
+        {
+            var paramString = this.name.Split('(').Last().Trim(')');
+
+            var delta = 0;
+            var list = new List<StringBuilder>()
+            {
+                new StringBuilder("T:")
+            };
+
+            foreach (var character in paramString)
+            {
+                if (character == '{')
+                {
+                    delta++;
+                }
+                else if (character == '}')
+                {
+                    delta--;
+                }
+                else if (character == ',' && delta == 0)
+                {
+                    list.Add(new StringBuilder("T:"));
+                }
+
+                if (character != ',' || delta != 0)
+                {
+                    list.Last().Append(character);
+                }
+            }
+
+            return list.Select(x => x.ToString());
+        }
 
         /// <summary>
         /// Convert the member name to Markdown reference link.

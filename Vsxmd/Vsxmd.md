@@ -26,7 +26,6 @@
 - [Extensions](#T-Vsxmd.Units.Extensions)
   - [AsCode](#M-Vsxmd.Units.Extensions.AsCode-System.String-)
   - [Escape](#M-Vsxmd.Units.Extensions.Escape-System.String-)
-  - [GetParamTypes](#M-Vsxmd.Units.Extensions.GetParamTypes-System.String-)
   - [Join](#M-Vsxmd.Units.Extensions.Join-System.Collections.Generic.IEnumerable{System.String},System.String-)
   - [NthLast\`\`1](#M-Vsxmd.Units.Extensions.NthLast``1-System.Collections.Generic.IEnumerable{``0},System.Int32-)
   - [TakeAllButLast\`\`1](#M-Vsxmd.Units.Extensions.TakeAllButLast``1-System.Collections.Generic.IEnumerable{``0},System.Int32-)
@@ -34,7 +33,6 @@
   - [ToHereLink](#M-Vsxmd.Units.Extensions.ToHereLink-System.String-)
   - [ToLowerString](#M-Vsxmd.Units.Extensions.ToLowerString-Vsxmd.Units.MemberKind-)
   - [ToMarkdownText](#M-Vsxmd.Units.Extensions.ToMarkdownText-System.Xml.Linq.XElement-)
-  - [ToNameSegments](#M-Vsxmd.Units.Extensions.ToNameSegments-System.String-)
   - [ToReferenceLink](#M-Vsxmd.Units.Extensions.ToReferenceLink-System.String,System.Boolean-)
 - [IUnit](#T-Vsxmd.Units.IUnit)
   - [ToMarkdown](#M-Vsxmd.Units.IUnit.ToMarkdown)
@@ -47,12 +45,17 @@
   - [Type](#F-Vsxmd.Units.MemberKind.Type)
 - [MemberName](#T-Vsxmd.Units.MemberName)
   - [#ctor](#M-Vsxmd.Units.MemberName.#ctor-System.String-)
+  - [Caption](#P-Vsxmd.Units.MemberName.Caption)
   - [Kind](#P-Vsxmd.Units.MemberName.Kind)
+  - [Link](#P-Vsxmd.Units.MemberName.Link)
+  - [Namespace](#P-Vsxmd.Units.MemberName.Namespace)
+  - [TypeName](#P-Vsxmd.Units.MemberName.TypeName)
+  - [CompareTo](#M-Vsxmd.Units.MemberName.CompareTo-Vsxmd.Units.MemberName-)
+  - [GetParamTypes](#M-Vsxmd.Units.MemberName.GetParamTypes)
   - [ToReferenceLink](#M-Vsxmd.Units.MemberName.ToReferenceLink-System.Boolean-)
 - [MemberUnit](#T-Vsxmd.Units.MemberUnit)
   - [#ctor](#M-Vsxmd.Units.MemberUnit.#ctor-System.Xml.Linq.XElement-)
   - [Comparer](#P-Vsxmd.Units.MemberUnit.Comparer)
-  - [FriendlyName](#P-Vsxmd.Units.MemberUnit.FriendlyName)
   - [Kind](#P-Vsxmd.Units.MemberUnit.Kind)
   - [Link](#P-Vsxmd.Units.MemberUnit.Link)
   - [TypeName](#P-Vsxmd.Units.MemberUnit.TypeName)
@@ -461,33 +464,6 @@ The escaped content.
 | ---- | ---- | ----------- |
 | content | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String) | The content. |
 
-<a name='M-Vsxmd.Units.Extensions.GetParamTypes-System.String-'></a>
-### GetParamTypes `method` [#](#M-Vsxmd.Units.Extensions.GetParamTypes-System.String-) [^](#contents)
-
-##### Summary
-
-Gets the method parameter type names from the member unit `name`.
-
-##### Returns
-
-The method parameter type name list.
-
-##### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| name | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String) | The member unit name. |
-
-##### Example
-
-It will prepend the type kind character (`T:`) to the type string.
-
-For `(System.String,System.Int32)`, returns `["T:System.String","T:System.Int32"]`.
-
-It also handle generic type.
-
-For `(System.Collections.Generic.IEnumerable{System.String})`, returns `["T:System.Collections.Generic.IEnumerable{System.String}"]`.
-
 <a name='M-Vsxmd.Units.Extensions.Join-System.Collections.Generic.IEnumerable{System.String},System.String-'></a>
 ### Join `method` [#](#M-Vsxmd.Units.Extensions.Join-System.Collections.Generic.IEnumerable{System.String},System.String-) [^](#contents)
 
@@ -636,27 +612,6 @@ To the below Markdown content.
 The `element` value is `null`, it throws `ArgumentException`. For more, see `ToMarkdownText`.
 ```
 
-<a name='M-Vsxmd.Units.Extensions.ToNameSegments-System.String-'></a>
-### ToNameSegments `method` [#](#M-Vsxmd.Units.Extensions.ToNameSegments-System.String-) [^](#contents)
-
-##### Summary
-
-Split the member unit `name` to segments.
-
-##### Returns
-
-The name segments.
-
-##### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| name | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String) | The member unit name. |
-
-##### Example
-
-Split `M:Vsxmd.Converter.#ctor(System.String)` to `["Vsxmd", "Converter", "#ctor"]` string list.
-
 <a name='M-Vsxmd.Units.Extensions.ToReferenceLink-System.String,System.Boolean-'></a>
 ### ToReferenceLink `method` [#](#M-Vsxmd.Units.Extensions.ToReferenceLink-System.String,System.Boolean-) [^](#contents)
 
@@ -784,12 +739,90 @@ Initializes a new instance of the [MemberName](#T-Vsxmd.Units.MemberName) class.
 | ---- | ---- | ----------- |
 | name | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String) | The raw member name. For example, `T:Vsxmd.Units.MemberName`. |
 
+<a name='P-Vsxmd.Units.MemberName.Caption'></a>
+### Caption `property` [#](#P-Vsxmd.Units.MemberName.Caption) [^](#contents)
+
+##### Summary
+
+Gets the caption representation for this member name.
+
+##### Example
+
+For [Type](#F-Vsxmd.Units.MemberKind.Type), show as `## Vsxmd.Units.MemberName [#](#here) [^](#contents)`.
+
+For other kinds, show as `### Vsxmd.Units.MemberName.Caption [#](#here) [^](#contents)`.
+
 <a name='P-Vsxmd.Units.MemberName.Kind'></a>
 ### Kind `property` [#](#P-Vsxmd.Units.MemberName.Kind) [^](#contents)
 
 ##### Summary
 
 Gets the member kind, one of [MemberKind](#T-Vsxmd.Units.MemberKind).
+
+<a name='P-Vsxmd.Units.MemberName.Link'></a>
+### Link `property` [#](#P-Vsxmd.Units.MemberName.Link) [^](#contents)
+
+##### Summary
+
+Gets the link pointing to this member unit.
+
+<a name='P-Vsxmd.Units.MemberName.Namespace'></a>
+### Namespace `property` [#](#P-Vsxmd.Units.MemberName.Namespace) [^](#contents)
+
+##### Summary
+
+Gets the namespace name.
+
+##### Example
+
+`System`, `Vsxmd`, `Vsxmd.Units`.
+
+<a name='P-Vsxmd.Units.MemberName.TypeName'></a>
+### TypeName `property` [#](#P-Vsxmd.Units.MemberName.TypeName) [^](#contents)
+
+##### Summary
+
+Gets the type name.
+
+##### Example
+
+`Vsxmd.Program`, `Vsxmd.Units.TypeUnit`.
+
+<a name='M-Vsxmd.Units.MemberName.CompareTo-Vsxmd.Units.MemberName-'></a>
+### CompareTo `method` [#](#M-Vsxmd.Units.MemberName.CompareTo-Vsxmd.Units.MemberName-) [^](#contents)
+
+##### Summary
+
+*Inherit from parent.*
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-Vsxmd.Units.MemberName.GetParamTypes'></a>
+### GetParamTypes `method` [#](#M-Vsxmd.Units.MemberName.GetParamTypes) [^](#contents)
+
+##### Summary
+
+Gets the method parameter type names from the member name.
+
+##### Returns
+
+The method parameter type name list.
+
+##### Parameters
+
+This method has no parameters.
+
+##### Example
+
+It will prepend the type kind character (`T:`) to the type string.
+
+For `(System.String,System.Int32)`, returns `["T:System.String","T:System.Int32"]`.
+
+It also handle generic type.
+
+For `(System.Collections.Generic.IEnumerable{System.String})`, returns `["T:System.Collections.Generic.IEnumerable{System.String}"]`.
 
 <a name='M-Vsxmd.Units.MemberName.ToReferenceLink-System.Boolean-'></a>
 ### ToReferenceLink `method` [#](#M-Vsxmd.Units.MemberName.ToReferenceLink-System.Boolean-) [^](#contents)
@@ -848,13 +881,6 @@ Initializes a new instance of the [MemberUnit](#T-Vsxmd.Units.MemberUnit) class.
 ##### Summary
 
 Gets the member unit comparer.
-
-<a name='P-Vsxmd.Units.MemberUnit.FriendlyName'></a>
-### FriendlyName `property` [#](#P-Vsxmd.Units.MemberUnit.FriendlyName) [^](#contents)
-
-##### Summary
-
-Gets the user friendly name for the member. This name will be shown as caption.
 
 <a name='P-Vsxmd.Units.MemberUnit.Kind'></a>
 ### Kind `property` [#](#P-Vsxmd.Units.MemberUnit.Kind) [^](#contents)

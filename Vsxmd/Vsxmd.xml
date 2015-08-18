@@ -301,27 +301,6 @@
             <returns>The Markdwon code span.</returns>
             <remarks>Reference: http://meta.stackexchange.com/questions/55437/how-can-the-backtick-character-be-included-in-code </remarks>
         </member>
-        <member name="M:Vsxmd.Units.Extensions.ToNameSegments(System.String)">
-            <summary>
-            Split the member unit <paramref name="name"/> to segments.
-            </summary>
-            <param name="name">The member unit name.</param>
-            <returns>The name segments.</returns>
-            <example>Split <c>M:Vsxmd.Converter.#ctor(System.String)</c> to <c>["Vsxmd", "Converter", "#ctor"]</c> string list.</example>
-        </member>
-        <member name="M:Vsxmd.Units.Extensions.GetParamTypes(System.String)">
-            <summary>
-            Gets the method parameter type names from the member unit <paramref name="name"/>.
-            </summary>
-            <param name="name">The member unit name.</param>
-            <returns>The method parameter type name list.</returns>
-            <example>
-            It will prepend the type kind character (<c>T:</c>) to the type string.
-            <para>For <c>(System.String,System.Int32)</c>, returns <c>["T:System.String","T:System.Int32"]</c>.</para>
-            It also handle generic type.
-            <para>For <c>(System.Collections.Generic.IEnumerable{System.String})</c>, returns <c>["T:System.Collections.Generic.IEnumerable{System.String}"]</c>.</para>
-            </example>
-        </member>
         <member name="M:Vsxmd.Units.Extensions.NthLast``1(System.Collections.Generic.IEnumerable{``0},System.Int32)">
             <summary>
             Gets the n-th last element from the <paramref name="source"/>.
@@ -421,6 +400,51 @@
             </summary>
             <value>The member kind.</value>
         </member>
+        <member name="P:Vsxmd.Units.MemberName.Link">
+            <summary>
+            Gets the link pointing to this member unit.
+            </summary>
+            <value>The link pointing to this member unit.</value>
+        </member>
+        <member name="P:Vsxmd.Units.MemberName.Caption">
+            <summary>
+            Gets the caption representation for this member name.
+            </summary>
+            <value>The caption.</value>
+            <example>
+            <para>For <see cref="F:Vsxmd.Units.MemberKind.Type"/>, show as <c>## Vsxmd.Units.MemberName [#](#here) [^](#contents)</c>.</para>
+            <para>For other kinds, show as <c>### Vsxmd.Units.MemberName.Caption [#](#here) [^](#contents)</c>.</para>
+            </example>
+        </member>
+        <member name="P:Vsxmd.Units.MemberName.TypeName">
+            <summary>
+            Gets the type name.
+            </summary>
+            <value>The type name.</value>
+            <example><c>Vsxmd.Program</c>, <c>Vsxmd.Units.TypeUnit</c>.</example>
+        </member>
+        <member name="P:Vsxmd.Units.MemberName.Namespace">
+            <summary>
+            Gets the namespace name.
+            </summary>
+            <value>The namespace name.</value>
+            <example><c>System</c>, <c>Vsxmd</c>, <c>Vsxmd.Units</c>.</example>
+        </member>
+        <member name="M:Vsxmd.Units.MemberName.CompareTo(Vsxmd.Units.MemberName)">
+            <inheritdoc />
+        </member>
+        <member name="M:Vsxmd.Units.MemberName.GetParamTypes">
+            <summary>
+            Gets the method parameter type names from the member name.
+            </summary>
+            <returns>The method parameter type name list.</returns>
+            <example>
+            It will prepend the type kind character (<c>T:</c>) to the type string.
+            <para>For <c>(System.String,System.Int32)</c>, returns <c>["T:System.String","T:System.Int32"]</c>.</para>
+            It also handle generic type.
+            <para>For <c>(System.Collections.Generic.IEnumerable{System.String})</c>, returns <c>["T:System.Collections.Generic.IEnumerable{System.String}"]</c>.</para>
+            </example>
+        </member>
         <member name="M:Vsxmd.Units.MemberName.ToReferenceLink(System.Boolean)">
             <summary>
             Convert the member name to Markdown reference link.
@@ -466,13 +490,6 @@
             Gets the link pointing to this member unit.
             </summary>
             <value>The link pointing to this member unit.</value>
-        </member>
-        <member name="P:Vsxmd.Units.MemberUnit.FriendlyName">
-            <summary>
-            Gets the user friendly name for the member.
-            This name will be shown as caption.
-            </summary>
-            <value>The user friendly name for the member.</value>
         </member>
         <member name="M:Vsxmd.Units.MemberUnit.ToMarkdown">
             <inheritdoc />

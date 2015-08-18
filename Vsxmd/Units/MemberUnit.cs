@@ -16,7 +16,7 @@ namespace Vsxmd.Units
     /// </summary>
     internal class MemberUnit : BaseUnit
     {
-        private readonly char type;
+        private readonly MemberName name;
 
         static MemberUnit()
         {
@@ -31,7 +31,7 @@ namespace Vsxmd.Units
         internal MemberUnit(XElement element)
             : base(element, "member")
         {
-            this.type = this.GetAttribute("name").First();
+            this.name = new MemberName(this.GetAttribute("name"));
         }
 
         /// <summary>
@@ -45,84 +45,19 @@ namespace Vsxmd.Units
         /// </summary>
         /// <value>The the type name.</value>
         /// <example><c>Vsxmd.Program</c>, <c>Vsxmd.Units.TypeUnit</c>.</example>
-        internal string TypeName => $"{this.NamespaceName}.{this.TypeShortName}";
+        internal string TypeName => this.name.TypeName;
 
         /// <summary>
         /// Gets the member kind, one of <see cref="MemberKind"/>.
         /// </summary>
         /// <value>The member kind.</value>
-        internal MemberKind Kind =>
-            this.type == 'T'
-            ? MemberKind.Type
-            : this.type == 'F'
-            ? MemberKind.Constants
-            : this.type == 'P'
-            ? MemberKind.Property
-            : this.type == 'M' && this.Name.Contains(".#ctor")
-            ? MemberKind.Constructor
-            : this.type == 'M' && !this.Name.Contains(".#ctor")
-            ? MemberKind.Method
-            : MemberKind.NotSupported;
+        internal MemberKind Kind => this.name.Kind;
 
         /// <summary>
         /// Gets the link pointing to this member unit.
         /// </summary>
         /// <value>The link pointing to this member unit.</value>
-        internal string Link => $"[{this.FriendlyName}](#{this.Href})";
-
-        private string Href => this.GetAttribute("name")
-            .Replace(':', '-')
-            .Replace('(', '-')
-            .Replace(')', '-');
-
-        /// <summary>
-        /// Gets the user friendly name for the member.
-        /// This name will be shown as caption.
-        /// </summary>
-        /// <value>The user friendly name for the member.</value>
-        private string FriendlyName =>
-            this.Kind == MemberKind.Type
-            ? this.TypeShortName.Escape()
-            : this.Kind == MemberKind.Constants ||
-              this.Kind == MemberKind.Property ||
-              this.Kind == MemberKind.Constructor ||
-              this.Kind == MemberKind.Method
-            ? this.NameSegments.Last().Escape()
-            : string.Empty;
-
-        private string TypeShortName =>
-            this.Kind == MemberKind.Type
-            ? this.NameSegments.Last()
-            : this.Kind == MemberKind.Constants ||
-              this.Kind == MemberKind.Property ||
-              this.Kind == MemberKind.Constructor ||
-              this.Kind == MemberKind.Method
-            ? this.NameSegments.NthLast(2)
-            : string.Empty;
-
-        private string NamespaceName =>
-            this.Kind == MemberKind.Type
-            ? this.NameSegments.TakeAllButLast(1).Join(".")
-            : this.Kind == MemberKind.Constants ||
-              this.Kind == MemberKind.Property ||
-              this.Kind == MemberKind.Constructor ||
-              this.Kind == MemberKind.Method
-            ? this.NameSegments.TakeAllButLast(2).Join(".")
-            : string.Empty;
-
-        private string Name => this.GetAttribute("name").Substring(2);
-
-        private IEnumerable<string> NameSegments => this.Name.ToNameSegments();
-
-        private string Caption =>
-            this.Kind == MemberKind.Type
-            ? $"{this.Href.ToAnchor()}## {this.FriendlyName} {this.Href.ToHereLink()} {TableOfContents.Link}"
-            : this.Kind == MemberKind.Constants ||
-              this.Kind == MemberKind.Property ||
-              this.Kind == MemberKind.Constructor ||
-              this.Kind == MemberKind.Method
-            ? $"{this.Href.ToAnchor()}### {this.FriendlyName} `{this.Kind.ToLowerString()}` {this.Href.ToHereLink()} {TableOfContents.Link}"
-            : string.Empty;
+        internal string Link => this.name.Link;
 
         private IEnumerable<string> InheritDoc =>
             this.GetChild("inheritdoc") == null
@@ -139,7 +74,7 @@ namespace Vsxmd.Units
             : new[]
             {
                 $"##### Namespace",
-                $"{this.NamespaceName}"
+                $"{this.name.Namespace}"
             };
 
         private IEnumerable<string> Summary =>
@@ -151,11 +86,8 @@ namespace Vsxmd.Units
         private IEnumerable<string> Params =>
             ParamUnit.ToMarkdown(
                 this.GetChildren("param"),
-                this.ParamTypes,
+                this.name.GetParamTypes(),
                 this.Kind);
-
-        private IEnumerable<string> ParamTypes =>
-            this.Name.GetParamTypes();
 
         private IEnumerable<string> Typeparams =>
             TypeparamUnit.ToMarkdown(this.GetChildren("typeparam"));
@@ -177,7 +109,7 @@ namespace Vsxmd.Units
 
         /// <inheritdoc />
         public override IEnumerable<string> ToMarkdown() =>
-            new[] { this.Caption }
+            new[] { this.name.Caption }
                 .Concat(this.Namespace)
                 .Concat(this.InheritDoc)
                 .Concat(this.Summary)
@@ -211,11 +143,7 @@ namespace Vsxmd.Units
         {
             /// <inheritdoc />
             public int Compare(MemberUnit x, MemberUnit y) =>
-                x.TypeShortName != y.TypeShortName
-                ? x.TypeShortName.CompareTo(y.TypeShortName)
-                : x.Kind != y.Kind
-                ? x.Kind.CompareTo(y.Kind)
-                : x.Name.CompareTo(y.Name);
+                x.name.CompareTo(y.name);
         }
     }
 }
