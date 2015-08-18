@@ -26,13 +26,11 @@ namespace Vsxmd.Units
         {
         }
 
-        private string Reference => this.GetAttribute("cref").Substring(2);
-
         /// <inheritdoc />
         public override IEnumerable<string> ToMarkdown() =>
             new[]
             {
-                $"- {this.Reference.AsCode()}"
+                $"- {this.GetAttribute("cref").ToReferenceLink()}"
             };
 
         /// <summary>

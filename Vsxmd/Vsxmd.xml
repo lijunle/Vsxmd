@@ -44,6 +44,7 @@
             <summary>
             Initializes a new instance of the <see cref="T:Vsxmd.Program.Test"/> class.
             <para>Test constructor without parameters.</para>
+            <para>See <see cref="M:Vsxmd.Program.Test.#ctor"/></para>
             </summary>
         </member>
         <member name="M:Vsxmd.Program.Test.TestGenericRefence">
@@ -56,6 +57,7 @@
         <member name="M:Vsxmd.Program.Test.TestGenericParameter``2(System.Linq.Expressions.Expression{System.Func{``0,``1,System.String}})">
             <summary>
             Test generic parameter type.
+            <para>See <typeparamref name="T1"/> and <typeparamref name="T2"/>.</para>
             </summary>
             <typeparam name="T1">Generic type 1.</typeparam>
             <typeparam name="T2">Generic type 2.</typeparam>
@@ -83,6 +85,23 @@
             <para>See <c>`backtick inside code block`</c></para>
             <para>See `<c>code block inside backtick</c>`</para>
             </summary>
+            <returns>Nothing.</returns>
+        </member>
+        <member name="T:Vsxmd.Program.TestGenericType`2">
+            <summary>
+            Test generic type.
+            <para>See <see cref="T:Vsxmd.Program.TestGenericType`2"/>.</para>
+            </summary>
+            <typeparam name="T1">Generic type 1.</typeparam>
+            <typeparam name="T2">Generic type 2.</typeparam>
+        </member>
+        <member name="M:Vsxmd.Program.TestGenericType`2.TestGenericMethod``2">
+            <summary>
+            Test generic method.
+            <para>See <see cref="M:Vsxmd.Program.TestGenericType`2.TestGenericMethod``2"/></para>
+            </summary>
+            <typeparam name="T3">Generic type 3.</typeparam>
+            <typeparam name="T4">Generic type 4.</typeparam>
             <returns>Nothing.</returns>
         </member>
         <member name="T:Vsxmd.TableOfContents">
@@ -261,6 +280,18 @@
             <param name="href">The href.</param>
             <returns>The "to here" link for the <paramref name="href"/>.</returns>
         </member>
+        <member name="M:Vsxmd.Units.Extensions.ToReferenceLink(System.String,System.Boolean)">
+            <summary>
+            Generate the reference link for the <paramref name="memberName"/>.
+            </summary>
+            <param name="memberName">The member name.</param>
+            <param name="useShortName">Indicate if use short type name.</param>
+            <returns>The generated reference link.</returns>
+            <example>
+            <para>For <c>T:Vsxmd.Units.MemberUnit</c>, convert it to <c>[MemberUnit](#T-Vsxmd.Units.MemberUnit)</c>.</para>
+            <para>For <c>T:System.ArgumentException</c>, convert it to <c>[ArgumentException](http://msdn/path/to/System.ArgumentException)</c>.</para>
+            </example>
+        </member>
         <member name="M:Vsxmd.Units.Extensions.AsCode(System.String)">
             <summary>
             Wrap the <paramref name="code"/> into Markdown backtick safely.
@@ -269,21 +300,6 @@
             <param name="code">The code span.</param>
             <returns>The Markdwon code span.</returns>
             <remarks>Reference: http://meta.stackexchange.com/questions/55437/how-can-the-backtick-character-be-included-in-code </remarks>
-        </member>
-        <member name="M:Vsxmd.Units.Extensions.ToNameSegments(System.String)">
-            <summary>
-            Split the member unit <paramref name="name"/> to segments.
-            </summary>
-            <param name="name">The member unit name.</param>
-            <returns>The name segments.</returns>
-            <example>Split <c>M:Vsxmd.Converter.#ctor(System.String)</c> to <c>["Vsxmd", "Converter", "#ctor"]</c> string list.</example>
-        </member>
-        <member name="M:Vsxmd.Units.Extensions.GetParamTypes(System.String)">
-            <summary>
-            Gets the method parameter type names from the member unit <paramref name="name"/>.
-            </summary>
-            <param name="name">The member unit name.</param>
-            <returns>The method parameter type name list.</returns>
         </member>
         <member name="M:Vsxmd.Units.Extensions.NthLast``1(System.Collections.Generic.IEnumerable{``0},System.Int32)">
             <summary>
@@ -367,6 +383,77 @@
             Method.
             </summary>
         </member>
+        <member name="T:Vsxmd.Units.MemberName">
+            <summary>
+            Member name.
+            </summary>
+        </member>
+        <member name="M:Vsxmd.Units.MemberName.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Vsxmd.Units.MemberName"/> class.
+            </summary>
+            <param name="name">The raw member name. For example, <c>T:Vsxmd.Units.MemberName</c>.</param>
+        </member>
+        <member name="P:Vsxmd.Units.MemberName.Kind">
+            <summary>
+            Gets the member kind, one of <see cref="T:Vsxmd.Units.MemberKind"/>.
+            </summary>
+            <value>The member kind.</value>
+        </member>
+        <member name="P:Vsxmd.Units.MemberName.Link">
+            <summary>
+            Gets the link pointing to this member unit.
+            </summary>
+            <value>The link pointing to this member unit.</value>
+        </member>
+        <member name="P:Vsxmd.Units.MemberName.Caption">
+            <summary>
+            Gets the caption representation for this member name.
+            </summary>
+            <value>The caption.</value>
+            <example>
+            <para>For <see cref="F:Vsxmd.Units.MemberKind.Type"/>, show as <c>## Vsxmd.Units.MemberName [#](#here) [^](#contents)</c>.</para>
+            <para>For other kinds, show as <c>### Vsxmd.Units.MemberName.Caption [#](#here) [^](#contents)</c>.</para>
+            </example>
+        </member>
+        <member name="P:Vsxmd.Units.MemberName.TypeName">
+            <summary>
+            Gets the type name.
+            </summary>
+            <value>The type name.</value>
+            <example><c>Vsxmd.Program</c>, <c>Vsxmd.Units.TypeUnit</c>.</example>
+        </member>
+        <member name="P:Vsxmd.Units.MemberName.Namespace">
+            <summary>
+            Gets the namespace name.
+            </summary>
+            <value>The namespace name.</value>
+            <example><c>System</c>, <c>Vsxmd</c>, <c>Vsxmd.Units</c>.</example>
+        </member>
+        <member name="M:Vsxmd.Units.MemberName.CompareTo(Vsxmd.Units.MemberName)">
+            <inheritdoc />
+        </member>
+        <member name="M:Vsxmd.Units.MemberName.GetParamTypes">
+            <summary>
+            Gets the method parameter type names from the member name.
+            </summary>
+            <returns>The method parameter type name list.</returns>
+            <example>
+            It will prepend the type kind character (<c>T:</c>) to the type string.
+            <para>For <c>(System.String,System.Int32)</c>, returns <c>["T:System.String","T:System.Int32"]</c>.</para>
+            It also handle generic type.
+            <para>For <c>(System.Collections.Generic.IEnumerable{System.String})</c>, returns <c>["T:System.Collections.Generic.IEnumerable{System.String}"]</c>.</para>
+            </example>
+        </member>
+        <member name="M:Vsxmd.Units.MemberName.ToReferenceLink(System.Boolean)">
+            <summary>
+            Convert the member name to Markdown reference link.
+            <para>If then name is under <c>System</c> namespace, the link points to MSDN.</para>
+            <para>Otherwise, the link points to this page anchor.</para>
+            </summary>
+            <param name="useShortName">Indicate if use short type name.</param>
+            <returns>The generated Markdown reference link.</returns>
+        </member>
         <member name="T:Vsxmd.Units.MemberUnit">
             <summary>
             Member unit.
@@ -403,13 +490,6 @@
             Gets the link pointing to this member unit.
             </summary>
             <value>The link pointing to this member unit.</value>
-        </member>
-        <member name="P:Vsxmd.Units.MemberUnit.FriendlyName">
-            <summary>
-            Gets the user friendly name for the member.
-            This name will be shown as caption.
-            </summary>
-            <value>The user friendly name for the member.</value>
         </member>
         <member name="M:Vsxmd.Units.MemberUnit.ToMarkdown">
             <inheritdoc />
