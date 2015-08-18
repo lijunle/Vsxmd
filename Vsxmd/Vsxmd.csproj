@@ -69,6 +69,7 @@
     <Compile Include="Converter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TableOfContents.cs" />
     <Compile Include="Units\AssemblyUnit.cs" />
     <Compile Include="Units\BaseUnit.cs" />
     <Compile Include="Units\ExampleUnit.cs" />

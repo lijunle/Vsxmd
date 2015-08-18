@@ -50,13 +50,19 @@ namespace Vsxmd
                 .Where(member => member.Kind != MemberKind.NotSupported)
                 .GroupBy(unit => unit.TypeName)
                 .Select(MemberUnit.ComplementType)
-                .SelectMany(group => group);
+                .SelectMany(group => group)
+                .OrderBy(member => member, MemberUnit.Comparer);
 
             var memberMarkdowns = memberUnits
-                .OrderBy(member => member, MemberUnit.Comparer)
                 .SelectMany(member => member.ToMarkdown());
 
-            return assemblyMarkdown.Concat(memberMarkdowns);
+            // table of contents
+            var tableOfContents = new TableOfContents(memberUnits)
+                .ToMarkdown();
+
+            return tableOfContents
+                .Concat(assemblyMarkdown)
+                .Concat(memberMarkdowns);
         }
     }
 }

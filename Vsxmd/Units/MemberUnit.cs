@@ -64,6 +64,32 @@ namespace Vsxmd.Units
             ? MemberKind.Method
             : MemberKind.NotSupported;
 
+        /// <summary>
+        /// Gets the link pointing to this member unit.
+        /// </summary>
+        /// <value>The link pointing to this member unit.</value>
+        internal string Link => $"[{this.FriendlyName}](#{this.Href})";
+
+        private string Href => this.GetAttribute("name")
+            .Replace(':', '-')
+            .Replace('(', '-')
+            .Replace(')', '-');
+
+        /// <summary>
+        /// Gets the user friendly name for the member.
+        /// This name will be shown as caption.
+        /// </summary>
+        /// <value>The user friendly name for the member.</value>
+        private string FriendlyName =>
+            this.Kind == MemberKind.Type
+            ? this.TypeShortName
+            : this.Kind == MemberKind.Constants ||
+              this.Kind == MemberKind.Property ||
+              this.Kind == MemberKind.Constructor ||
+              this.Kind == MemberKind.Method
+            ? this.NameSegments.Last().Escape()
+            : string.Empty;
+
         private string TypeShortName =>
             this.Kind == MemberKind.Type
             ? this.NameSegments.Last()
@@ -90,12 +116,12 @@ namespace Vsxmd.Units
 
         private string Caption =>
             this.Kind == MemberKind.Type
-            ? $"## {this.TypeShortName}"
+            ? $"{this.Href.ToAnchor()}## {this.FriendlyName} {this.Href.ToHereLink()} {TableOfContents.Link}"
             : this.Kind == MemberKind.Constants ||
               this.Kind == MemberKind.Property ||
               this.Kind == MemberKind.Constructor ||
               this.Kind == MemberKind.Method
-            ? $"### {this.NameSegments.Last().Escape()} `{this.Kind.ToLowerString()}`"
+            ? $"{this.Href.ToAnchor()}### {this.FriendlyName} `{this.Kind.ToLowerString()}` {this.Href.ToHereLink()} {TableOfContents.Link}"
             : string.Empty;
 
         private IEnumerable<string> InheritDoc =>

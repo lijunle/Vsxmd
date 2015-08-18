@@ -43,6 +43,22 @@ namespace Vsxmd.Units
             content.Replace("`", @"\`");
 
         /// <summary>
+        /// Generate an anchor for the <paramref name="href"/>.
+        /// </summary>
+        /// <param name="href">The href.</param>
+        /// <returns>The anchor for the <paramref name="href"/>.</returns>
+        internal static string ToAnchor(this string href) =>
+             $"<a name='{href}'></a>\n";
+
+        /// <summary>
+        /// Generate "to here" link for the <paramref name="href"/>.
+        /// </summary>
+        /// <param name="href">The href.</param>
+        /// <returns>The "to here" link for the <paramref name="href"/>.</returns>
+        internal static string ToHereLink(this string href) =>
+            $"[#](#{href})";
+
+        /// <summary>
         /// Wrap the <paramref name="code"/> into Markdown backtick safely.
         /// <para>The backtick characters inside the <paramref name="code"/> reverse as it is.</para>
         /// </summary>

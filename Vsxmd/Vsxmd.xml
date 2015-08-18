@@ -85,6 +85,30 @@
             </summary>
             <returns>Nothing.</returns>
         </member>
+        <member name="T:Vsxmd.TableOfContents">
+            <summary>
+            Table of contents.
+            </summary>
+        </member>
+        <member name="M:Vsxmd.TableOfContents.#ctor(System.Linq.IOrderedEnumerable{Vsxmd.Units.MemberUnit})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Vsxmd.TableOfContents"/> class.
+            <para>It convert the table of contents from the <paramref name="memberUnits"/>.</para>
+            </summary>
+            <param name="memberUnits">The member unit list.</param>
+        </member>
+        <member name="P:Vsxmd.TableOfContents.Link">
+            <summary>
+            Gets the link pointing to the table of contents.
+            </summary>
+            <value>The link pointing to the table of contents.</value>
+        </member>
+        <member name="M:Vsxmd.TableOfContents.ToMarkdown">
+            <summary>
+            Convert the table of contents to Markdown syntax.
+            </summary>
+            <returns>The table of contents in Markdown syntax.</returns>
+        </member>
         <member name="T:Vsxmd.Units.AssemblyUnit">
             <summary>
             Assembly unit.
@@ -223,6 +247,20 @@
             <param name="content">The content.</param>
             <returns>The escaped content.</returns>
         </member>
+        <member name="M:Vsxmd.Units.Extensions.ToAnchor(System.String)">
+            <summary>
+            Generate an anchor for the <paramref name="href"/>.
+            </summary>
+            <param name="href">The href.</param>
+            <returns>The anchor for the <paramref name="href"/>.</returns>
+        </member>
+        <member name="M:Vsxmd.Units.Extensions.ToHereLink(System.String)">
+            <summary>
+            Generate "to here" link for the <paramref name="href"/>.
+            </summary>
+            <param name="href">The href.</param>
+            <returns>The "to here" link for the <paramref name="href"/>.</returns>
+        </member>
         <member name="M:Vsxmd.Units.Extensions.AsCode(System.String)">
             <summary>
             Wrap the <paramref name="code"/> into Markdown backtick safely.
@@ -359,6 +397,19 @@
             Gets the member kind, one of <see cref="T:Vsxmd.Units.MemberKind"/>.
             </summary>
             <value>The member kind.</value>
+        </member>
+        <member name="P:Vsxmd.Units.MemberUnit.Link">
+            <summary>
+            Gets the link pointing to this member unit.
+            </summary>
+            <value>The link pointing to this member unit.</value>
+        </member>
+        <member name="P:Vsxmd.Units.MemberUnit.FriendlyName">
+            <summary>
+            Gets the user friendly name for the member.
+            This name will be shown as caption.
+            </summary>
+            <value>The user friendly name for the member.</value>
         </member>
         <member name="M:Vsxmd.Units.MemberUnit.ToMarkdown">
             <inheritdoc />
