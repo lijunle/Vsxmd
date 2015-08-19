@@ -20,14 +20,27 @@ namespace Vsxmd.Units
 
         private readonly char type;
 
+        private readonly IEnumerable<string> paramNames;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MemberName"/> class.
+        /// </summary>
+        /// <param name="name">The raw member name. For example, <c>T:Vsxmd.Units.MemberName</c>.</param>
+        /// <param name="paramNames">The parameter names. It is only used when member kind is <see cref="MemberKind.Constructor"/> or <see cref="MemberKind.Method"/>.</param>
+        internal MemberName(string name, IEnumerable<string> paramNames)
+        {
+            this.name = name;
+            this.type = name.First();
+            this.paramNames = paramNames;
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="MemberName"/> class.
         /// </summary>
         /// <param name="name">The raw member name. For example, <c>T:Vsxmd.Units.MemberName</c>.</param>
         internal MemberName(string name)
+            : this(name, null)
         {
-            this.name = name;
-            this.type = name.First();
         }
 
         /// <summary>
@@ -52,7 +65,14 @@ namespace Vsxmd.Units
         /// </summary>
         /// <value>The link pointing to this member unit.</value>
         internal string Link =>
-            $"[{this.FriendlyName.Escape()}](#{this.Href} '{this.LongName}')";
+            this.Kind == MemberKind.Type ||
+            this.Kind == MemberKind.Constants ||
+            this.Kind == MemberKind.Property
+            ? $"[{this.FriendlyName.Escape()}](#{this.Href} '{this.StrippedName}')"
+            : this.Kind == MemberKind.Constructor ||
+              this.Kind == MemberKind.Method
+            ? $"[{this.FriendlyName.Escape()}({this.paramNames.Join(",")})](#{this.Href} '{this.StrippedName}')"
+            : string.Empty;
 
         /// <summary>
         /// Gets the caption representation for this member name.
@@ -66,10 +86,11 @@ namespace Vsxmd.Units
             this.Kind == MemberKind.Type
             ? $"{this.Href.ToAnchor()}## {this.FriendlyName.Escape()} {this.Href.ToHereLink()} {TableOfContents.Link}"
             : this.Kind == MemberKind.Constants ||
-              this.Kind == MemberKind.Property ||
-              this.Kind == MemberKind.Constructor ||
-              this.Kind == MemberKind.Method
+              this.Kind == MemberKind.Property
             ? $"{this.Href.ToAnchor()}### {this.FriendlyName.Escape()} `{this.Kind.ToLowerString()}` {this.Href.ToHereLink()} {TableOfContents.Link}"
+            : this.Kind == MemberKind.Constructor ||
+              this.Kind == MemberKind.Method
+            ? $"{this.Href.ToAnchor()}### {this.FriendlyName.Escape()}({this.paramNames.Join(",")}) `{this.Kind.ToLowerString()}` {this.Href.ToHereLink()} {TableOfContents.Link}"
             : string.Empty;
 
         /// <summary>
@@ -110,8 +131,11 @@ namespace Vsxmd.Units
             .Replace('(', '-')
             .Replace(')', '-');
 
+        private string StrippedName =>
+            this.name.Substring(2);
+
         private string LongName =>
-            this.name.Substring(2).Split('(').First();
+            this.StrippedName.Split('(').First();
 
         private string MsdnName =>
             this.LongName.Split('{').First();
@@ -190,8 +214,8 @@ namespace Vsxmd.Units
         /// <returns>The generated Markdown reference link.</returns>
         internal string ToReferenceLink(bool useShortName) =>
             $"{this.Namespace}.".StartsWith("System.")
-            ? $"[{this.GetReferenceName(useShortName).Escape()}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:{this.MsdnName} '{this.LongName}')"
-            : $"[{this.GetReferenceName(useShortName).Escape()}](#{this.Href} '{this.LongName}')";
+            ? $"[{this.GetReferenceName(useShortName).Escape()}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:{this.MsdnName} '{this.StrippedName}')"
+            : $"[{this.GetReferenceName(useShortName).Escape()}](#{this.Href} '{this.StrippedName}')";
 
         private string GetReferenceName(bool useShortName) =>
             !useShortName

@@ -402,6 +402,13 @@
             Member name.
             </summary>
         </member>
+        <member name="M:Vsxmd.Units.MemberName.#ctor(System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Vsxmd.Units.MemberName"/> class.
+            </summary>
+            <param name="name">The raw member name. For example, <c>T:Vsxmd.Units.MemberName</c>.</param>
+            <param name="paramNames">The parameter names. It is only used when member kind is <see cref="F:Vsxmd.Units.MemberKind.Constructor"/> or <see cref="F:Vsxmd.Units.MemberKind.Method"/>.</param>
+        </member>
         <member name="M:Vsxmd.Units.MemberName.#ctor(System.String)">
             <summary>
             Initializes a new instance of the <see cref="T:Vsxmd.Units.MemberName"/> class.

@@ -15,6 +15,8 @@ namespace Vsxmd.Units
     /// </summary>
     internal class AssemblyUnit : BaseUnit
     {
+        private const string Href = "assembly";
+
         /// <summary>
         /// Initializes a new instance of the <see cref="AssemblyUnit"/> class.
         /// </summary>
@@ -24,8 +26,6 @@ namespace Vsxmd.Units
             : base(element, "assembly")
         {
         }
-
-        private static string Href => "assembly";
 
         private string AssemblyName => this.GetChild("name").Value;
 

@@ -31,7 +31,9 @@ namespace Vsxmd.Units
         internal MemberUnit(XElement element)
             : base(element, "member")
         {
-            this.name = new MemberName(this.GetAttribute("name"));
+            this.name = new MemberName(
+                this.GetAttribute("name"),
+                this.GetChildren("param").Select(x => x.Attribute("name").Value));
         }
 
         /// <summary>
