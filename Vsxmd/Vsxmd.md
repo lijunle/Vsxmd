@@ -1167,12 +1167,6 @@ Vsxmd
 
 Program entry.
 
-##### Permissions
-
-| Name | Description |
-| ---- | ----------- |
-| [System.Security.PermissionSet](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Security.PermissionSet 'System.Security.PermissionSet') | Vsxmd provides no program APIs. |
-
 ##### Remarks
 
 Usage syntax: `Vsxmd.exe <input-XML-path> [output-Markdown-path]`
@@ -1499,6 +1493,12 @@ See [Test.#ctor](#M-Vsxmd.Program.Test.#ctor 'Vsxmd.Program.Test.#ctor')
 ##### Parameters
 
 This constructor has no parameters.
+
+##### Permissions
+
+| Name | Description |
+| ---- | ----------- |
+| [System.Security.PermissionSet](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Security.PermissionSet 'System.Security.PermissionSet') | Just for test. |
 
 <a name='M-Vsxmd.Program.Test.TestBacktickInSummary'></a>
 ### TestBacktickInSummary() `method` [#](#M-Vsxmd.Program.Test.TestBacktickInSummary 'Go To Here') [^](#contents 'Back To Contents')

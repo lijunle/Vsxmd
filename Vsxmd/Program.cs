@@ -23,7 +23,6 @@ namespace Vsxmd
     /// <para>The <c>input-XML-path</c> argument is required. It references to the VS generated XML documentation file.</para>
     /// <para>The <c>output-Markdown-path</c> argument is optional. It indicates the file path for the Markdown output file. When not specific, it will be a <c>.md</c> file with same file name as the XML documentation file, path at the XML documentation folder.</para>
     /// </remarks>
-    /// <permission cref="PermissionSet">Vsxmd provides no program APIs.</permission>
     internal static class Program
     {
         /// <summary>
@@ -62,6 +61,7 @@ namespace Vsxmd
             /// <para>Test constructor without parameters.</para>
             /// <para>See <see cref="Test()"/></para>
             /// </summary>
+            /// <permission cref="PermissionSet">Just for test.</permission>
             internal Test()
             {
             }
