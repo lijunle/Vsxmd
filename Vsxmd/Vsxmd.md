@@ -13,7 +13,7 @@
   - [GetChildren](#M-Vsxmd.Units.BaseUnit.GetChildren-System.Xml.Linq.XName-)
   - [ToMarkdown](#M-Vsxmd.Units.BaseUnit.ToMarkdown)
 - [Converter](#T-Vsxmd.Converter)
-  - [#ctor](#M-Vsxmd.Converter.#ctor-System.String-)
+  - [#ctor](#M-Vsxmd.Converter.#ctor-System.Xml.Linq.XDocument-)
   - [ToMarkdown](#M-Vsxmd.Converter.ToMarkdown)
 - [ExampleUnit](#T-Vsxmd.Units.ExampleUnit)
   - [#ctor](#M-Vsxmd.Units.ExampleUnit.#ctor-System.Xml.Linq.XElement-)
@@ -28,6 +28,7 @@
   - [Escape](#M-Vsxmd.Units.Extensions.Escape-System.String-)
   - [Join](#M-Vsxmd.Units.Extensions.Join-System.Collections.Generic.IEnumerable{System.String},System.String-)
   - [NthLast\`\`1](#M-Vsxmd.Units.Extensions.NthLast``1-System.Collections.Generic.IEnumerable{``0},System.Int32-)
+  - [Suffix](#M-Vsxmd.Units.Extensions.Suffix-System.String,System.String-)
   - [TakeAllButLast\`\`1](#M-Vsxmd.Units.Extensions.TakeAllButLast``1-System.Collections.Generic.IEnumerable{``0},System.Int32-)
   - [ToAnchor](#M-Vsxmd.Units.Extensions.ToAnchor-System.String-)
   - [ToHereLink](#M-Vsxmd.Units.Extensions.ToHereLink-System.String-)
@@ -271,8 +272,8 @@ Vsxmd
 
 *Inherit from parent.*
 
-<a name='M-Vsxmd.Converter.#ctor-System.String-'></a>
-### #ctor `constructor` [#](#M-Vsxmd.Converter.#ctor-System.String-) [^](#contents)
+<a name='M-Vsxmd.Converter.#ctor-System.Xml.Linq.XDocument-'></a>
+### #ctor `constructor` [#](#M-Vsxmd.Converter.#ctor-System.Xml.Linq.XDocument-) [^](#contents)
 
 ##### Summary
 
@@ -282,7 +283,7 @@ Initializes a new instance of the [Converter](#T-Vsxmd.Converter) class.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| xmlPath | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String) | The XML document path. |
+| document | [System.Xml.Linq.XDocument](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XDocument) | The XML document. |
 
 <a name='M-Vsxmd.Converter.ToMarkdown'></a>
 ### ToMarkdown `method` [#](#M-Vsxmd.Converter.ToMarkdown) [^](#contents)
@@ -503,6 +504,24 @@ The element at the specified position in the `source` sequence.
 | Name | Description |
 | ---- | ----------- |
 | TSource | The type of the elements of `source`. |
+
+<a name='M-Vsxmd.Units.Extensions.Suffix-System.String,System.String-'></a>
+### Suffix `method` [#](#M-Vsxmd.Units.Extensions.Suffix-System.String,System.String-) [^](#contents)
+
+##### Summary
+
+Suffix the `suffix` to the `value`, and generate a new string.
+
+##### Returns
+
+The new string.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| value | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String) | The original string value. |
+| suffix | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String) | The suffix string. |
 
 <a name='M-Vsxmd.Units.Extensions.TakeAllButLast``1-System.Collections.Generic.IEnumerable{``0},System.Int32-'></a>
 ### TakeAllButLast\`\`1 `method` [#](#M-Vsxmd.Units.Extensions.TakeAllButLast``1-System.Collections.Generic.IEnumerable{``0},System.Int32-) [^](#contents)

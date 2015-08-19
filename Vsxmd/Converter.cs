@@ -14,28 +14,28 @@ namespace Vsxmd
     /// <inheritdoc/>
     internal class Converter : IConverter
     {
-        private readonly string xmlPath;
+        private readonly XDocument document;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Converter"/> class.
         /// </summary>
-        /// <param name="xmlPath">The XML document path.</param>
-        internal Converter(string xmlPath)
+        /// <param name="document">The XML document.</param>
+        internal Converter(XDocument document)
         {
-            this.xmlPath = xmlPath;
+            this.document = document;
         }
 
         /// <inheritdoc/>
         public string ToMarkdown() =>
-            $"{string.Join("\n\n", ToMarkdown(XDocument.Load(this.xmlPath)))}\n";
+            ToUnits(this.document.Root)
+                .SelectMany(x => x.ToMarkdown())
+                .Join("\n\n")
+                .Suffix("\n");
 
-        private static IEnumerable<string> ToMarkdown(XDocument document)
+        private static IEnumerable<IUnit> ToUnits(XElement docElement)
         {
-            var docElement = document.Root;
-
             // assembly unit
             var assemblyUnit = new AssemblyUnit(docElement.Element("assembly"));
-            var assemblyMarkdown = assemblyUnit.ToMarkdown();
 
             // member units
             var memberUnits = docElement
@@ -48,16 +48,12 @@ namespace Vsxmd
                 .SelectMany(group => group)
                 .OrderBy(member => member, MemberUnit.Comparer);
 
-            var memberMarkdowns = memberUnits
-                .SelectMany(member => member.ToMarkdown());
-
             // table of contents
-            var tableOfContents = new TableOfContents(memberUnits)
-                .ToMarkdown();
+            var tableOfContents = new TableOfContents(memberUnits);
 
-            return tableOfContents
-                .Concat(assemblyMarkdown)
-                .Concat(memberMarkdowns);
+            return new IUnit[] { tableOfContents }
+                .Concat(new[] { assemblyUnit })
+                .Concat(memberUnits);
         }
     }
 }

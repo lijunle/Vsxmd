@@ -7,11 +7,11 @@
         <member name="T:Vsxmd.Converter">
             <inheritdoc/>
         </member>
-        <member name="M:Vsxmd.Converter.#ctor(System.String)">
+        <member name="M:Vsxmd.Converter.#ctor(System.Xml.Linq.XDocument)">
             <summary>
             Initializes a new instance of the <see cref="T:Vsxmd.Converter"/> class.
             </summary>
-            <param name="xmlPath">The XML document path.</param>
+            <param name="document">The XML document.</param>
         </member>
         <member name="M:Vsxmd.Converter.ToMarkdown">
             <inheritdoc/>
@@ -264,6 +264,14 @@
             <param name="value">The string values.</param>
             <param name="separator">The separator.</param>
             <returns>The concatenated string.</returns>
+        </member>
+        <member name="M:Vsxmd.Units.Extensions.Suffix(System.String,System.String)">
+            <summary>
+            Suffix the <paramref name="suffix"/> to the <paramref name="value"/>, and generate a new string.
+            </summary>
+            <param name="value">The original string value.</param>
+            <param name="suffix">The suffix string.</param>
+            <returns>The new string.</returns>
         </member>
         <member name="M:Vsxmd.Units.Extensions.Escape(System.String)">
             <summary>

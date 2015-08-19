@@ -34,6 +34,15 @@ namespace Vsxmd.Units
             string.Join(separator, value);
 
         /// <summary>
+        /// Suffix the <paramref name="suffix"/> to the <paramref name="value"/>, and generate a new string.
+        /// </summary>
+        /// <param name="value">The original string value.</param>
+        /// <param name="suffix">The suffix string.</param>
+        /// <returns>The new string.</returns>
+        internal static string Suffix(this string value, string suffix) =>
+            string.Concat(value, suffix);
+
+        /// <summary>
         /// Escape the content to keep it raw in Markdown syntax.
         /// </summary>
         /// <param name="content">The content.</param>
