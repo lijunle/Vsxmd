@@ -68,10 +68,10 @@ namespace Vsxmd.Units
             this.Kind == MemberKind.Type ||
             this.Kind == MemberKind.Constants ||
             this.Kind == MemberKind.Property
-            ? $"[{this.FriendlyName.Escape()}](#{this.Href} '{this.LongName}')"
+            ? $"[{this.FriendlyName.Escape()}](#{this.Href} '{this.StrippedName}')"
             : this.Kind == MemberKind.Constructor ||
               this.Kind == MemberKind.Method
-            ? $"[{this.FriendlyName.Escape()}({this.paramNames.Join(",")})](#{this.Href} '{this.LongName}')"
+            ? $"[{this.FriendlyName.Escape()}({this.paramNames.Join(",")})](#{this.Href} '{this.StrippedName}')"
             : string.Empty;
 
         /// <summary>
@@ -131,8 +131,11 @@ namespace Vsxmd.Units
             .Replace('(', '-')
             .Replace(')', '-');
 
+        private string StrippedName =>
+            this.name.Substring(2);
+
         private string LongName =>
-            this.name.Substring(2).Split('(').First();
+            this.StrippedName.Split('(').First();
 
         private string MsdnName =>
             this.LongName.Split('{').First();
@@ -211,8 +214,8 @@ namespace Vsxmd.Units
         /// <returns>The generated Markdown reference link.</returns>
         internal string ToReferenceLink(bool useShortName) =>
             $"{this.Namespace}.".StartsWith("System.")
-            ? $"[{this.GetReferenceName(useShortName).Escape()}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:{this.MsdnName} '{this.LongName}')"
-            : $"[{this.GetReferenceName(useShortName).Escape()}](#{this.Href} '{this.LongName}')";
+            ? $"[{this.GetReferenceName(useShortName).Escape()}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:{this.MsdnName} '{this.StrippedName}')"
+            : $"[{this.GetReferenceName(useShortName).Escape()}](#{this.Href} '{this.StrippedName}')";
 
         private string GetReferenceName(bool useShortName) =>
             !useShortName
