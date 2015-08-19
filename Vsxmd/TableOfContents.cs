@@ -13,7 +13,7 @@ namespace Vsxmd
     /// <summary>
     /// Table of contents.
     /// </summary>
-    internal class TableOfContents
+    internal class TableOfContents : IUnit
     {
         private readonly IOrderedEnumerable<MemberUnit> memberUnits;
 
@@ -39,7 +39,7 @@ namespace Vsxmd
         /// Convert the table of contents to Markdown syntax.
         /// </summary>
         /// <returns>The table of contents in Markdown syntax.</returns>
-        internal IEnumerable<string> ToMarkdown() =>
+        public IEnumerable<string> ToMarkdown() =>
             new[]
             {
                 $"{Href.ToAnchor()}# Contents {Href.ToHereLink()}",

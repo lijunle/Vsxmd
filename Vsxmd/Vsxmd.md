@@ -13,7 +13,7 @@
   - [GetChildren](#M-Vsxmd.Units.BaseUnit.GetChildren-System.Xml.Linq.XName-)
   - [ToMarkdown](#M-Vsxmd.Units.BaseUnit.ToMarkdown)
 - [Converter](#T-Vsxmd.Converter)
-  - [#ctor](#M-Vsxmd.Converter.#ctor-System.String-)
+  - [#ctor](#M-Vsxmd.Converter.#ctor-System.Xml.Linq.XDocument-)
   - [ToMarkdown](#M-Vsxmd.Converter.ToMarkdown)
 - [ExampleUnit](#T-Vsxmd.Units.ExampleUnit)
   - [#ctor](#M-Vsxmd.Units.ExampleUnit.#ctor-System.Xml.Linq.XElement-)
@@ -28,12 +28,15 @@
   - [Escape](#M-Vsxmd.Units.Extensions.Escape-System.String-)
   - [Join](#M-Vsxmd.Units.Extensions.Join-System.Collections.Generic.IEnumerable{System.String},System.String-)
   - [NthLast\`\`1](#M-Vsxmd.Units.Extensions.NthLast``1-System.Collections.Generic.IEnumerable{``0},System.Int32-)
+  - [Suffix](#M-Vsxmd.Units.Extensions.Suffix-System.String,System.String-)
   - [TakeAllButLast\`\`1](#M-Vsxmd.Units.Extensions.TakeAllButLast``1-System.Collections.Generic.IEnumerable{``0},System.Int32-)
   - [ToAnchor](#M-Vsxmd.Units.Extensions.ToAnchor-System.String-)
   - [ToHereLink](#M-Vsxmd.Units.Extensions.ToHereLink-System.String-)
   - [ToLowerString](#M-Vsxmd.Units.Extensions.ToLowerString-Vsxmd.Units.MemberKind-)
   - [ToMarkdownText](#M-Vsxmd.Units.Extensions.ToMarkdownText-System.Xml.Linq.XElement-)
   - [ToReferenceLink](#M-Vsxmd.Units.Extensions.ToReferenceLink-System.String,System.Boolean-)
+- [IConverter](#T-Vsxmd.IConverter)
+  - [ToMarkdown](#M-Vsxmd.IConverter.ToMarkdown)
 - [IUnit](#T-Vsxmd.Units.IUnit)
   - [ToMarkdown](#M-Vsxmd.Units.IUnit.ToMarkdown)
 - [MemberKind](#T-Vsxmd.Units.MemberKind)
@@ -267,10 +270,10 @@ Vsxmd
 
 ##### Summary
 
-Convert from XML docuement to Markdown syntax.
+*Inherit from parent.*
 
-<a name='M-Vsxmd.Converter.#ctor-System.String-'></a>
-### #ctor `constructor` [#](#M-Vsxmd.Converter.#ctor-System.String-) [^](#contents)
+<a name='M-Vsxmd.Converter.#ctor-System.Xml.Linq.XDocument-'></a>
+### #ctor `constructor` [#](#M-Vsxmd.Converter.#ctor-System.Xml.Linq.XDocument-) [^](#contents)
 
 ##### Summary
 
@@ -280,18 +283,14 @@ Initializes a new instance of the [Converter](#T-Vsxmd.Converter) class.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| xmlPath | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String) | The XML document path. |
+| document | [System.Xml.Linq.XDocument](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XDocument) | The XML document. |
 
 <a name='M-Vsxmd.Converter.ToMarkdown'></a>
 ### ToMarkdown `method` [#](#M-Vsxmd.Converter.ToMarkdown) [^](#contents)
 
 ##### Summary
 
-Convert to Markdown syntax.
-
-##### Returns
-
-The generated Markdown content.
+*Inherit from parent.*
 
 ##### Parameters
 
@@ -506,6 +505,24 @@ The element at the specified position in the `source` sequence.
 | ---- | ----------- |
 | TSource | The type of the elements of `source`. |
 
+<a name='M-Vsxmd.Units.Extensions.Suffix-System.String,System.String-'></a>
+### Suffix `method` [#](#M-Vsxmd.Units.Extensions.Suffix-System.String,System.String-) [^](#contents)
+
+##### Summary
+
+Suffix the `suffix` to the `value`, and generate a new string.
+
+##### Returns
+
+The new string.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| value | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String) | The original string value. |
+| suffix | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String) | The suffix string. |
+
 <a name='M-Vsxmd.Units.Extensions.TakeAllButLast``1-System.Collections.Generic.IEnumerable{``0},System.Int32-'></a>
 ### TakeAllButLast\`\`1 `method` [#](#M-Vsxmd.Units.Extensions.TakeAllButLast``1-System.Collections.Generic.IEnumerable{``0},System.Int32-) [^](#contents)
 
@@ -635,6 +652,32 @@ The generated reference link.
 For `T:Vsxmd.Units.MemberUnit`, convert it to `[MemberUnit](#T-Vsxmd.Units.MemberUnit)`.
 
 For `T:System.ArgumentException`, convert it to `[ArgumentException](http://msdn/path/to/System.ArgumentException)`.
+
+<a name='T-Vsxmd.IConverter'></a>
+## IConverter [#](#T-Vsxmd.IConverter) [^](#contents)
+
+##### Namespace
+
+Vsxmd
+
+##### Summary
+
+Converter for XML docuement to Markdown syntax conversion.
+
+<a name='M-Vsxmd.IConverter.ToMarkdown'></a>
+### ToMarkdown `method` [#](#M-Vsxmd.IConverter.ToMarkdown) [^](#contents)
+
+##### Summary
+
+Convert to Markdown syntax.
+
+##### Returns
+
+The generated Markdown content.
+
+##### Parameters
+
+This method has no parameters.
 
 <a name='T-Vsxmd.Units.IUnit'></a>
 ## IUnit [#](#T-Vsxmd.Units.IUnit) [^](#contents)

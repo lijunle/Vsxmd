@@ -12,6 +12,7 @@ namespace Vsxmd
     using System.Linq.Expressions;
     using System.Security;
     using System.Text.RegularExpressions;
+    using System.Xml.Linq;
 
     /// <summary>
     /// Program entry.
@@ -47,7 +48,8 @@ namespace Vsxmd
                 markdownPath = Regex.Replace(xmlPath, @"\.xml$", ".md", RegexOptions.IgnoreCase);
             }
 
-            var converter = new Converter(xmlPath);
+            var document = XDocument.Load(xmlPath);
+            var converter = new Converter(document);
             var markdown = converter.ToMarkdown();
 
             File.WriteAllText(markdownPath, markdown);
