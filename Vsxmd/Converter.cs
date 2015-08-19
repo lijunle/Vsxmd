@@ -12,7 +12,7 @@ namespace Vsxmd
     using Units;
 
     /// <inheritdoc/>
-    internal class Converter : IConverter
+    public class Converter : IConverter
     {
         private readonly XDocument document;
 
@@ -20,10 +20,18 @@ namespace Vsxmd
         /// Initializes a new instance of the <see cref="Converter"/> class.
         /// </summary>
         /// <param name="document">The XML document.</param>
-        internal Converter(XDocument document)
+        public Converter(XDocument document)
         {
             this.document = document;
         }
+
+        /// <summary>
+        /// Convert VS XML document to Markdown syntax.
+        /// </summary>
+        /// <param name="document">The XML document.</param>
+        /// <returns>The generated Markdown content.</returns>
+        public static string ToMarkdown(XDocument document) =>
+            new Converter(document).ToMarkdown();
 
         /// <inheritdoc/>
         public string ToMarkdown() =>

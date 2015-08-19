@@ -13,6 +13,13 @@
             </summary>
             <param name="document">The XML document.</param>
         </member>
+        <member name="M:Vsxmd.Converter.ToMarkdown(System.Xml.Linq.XDocument)">
+            <summary>
+            Convert VS XML document to Markdown syntax.
+            </summary>
+            <param name="document">The XML document.</param>
+            <returns>The generated Markdown content.</returns>
+        </member>
         <member name="M:Vsxmd.Converter.ToMarkdown">
             <inheritdoc/>
         </member>
@@ -37,7 +44,6 @@
             <para>The <c>input-XML-path</c> argument is required. It references to the VS generated XML documentation file.</para>
             <para>The <c>output-Markdown-path</c> argument is optional. It indicates the file path for the Markdown output file. When not specific, it will be a <c>.md</c> file with same file name as the XML documentation file, path at the XML documentation folder.</para>
             </remarks>
-            <permission cref="T:System.Security.PermissionSet">Vsxmd provides no program APIs.</permission>
         </member>
         <member name="M:Vsxmd.Program.Main(System.String[])">
             <summary>
@@ -52,6 +58,7 @@
             <para>Test constructor without parameters.</para>
             <para>See <see cref="M:Vsxmd.Program.Test.#ctor"/></para>
             </summary>
+            <permission cref="T:System.Security.PermissionSet">Just for test.</permission>
         </member>
         <member name="M:Vsxmd.Program.Test.TestGenericRefence">
             <summary>
