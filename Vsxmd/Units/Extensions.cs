@@ -64,7 +64,7 @@ namespace Vsxmd.Units
         /// <param name="href">The href.</param>
         /// <returns>The "to here" link for the <paramref name="href"/>.</returns>
         internal static string ToHereLink(this string href) =>
-            $"[#](#{href})";
+            $"[#](#{href} 'Go To Here')";
 
         /// <summary>
         /// Generate the reference link for the <paramref name="memberName"/>.

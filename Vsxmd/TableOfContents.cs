@@ -31,7 +31,7 @@ namespace Vsxmd
         /// Gets the link pointing to the table of contents.
         /// </summary>
         /// <value>The link pointing to the table of contents.</value>
-        internal static string Link => $"[^](#{Href})";
+        internal static string Link => $"[^](#{Href} 'Back To Contents')";
 
         private static string Href => "contents";
 

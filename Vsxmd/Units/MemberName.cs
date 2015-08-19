@@ -52,7 +52,7 @@ namespace Vsxmd.Units
         /// </summary>
         /// <value>The link pointing to this member unit.</value>
         internal string Link =>
-            $"[{this.FriendlyName.Escape()}](#{this.Href})";
+            $"[{this.FriendlyName.Escape()}](#{this.Href} '{this.LongName}')";
 
         /// <summary>
         /// Gets the caption representation for this member name.
@@ -111,7 +111,7 @@ namespace Vsxmd.Units
             .Replace(')', '-');
 
         private string LongName =>
-            this.name.Split('(').First().Split(':').Last();
+            this.name.Substring(2).Split('(').First();
 
         private string MsdnName =>
             this.LongName.Split('{').First();
@@ -190,8 +190,8 @@ namespace Vsxmd.Units
         /// <returns>The generated Markdown reference link.</returns>
         internal string ToReferenceLink(bool useShortName) =>
             $"{this.Namespace}.".StartsWith("System.")
-            ? $"[{this.GetReferenceName(useShortName).Escape()}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:{this.MsdnName})"
-            : $"[{this.GetReferenceName(useShortName).Escape()}](#{this.Href})";
+            ? $"[{this.GetReferenceName(useShortName).Escape()}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:{this.MsdnName} '{this.LongName}')"
+            : $"[{this.GetReferenceName(useShortName).Escape()}](#{this.Href} '{this.LongName}')";
 
         private string GetReferenceName(bool useShortName) =>
             !useShortName
