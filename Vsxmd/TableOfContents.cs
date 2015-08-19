@@ -15,6 +15,8 @@ namespace Vsxmd
     /// </summary>
     internal class TableOfContents : IUnit
     {
+        private const string Href = "contents";
+
         private readonly IOrderedEnumerable<MemberUnit> memberUnits;
 
         /// <summary>
@@ -32,8 +34,6 @@ namespace Vsxmd
         /// </summary>
         /// <value>The link pointing to the table of contents.</value>
         internal static string Link => $"[^](#{Href} 'Back To Contents')";
-
-        private static string Href => "contents";
 
         /// <summary>
         /// Convert the table of contents to Markdown syntax.
