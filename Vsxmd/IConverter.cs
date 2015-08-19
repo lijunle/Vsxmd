@@ -9,7 +9,7 @@ namespace Vsxmd
     /// <summary>
     /// Converter for XML docuement to Markdown syntax conversion.
     /// </summary>
-    internal interface IConverter
+    public interface IConverter
     {
         /// <summary>
         /// Convert to Markdown syntax.
