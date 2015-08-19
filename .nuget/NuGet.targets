@@ -14,6 +14,13 @@
 
         <!-- Download NuGet.exe if it does not already exist -->
         <DownloadNuGetExe Condition=" '$(DownloadNuGetExe)' == '' ">false</DownloadNuGetExe>
+
+        <!-- Use the nuspec file with the same project name if not specific -->
+        <NuspecPath Condition=" '$(NuspecPath)' == '' ">$(ProjectPath.Replace(".csproj", ".nuspec"))</NuspecPath>
+
+        <!-- Use AppVeyor build version as build version if available. Otherwise, set as 0.0.0.0 -->
+        <BuildVersion Condition=" '$(APPVEYOR_BUILD_VERSION)' != '' ">$(APPVEYOR_BUILD_VERSION)</BuildVersion>
+        <BuildVersion Condition=" '$(BuildVersion)' == '' ">0.0.0.0</BuildVersion>
     </PropertyGroup>
 
     <ItemGroup Condition=" '$(PackageSources)' == '' ">
@@ -63,7 +70,7 @@
 
         <!-- Commands -->
         <RestoreCommand>$(NuGetCommand) install "$(PackagesConfig)" -source "$(PackageSources)"  $(NonInteractiveSwitch) $(RequireConsentSwitch) -solutionDir $(PaddedSolutionDir)</RestoreCommand>
-        <BuildCommand>$(NuGetCommand) pack "$(ProjectPath)" -Properties "Configuration=$(Configuration);Platform=$(Platform)" $(NonInteractiveSwitch) -OutputDirectory "$(PackageOutputDir)" -symbols</BuildCommand>
+        <BuildCommand>$(NuGetCommand) pack "$(NuspecPath)" -Properties "Version=$(BuildVersion);Configuration=$(Configuration)" $(NonInteractiveSwitch) -OutputDirectory "$(PackageOutputDir)" -symbols</BuildCommand>
 
         <!-- We need to ensure packages are restored prior to assembly resolve -->
         <BuildDependsOn Condition="$(RestorePackages) == 'true'">
