@@ -25,6 +25,14 @@ namespace Vsxmd
             this.document = document;
         }
 
+        /// <summary>
+        /// Convert VS XML document to Markdown syntax.
+        /// </summary>
+        /// <param name="document">The XML document.</param>
+        /// <returns>The generated Markdown content.</returns>
+        public static string ToMarkdown(XDocument document) =>
+            new Converter(document).ToMarkdown();
+
         /// <inheritdoc/>
         public string ToMarkdown() =>
             ToUnits(this.document.Root)

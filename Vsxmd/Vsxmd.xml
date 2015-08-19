@@ -13,6 +13,13 @@
             </summary>
             <param name="document">The XML document.</param>
         </member>
+        <member name="M:Vsxmd.Converter.ToMarkdown(System.Xml.Linq.XDocument)">
+            <summary>
+            Convert VS XML document to Markdown syntax.
+            </summary>
+            <param name="document">The XML document.</param>
+            <returns>The generated Markdown content.</returns>
+        </member>
         <member name="M:Vsxmd.Converter.ToMarkdown">
             <inheritdoc/>
         </member>

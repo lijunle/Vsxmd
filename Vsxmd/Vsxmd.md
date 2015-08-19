@@ -14,6 +14,7 @@
   - [ToMarkdown()](#M-Vsxmd.Units.BaseUnit.ToMarkdown 'Vsxmd.Units.BaseUnit.ToMarkdown')
 - [Converter](#T-Vsxmd.Converter 'Vsxmd.Converter')
   - [#ctor(document)](#M-Vsxmd.Converter.#ctor-System.Xml.Linq.XDocument- 'Vsxmd.Converter.#ctor(System.Xml.Linq.XDocument)')
+  - [ToMarkdown(document)](#M-Vsxmd.Converter.ToMarkdown-System.Xml.Linq.XDocument- 'Vsxmd.Converter.ToMarkdown(System.Xml.Linq.XDocument)')
   - [ToMarkdown()](#M-Vsxmd.Converter.ToMarkdown 'Vsxmd.Converter.ToMarkdown')
 - [ExampleUnit](#T-Vsxmd.Units.ExampleUnit 'Vsxmd.Units.ExampleUnit')
   - [#ctor(element)](#M-Vsxmd.Units.ExampleUnit.#ctor-System.Xml.Linq.XElement- 'Vsxmd.Units.ExampleUnit.#ctor(System.Xml.Linq.XElement)')
@@ -279,6 +280,23 @@ Vsxmd
 ##### Summary
 
 Initializes a new instance of the [Converter](#T-Vsxmd.Converter 'Vsxmd.Converter') class.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| document | [System.Xml.Linq.XDocument](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XDocument 'System.Xml.Linq.XDocument') | The XML document. |
+
+<a name='M-Vsxmd.Converter.ToMarkdown-System.Xml.Linq.XDocument-'></a>
+### ToMarkdown(document) `method` [#](#M-Vsxmd.Converter.ToMarkdown-System.Xml.Linq.XDocument- 'Go To Here') [^](#contents 'Back To Contents')
+
+##### Summary
+
+Convert VS XML document to Markdown syntax.
+
+##### Returns
+
+The generated Markdown content.
 
 ##### Parameters
 
