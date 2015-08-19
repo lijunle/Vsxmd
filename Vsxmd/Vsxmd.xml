@@ -5,9 +5,7 @@
     </assembly>
     <members>
         <member name="T:Vsxmd.Converter">
-            <summary>
-            Convert from XML docuement to Markdown syntax.
-            </summary>
+            <inheritdoc/>
         </member>
         <member name="M:Vsxmd.Converter.#ctor(System.String)">
             <summary>
@@ -16,6 +14,14 @@
             <param name="xmlPath">The XML document path.</param>
         </member>
         <member name="M:Vsxmd.Converter.ToMarkdown">
+            <inheritdoc/>
+        </member>
+        <member name="T:Vsxmd.IConverter">
+            <summary>
+            Converter for XML docuement to Markdown syntax conversion.
+            </summary>
+        </member>
+        <member name="M:Vsxmd.IConverter.ToMarkdown">
             <summary>
             Convert to Markdown syntax.
             </summary>

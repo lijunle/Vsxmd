@@ -34,6 +34,8 @@
   - [ToLowerString](#M-Vsxmd.Units.Extensions.ToLowerString-Vsxmd.Units.MemberKind-)
   - [ToMarkdownText](#M-Vsxmd.Units.Extensions.ToMarkdownText-System.Xml.Linq.XElement-)
   - [ToReferenceLink](#M-Vsxmd.Units.Extensions.ToReferenceLink-System.String,System.Boolean-)
+- [IConverter](#T-Vsxmd.IConverter)
+  - [ToMarkdown](#M-Vsxmd.IConverter.ToMarkdown)
 - [IUnit](#T-Vsxmd.Units.IUnit)
   - [ToMarkdown](#M-Vsxmd.Units.IUnit.ToMarkdown)
 - [MemberKind](#T-Vsxmd.Units.MemberKind)
@@ -267,7 +269,7 @@ Vsxmd
 
 ##### Summary
 
-Convert from XML docuement to Markdown syntax.
+*Inherit from parent.*
 
 <a name='M-Vsxmd.Converter.#ctor-System.String-'></a>
 ### #ctor `constructor` [#](#M-Vsxmd.Converter.#ctor-System.String-) [^](#contents)
@@ -287,11 +289,7 @@ Initializes a new instance of the [Converter](#T-Vsxmd.Converter) class.
 
 ##### Summary
 
-Convert to Markdown syntax.
-
-##### Returns
-
-The generated Markdown content.
+*Inherit from parent.*
 
 ##### Parameters
 
@@ -635,6 +633,32 @@ The generated reference link.
 For `T:Vsxmd.Units.MemberUnit`, convert it to `[MemberUnit](#T-Vsxmd.Units.MemberUnit)`.
 
 For `T:System.ArgumentException`, convert it to `[ArgumentException](http://msdn/path/to/System.ArgumentException)`.
+
+<a name='T-Vsxmd.IConverter'></a>
+## IConverter [#](#T-Vsxmd.IConverter) [^](#contents)
+
+##### Namespace
+
+Vsxmd
+
+##### Summary
+
+Converter for XML docuement to Markdown syntax conversion.
+
+<a name='M-Vsxmd.IConverter.ToMarkdown'></a>
+### ToMarkdown `method` [#](#M-Vsxmd.IConverter.ToMarkdown) [^](#contents)
+
+##### Summary
+
+Convert to Markdown syntax.
+
+##### Returns
+
+The generated Markdown content.
+
+##### Parameters
+
+This method has no parameters.
 
 <a name='T-Vsxmd.Units.IUnit'></a>
 ## IUnit [#](#T-Vsxmd.Units.IUnit) [^](#contents)

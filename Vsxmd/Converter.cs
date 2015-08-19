@@ -11,10 +11,8 @@ namespace Vsxmd
     using System.Xml.Linq;
     using Units;
 
-    /// <summary>
-    /// Convert from XML docuement to Markdown syntax.
-    /// </summary>
-    internal class Converter
+    /// <inheritdoc/>
+    internal class Converter : IConverter
     {
         private readonly string xmlPath;
 
@@ -27,11 +25,8 @@ namespace Vsxmd
             this.xmlPath = xmlPath;
         }
 
-        /// <summary>
-        /// Convert to Markdown syntax.
-        /// </summary>
-        /// <returns>The generated Markdown content.</returns>
-        internal string ToMarkdown() =>
+        /// <inheritdoc/>
+        public string ToMarkdown() =>
             $"{string.Join("\n\n", ToMarkdown(XDocument.Load(this.xmlPath)))}\n";
 
         private static IEnumerable<string> ToMarkdown(XDocument document)
