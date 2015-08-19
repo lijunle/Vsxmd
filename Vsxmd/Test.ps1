@@ -29,6 +29,7 @@ function Test {
         else
         {
             Add-AppveyorTest $file -Outcome Failed
+            exit -1
         }
     }
 }
