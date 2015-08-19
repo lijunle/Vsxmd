@@ -42,7 +42,7 @@ namespace Vsxmd
             string xmlPath = args[0];
             string markdownPath = args.ElementAtOrDefault(1);
 
-            if (markdownPath == null)
+            if (string.IsNullOrWhiteSpace(markdownPath))
             {
                 // replace the `xml` extension with `md` extension
                 markdownPath = Regex.Replace(xmlPath, @"\.xml$", ".md", RegexOptions.IgnoreCase);
