@@ -20,14 +20,27 @@ namespace Vsxmd.Units
 
         private readonly char type;
 
+        private readonly IEnumerable<string> paramNames;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MemberName"/> class.
+        /// </summary>
+        /// <param name="name">The raw member name. For example, <c>T:Vsxmd.Units.MemberName</c>.</param>
+        /// <param name="paramNames">The parameter names. It is only used when member kind is <see cref="MemberKind.Constructor"/> or <see cref="MemberKind.Method"/>.</param>
+        internal MemberName(string name, IEnumerable<string> paramNames)
+        {
+            this.name = name;
+            this.type = name.First();
+            this.paramNames = paramNames;
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="MemberName"/> class.
         /// </summary>
         /// <param name="name">The raw member name. For example, <c>T:Vsxmd.Units.MemberName</c>.</param>
         internal MemberName(string name)
+            : this(name, null)
         {
-            this.name = name;
-            this.type = name.First();
         }
 
         /// <summary>
@@ -52,7 +65,14 @@ namespace Vsxmd.Units
         /// </summary>
         /// <value>The link pointing to this member unit.</value>
         internal string Link =>
-            $"[{this.FriendlyName.Escape()}](#{this.Href} '{this.LongName}')";
+            this.Kind == MemberKind.Type ||
+            this.Kind == MemberKind.Constants ||
+            this.Kind == MemberKind.Property
+            ? $"[{this.FriendlyName.Escape()}](#{this.Href} '{this.LongName}')"
+            : this.Kind == MemberKind.Constructor ||
+              this.Kind == MemberKind.Method
+            ? $"[{this.FriendlyName.Escape()}({this.paramNames.Join(",")})](#{this.Href} '{this.LongName}')"
+            : string.Empty;
 
         /// <summary>
         /// Gets the caption representation for this member name.
@@ -66,10 +86,11 @@ namespace Vsxmd.Units
             this.Kind == MemberKind.Type
             ? $"{this.Href.ToAnchor()}## {this.FriendlyName.Escape()} {this.Href.ToHereLink()} {TableOfContents.Link}"
             : this.Kind == MemberKind.Constants ||
-              this.Kind == MemberKind.Property ||
-              this.Kind == MemberKind.Constructor ||
-              this.Kind == MemberKind.Method
+              this.Kind == MemberKind.Property
             ? $"{this.Href.ToAnchor()}### {this.FriendlyName.Escape()} `{this.Kind.ToLowerString()}` {this.Href.ToHereLink()} {TableOfContents.Link}"
+            : this.Kind == MemberKind.Constructor ||
+              this.Kind == MemberKind.Method
+            ? $"{this.Href.ToAnchor()}### {this.FriendlyName.Escape()}({this.paramNames.Join(",")}) `{this.Kind.ToLowerString()}` {this.Href.ToHereLink()} {TableOfContents.Link}"
             : string.Empty;
 
         /// <summary>
