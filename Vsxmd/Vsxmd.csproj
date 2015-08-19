@@ -18,6 +18,7 @@
     <RestorePackages>true</RestorePackages>
     <DownloadNuGetExe>true</DownloadNuGetExe>
     <BuildPackage>true</BuildPackage>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <DocumentationFile>Vsxmd.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
