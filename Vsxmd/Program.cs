@@ -66,6 +66,15 @@ namespace Vsxmd
             {
             }
 
+#pragma warning disable SA1614 // Element parameter documentation must have text
+            /// <summary>
+            /// Test a param tag without description.
+            /// </summary>
+            /// <param name="p"></param>
+            /// <returns>Nothing.</returns>
+            internal string TestParamWithoutDescription(string p) => null;
+#pragma warning restore SA1614 // Element parameter documentation must have text
+
             /// <summary>
             /// Test generic reference type.
             /// <para>See <see cref="TestGenericParameter{T1, T2}(Expression{Func{T1, T2, string}})"/>.</para>

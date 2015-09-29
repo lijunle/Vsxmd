@@ -60,6 +60,13 @@
             </summary>
             <permission cref="T:System.Security.PermissionSet">Just for test.</permission>
         </member>
+        <member name="M:Vsxmd.Program.Test.TestParamWithoutDescription(System.String)">
+            <summary>
+            Test a param tag without description.
+            </summary>
+            <param name="p"></param>
+            <returns>Nothing.</returns>
+        </member>
         <member name="M:Vsxmd.Program.Test.TestGenericRefence">
             <summary>
             Test generic reference type.
