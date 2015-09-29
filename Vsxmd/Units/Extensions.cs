@@ -141,12 +141,7 @@ namespace Vsxmd.Units
         internal static string ToMarkdownText(this XElement element) =>
             element.Nodes()
                 .Select(ToMarkdownSpan)
-                .Aggregate((x, y) =>
-                    x.EndsWith("\n\n")
-                        ? $"{x}{y.TrimStart()}"
-                        : y.StartsWith("\n\n")
-                        ? $"{x.TrimEnd()}{y}"
-                        : $"{x}{y}")
+                .Aggregate(string.Empty, JoinMarkdownSpan)
                 .Trim();
 
         private static string ToMarkdownSpan(XNode node)
@@ -181,5 +176,12 @@ namespace Vsxmd.Units
 
             return string.Empty;
         }
+
+        private static string JoinMarkdownSpan(string x, string y) =>
+            x.EndsWith("\n\n")
+                ? $"{x}{y.TrimStart()}"
+                : y.StartsWith("\n\n")
+                ? $"{x.TrimEnd()}{y}"
+                : $"{x}{y}";
     }
 }
