@@ -127,6 +127,7 @@ namespace Vsxmd.Units
             : string.Empty;
 
         private string Href => this.name
+            .Replace('.', '-')
             .Replace(':', '-')
             .Replace('(', '-')
             .Replace(')', '-');
