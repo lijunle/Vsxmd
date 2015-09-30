@@ -33,7 +33,7 @@ namespace Vsxmd
         /// Gets the link pointing to the table of contents.
         /// </summary>
         /// <value>The link pointing to the table of contents.</value>
-        internal static string Link => $"[^](#{Href} 'Back To Contents')";
+        internal static string Link => $"[=](#{Href} 'Back To Contents')";
 
         /// <summary>
         /// Convert the table of contents to Markdown syntax.
