@@ -31,9 +31,9 @@ If not specified, it will be the same XML documentation file name with `.md` ext
 
 This library provides the following public API to convert VS XML documentation to Markdown syntax programmatically.
 
-- [Converter](https://github.com/lijunle/Vsxmd/blob/master/Vsxmd/Vsxmd.md#T-Vsxmd.Converter) : [IConverter](https://github.com/lijunle/Vsxmd/blob/master/Vsxmd/Vsxmd.md#T-Vsxmd.IConverter)
-  - [string ToMarkdown()](https://github.com/lijunle/Vsxmd/blob/master/Vsxmd/Vsxmd.md#M-Vsxmd.Converter.ToMarkdown)
-  - [static string ToMarkdown(document)](https://github.com/lijunle/Vsxmd/blob/master/Vsxmd/Vsxmd.md#M-Vsxmd.Converter.ToMarkdown-System.Xml.Linq.XDocument-)
+- [Converter](https://github.com/lijunle/Vsxmd/blob/master/Vsxmd/Vsxmd.md#T-Vsxmd-Converter) : [IConverter](https://github.com/lijunle/Vsxmd/blob/master/Vsxmd/Vsxmd.md#T-Vsxmd-IConverter)
+  - [string ToMarkdown()](https://github.com/lijunle/Vsxmd/blob/master/Vsxmd/Vsxmd.md#M-Vsxmd-IConverter-ToMarkdown)
+  - [static string ToMarkdown(document)](https://github.com/lijunle/Vsxmd/blob/master/Vsxmd/Vsxmd.md#M-Vsxmd-Converter-ToMarkdown-System-Xml-Linq-XDocument-)
 
 # Example
 
