@@ -21,7 +21,7 @@ This project is initially inspired from a [gist](https://gist.github.com/formix/
 - Install [Vsxmd](https://www.nuget.org/packages/Vsxmd/) package from NuGet.
 - Build the project, then a `.md` file is generated next to the XML document.
 
-# Makrdown Path
+# Markdown Path
 
 The project property, `DocumentationMarkdown`, is used to specify the generated Markdown file path.
 
