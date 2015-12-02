@@ -12,7 +12,7 @@ This project is initially inspired from a [gist](https://gist.github.com/formix/
 - Provide easy reading facilities - parameter table, link tooltip, etc.
 - Provide table of contents and navigation links.
 - Provide type and member anchors.
-- Reference `System` types to MSDN packages.
+- Reference `System` types to MSDN pages.
 
 # Usage
 
