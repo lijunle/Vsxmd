@@ -11,7 +11,6 @@ namespace Vsxmd
     using System.Linq;
     using System.Linq.Expressions;
     using System.Security;
-    using System.Text.RegularExpressions;
     using System.Xml.Linq;
 
     /// <summary>
@@ -43,8 +42,8 @@ namespace Vsxmd
 
             if (string.IsNullOrWhiteSpace(markdownPath))
             {
-                // replace the `xml` extension with `md` extension
-                markdownPath = Regex.Replace(xmlPath, @"\.xml$", ".md", RegexOptions.IgnoreCase);
+                // replace extension with `md` extension
+                markdownPath = Path.ChangeExtension(xmlPath, ".md");
             }
 
             var document = XDocument.Load(xmlPath);
