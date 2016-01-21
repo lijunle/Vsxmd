@@ -7,6 +7,6 @@
     <Message Text="Vsxmd starts to convert XML to Markdown." />
     <Error Condition=" '$(DocumentationFile)' == '' " Text="Project has not configure to output XML documentation file." />
     <Exec Command="$(VsxmdCommand)" />
-    <Message Text="Vsxmd finishs conversion." />
+    <Message Text="Vsxmd finishes conversion." />
   </Target>
 </Project>
