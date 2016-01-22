@@ -107,6 +107,12 @@
             </summary>
             <returns>Nothing.</returns>
         </member>
+        <member name="M:Vsxmd.Program.Test.TestSeeLangword">
+            <summary>
+            Test see tag with langword attribute. See <see langword="true"/>.
+            </summary>
+            <returns>Nothing.</returns>
+        </member>
         <member name="T:Vsxmd.Program.TestGenericType`2">
             <summary>
             Test generic type.

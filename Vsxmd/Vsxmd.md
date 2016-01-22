@@ -106,6 +106,7 @@
   - [TestGenericPermission()](#M-Vsxmd-Program-Test-TestGenericPermission 'Vsxmd.Program.Test.TestGenericPermission')
   - [TestGenericRefence()](#M-Vsxmd-Program-Test-TestGenericRefence 'Vsxmd.Program.Test.TestGenericRefence')
   - [TestParamWithoutDescription(p)](#M-Vsxmd-Program-Test-TestParamWithoutDescription-System-String- 'Vsxmd.Program.Test.TestParamWithoutDescription(System.String)')
+  - [TestSeeLangword()](#M-Vsxmd-Program-Test-TestSeeLangword 'Vsxmd.Program.Test.TestSeeLangword')
 - [TestGenericType\`2](#T-Vsxmd-Program-TestGenericType`2 'Vsxmd.Program.TestGenericType`2')
   - [TestGenericMethod\`\`2()](#M-Vsxmd-Program-TestGenericType`2-TestGenericMethod``2 'Vsxmd.Program.TestGenericType`2.TestGenericMethod``2')
 - [TypeparamUnit](#T-Vsxmd-Units-TypeparamUnit 'Vsxmd.Units.TypeparamUnit')
@@ -1623,6 +1624,21 @@ Nothing.
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | p | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') |  |
+
+<a name='M-Vsxmd-Program-Test-TestSeeLangword'></a>
+### TestSeeLangword() `method` [#](#M-Vsxmd-Program-Test-TestSeeLangword 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Test see tag with langword attribute. See `true`.
+
+##### Returns
+
+Nothing.
+
+##### Parameters
+
+This method has no parameters.
 
 <a name='T-Vsxmd-Program-TestGenericType`2'></a>
 ## TestGenericType\`2 [#](#T-Vsxmd-Program-TestGenericType`2 'Go To Here') [=](#contents 'Back To Contents')
