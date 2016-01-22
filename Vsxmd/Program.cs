@@ -115,6 +115,12 @@ namespace Vsxmd
             /// </summary>
             /// <returns>Nothing.</returns>
             internal string TestBacktickInSummary() => null;
+
+            /// <summary>
+            /// Test see tag with langword attribute. See <see langword="true"/>.
+            /// </summary>
+            /// <returns>Nothing.</returns>
+            internal string TestSeeLangword() => null;
         }
 
         /// <summary>
