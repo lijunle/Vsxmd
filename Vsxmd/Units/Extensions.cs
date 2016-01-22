@@ -158,7 +158,7 @@ namespace Vsxmd.Units
                 switch (child.Name.ToString())
                 {
                     case "see":
-                        return $"{child.Attribute("cref").Value.ToReferenceLink(useShortName: true)}";
+                        return $"{child.ToSeeTagMarkdownSpan()}";
                     case "paramref":
                     case "typeparamref":
                         return $"{child.Attribute("name").Value.AsCode()}";
@@ -183,5 +183,9 @@ namespace Vsxmd.Units
                 : y.StartsWith("\n\n")
                 ? $"{x.TrimEnd()}{y}"
                 : $"{x}{y}";
+
+        private static string ToSeeTagMarkdownSpan(this XElement seeTag) =>
+            seeTag.Attribute("cref")?.Value?.ToReferenceLink(useShortName: true) ??
+            seeTag.Attribute("langword")?.Value?.AsCode();
     }
 }
