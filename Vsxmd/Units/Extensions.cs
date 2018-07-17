@@ -166,11 +166,8 @@ namespace Vsxmd.Units
                     case "value":
                         return $"{child.Value.AsCode()}";
                     case "code":
-                        return $"\n\n```\n{string.Concat(child.Nodes()).Trim()}\n```\n\n";
-                    case "xml":
-                        return $"\n\n```xml\n{string.Concat(child.Nodes()).Trim()}\n```\n\n";
-                    case "csharp":
-                        return $"\n\n```csharp\n{string.Concat(child.Nodes()).Trim()}\n```\n\n";
+                        var lang = child.Attribute("lang").Value != null ? child.Attribute("lang").Value : string.Empty;
+                        return $"\n\n```{lang}\n{string.Concat(child.Nodes()).Trim()}\n```\n\n";
                     case "para":
                         return $"\n\n{child.ToMarkdownText()}\n\n";
                     default:
