@@ -31,26 +31,36 @@ namespace Vsxmd
         /// <seealso cref="Program"/>
         internal static void Main(string[] args)
         {
-            if (args.Length < 1)
+
+            try
             {
-                Console.Error.WriteLine($"Usage: {AppDomain.CurrentDomain.FriendlyName} <input-XML-path> [output-Markdown-path]");
-                Environment.Exit(1);
+                if (args == null || args.Length < 1)
+                {
+                    return;
+                    // Console.Error.WriteLine($"Usage: {AppDomain.CurrentDomain.FriendlyName} <input-XML-path> [output-Markdown-path]");
+                    // Environment.Exit(1);
+                }
+
+                string xmlPath = args[0];
+                string markdownPath = args.ElementAtOrDefault(1);
+
+                if (string.IsNullOrWhiteSpace(markdownPath))
+                {
+                    // replace extension with `md` extension
+                    markdownPath = Path.ChangeExtension(xmlPath, ".md");
+                }
+
+                var document = XDocument.Load(xmlPath);
+                var converter = new Converter(document);
+                var markdown = converter.ToMarkdown();
+
+                File.WriteAllText(markdownPath, markdown);
             }
-
-            string xmlPath = args[0];
-            string markdownPath = args.ElementAtOrDefault(1);
-
-            if (string.IsNullOrWhiteSpace(markdownPath))
+            catch (Exception)
             {
-                // replace extension with `md` extension
-                markdownPath = Path.ChangeExtension(xmlPath, ".md");
+                // Ignore errors. Do not impact on project build
+                return;
             }
-
-            var document = XDocument.Load(xmlPath);
-            var converter = new Converter(document);
-            var markdown = converter.ToMarkdown();
-
-            File.WriteAllText(markdownPath, markdown);
         }
 
         private class Test
