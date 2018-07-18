@@ -13,6 +13,7 @@ This project is initially inspired from a [gist](https://gist.github.com/formix/
 - Provide table of contents and navigation links.
 - Provide type and member anchors.
 - Reference `System` types to MSDN pages.
+- Dynamic code highlighting through \<code lang=""\> tag
 
 # Usage
 
