@@ -161,12 +161,13 @@ namespace Vsxmd.Units
                         return $"{child.ToSeeTagMarkdownSpan()}";
                     case "paramref":
                     case "typeparamref":
-                        return $"{child.Attribute("name").Value.AsCode()}";
+                        return $"{child.Attribute("name")?.Value.AsCode()}";
                     case "c":
                     case "value":
                         return $"{child.Value.AsCode()}";
                     case "code":
-                        return $"\n\n```\n{string.Concat(child.Nodes()).Trim()}\n```\n\n";
+                        var lang = child.Attribute("lang")?.Value ?? string.Empty;
+                        return $"\n\n```{lang}\n{string.Concat(child.Nodes()).Trim()}\n```\n\n";
                     case "para":
                         return $"\n\n{child.ToMarkdownText()}\n\n";
                     default:

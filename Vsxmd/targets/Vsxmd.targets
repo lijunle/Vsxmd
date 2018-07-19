@@ -5,7 +5,6 @@
   </PropertyGroup>
   <Target Name="Vsxmd" AfterTargets="Build">
     <Message Text="Vsxmd starts to convert XML to Markdown." />
-    <Error Condition=" '$(DocumentationFile)' == '' " Text="Project not configured to output XML documentation file." />
     <Exec Command="$(VsxmdCommand)" />
     <Message Text="Vsxmd finishes conversion." />
   </Target>
