@@ -55,7 +55,7 @@ deploy:
       appveyor_repo_tag: true
   - provider: NuGet
     server: https://www.myget.org/F/lijunle/api/v2/package
-    symbol_server: https://nuget.symbolsource.org/MyGet/lijunle
+    symbol_server: http://nuget.symbolsource.org/MyGet/lijunle
     api_key:
       secure: 8wzaNPk1mfp5TWFmpGIAs7XRcB9LF9NJKMkdm0oUN1q6SwQ/VVd6r9WPcDm0IXlu
     on:
