@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <VsxmdCommand>"$(MSBuildThisFileDirectory)\..\tools\Vsxmd.exe" "$(DocumentationFile)" "$(DocumentationMarkdown)"</VsxmdCommand>
+    <VsxmdCommand>"$(MSBuildThisFileDirectory)\..\tools\Vsxmd.exe" "$(DocumentationFile)" "$(DocumentationMarkdown)" "$(VsxmdAutoDeleteXml)"</VsxmdCommand>
   </PropertyGroup>
   <Target Name="Vsxmd" AfterTargets="Build">
     <Message Text="Vsxmd starts to convert XML to Markdown." />

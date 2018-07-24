@@ -31,14 +31,11 @@ namespace Vsxmd
         /// <seealso cref="Program"/>
         internal static void Main(string[] args)
         {
-
             try
             {
                 if (args == null || args.Length < 1)
                 {
                     return;
-                    // Console.Error.WriteLine($"Usage: {AppDomain.CurrentDomain.FriendlyName} <input-XML-path> [output-Markdown-path]");
-                    // Environment.Exit(1);
                 }
 
                 string xmlPath = args[0];
@@ -55,6 +52,18 @@ namespace Vsxmd
                 var markdown = converter.ToMarkdown();
 
                 File.WriteAllText(markdownPath, markdown);
+
+                string vsxmdAutoDeleteXml = args.ElementAtOrDefault(2);
+                if (string.IsNullOrWhiteSpace(vsxmdAutoDeleteXml))
+                {
+                    return;
+                }
+
+                var shouldDelete = Convert.ToBoolean(vsxmdAutoDeleteXml);
+                if (shouldDelete)
+                {
+                    File.Delete(xmlPath);
+                }
             }
             catch (Exception)
             {
