@@ -59,8 +59,12 @@ namespace Vsxmd
             // table of contents
             var tableOfContents = new TableOfContents(memberUnits);
 
-            return new IUnit[] { tableOfContents }
-                .Concat(new[] { assemblyUnit })
+            //return new IUnit[] { tableOfContents }
+            //    .Concat(new[] { assemblyUnit })
+            //    .Concat(memberUnits);
+
+            return new IUnit[] { assemblyUnit }
+                .Concat(new[] { tableOfContents })
                 .Concat(memberUnits);
         }
     }
