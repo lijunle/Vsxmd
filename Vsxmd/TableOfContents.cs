@@ -42,7 +42,8 @@ namespace Vsxmd
         public IEnumerable<string> ToMarkdown() =>
             new[]
             {
-                $"{Href.ToAnchor()}# Contents {Href.ToHereLink()}",
+
+                $"## Contents",
                 this.memberUnits.Select(ToMarkdown).Join("\n")
             };
 

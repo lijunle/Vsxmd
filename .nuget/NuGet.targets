@@ -20,7 +20,7 @@
 
         <!-- Use AppVeyor build version as build version if available. Otherwise, set as 0.0.0.0 -->
         <BuildVersion Condition=" '$(APPVEYOR_BUILD_VERSION)' != '' ">$(APPVEYOR_BUILD_VERSION)</BuildVersion>
-        <BuildVersion Condition=" '$(BuildVersion)' == '' ">0.0.0.9</BuildVersion>
+        <BuildVersion Condition=" '$(BuildVersion)' == '' ">0.0.0.0</BuildVersion>
     </PropertyGroup>
 
     <ItemGroup Condition=" '$(PackageSources)' == '' ">

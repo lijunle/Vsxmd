@@ -84,13 +84,13 @@ namespace Vsxmd.Units
         /// </example>
         internal string Caption =>
             this.Kind == MemberKind.Type
-            ? $"{this.Href.ToAnchor()}## {this.FriendlyName.Escape()} {this.Href.ToHereLink()} {TableOfContents.Link}"
+            ? $"{this.Href.ToAnchor()}## {this.FriendlyName.Escape()} `{this.Kind.ToLowerString()}`"
             : this.Kind == MemberKind.Constants ||
               this.Kind == MemberKind.Property
-            ? $"{this.Href.ToAnchor()}### {this.FriendlyName.Escape()} `{this.Kind.ToLowerString()}` {this.Href.ToHereLink()} {TableOfContents.Link}"
+            ? $"{this.Href.ToAnchor()}### {this.FriendlyName.Escape()} `{this.Kind.ToLowerString()}`"
             : this.Kind == MemberKind.Constructor ||
               this.Kind == MemberKind.Method
-            ? $"{this.Href.ToAnchor()}### {this.FriendlyName.Escape()}({this.paramNames.Join(",")}) `{this.Kind.ToLowerString()}` {this.Href.ToHereLink()} {TableOfContents.Link}"
+            ? $"{this.Href.ToAnchor()}### {this.FriendlyName.Escape()}({this.paramNames.Join(",")}) `{this.Kind.ToLowerString()}`"
             : string.Empty;
 
         /// <summary>
