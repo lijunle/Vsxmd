@@ -55,7 +55,7 @@ deploy:
       appveyor_repo_tag: true
   - provider: NuGet
     server: https://www.myget.org/feed/saleslessalopes/package/nuget/Vsxmd
-    symbol_server: http://nuget.smbsrc.net/
+    symbol_server: https://nuget.smbsrc.net/
     api_key:
       secure: oy2jy2zj2fxbbrrooobax37rw2ntgl3uziqobsfjpw57gq
     on:
