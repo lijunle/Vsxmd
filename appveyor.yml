@@ -57,6 +57,6 @@ deploy:
     server: https://www.myget.org/F/saleslessalopes/api/v3/package
     symbol_server: https://nuget.smbsrc.net/
     api_key:
-      secure: oy2jy2zj2fxbbrrooobax37rw2ntgl3uziqobsfjpw57gq
+      secure: wbahkr9rvdhuu22kderx
     on:
       branch: master
