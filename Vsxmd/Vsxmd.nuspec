@@ -4,13 +4,13 @@
     <id>Vsxmd</id>
     <version>$Version$</version>
     <title>Vsxmd</title>
-    <authors>Junle Li</authors>
-    <owners>Junle Li</owners>
+    <authors>Junle Li, Sales Lessa Lopes</authors>
+    <owners>Junle Li, Sales Lessa Lopes</owners>
     <licenseUrl>https://github.com/lijunle/Vsxmd/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/lijunle/Vsxmd</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>VS XML documentation -> Markdown syntax.</description>
-    <copyright>Copyright 2015</copyright>
+    <copyright>Copyright 2018</copyright>
     <developmentDependency>true</developmentDependency>
     <tags>Vsxmd VS XML document Markdown</tags>
   </metadata>
