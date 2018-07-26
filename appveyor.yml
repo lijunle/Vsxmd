@@ -50,13 +50,13 @@ deploy:
       appveyor_repo_tag: true
   - provider: NuGet
     api_key:
-      secure: iBKdOaX4b1BDwWzGKoqbHoJHyOAxL6EHCRIretKb16QRLm5l1nkaF+W0SGfuEfMY
+      secure: oy2jy2zj2fxbbrrooobax37rw2ntgl3uziqobsfjpw57gq
     on:
       appveyor_repo_tag: true
   - provider: NuGet
-    server: https://www.myget.org/F/lijunle/api/v2/package
-    symbol_server: https://nuget.symbolsource.org/MyGet/lijunle
+    server: https://www.myget.org/feed/saleslessalopes/package/nuget/Vsxmd
+    symbol_server: http://nuget.smbsrc.net/
     api_key:
-      secure: 8wzaNPk1mfp5TWFmpGIAs7XRcB9LF9NJKMkdm0oUN1q6SwQ/VVd6r9WPcDm0IXlu
+      secure: oy2jy2zj2fxbbrrooobax37rw2ntgl3uziqobsfjpw57gq
     on:
       branch: master
