@@ -54,7 +54,7 @@ deploy:
     on:
       appveyor_repo_tag: true
   - provider: NuGet
-    server: https://www.myget.org/F/saleslessalopes/api/v3/package
+    server: https://www.myget.org/F/saleslessalopes/api/v3/index.json
     symbol_server: https://nuget.smbsrc.net/
     api_key:
       secure: wbahkr9rvdhuu22kderx
