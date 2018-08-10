@@ -150,7 +150,7 @@ namespace Vsxmd.Units
             var text = node as XText;
             if (text != null)
             {
-                return text.Value.Escape();
+                return text.Value.Escape().TrimStart(' ').Replace("            ","");
             }
 
             var child = node as XElement;
@@ -168,7 +168,7 @@ namespace Vsxmd.Units
                         return $"{child.Value.AsCode()}";
                     case "code":
                         var lang = child.Attribute("lang")?.Value ?? string.Empty;
-                        return $"\n\n```{lang}\n{string.Concat(child.Nodes()).Trim()}\n```\n\n";
+                        return $"\n\n```{lang}\n{string.Concat(child.Nodes().Select(t => $"{t}".Replace("             ", $"").Replace("                 ", "    "))).Trim()}\n```\n\n";
                     case "example":
                     case "para":
                         return $"\n\n{child.ToMarkdownText()}\n\n";
