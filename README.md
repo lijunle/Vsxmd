@@ -14,7 +14,8 @@ This project is initially inspired from a [gist](https://gist.github.com/formix/
 - Provide type and member anchors.
 - Reference `System` types to MSDN pages.
 - Dynamic code highlighting through \<code lang=""\> tag
-- Option to delete auto generated XMl configuration file
+- Option to delete auto generated XML configuration file
+- Option to create tables using pure markdown
 
 # Usage
 

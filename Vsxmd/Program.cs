@@ -65,8 +65,9 @@ namespace Vsxmd
                     File.Delete(xmlPath);
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                Console.WriteLine(e.Message);
                 // Ignore errors. Do not impact on project build
                 return;
             }

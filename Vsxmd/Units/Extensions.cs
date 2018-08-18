@@ -6,6 +6,7 @@
 
 namespace Vsxmd.Units
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text.RegularExpressions;
@@ -127,6 +128,7 @@ namespace Vsxmd.Units
         /// For example, it works for <c>summary</c> and <c>returns</c> elements.
         /// </summary>
         /// <param name="element">The XML element.</param>
+        /// <param name="withLineBreak">Optional parameter to transform two spaces into a linebreak</param>
         /// <returns>The generated Markdwon content.</returns>
         /// <example>
         /// This method converts the following <c>summary</c> element
@@ -138,7 +140,7 @@ namespace Vsxmd.Units
         /// The `element` value is `null`, it throws `ArgumentException`. For more, see `ToMarkdownText`.
         /// </code>
         /// </example>
-        internal static string ToMarkdownText(this XElement element) =>
+        internal static string ToMarkdownText(this XElement element, bool withLineBreak = false) =>
             element.Nodes()
                 .Select(ToMarkdownSpan)
                 .Aggregate(string.Empty, JoinMarkdownSpan)
@@ -149,7 +151,7 @@ namespace Vsxmd.Units
             var text = node as XText;
             if (text != null)
             {
-                return Regex.Replace(text.Value, @"\s+", " ", RegexOptions.Multiline).Escape();
+                return text.Value.Escape().TrimStart(' ').Replace("            ", "");
             }
 
             var child = node as XElement;
@@ -167,7 +169,12 @@ namespace Vsxmd.Units
                         return $"{child.Value.AsCode()}";
                     case "code":
                         var lang = child.Attribute("lang")?.Value ?? string.Empty;
-                        return $"\n\n```{lang}\n{string.Concat(child.Nodes()).Trim()}\n```\n\n";
+
+                        string value = child.Nodes().First().ToString().Replace("\t", "    ");
+                        var indexOf = FindIndexOf(value);
+
+                        return $"\n\n```{lang}\n{string.Join("\n", value.Split(Environment.NewLine.ToCharArray()).Where(t => t.Length > indexOf).Select(t => t.Substring(indexOf)))} \n```\n\n";
+                    case "example":
                     case "para":
                         return $"\n\n{child.ToMarkdownText()}\n\n";
                     default:
@@ -176,6 +183,29 @@ namespace Vsxmd.Units
             }
 
             return string.Empty;
+        }
+
+        private static int FindIndexOf(string node)
+        {
+            List<int> result = new List<int>();
+
+            foreach (var item in node.Split(Environment.NewLine.ToCharArray())
+                .Where(t => t.Length > 0))
+            {
+                result.Add(0);
+
+                for (int i = 0; i < item.Length; i++)
+                {
+                    if (item.ToCharArray()[i] != ' ')
+                    {
+                        break;
+                    }
+
+                    result[result.Count - 1] += 1;
+                }
+            }
+
+            return result.Min();
         }
 
         private static string JoinMarkdownSpan(string x, string y) =>
