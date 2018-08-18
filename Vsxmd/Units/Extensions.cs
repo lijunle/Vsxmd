@@ -6,6 +6,7 @@
 
 namespace Vsxmd.Units
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text.RegularExpressions;
@@ -150,7 +151,7 @@ namespace Vsxmd.Units
             var text = node as XText;
             if (text != null)
             {
-                return text.Value.Escape().TrimStart(' ').Replace("            ","");
+                return text.Value.Escape().TrimStart(' ').Replace("            ", "");
             }
 
             var child = node as XElement;
@@ -168,7 +169,11 @@ namespace Vsxmd.Units
                         return $"{child.Value.AsCode()}";
                     case "code":
                         var lang = child.Attribute("lang")?.Value ?? string.Empty;
-                        return $"\n\n```{lang}\n{string.Concat(child.Nodes().Select(t => $"{t}".Replace("             ", $"").Replace("                 ", "    "))).Trim()}\n```\n\n";
+
+                        string value = child.Nodes().First().ToString().Replace("\t", "    ");
+                        var indexOf = FindIndexOf(value);
+
+                        return $"\n\n```{lang}\n{string.Join("\n", value.Split(Environment.NewLine.ToCharArray()).Where(t => t.Length > indexOf).Select(t => t.Substring(indexOf)))} \n```\n\n";
                     case "example":
                     case "para":
                         return $"\n\n{child.ToMarkdownText()}\n\n";
@@ -178,6 +183,29 @@ namespace Vsxmd.Units
             }
 
             return string.Empty;
+        }
+
+        private static int FindIndexOf(string node)
+        {
+            List<int> result = new List<int>();
+
+            foreach (var item in node.Split(Environment.NewLine.ToCharArray())
+                .Where(t => t.Length > 0))
+            {
+                result.Add(0);
+
+                for (int i = 0; i < item.Length; i++)
+                {
+                    if (item.ToCharArray()[i] != ' ')
+                    {
+                        break;
+                    }
+
+                    result[result.Count - 1] += 1;
+                }
+            }
+
+            return result.Min();
         }
 
         private static string JoinMarkdownSpan(string x, string y) =>
