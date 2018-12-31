@@ -39,3 +39,17 @@ nuget:
   project_feed: false
   disable_publish_on_pr: true
 
+deploy:
+  - release: v$(APPVEYOR_BUILD_VERSION)
+    provider: GitHub
+    draft: false
+    prerelease: false
+    auth_token:
+      secure: cApkFZuYfz7loLotMfbhb53ZIfjjfbY7dr46eu6Q9+yAV+KuSGYGcVTG8Bgx8wka
+    on:
+      appveyor_repo_tag: true
+  - provider: NuGet
+    api_key:
+      secure: iBKdOaX4b1BDwWzGKoqbHoJHyOAxL6EHCRIretKb16QRLm5l1nkaF+W0SGfuEfMY
+    on:
+      appveyor_repo_tag: true
