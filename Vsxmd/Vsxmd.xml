@@ -1,0 +1,719 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Vsxmd</name>
+    </assembly>
+    <members>
+        <member name="T:Vsxmd.Converter">
+            <inheritdoc/>
+        </member>
+        <member name="M:Vsxmd.Converter.#ctor(System.Xml.Linq.XDocument)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Vsxmd.Converter"/> class.
+            </summary>
+            <param name="document">The XML document.</param>
+        </member>
+        <member name="M:Vsxmd.Converter.ToMarkdown(System.Xml.Linq.XDocument)">
+            <summary>
+            Convert VS XML document to Markdown syntax.
+            </summary>
+            <param name="document">The XML document.</param>
+            <returns>The generated Markdown content.</returns>
+        </member>
+        <member name="M:Vsxmd.Converter.ToMarkdown">
+            <inheritdoc/>
+        </member>
+        <member name="T:Vsxmd.IConverter">
+            <summary>
+            Converter for XML docuement to Markdown syntax conversion.
+            </summary>
+        </member>
+        <member name="M:Vsxmd.IConverter.ToMarkdown">
+            <summary>
+            Convert to Markdown syntax.
+            </summary>
+            <returns>The generated Markdown content.</returns>
+        </member>
+        <member name="T:Vsxmd.Program">
+            <summary>
+            Program entry.
+            </summary>
+            <remarks>
+            Usage syntax:
+            <c>Vsxmd.exe &lt;input-XML-path&gt; [output-Markdown-path]</c>
+            <para>The <c>input-XML-path</c> argument is required. It references to the VS generated XML documentation file.</para>
+            <para>The <c>output-Markdown-path</c> argument is optional. It indicates the file path for the Markdown output file. When not specific, it will be a <c>.md</c> file with same file name as the XML documentation file, path at the XML documentation folder.</para>
+            </remarks>
+        </member>
+        <member name="M:Vsxmd.Program.Main(System.String[])">
+            <summary>
+            Program main function entry.
+            </summary>
+            <param name="args">Program arguments.</param>
+            <seealso cref="T:Vsxmd.Program"/>
+        </member>
+        <member name="M:Vsxmd.Program.Test.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Vsxmd.Program.Test"/> class.
+            <para>Test constructor without parameters.</para>
+            <para>See <see cref="M:Vsxmd.Program.Test.#ctor"/></para>
+            </summary>
+            <permission cref="T:Vsxmd.Program">Just for test.</permission>
+        </member>
+        <member name="M:Vsxmd.Program.Test.TestParamWithoutDescription(System.String)">
+            <summary>
+            Test a param tag without description.
+            </summary>
+            <param name="p"></param>
+            <returns>Nothing.</returns>
+        </member>
+        <member name="M:Vsxmd.Program.Test.TestGenericRefence">
+            <summary>
+            Test generic reference type.
+            <para>See <see cref="M:Vsxmd.Program.Test.TestGenericParameter``2(System.Linq.Expressions.Expression{System.Func{``0,``1,System.String}})"/>.</para>
+            </summary>
+            <returns>Nothing.</returns>
+        </member>
+        <member name="M:Vsxmd.Program.Test.TestGenericParameter``2(System.Linq.Expressions.Expression{System.Func{``0,``1,System.String}})">
+            <summary>
+            Test generic parameter type.
+            <para>See <typeparamref name="T1"/> and <typeparamref name="T2"/>.</para>
+            </summary>
+            <typeparam name="T1">Generic type 1.</typeparam>
+            <typeparam name="T2">Generic type 2.</typeparam>
+            <param name="expression">The linq expression.</param>
+            <returns>Nothing.</returns>
+        </member>
+        <member name="M:Vsxmd.Program.Test.TestGenericException">
+            <summary>
+            Test generic exception type.
+            </summary>
+            <returns>Nothing.</returns>
+            <exception cref="M:Vsxmd.Program.Test.TestGenericParameter``2(System.Linq.Expressions.Expression{System.Func{``0,``1,System.String}})">Just for test.</exception>
+        </member>
+        <member name="M:Vsxmd.Program.Test.TestGenericPermission">
+            <summary>
+            Test generic exception type.
+            </summary>
+            <returns>Nothing.</returns>
+            <permission cref="M:Vsxmd.Program.Test.TestGenericParameter``2(System.Linq.Expressions.Expression{System.Func{``0,``1,System.String}})">Just for test.</permission>
+        </member>
+        <member name="M:Vsxmd.Program.Test.TestBacktickInSummary">
+            <summary>
+            Test backtick characters in summary comment.
+            <para>See `should not inside code block`.</para>
+            <para>See <c>`backtick inside code block`</c></para>
+            <para>See `<c>code block inside backtick</c>`</para>
+            </summary>
+            <returns>Nothing.</returns>
+        </member>
+        <member name="M:Vsxmd.Program.Test.TestSeeLangword">
+            <summary>
+            Test see tag with langword attribute. See <see langword="true"/>.
+            </summary>
+            <returns>Nothing.</returns>
+        </member>
+        <member name="T:Vsxmd.Program.TestGenericType`2">
+            <summary>
+            Test generic type.
+            <para>See <see cref="T:Vsxmd.Program.TestGenericType`2"/>.</para>
+            </summary>
+            <typeparam name="T1">Generic type 1.</typeparam>
+            <typeparam name="T2">Generic type 2.</typeparam>
+        </member>
+        <member name="M:Vsxmd.Program.TestGenericType`2.TestGenericMethod``2">
+            <summary>
+            Test generic method.
+            <para>See <see cref="M:Vsxmd.Program.TestGenericType`2.TestGenericMethod``2"/></para>
+            </summary>
+            <typeparam name="T3">Generic type 3.</typeparam>
+            <typeparam name="T4">Generic type 4.</typeparam>
+            <returns>Nothing.</returns>
+        </member>
+        <member name="T:Vsxmd.TableOfContents">
+            <summary>
+            Table of contents.
+            </summary>
+        </member>
+        <member name="M:Vsxmd.TableOfContents.#ctor(System.Linq.IOrderedEnumerable{Vsxmd.Units.MemberUnit})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Vsxmd.TableOfContents"/> class.
+            <para>It convert the table of contents from the <paramref name="memberUnits"/>.</para>
+            </summary>
+            <param name="memberUnits">The member unit list.</param>
+        </member>
+        <member name="P:Vsxmd.TableOfContents.Link">
+            <summary>
+            Gets the link pointing to the table of contents.
+            </summary>
+            <value>The link pointing to the table of contents.</value>
+        </member>
+        <member name="M:Vsxmd.TableOfContents.ToMarkdown">
+            <summary>
+            Convert the table of contents to Markdown syntax.
+            </summary>
+            <returns>The table of contents in Markdown syntax.</returns>
+        </member>
+        <member name="T:Vsxmd.Units.AssemblyUnit">
+            <summary>
+            Assembly unit.
+            </summary>
+        </member>
+        <member name="M:Vsxmd.Units.AssemblyUnit.#ctor(System.Xml.Linq.XElement)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Vsxmd.Units.AssemblyUnit"/> class.
+            </summary>
+            <param name="element">The assembly XML element.</param>
+            <exception cref="T:System.ArgumentException">Throw if XML element name is not <c>assembly</c>.</exception>
+        </member>
+        <member name="M:Vsxmd.Units.AssemblyUnit.ToMarkdown">
+            <inheritdoc />
+        </member>
+        <member name="T:Vsxmd.Units.BaseUnit">
+            <summary>
+            The base unit.
+            </summary>
+        </member>
+        <member name="M:Vsxmd.Units.BaseUnit.#ctor(System.Xml.Linq.XElement,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Vsxmd.Units.BaseUnit"/> class.
+            </summary>
+            <param name="element">The XML element.</param>
+            <param name="elementName">The expected XML element name.</param>
+            <exception cref="T:System.ArgumentException">Throw if XML <paramref name="element"/> name not matches the expected <paramref name="elementName"/>.</exception>
+        </member>
+        <member name="P:Vsxmd.Units.BaseUnit.Element">
+            <summary>
+            Gets the XML element.
+            </summary>
+            <value>The XML element.</value>
+        </member>
+        <member name="P:Vsxmd.Units.BaseUnit.ElementContent">
+            <summary>
+            Gets the Markdown content representing the element.
+            </summary>
+            <value>The Markdown content.</value>
+        </member>
+        <member name="M:Vsxmd.Units.BaseUnit.ToMarkdown">
+            <inheritdoc />
+        </member>
+        <member name="M:Vsxmd.Units.BaseUnit.GetChild(System.Xml.Linq.XName)">
+            <summary>
+            Gets the first (in document order) child element with the specified <paramref name="name"/>.
+            </summary>
+            <param name="name">The <see cref="T:System.Xml.Linq.XName"/> to match.</param>
+            <returns>A <see cref="T:System.Xml.Linq.XName"/> that matches the specified <paramref name="name"/>, or <value>null</value>.</returns>
+        </member>
+        <member name="M:Vsxmd.Units.BaseUnit.GetChildren(System.Xml.Linq.XName)">
+            <summary>
+            Returns a collection of the child elements of this element or document, in document order.
+            Only elements that have a matching <see cref="T:System.Xml.Linq.XName"/> are included in the collection.
+            </summary>
+            <param name="name">The <see cref="T:System.Xml.Linq.XName"/> to match.</param>
+            <returns>An <see cref="T:System.Collections.Generic.IEnumerable`1"/> of <see cref="T:System.Xml.Linq.XElement"/> containing the children that have a matching <see cref="T:System.Xml.Linq.XName"/>, in document order.</returns>
+        </member>
+        <member name="M:Vsxmd.Units.BaseUnit.GetAttribute(System.Xml.Linq.XName)">
+            <summary>
+            Returns the <see cref="T:System.Xml.Linq.XAttribute"/> value of this <see cref="T:System.Xml.Linq.XElement"/> that has the specified <paramref name="name"/>.
+            </summary>
+            <param name="name">The <see cref="T:System.Xml.Linq.XName"/> of the <see cref="T:System.Xml.Linq.XAttribute"/> to get.</param>
+            <returns>An <see cref="T:System.Xml.Linq.XAttribute"/> value that has the specified <paramref name="name"/>; <value>null</value> if there is no attribute with the specified <paramref name="name"/>.</returns>
+        </member>
+        <member name="T:Vsxmd.Units.ExampleUnit">
+            <summary>
+            Example unit.
+            </summary>
+        </member>
+        <member name="M:Vsxmd.Units.ExampleUnit.#ctor(System.Xml.Linq.XElement)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Vsxmd.Units.ExampleUnit"/> class.
+            </summary>
+            <param name="element">The example XML element.</param>
+            <exception cref="T:System.ArgumentException">Throw if XML element name is not <c>example</c>.</exception>
+        </member>
+        <member name="M:Vsxmd.Units.ExampleUnit.ToMarkdown">
+            <inheritdoc />
+        </member>
+        <member name="M:Vsxmd.Units.ExampleUnit.ToMarkdown(System.Xml.Linq.XElement)">
+            <summary>
+            Convert the example XML element to Markdown safely.
+            If elemnt is <value>null</value>, return empty string.
+            </summary>
+            <param name="element">The example XML element.</param>
+            <returns>The generated Markdown.</returns>
+        </member>
+        <member name="T:Vsxmd.Units.ExceptionUnit">
+            <summary>
+            Exception unit.
+            </summary>
+        </member>
+        <member name="M:Vsxmd.Units.ExceptionUnit.#ctor(System.Xml.Linq.XElement)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Vsxmd.Units.ExceptionUnit"/> class.
+            </summary>
+            <param name="element">The exception XML element.</param>
+            <exception cref="T:System.ArgumentException">Throw if XML element name is not <c>exception</c>.</exception>
+        </member>
+        <member name="M:Vsxmd.Units.ExceptionUnit.ToMarkdown">
+            <inheritdoc />
+        </member>
+        <member name="M:Vsxmd.Units.ExceptionUnit.ToMarkdown(System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement})">
+            <summary>
+            Convert the exception XML element to Markdown safely.
+            If elemnt is <value>null</value>, return empty string.
+            </summary>
+            <param name="elements">The exception XML element list.</param>
+            <returns>The generated Markdown.</returns>
+        </member>
+        <member name="T:Vsxmd.Units.Extensions">
+            <summary>
+            Extensions helper.
+            </summary>
+        </member>
+        <member name="M:Vsxmd.Units.Extensions.ToLowerString(Vsxmd.Units.MemberKind)">
+            <summary>
+            Convert the <see cref="T:Vsxmd.Units.MemberKind"/> to its lowercase name.
+            </summary>
+            <param name="memberKind">The member kind.</param>
+            <returns>The member kind's lowercase name.</returns>
+        </member>
+        <member name="M:Vsxmd.Units.Extensions.Join(System.Collections.Generic.IEnumerable{System.String},System.String)">
+            <summary>
+            Concatenates the <paramref name="value"/>s with the <paramref name="separator"/>.
+            </summary>
+            <param name="value">The string values.</param>
+            <param name="separator">The separator.</param>
+            <returns>The concatenated string.</returns>
+        </member>
+        <member name="M:Vsxmd.Units.Extensions.Suffix(System.String,System.String)">
+            <summary>
+            Suffix the <paramref name="suffix"/> to the <paramref name="value"/>, and generate a new string.
+            </summary>
+            <param name="value">The original string value.</param>
+            <param name="suffix">The suffix string.</param>
+            <returns>The new string.</returns>
+        </member>
+        <member name="M:Vsxmd.Units.Extensions.Escape(System.String)">
+            <summary>
+            Escape the content to keep it raw in Markdown syntax.
+            </summary>
+            <param name="content">The content.</param>
+            <returns>The escaped content.</returns>
+        </member>
+        <member name="M:Vsxmd.Units.Extensions.ToAnchor(System.String)">
+            <summary>
+            Generate an anchor for the <paramref name="href"/>.
+            </summary>
+            <param name="href">The href.</param>
+            <returns>The anchor for the <paramref name="href"/>.</returns>
+        </member>
+        <member name="M:Vsxmd.Units.Extensions.ToHereLink(System.String)">
+            <summary>
+            Generate "to here" link for the <paramref name="href"/>.
+            </summary>
+            <param name="href">The href.</param>
+            <returns>The "to here" link for the <paramref name="href"/>.</returns>
+        </member>
+        <member name="M:Vsxmd.Units.Extensions.ToReferenceLink(System.String,System.Boolean)">
+            <summary>
+            Generate the reference link for the <paramref name="memberName"/>.
+            </summary>
+            <param name="memberName">The member name.</param>
+            <param name="useShortName">Indicate if use short type name.</param>
+            <returns>The generated reference link.</returns>
+            <example>
+            <para>For <c>T:Vsxmd.Units.MemberUnit</c>, convert it to <c>[MemberUnit](#T-Vsxmd.Units.MemberUnit)</c>.</para>
+            <para>For <c>T:System.ArgumentException</c>, convert it to <c>[ArgumentException](http://msdn/path/to/System.ArgumentException)</c>.</para>
+            </example>
+        </member>
+        <member name="M:Vsxmd.Units.Extensions.AsCode(System.String)">
+            <summary>
+            Wrap the <paramref name="code"/> into Markdown backtick safely.
+            <para>The backtick characters inside the <paramref name="code"/> reverse as it is.</para>
+            </summary>
+            <param name="code">The code span.</param>
+            <returns>The Markdwon code span.</returns>
+            <remarks>Reference: http://meta.stackexchange.com/questions/55437/how-can-the-backtick-character-be-included-in-code </remarks>
+        </member>
+        <member name="M:Vsxmd.Units.Extensions.NthLast``1(System.Collections.Generic.IEnumerable{``0},System.Int32)">
+            <summary>
+            Gets the n-th last element from the <paramref name="source"/>.
+            </summary>
+            <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
+            <param name="source">The source enumerable.</param>
+            <param name="index">The index for the n-th last.</param>
+            <returns>The element at the specified position in the <paramref name="source"/> sequence.</returns>
+        </member>
+        <member name="M:Vsxmd.Units.Extensions.TakeAllButLast``1(System.Collections.Generic.IEnumerable{``0},System.Int32)">
+            <summary>
+            Take all element except the last <paramref name="count"/>.
+            </summary>
+            <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
+            <param name="source">The source enumerable.</param>
+            <param name="count">The number to except.</param>
+            <returns>The generated enumerable.</returns>
+        </member>
+        <member name="M:Vsxmd.Units.Extensions.ToMarkdownText(System.Xml.Linq.XElement,System.Boolean)">
+            <summary>
+            Convert the inline XML nodes to Markdown text.
+            For example, it works for <c>summary</c> and <c>returns</c> elements.
+            </summary>
+            <param name="element">The XML element.</param>
+            <param name="withLineBreak">Optional parameter to transform two spaces into a linebreak</param>
+            <returns>The generated Markdwon content.</returns>
+            <example>
+            This method converts the following <c>summary</c> element
+            <code>
+            <summary>The <paramref name="element" /> value is <value>null</value>, it throws <c>ArgumentException</c>. For more, see <see cref="M:Vsxmd.Units.Extensions.ToMarkdownText(System.Xml.Linq.XElement,System.Boolean)"/>.</summary>
+            </code>
+            To the below Markdown content.
+            <code>
+            The `element` value is `null`, it throws `ArgumentException`. For more, see `ToMarkdownText`.
+            </code>
+            </example>
+        </member>
+        <member name="T:Vsxmd.Units.IUnit">
+            <summary>
+            <see cref="T:Vsxmd.Units.IUnit"/> is wrapper to handle XML elements.
+            </summary>
+        </member>
+        <member name="M:Vsxmd.Units.IUnit.ToMarkdown">
+            <summary>
+            Represent the XML element content as Markdown syntax.
+            </summary>
+            <returns>The generated Markdown content.</returns>
+        </member>
+        <member name="T:Vsxmd.Units.MemberKind">
+            <summary>
+            The member kind.
+            </summary>
+        </member>
+        <member name="F:Vsxmd.Units.MemberKind.NotSupported">
+            <summary>
+            Not supported member kind.
+            </summary>
+        </member>
+        <member name="F:Vsxmd.Units.MemberKind.Type">
+            <summary>
+            Type.
+            </summary>
+        </member>
+        <member name="F:Vsxmd.Units.MemberKind.Constructor">
+            <summary>
+            Constructor.
+            </summary>
+        </member>
+        <member name="F:Vsxmd.Units.MemberKind.Constants">
+            <summary>
+            Constants
+            </summary>
+        </member>
+        <member name="F:Vsxmd.Units.MemberKind.Property">
+            <summary>
+            Property.
+            </summary>
+        </member>
+        <member name="F:Vsxmd.Units.MemberKind.Method">
+            <summary>
+            Method.
+            </summary>
+        </member>
+        <member name="T:Vsxmd.Units.MemberName">
+            <summary>
+            Member name.
+            </summary>
+        </member>
+        <member name="M:Vsxmd.Units.MemberName.#ctor(System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Vsxmd.Units.MemberName"/> class.
+            </summary>
+            <param name="name">The raw member name. For example, <c>T:Vsxmd.Units.MemberName</c>.</param>
+            <param name="paramNames">The parameter names. It is only used when member kind is <see cref="F:Vsxmd.Units.MemberKind.Constructor"/> or <see cref="F:Vsxmd.Units.MemberKind.Method"/>.</param>
+        </member>
+        <member name="M:Vsxmd.Units.MemberName.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Vsxmd.Units.MemberName"/> class.
+            </summary>
+            <param name="name">The raw member name. For example, <c>T:Vsxmd.Units.MemberName</c>.</param>
+        </member>
+        <member name="P:Vsxmd.Units.MemberName.Kind">
+            <summary>
+            Gets the member kind, one of <see cref="T:Vsxmd.Units.MemberKind"/>.
+            </summary>
+            <value>The member kind.</value>
+        </member>
+        <member name="P:Vsxmd.Units.MemberName.Link">
+            <summary>
+            Gets the link pointing to this member unit.
+            </summary>
+            <value>The link pointing to this member unit.</value>
+        </member>
+        <member name="P:Vsxmd.Units.MemberName.Caption">
+            <summary>
+            Gets the caption representation for this member name.
+            </summary>
+            <value>The caption.</value>
+            <example>
+            <para>For <see cref="F:Vsxmd.Units.MemberKind.Type"/>, show as <c>## Vsxmd.Units.MemberName [#](#here) [^](#contents)</c>.</para>
+            <para>For other kinds, show as <c>### Vsxmd.Units.MemberName.Caption [#](#here) [^](#contents)</c>.</para>
+            </example>
+        </member>
+        <member name="P:Vsxmd.Units.MemberName.TypeName">
+            <summary>
+            Gets the type name.
+            </summary>
+            <value>The type name.</value>
+            <example><c>Vsxmd.Program</c>, <c>Vsxmd.Units.TypeUnit</c>.</example>
+        </member>
+        <member name="P:Vsxmd.Units.MemberName.Namespace">
+            <summary>
+            Gets the namespace name.
+            </summary>
+            <value>The namespace name.</value>
+            <example><c>System</c>, <c>Vsxmd</c>, <c>Vsxmd.Units</c>.</example>
+        </member>
+        <member name="M:Vsxmd.Units.MemberName.CompareTo(Vsxmd.Units.MemberName)">
+            <inheritdoc />
+        </member>
+        <member name="M:Vsxmd.Units.MemberName.GetParamTypes">
+            <summary>
+            Gets the method parameter type names from the member name.
+            </summary>
+            <returns>The method parameter type name list.</returns>
+            <example>
+            It will prepend the type kind character (<c>T:</c>) to the type string.
+            <para>For <c>(System.String,System.Int32)</c>, returns <c>["T:System.String","T:System.Int32"]</c>.</para>
+            It also handle generic type.
+            <para>For <c>(System.Collections.Generic.IEnumerable{System.String})</c>, returns <c>["T:System.Collections.Generic.IEnumerable{System.String}"]</c>.</para>
+            </example>
+        </member>
+        <member name="M:Vsxmd.Units.MemberName.ToReferenceLink(System.Boolean)">
+            <summary>
+            Convert the member name to Markdown reference link.
+            <para>If then name is under <c>System</c> namespace, the link points to MSDN.</para>
+            <para>Otherwise, the link points to this page anchor.</para>
+            </summary>
+            <param name="useShortName">Indicate if use short type name.</param>
+            <returns>The generated Markdown reference link.</returns>
+        </member>
+        <member name="T:Vsxmd.Units.MemberUnit">
+            <summary>
+            Member unit.
+            </summary>
+        </member>
+        <member name="M:Vsxmd.Units.MemberUnit.#ctor(System.Xml.Linq.XElement)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Vsxmd.Units.MemberUnit"/> class.
+            </summary>
+            <param name="element">The member XML element.</param>
+            <exception cref="T:System.ArgumentException">Throw if XML element name is not <c>member</c>.</exception>
+        </member>
+        <member name="P:Vsxmd.Units.MemberUnit.Comparer">
+            <summary>
+            Gets the member unit comparer.
+            </summary>
+            <value>The member unit comparer.</value>
+        </member>
+        <member name="P:Vsxmd.Units.MemberUnit.TypeName">
+            <summary>
+            Gets the type name.
+            </summary>
+            <value>The the type name.</value>
+            <example><c>Vsxmd.Program</c>, <c>Vsxmd.Units.TypeUnit</c>.</example>
+        </member>
+        <member name="P:Vsxmd.Units.MemberUnit.Kind">
+            <summary>
+            Gets the member kind, one of <see cref="T:Vsxmd.Units.MemberKind"/>.
+            </summary>
+            <value>The member kind.</value>
+        </member>
+        <member name="P:Vsxmd.Units.MemberUnit.Link">
+            <summary>
+            Gets the link pointing to this member unit.
+            </summary>
+            <value>The link pointing to this member unit.</value>
+        </member>
+        <member name="M:Vsxmd.Units.MemberUnit.ToMarkdown">
+            <inheritdoc />
+        </member>
+        <member name="M:Vsxmd.Units.MemberUnit.ComplementType(System.Collections.Generic.IEnumerable{Vsxmd.Units.MemberUnit})">
+            <summary>
+            Complement a type unit if the member unit <paramref name="group"/> does not have one.
+            One member unit group has the same <see cref="P:Vsxmd.Units.MemberUnit.TypeName"/>.
+            </summary>
+            <param name="group">The member unit group.</param>
+            <returns>The complemented member unit group.</returns>
+        </member>
+        <member name="M:Vsxmd.Units.MemberUnit.MemberUnitComparer.Compare(Vsxmd.Units.MemberUnit,Vsxmd.Units.MemberUnit)">
+            <inheritdoc />
+        </member>
+        <member name="T:Vsxmd.Units.ParamUnit">
+            <summary>
+            Param unit.
+            </summary>
+        </member>
+        <member name="M:Vsxmd.Units.ParamUnit.#ctor(System.Xml.Linq.XElement,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Vsxmd.Units.ParamUnit"/> class.
+            </summary>
+            <param name="element">The param XML element.</param>
+            <param name="paramType">The paramter type corresponding to the param XML element.</param>
+            <exception cref="T:System.ArgumentException">Throw if XML element name is not <c>param</c>.</exception>
+        </member>
+        <member name="M:Vsxmd.Units.ParamUnit.ToMarkdown">
+            <inheritdoc />
+        </member>
+        <member name="M:Vsxmd.Units.ParamUnit.ToMarkdown(System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement},System.Collections.Generic.IEnumerable{System.String},Vsxmd.Units.MemberKind)">
+            <summary>
+            Convert the param XML element to Markdown safely.
+            </summary>
+            <param name="elements">The param XML element list.</param>
+            <param name="paramTypes">The paramater type names.</param>
+            <param name="memberKind">The member kind of the parent element.</param>
+            <returns>The generated Markdown.</returns>
+            <remarks>
+            When the parameter (a.k.a <paramref name="elements"/>) list is empty:
+            <para>If parent element kind is <see cref="F:Vsxmd.Units.MemberKind.Constructor"/> or <see cref="F:Vsxmd.Units.MemberKind.Method"/>, it returns a hint about "no parameters".</para>
+            <para>If parent element kind is not the value mentioned above, it returns an empty string.</para>
+            </remarks>
+        </member>
+        <member name="T:Vsxmd.Units.PermissionUnit">
+            <summary>
+            Permission unit.
+            </summary>
+        </member>
+        <member name="M:Vsxmd.Units.PermissionUnit.#ctor(System.Xml.Linq.XElement)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Vsxmd.Units.PermissionUnit"/> class.
+            </summary>
+            <param name="element">The permission XML element.</param>
+            <exception cref="T:System.ArgumentException">Throw if XML element name is not <c>permission</c>.</exception>
+        </member>
+        <member name="M:Vsxmd.Units.PermissionUnit.ToMarkdown">
+            <inheritdoc />
+        </member>
+        <member name="M:Vsxmd.Units.PermissionUnit.ToMarkdown(System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement})">
+            <summary>
+            Convert the permission XML element to Markdown safely.
+            If elemnt is <value>null</value>, return empty string.
+            </summary>
+            <param name="elements">The permission XML element list.</param>
+            <returns>The generated Markdown.</returns>
+        </member>
+        <member name="T:Vsxmd.Units.RemarksUnit">
+            <summary>
+            Remarks unit.
+            </summary>
+        </member>
+        <member name="M:Vsxmd.Units.RemarksUnit.#ctor(System.Xml.Linq.XElement)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Vsxmd.Units.RemarksUnit"/> class.
+            </summary>
+            <param name="element">The remarks XML element.</param>
+            <exception cref="T:System.ArgumentException">Throw if XML element name is not <c>remarks</c>.</exception>
+        </member>
+        <member name="M:Vsxmd.Units.RemarksUnit.ToMarkdown">
+            <inheritdoc />
+        </member>
+        <member name="M:Vsxmd.Units.RemarksUnit.ToMarkdown(System.Xml.Linq.XElement)">
+            <summary>
+            Convert the remarks XML element to Markdown safely.
+            If elemnt is <value>null</value>, return empty string.
+            </summary>
+            <param name="element">The remarks XML element.</param>
+            <returns>The generated Markdown.</returns>
+        </member>
+        <member name="T:Vsxmd.Units.ReturnsUnit">
+            <summary>
+            Returns unit.
+            </summary>
+        </member>
+        <member name="M:Vsxmd.Units.ReturnsUnit.#ctor(System.Xml.Linq.XElement)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Vsxmd.Units.ReturnsUnit"/> class.
+            </summary>
+            <param name="element">The returns XML element.</param>
+            <exception cref="T:System.ArgumentException">Throw if XML element name is not <c>returns</c>.</exception>
+        </member>
+        <member name="M:Vsxmd.Units.ReturnsUnit.ToMarkdown">
+            <inheritdoc />
+        </member>
+        <member name="M:Vsxmd.Units.ReturnsUnit.ToMarkdown(System.Xml.Linq.XElement)">
+            <summary>
+            Convert the returns XML element to Markdown safely.
+            If elemnt is <value>null</value>, return empty string.
+            </summary>
+            <param name="element">The returns XML element.</param>
+            <returns>The generated Markdown.</returns>
+        </member>
+        <member name="T:Vsxmd.Units.SeealsoUnit">
+            <summary>
+            Seealso unit.
+            </summary>
+        </member>
+        <member name="M:Vsxmd.Units.SeealsoUnit.#ctor(System.Xml.Linq.XElement)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Vsxmd.Units.SeealsoUnit"/> class.
+            </summary>
+            <param name="element">The seealso XML element.</param>
+            <exception cref="T:System.ArgumentException">Throw if XML element name is not <c>seealso</c>.</exception>
+        </member>
+        <member name="M:Vsxmd.Units.SeealsoUnit.ToMarkdown">
+            <inheritdoc />
+        </member>
+        <member name="M:Vsxmd.Units.SeealsoUnit.ToMarkdown(System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement})">
+            <summary>
+            Convert the seealso XML element to Markdown safely.
+            If elemnt is <value>null</value>, return empty string.
+            </summary>
+            <param name="elements">The seealso XML element list.</param>
+            <returns>The generated Markdown.</returns>
+        </member>
+        <member name="T:Vsxmd.Units.SummaryUnit">
+            <summary>
+            Summary unit.
+            </summary>
+        </member>
+        <member name="M:Vsxmd.Units.SummaryUnit.#ctor(System.Xml.Linq.XElement)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Vsxmd.Units.SummaryUnit"/> class.
+            </summary>
+            <param name="element">The summary XML element.</param>
+            <exception cref="T:System.ArgumentException">Throw if XML element name is not <c>summary</c>.</exception>
+        </member>
+        <member name="M:Vsxmd.Units.SummaryUnit.ToMarkdown">
+            <inheritdoc />
+        </member>
+        <member name="M:Vsxmd.Units.SummaryUnit.ToMarkdown(System.Xml.Linq.XElement)">
+            <summary>
+            Convert the summary XML element to Markdown safely.
+            If elemnt is <value>null</value>, return empty string.
+            </summary>
+            <param name="element">The summary XML element.</param>
+            <returns>The generated Markdown.</returns>
+        </member>
+        <member name="T:Vsxmd.Units.TypeparamUnit">
+            <summary>
+            Typeparam unit.
+            </summary>
+        </member>
+        <member name="M:Vsxmd.Units.TypeparamUnit.#ctor(System.Xml.Linq.XElement)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Vsxmd.Units.TypeparamUnit"/> class.
+            </summary>
+            <param name="element">The typeparam XML element.</param>
+            <exception cref="T:System.ArgumentException">Throw if XML element name is not <c>typeparam</c>.</exception>
+        </member>
+        <member name="M:Vsxmd.Units.TypeparamUnit.ToMarkdown">
+            <inheritdoc />
+        </member>
+        <member name="M:Vsxmd.Units.TypeparamUnit.ToMarkdown(System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement})">
+            <summary>
+            Convert the param XML element to Markdown safely.
+            If elemnt is <value>null</value>, return empty string.
+            </summary>
+            <param name="elements">The param XML element list.</param>
+            <returns>The generated Markdown.</returns>
+        </member>
+    </members>
+</doc>
