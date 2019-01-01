@@ -23,6 +23,7 @@
     <DevelopmentDependency>true</DevelopmentDependency>
     <IncludeBuildOutput>true</IncludeBuildOutput>
     <IncludeSymbols>true</IncludeSymbols>
+    <IncludeSource>true</IncludeSource>
   </PropertyGroup>
   <ItemGroup>
     <Content Include="..\LICENSE" Link="LICENSE" PackagePath="\" />
