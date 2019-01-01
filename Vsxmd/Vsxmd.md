@@ -645,13 +645,13 @@ The generated Markdwon content.
 This method converts the following `summary`element
 
 ```
-<summary>The <paramref name="element" /> value is <value>null</value>, it throws <c>ArgumentException</c>. For more, see <see cref="M:Vsxmd.Units.Extensions.ToMarkdownText(System.Xml.Linq.XElement,System.Boolean)" />.</summary> 
+<summary>The <paramref name="element" /> value is <value>null</value>, it throws <c>ArgumentException</c>. For more, see <see cref="M:Vsxmd.Units.Extensions.ToMarkdownText(System.Xml.Linq.XElement,System.Boolean)" />.</summary>
 ```
 
 To the below Markdown content.
 
 ```
-The `element` value is `null`, it throws `ArgumentException`. For more, see `ToMarkdownText`. 
+The `element` value is `null`, it throws `ArgumentException`. For more, see `ToMarkdownText`.
 ```
 
 <a name='M-Vsxmd-Units-Extensions-ToReferenceLink-System-String,System-Boolean-'></a>

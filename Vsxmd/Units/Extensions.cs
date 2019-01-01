@@ -173,7 +173,12 @@ namespace Vsxmd.Units
                         string value = child.Nodes().First().ToString().Replace("\t", "    ");
                         var indexOf = FindIndexOf(value);
 
-                        return $"\n\n```{lang}\n{string.Join("\n", value.Split(Environment.NewLine.ToCharArray()).Where(t => t.Length > indexOf).Select(t => t.Substring(indexOf)))} \n```\n\n";
+                        var codeblockLines = value.Split(Environment.NewLine.ToCharArray())
+                            .Where(t => t.Length > indexOf)
+                            .Select(t => t.Substring(indexOf));
+                        var codeblock = string.Join("\n", codeblockLines);
+
+                        return $"\n\n```{lang}\n{codeblock}\n```\n\n";
                     case "example":
                     case "para":
                         return $"\n\n{child.ToMarkdownText()}\n\n";
