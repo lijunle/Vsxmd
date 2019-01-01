@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Condition=" '$(MSBuildRuntimeType)' == 'Full' OR '$(MSBuildRuntimeType)' == '' ">
+    <VsxmdCommand>"$(MSBuildThisFileDirectory)\..\tools\net46\Vsxmd.exe" "$(DocumentationFile)" "$(DocumentationMarkdown)" "$(VsxmdAutoDeleteXml)"</VsxmdCommand>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(MSBuildRuntimeType)' == 'Mono' ">
+    <VsxmdCommand>mono "$(MSBuildThisFileDirectory)\..\tools\net46\Vsxmd.exe" "$(DocumentationFile)" "$(DocumentationMarkdown)" "$(VsxmdAutoDeleteXml)"</VsxmdCommand>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(MSBuildRuntimeType)' == 'Core' ">
+    <VsxmdCommand>dotnet "$(MSBuildThisFileDirectory)\..\tools\netcoreapp2.2\Vsxmd.dll" "$(DocumentationFile)" "$(DocumentationMarkdown)" "$(VsxmdAutoDeleteXml)"</VsxmdCommand>
+  </PropertyGroup>
+  <Target Name="Vsxmd" AfterTargets="Build">
+    <Message Text="Vsxmd starts to convert XML to Markdown." />
+    <Exec Command="$(VsxmdCommand)" />
+    <Message Text="Vsxmd finishes conversion." />
+  </Target>
+</Project>

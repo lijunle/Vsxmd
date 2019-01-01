@@ -75,8 +75,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Test.ps1" />
-    <None Include="Vsxmd.nuspec" />
-    <None Include="targets\Vsxmd.targets" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
