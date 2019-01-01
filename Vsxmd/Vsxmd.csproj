@@ -1,13 +1,14 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
+  <!-- Project Metadata -->
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFrameworks>netcoreapp2.2;net46</TargetFrameworks>
     <DocumentationFile>Vsxmd.xml</DocumentationFile>
   </PropertyGroup>
 
+  <!-- NuGet Metadata: https://docs.microsoft.com/en-us/dotnet/core/tools/csproj#nuget-metadata-properties -->
   <PropertyGroup>
-    <!-- NuGet Metadata: https://docs.microsoft.com/en-us/dotnet/core/tools/csproj#nuget-metadata-properties -->
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Title>Vsxmd</Title>
     <Version>0.0.0</Version>
@@ -22,11 +23,18 @@
     <IncludeBuildOutput>true</IncludeBuildOutput>
     <IncludeSymbols>true</IncludeSymbols>
   </PropertyGroup>
-
   <ItemGroup>
     <Content Include="..\LICENSE" Link="LICENSE" PackagePath="\" />
     <Content Include="build\Vsxmd.targets" PackagePath="build\" />
     <Content Include="buildMultiTargeting\Vsxmd.targets" PackagePath="buildMultiTargeting\" />
   </ItemGroup>
+
+  <!-- Generate the Markdown file for itself -->
+  <Target Name="VsxmdPreparation" AfterTargets="PostBuildEvent">
+    <PropertyGroup>
+      <BinaryDirectory>$(OutputPath)\..</BinaryDirectory>
+    </PropertyGroup>
+  </Target>
+  <Import Project="$(MSBuildThisFileDirectory)\build\Vsxmd.targets" />
 
 </Project>

@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup Condition=" '$(MSBuildRuntimeType)' == 'Full' OR '$(MSBuildRuntimeType)' == '' ">
-    <VsxmdCommand>"$(MSBuildThisFileDirectory)\..\tools\net46\Vsxmd.exe" "$(DocumentationFile)" "$(DocumentationMarkdown)" "$(VsxmdAutoDeleteXml)"</VsxmdCommand>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(MSBuildRuntimeType)' == 'Mono' ">
-    <VsxmdCommand>mono "$(MSBuildThisFileDirectory)\..\tools\net46\Vsxmd.exe" "$(DocumentationFile)" "$(DocumentationMarkdown)" "$(VsxmdAutoDeleteXml)"</VsxmdCommand>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(MSBuildRuntimeType)' == 'Core' ">
-    <VsxmdCommand>dotnet "$(MSBuildThisFileDirectory)\..\tools\netcoreapp2.2\Vsxmd.dll" "$(DocumentationFile)" "$(DocumentationMarkdown)" "$(VsxmdAutoDeleteXml)"</VsxmdCommand>
-  </PropertyGroup>
-  <Target Name="Vsxmd" AfterTargets="Build">
+<Project TreatAsLocalProperty="BinaryDirectory;VsxmdCommand">
+  <Target Name="Vsxmd" AfterTargets="PostBuildEvent">
+    <PropertyGroup>
+      <BinaryDirectory Condition=" '$(BinaryDirectory)' == '' ">$(MSBuildThisFileDirectory)\..\tools</BinaryDirectory>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(MSBuildRuntimeType)' == 'Full' OR '$(MSBuildRuntimeType)' == '' ">
+      <VsxmdCommand>"$(BinaryDirectory)\net46\Vsxmd.exe" "$(DocumentationFile)" "$(DocumentationMarkdown)" "$(VsxmdAutoDeleteXml)"</VsxmdCommand>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(MSBuildRuntimeType)' == 'Mono' ">
+      <VsxmdCommand>mono "$(BinaryDirectory)\net46\Vsxmd.exe" "$(DocumentationFile)" "$(DocumentationMarkdown)" "$(VsxmdAutoDeleteXml)"</VsxmdCommand>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(MSBuildRuntimeType)' == 'Core' ">
+      <VsxmdCommand>dotnet "$(BinaryDirectory)\netcoreapp2.2\Vsxmd.dll" "$(DocumentationFile)" "$(DocumentationMarkdown)" "$(VsxmdAutoDeleteXml)"</VsxmdCommand>
+    </PropertyGroup>
     <Message Text="Vsxmd starts to convert XML to Markdown." />
     <Exec Command="$(VsxmdCommand)" />
     <Message Text="Vsxmd finishes conversion." />
