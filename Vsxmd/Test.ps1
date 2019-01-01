@@ -3,9 +3,9 @@ param (
     [switch]$Run
 )
 
-$path = (Resolve-Path "$($MyInvocation.MyCommand.Path)\..").Path
-$md = "$path\Vsxmd.md"
-$xml = "$path\Vsxmd.xml"
+$path = (Resolve-Path "$($MyInvocation.MyCommand.Path)/..").Path
+$md = "$path/Vsxmd.md"
+$xml = "$path/Vsxmd.xml"
 
 function Test {
     param (
