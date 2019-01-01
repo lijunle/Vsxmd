@@ -34,10 +34,23 @@ function Test {
     }
 }
 
+function RemoveTrailingSpaces {
+    param (
+        [string]$file
+    )
+
+    $content = Get-Content $file
+    $content | Foreach { $_.TrimEnd() } | Set-Content $file
+}
+
+
 if ($Prepare)
 {
-    copy $md "$md.tmp"
-    copy $xml "$xml.tmp"
+    RemoveTrailingSpaces $md
+    RemoveTrailingSpaces $xml
+
+    Copy $md "$md.tmp"
+    Copy $xml "$xml.tmp"
 }
 
 if ($Run)
