@@ -7,14 +7,14 @@ $path = (Resolve-Path "$($MyInvocation.MyCommand.Path)/..").Path
 $md = "$path/Vsxmd.md"
 $xml = "$path/Vsxmd.xml"
 
-function Test {
+function Verify-Diff {
     param (
         [string]$file
     )
 
-    $content1 = (cat $file);
-    $content2 = (cat "$file.tmp")
-    $diff = (diff $content1 $content2)
+    $content1 = (Get-Content $file);
+    $content2 = (Get-Content "$file.tmp")
+    $diff = (Compare-Object $content1 $content2)
     $same = $diff.Count -eq 0
 
     echo "File $file Passed: $same"
@@ -34,7 +34,7 @@ function Test {
     }
 }
 
-function RemoveTrailingSpaces {
+function Remove-TrailingSpaces {
     param (
         [string]$file
     )
@@ -46,15 +46,15 @@ function RemoveTrailingSpaces {
 
 if ($Prepare)
 {
-    RemoveTrailingSpaces $md
-    RemoveTrailingSpaces $xml
+    Remove-TrailingSpaces $md
+    Remove-TrailingSpaces $xml
 
-    Copy $md "$md.tmp"
-    Copy $xml "$xml.tmp"
+    Copy-Item $md "$md.tmp"
+    Copy-Item $xml "$xml.tmp"
 }
 
 if ($Run)
 {
-    Test $md
-    Test $xml
+    Verify-Diff $md
+    Verify-Diff $xml
 }
