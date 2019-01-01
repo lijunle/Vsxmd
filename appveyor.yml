@@ -30,10 +30,10 @@ dotnet_csproj:
 before_build:
   - ps: dotnet --version
   - ps: dotnet restore Vsxmd.sln
-  - ps: Vsxmd\Test.ps1 -Prepare
+  - ps: ./Vsxmd/Test.ps1 -Prepare
 
 test_script:
-  - ps: Vsxmd\Test.ps1 -Run
+  - ps: ./Vsxmd/Test.ps1 -Run
 
 artifacts:
   - path: 'Vsxmd\**\*.nupkg'
