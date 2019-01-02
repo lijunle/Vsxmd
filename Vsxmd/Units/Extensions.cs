@@ -133,7 +133,7 @@ namespace Vsxmd.Units
         /// <example>
         /// This method converts the following <c>summary</c> element
         /// <code>
-        /// <summary>The <paramref name="element" /> value is <value>null</value>, it throws <c>ArgumentException</c>. For more, see <see cref="ToMarkdownText(XElement)"/>.</summary>
+        /// <summary>The <paramref name="element" /> value is <value>null</value>, it throws <c>ArgumentException</c>. For more, see <see cref="ToMarkdownText(XElement, bool)"/>.</summary>
         /// </code>
         /// To the below Markdown content.
         /// <code>
@@ -173,7 +173,12 @@ namespace Vsxmd.Units
                         string value = child.Nodes().First().ToString().Replace("\t", "    ");
                         var indexOf = FindIndexOf(value);
 
-                        return $"\n\n```{lang}\n{string.Join("\n", value.Split(Environment.NewLine.ToCharArray()).Where(t => t.Length > indexOf).Select(t => t.Substring(indexOf)))} \n```\n\n";
+                        var codeblockLines = value.Split(Environment.NewLine.ToCharArray())
+                            .Where(t => t.Length > indexOf)
+                            .Select(t => t.Substring(indexOf));
+                        var codeblock = string.Join("\n", codeblockLines);
+
+                        return $"\n\n```{lang}\n{codeblock}\n```\n\n";
                     case "example":
                     case "para":
                         return $"\n\n{child.ToMarkdownText()}\n\n";

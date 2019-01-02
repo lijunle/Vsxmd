@@ -58,7 +58,7 @@
             <para>Test constructor without parameters.</para>
             <para>See <see cref="M:Vsxmd.Program.Test.#ctor"/></para>
             </summary>
-            <permission cref="T:System.Security.PermissionSet">Just for test.</permission>
+            <permission cref="T:Vsxmd.Program">Just for test.</permission>
         </member>
         <member name="M:Vsxmd.Program.Test.TestParamWithoutDescription(System.String)">
             <summary>
@@ -364,7 +364,7 @@
             <example>
             This method converts the following <c>summary</c> element
             <code>
-            <summary>The <paramref name="element" /> value is <value>null</value>, it throws <c>ArgumentException</c>. For more, see <see cref="!:ToMarkdownText(XElement)"/>.</summary>
+            <summary>The <paramref name="element" /> value is <value>null</value>, it throws <c>ArgumentException</c>. For more, see <see cref="M:Vsxmd.Units.Extensions.ToMarkdownText(System.Xml.Linq.XElement,System.Boolean)"/>.</summary>
             </code>
             To the below Markdown content.
             <code>

@@ -1,4 +1,8 @@
-version: 0.0.0.{build}
+version: 0.0.{build}
+
+image:
+  - Visual Studio 2017
+  - Ubuntu
 
 shallow_clone: true
 
@@ -14,30 +18,25 @@ configuration:
 matrix:
   fast_finish: true
 
-assembly_info:
+dotnet_csproj:
   patch: true
-  file: AssemblyInfo.cs
-  assembly_version: "{version}"
-  assembly_file_version: "{version}"
-  assembly_informational_version: "{version}"
-
-cache:
-  - packages -> **\packages.config
+  file: '**\*.csproj'
+  version: '{version}'
+  package_version: '{version}'
+  assembly_version: '{version}'
+  file_version: '{version}'
+  informational_version: '{version}'
 
 before_build:
-  - ps: nuget restore Vsxmd.sln
-  - ps: Vsxmd\Test.ps1 -Prepare
+  - ps: dotnet --version
+  - ps: dotnet restore Vsxmd.sln
+  - ps: ./Vsxmd/Test.ps1 -Prepare
 
 test_script:
-  - ps: Vsxmd\Test.ps1 -Run
+  - ps: ./Vsxmd/Test.ps1 -Run
 
 artifacts:
   - path: 'Vsxmd\**\*.nupkg'
-
-nuget:
-  account_feed: false
-  project_feed: false
-  disable_publish_on_pr: true
 
 deploy:
   - release: v$(APPVEYOR_BUILD_VERSION)
@@ -46,10 +45,5 @@ deploy:
     prerelease: false
     auth_token:
       secure: cApkFZuYfz7loLotMfbhb53ZIfjjfbY7dr46eu6Q9+yAV+KuSGYGcVTG8Bgx8wka
-    on:
-      appveyor_repo_tag: true
-  - provider: NuGet
-    api_key:
-      secure: iBKdOaX4b1BDwWzGKoqbHoJHyOAxL6EHCRIretKb16QRLm5l1nkaF+W0SGfuEfMY
     on:
       appveyor_repo_tag: true

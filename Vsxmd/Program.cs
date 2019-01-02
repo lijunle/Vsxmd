@@ -10,7 +10,6 @@ namespace Vsxmd
     using System.IO;
     using System.Linq;
     using System.Linq.Expressions;
-    using System.Security;
     using System.Xml.Linq;
 
     /// <summary>
@@ -80,7 +79,7 @@ namespace Vsxmd
             /// <para>Test constructor without parameters.</para>
             /// <para>See <see cref="Test()"/></para>
             /// </summary>
-            /// <permission cref="PermissionSet">Just for test.</permission>
+            /// <permission cref="Program">Just for test.</permission>
             internal Test()
             {
             }
