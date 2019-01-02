@@ -24,12 +24,20 @@
     <IncludeBuildOutput>true</IncludeBuildOutput>
     <IncludeSymbols>true</IncludeSymbols>
     <IncludeSource>true</IncludeSource>
+    <GenerateNuspecDependsOn>ExcludeDocumentationFile</GenerateNuspecDependsOn>
   </PropertyGroup>
   <ItemGroup>
     <Content Include="..\LICENSE" Link="LICENSE" PackagePath="\" />
     <Content Include="build\Vsxmd.targets" PackagePath="build\" />
     <Content Include="buildMultiTargeting\Vsxmd.targets" PackagePath="buildMultiTargeting\" />
   </ItemGroup>
+  <Target Name="ExcludeDocumentationFile">
+    <ItemGroup>
+      <!-- The _BuildOutputInPackage item group is declared in NuGet.Build.Tasks.Pack.targets -->
+      <_BuildOutputInPackage Remove="$(MSBuildProjectDirectory)\$(DocumentationFile)" />
+      <_BuildOutputInPackage Remove="$(MSBuildProjectDirectory)\**\$(DocumentationFile)" />
+    </ItemGroup>
+  </Target>
 
   <!-- Generate the Markdown file for itself -->
   <Target Name="VsxmdPreparation" AfterTargets="PostBuildEvent">
