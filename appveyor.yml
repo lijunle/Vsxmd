@@ -21,15 +21,14 @@ matrix:
 dotnet_csproj:
   patch: true
   file: '**\*.csproj'
-  version: '{version}'
-  package_version: '{version}'
-  assembly_version: '{version}'
-  file_version: '{version}'
-  informational_version: '{version}'
+  version: "{version}"
+  package_version: "{version}"
+  assembly_version: "{version}"
+  file_version: "{version}"
+  informational_version: "{version}"
 
 before_build:
-  - ps: dotnet --version
-  - ps: dotnet restore Vsxmd.sln
+  - ps: msbuild -t:restore
   - ps: ./Vsxmd/Test.ps1 -Prepare
 
 test_script:
