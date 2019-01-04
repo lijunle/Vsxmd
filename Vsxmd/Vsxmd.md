@@ -36,7 +36,7 @@
   - [ToAnchor(href)](#M-Vsxmd-Units-Extensions-ToAnchor-System-String- 'Vsxmd.Units.Extensions.ToAnchor(System.String)')
   - [ToHereLink(href)](#M-Vsxmd-Units-Extensions-ToHereLink-System-String- 'Vsxmd.Units.Extensions.ToHereLink(System.String)')
   - [ToLowerString(memberKind)](#M-Vsxmd-Units-Extensions-ToLowerString-Vsxmd-Units-MemberKind- 'Vsxmd.Units.Extensions.ToLowerString(Vsxmd.Units.MemberKind)')
-  - [ToMarkdownText(element,withLineBreak)](#M-Vsxmd-Units-Extensions-ToMarkdownText-System-Xml-Linq-XElement,System-Boolean- 'Vsxmd.Units.Extensions.ToMarkdownText(System.Xml.Linq.XElement,System.Boolean)')
+  - [ToMarkdownText(element)](#M-Vsxmd-Units-Extensions-ToMarkdownText-System-Xml-Linq-XElement- 'Vsxmd.Units.Extensions.ToMarkdownText(System.Xml.Linq.XElement)')
   - [ToReferenceLink(memberName,useShortName)](#M-Vsxmd-Units-Extensions-ToReferenceLink-System-String,System-Boolean- 'Vsxmd.Units.Extensions.ToReferenceLink(System.String,System.Boolean)')
 - [IConverter](#T-Vsxmd-IConverter 'Vsxmd.IConverter')
   - [ToMarkdown()](#M-Vsxmd-IConverter-ToMarkdown 'Vsxmd.IConverter.ToMarkdown')
@@ -621,8 +621,8 @@ The member kind's lowercase name.
 | ---- | ---- | ----------- |
 | memberKind | [Vsxmd.Units.MemberKind](#T-Vsxmd-Units-MemberKind 'Vsxmd.Units.MemberKind') | The member kind. |
 
-<a name='M-Vsxmd-Units-Extensions-ToMarkdownText-System-Xml-Linq-XElement,System-Boolean-'></a>
-### ToMarkdownText(element,withLineBreak) `method`
+<a name='M-Vsxmd-Units-Extensions-ToMarkdownText-System-Xml-Linq-XElement-'></a>
+### ToMarkdownText(element) `method`
 
 ##### Summary
 
@@ -638,14 +638,13 @@ The generated Markdwon content.
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | element | [System.Xml.Linq.XElement](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XElement 'System.Xml.Linq.XElement') | The XML element. |
-| withLineBreak | [System.Boolean](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Boolean 'System.Boolean') | Optional parameter to transform two spaces into a linebreak. |
 
 ##### Example
 
 This method converts the following `summary`element.
 
 ```
-<summary>The <paramref name="element" /> value is <value>null</value>, it throws <c>ArgumentException</c>. For more, see <see cref="M:Vsxmd.Units.Extensions.ToMarkdownText(System.Xml.Linq.XElement,System.Boolean)" />.</summary>
+<summary>The <paramref name="element" /> value is <value>null</value>, it throws <c>ArgumentException</c>. For more, see <see cref="M:Vsxmd.Units.Extensions.ToMarkdownText(System.Xml.Linq.XElement)" />.</summary>
 ```
 
 To the below Markdown content.

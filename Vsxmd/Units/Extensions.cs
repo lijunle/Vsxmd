@@ -130,19 +130,18 @@ namespace Vsxmd.Units
         /// For example, it works for <c>summary</c> and <c>returns</c> elements.
         /// </summary>
         /// <param name="element">The XML element.</param>
-        /// <param name="withLineBreak">Optional parameter to transform two spaces into a linebreak.</param>
         /// <returns>The generated Markdwon content.</returns>
         /// <example>
         /// This method converts the following <c>summary</c> element.
         /// <code>
-        /// <summary>The <paramref name="element" /> value is <value>null</value>, it throws <c>ArgumentException</c>. For more, see <see cref="ToMarkdownText(XElement, bool)"/>.</summary>
+        /// <summary>The <paramref name="element" /> value is <value>null</value>, it throws <c>ArgumentException</c>. For more, see <see cref="ToMarkdownText(XElement)"/>.</summary>
         /// </code>
         /// To the below Markdown content.
         /// <code>
         /// The `element` value is `null`, it throws `ArgumentException`. For more, see `ToMarkdownText`.
         /// </code>
         /// </example>
-        internal static string ToMarkdownText(this XElement element, bool withLineBreak = false) =>
+        internal static string ToMarkdownText(this XElement element) =>
             element.Nodes()
                 .Select(ToMarkdownSpan)
                 .Aggregate(string.Empty, JoinMarkdownSpan)

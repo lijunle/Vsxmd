@@ -353,18 +353,17 @@
             <param name="count">The number to except.</param>
             <returns>The generated enumerable.</returns>
         </member>
-        <member name="M:Vsxmd.Units.Extensions.ToMarkdownText(System.Xml.Linq.XElement,System.Boolean)">
+        <member name="M:Vsxmd.Units.Extensions.ToMarkdownText(System.Xml.Linq.XElement)">
             <summary>
             Convert the inline XML nodes to Markdown text.
             For example, it works for <c>summary</c> and <c>returns</c> elements.
             </summary>
             <param name="element">The XML element.</param>
-            <param name="withLineBreak">Optional parameter to transform two spaces into a linebreak.</param>
             <returns>The generated Markdwon content.</returns>
             <example>
             This method converts the following <c>summary</c> element.
             <code>
-            <summary>The <paramref name="element" /> value is <value>null</value>, it throws <c>ArgumentException</c>. For more, see <see cref="M:Vsxmd.Units.Extensions.ToMarkdownText(System.Xml.Linq.XElement,System.Boolean)"/>.</summary>
+            <summary>The <paramref name="element" /> value is <value>null</value>, it throws <c>ArgumentException</c>. For more, see <see cref="M:Vsxmd.Units.Extensions.ToMarkdownText(System.Xml.Linq.XElement)"/>.</summary>
             </code>
             To the below Markdown content.
             <code>
