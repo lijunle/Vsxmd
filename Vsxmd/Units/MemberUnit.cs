@@ -67,7 +67,7 @@ namespace Vsxmd.Units
                 : new[]
                 {
                     "##### Summary",
-                    "*Inherit from parent.*"
+                    "*Inherit from parent.*",
                 };
 
         private IEnumerable<string> Namespace =>
@@ -76,7 +76,7 @@ namespace Vsxmd.Units
             : new[]
             {
                 $"##### Namespace",
-                $"{this.name.Namespace}"
+                $"{this.name.Namespace}",
             };
 
         private IEnumerable<string> Summary =>
@@ -138,7 +138,8 @@ namespace Vsxmd.Units
 
         private static MemberUnit Create(string typeName) =>
             new MemberUnit(
-                new XElement("member",
+                new XElement(
+                    "member",
                     new XAttribute("name", $"T:{typeName}")));
 
         private class MemberUnitComparer : IComparer<MemberUnit>

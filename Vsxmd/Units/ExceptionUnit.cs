@@ -34,7 +34,7 @@ namespace Vsxmd.Units
         public override IEnumerable<string> ToMarkdown() =>
             new[]
             {
-                $"| {this.Name} | {this.Description} |"
+                $"| {this.Name} | {this.Description} |",
             };
 
         /// <summary>
@@ -57,14 +57,14 @@ namespace Vsxmd.Units
             var table = new[]
             {
                 "| Name | Description |",
-                "| ---- | ----------- |"
+                "| ---- | ----------- |",
             }
             .Concat(markdowns);
 
             return new[]
             {
                 "##### Exceptions",
-                string.Join("\n", table)
+                string.Join("\n", table),
             };
         }
     }

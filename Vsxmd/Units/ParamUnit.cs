@@ -38,7 +38,7 @@ namespace Vsxmd.Units
         public override IEnumerable<string> ToMarkdown() =>
             new[]
             {
-                $"| {this.Name} | {this.paramType.ToReferenceLink()} | {this.Description} |"
+                $"| {this.Name} | {this.paramType.ToReferenceLink()} | {this.Description} |",
             };
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace Vsxmd.Units
                     : new[]
                     {
                         "##### Parameters",
-                        $"This {memberKind.ToLowerString()} has no parameters."
+                        $"This {memberKind.ToLowerString()} has no parameters.",
                     };
             }
 
@@ -78,14 +78,14 @@ namespace Vsxmd.Units
             var table = new[]
             {
                 "| Name | Type | Description |",
-                "| ---- | ---- | ----------- |"
+                "| ---- | ---- | ----------- |",
             }
             .Concat(markdowns);
 
             return new[]
             {
                 "##### Parameters",
-                string.Join("\n", table)
+                string.Join("\n", table),
             };
         }
     }

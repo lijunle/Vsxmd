@@ -157,10 +157,10 @@ namespace Vsxmd.Units
         /// <inheritdoc />
         public int CompareTo(MemberName other) =>
             this.TypeShortName != other.TypeShortName
-            ? this.TypeShortName.CompareTo(other.TypeShortName)
+            ? string.Compare(this.TypeShortName, other.TypeShortName, StringComparison.Ordinal)
             : this.Kind != other.Kind
             ? this.Kind.CompareTo(other.Kind)
-            : this.LongName.CompareTo(other.LongName);
+            : string.Compare(this.LongName, other.LongName, StringComparison.Ordinal);
 
         /// <summary>
         /// Gets the method parameter type names from the member name.
@@ -179,7 +179,7 @@ namespace Vsxmd.Units
             var delta = 0;
             var list = new List<StringBuilder>()
             {
-                new StringBuilder("T:")
+                new StringBuilder("T:"),
             };
 
             foreach (var character in paramString)
@@ -214,7 +214,7 @@ namespace Vsxmd.Units
         /// <param name="useShortName">Indicate if use short type name.</param>
         /// <returns>The generated Markdown reference link.</returns>
         internal string ToReferenceLink(bool useShortName) =>
-            $"{this.Namespace}.".StartsWith("System.")
+            $"{this.Namespace}.".StartsWith("System.", StringComparison.Ordinal)
             ? $"[{this.GetReferenceName(useShortName).Escape()}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:{this.MsdnName} '{this.StrippedName}')"
             : $"[{this.GetReferenceName(useShortName).Escape()}](#{this.Href} '{this.StrippedName}')";
 

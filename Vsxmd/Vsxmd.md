@@ -467,7 +467,7 @@ The Markdwon code span.
 
 ##### Remarks
 
-Reference: http://meta.stackexchange.com/questions/55437/how-can-the-backtick-character-be-included-in-code
+Reference: http://meta.stackexchange.com/questions/55437/how-can-the-backtick-character-be-included-in-code .
 
 <a name='M-Vsxmd-Units-Extensions-Escape-System-String-'></a>
 ### Escape(content) `method`
@@ -638,11 +638,11 @@ The generated Markdwon content.
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | element | [System.Xml.Linq.XElement](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XElement 'System.Xml.Linq.XElement') | The XML element. |
-| withLineBreak | [System.Boolean](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Boolean 'System.Boolean') | Optional parameter to transform two spaces into a linebreak |
+| withLineBreak | [System.Boolean](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Boolean 'System.Boolean') | Optional parameter to transform two spaces into a linebreak. |
 
 ##### Example
 
-This method converts the following `summary`element
+This method converts the following `summary`element.
 
 ```
 <summary>The <paramref name="element" /> value is <value>null</value>, it throws <c>ArgumentException</c>. For more, see <see cref="M:Vsxmd.Units.Extensions.ToMarkdownText(System.Xml.Linq.XElement,System.Boolean)" />.</summary>
@@ -1178,7 +1178,10 @@ Program entry.
 ##### Remarks
 
 Usage syntax:
-`Vsxmd.exe <input-XML-path> [output-Markdown-path]`
+
+```
+Vsxmd.exe &lt;input-XML-path&gt; [output-Markdown-path]
+```
 
 The `input-XML-path`argument is required. It references to the VS generated XML documentation file.
 
@@ -1501,7 +1504,7 @@ Initializes a new instance of the [Test](#T-Vsxmd-Program-Test 'Vsxmd.Program.Te
 
 Test constructor without parameters.
 
-See [Test.#ctor](#M-Vsxmd-Program-Test-#ctor 'Vsxmd.Program.Test.#ctor')
+See [Test.#ctor](#M-Vsxmd-Program-Test-#ctor 'Vsxmd.Program.Test.#ctor').
 
 ##### Parameters
 
@@ -1522,9 +1525,9 @@ Test backtick characters in summary comment.
 
 See \`should not inside code block\`.
 
-See `` `backtick inside code block` ``
+See `` `backtick inside code block` ``.
 
-See \``code block inside backtick`\`
+See \``code block inside backtick`\`.
 
 ##### Returns
 
@@ -1678,7 +1681,7 @@ See [TestGenericType\`2](#T-Vsxmd-Program-TestGenericType`2 'Vsxmd.Program.TestG
 
 Test generic method.
 
-See [TestGenericMethod\`\`2](#M-Vsxmd-Program-TestGenericType`2-TestGenericMethod``2 'Vsxmd.Program.TestGenericType`2.TestGenericMethod``2')
+See [TestGenericMethod\`\`2](#M-Vsxmd-Program-TestGenericType`2-TestGenericMethod``2 'Vsxmd.Program.TestGenericType`2.TestGenericMethod``2').
 
 ##### Returns
 

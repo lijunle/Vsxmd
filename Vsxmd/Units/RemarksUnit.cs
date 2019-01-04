@@ -31,7 +31,7 @@ namespace Vsxmd.Units
             new[]
             {
                 "##### Remarks",
-                this.ElementContent
+                this.ElementContent,
             };
 
         /// <summary>

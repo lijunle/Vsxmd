@@ -31,7 +31,7 @@ namespace Vsxmd.Units
             new[]
             {
                 "##### Returns",
-                this.ElementContent
+                this.ElementContent,
             };
 
         /// <summary>

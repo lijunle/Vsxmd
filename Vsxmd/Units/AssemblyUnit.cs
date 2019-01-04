@@ -33,7 +33,7 @@ namespace Vsxmd.Units
         public override IEnumerable<string> ToMarkdown() =>
             new[]
             {
-                $"{Href.ToAnchor()}# {this.AssemblyName}"
+                $"{Href.ToAnchor()}# {this.AssemblyName}",
             };
     }
 }

@@ -7,6 +7,7 @@
 namespace Vsxmd
 {
     using System;
+    using System.Globalization;
     using System.IO;
     using System.Linq;
     using System.Linq.Expressions;
@@ -17,7 +18,7 @@ namespace Vsxmd
     /// </summary>
     /// <remarks>
     /// Usage syntax:
-    /// <c>Vsxmd.exe &lt;input-XML-path&gt; [output-Markdown-path]</c>
+    /// <code>Vsxmd.exe &lt;input-XML-path&gt; [output-Markdown-path]</code>
     /// <para>The <c>input-XML-path</c> argument is required. It references to the VS generated XML documentation file.</para>
     /// <para>The <c>output-Markdown-path</c> argument is optional. It indicates the file path for the Markdown output file. When not specific, it will be a <c>.md</c> file with same file name as the XML documentation file, path at the XML documentation folder.</para>
     /// </remarks>
@@ -58,7 +59,7 @@ namespace Vsxmd
                     return;
                 }
 
-                var shouldDelete = Convert.ToBoolean(vsxmdAutoDeleteXml);
+                var shouldDelete = Convert.ToBoolean(vsxmdAutoDeleteXml, CultureInfo.InvariantCulture);
                 if (shouldDelete)
                 {
                     File.Delete(xmlPath);
@@ -67,6 +68,7 @@ namespace Vsxmd
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
+
                 // Ignore errors. Do not impact on project build
                 return;
             }
@@ -77,7 +79,7 @@ namespace Vsxmd
             /// <summary>
             /// Initializes a new instance of the <see cref="Test"/> class.
             /// <para>Test constructor without parameters.</para>
-            /// <para>See <see cref="Test()"/></para>
+            /// <para>See <see cref="Test()"/>.</para>
             /// </summary>
             /// <permission cref="Program">Just for test.</permission>
             internal Test()
@@ -129,8 +131,8 @@ namespace Vsxmd
             /// <summary>
             /// Test backtick characters in summary comment.
             /// <para>See `should not inside code block`.</para>
-            /// <para>See <c>`backtick inside code block`</c></para>
-            /// <para>See `<c>code block inside backtick</c>`</para>
+            /// <para>See <c>`backtick inside code block`</c>.</para>
+            /// <para>See `<c>code block inside backtick</c>`.</para>
             /// </summary>
             /// <returns>Nothing.</returns>
             internal string TestBacktickInSummary() => null;
@@ -152,7 +154,7 @@ namespace Vsxmd
         {
             /// <summary>
             /// Test generic method.
-            /// <para>See <see cref="TestGenericMethod{T3, T4}"/></para>
+            /// <para>See <see cref="TestGenericMethod{T3, T4}"/>.</para>
             /// </summary>
             /// <typeparam name="T3">Generic type 3.</typeparam>
             /// <typeparam name="T4">Generic type 4.</typeparam>

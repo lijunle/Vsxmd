@@ -39,6 +39,6 @@ namespace Vsxmd.Units
         /// <summary>
         /// Method.
         /// </summary>
-        Method
+        Method,
     }
 }
