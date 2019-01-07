@@ -9,7 +9,7 @@ namespace Vsxmd
     using System.Collections.Generic;
     using System.Linq;
     using System.Xml.Linq;
-    using Units;
+    using Vsxmd.Units;
 
     /// <inheritdoc/>
     public class Converter : IConverter

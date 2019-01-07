@@ -9,7 +9,6 @@ namespace Vsxmd.Units
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text.RegularExpressions;
     using System.Xml.Linq;
 
     /// <summary>
@@ -23,7 +22,9 @@ namespace Vsxmd.Units
         /// <param name="memberKind">The member kind.</param>
         /// <returns>The member kind's lowercase name.</returns>
         internal static string ToLowerString(this MemberKind memberKind) =>
-            memberKind.ToString().ToLower();
+#pragma warning disable CA1308 // We use lower case in URL anchor.
+            memberKind.ToString().ToLowerInvariant();
+#pragma warning restore CA1308
 
         /// <summary>
         /// Concatenates the <paramref name="value"/>s with the <paramref name="separator"/>.
@@ -86,7 +87,7 @@ namespace Vsxmd.Units
         /// </summary>
         /// <param name="code">The code span.</param>
         /// <returns>The Markdwon code span.</returns>
-        /// <remarks>Reference: http://meta.stackexchange.com/questions/55437/how-can-the-backtick-character-be-included-in-code </remarks>
+        /// <remarks>Reference: http://meta.stackexchange.com/questions/55437/how-can-the-backtick-character-be-included-in-code .</remarks>
         internal static string AsCode(this string code)
         {
             string backticks = "`";
@@ -95,7 +96,7 @@ namespace Vsxmd.Units
                 backticks += "`";
             }
 
-            return code.StartsWith("`") || code.EndsWith("`")
+            return code.StartsWith("`", StringComparison.Ordinal) || code.EndsWith("`", StringComparison.Ordinal)
                 ? $"{backticks} {code} {backticks}"
                 : $"{backticks}{code}{backticks}";
         }
@@ -128,19 +129,18 @@ namespace Vsxmd.Units
         /// For example, it works for <c>summary</c> and <c>returns</c> elements.
         /// </summary>
         /// <param name="element">The XML element.</param>
-        /// <param name="withLineBreak">Optional parameter to transform two spaces into a linebreak</param>
         /// <returns>The generated Markdwon content.</returns>
         /// <example>
-        /// This method converts the following <c>summary</c> element
+        /// This method converts the following <c>summary</c> element.
         /// <code>
-        /// <summary>The <paramref name="element" /> value is <value>null</value>, it throws <c>ArgumentException</c>. For more, see <see cref="ToMarkdownText(XElement, bool)"/>.</summary>
+        /// <summary>The <paramref name="element" /> value is <value>null</value>, it throws <c>ArgumentException</c>. For more, see <see cref="ToMarkdownText(XElement)"/>.</summary>
         /// </code>
         /// To the below Markdown content.
         /// <code>
         /// The `element` value is `null`, it throws `ArgumentException`. For more, see `ToMarkdownText`.
         /// </code>
         /// </example>
-        internal static string ToMarkdownText(this XElement element, bool withLineBreak = false) =>
+        internal static string ToMarkdownText(this XElement element) =>
             element.Nodes()
                 .Select(ToMarkdownSpan)
                 .Aggregate(string.Empty, JoinMarkdownSpan)
@@ -151,7 +151,7 @@ namespace Vsxmd.Units
             var text = node as XText;
             if (text != null)
             {
-                return text.Value.Escape().TrimStart(' ').Replace("            ", "");
+                return text.Value.Escape().TrimStart(' ').Replace("            ", string.Empty);
             }
 
             var child = node as XElement;
@@ -214,9 +214,9 @@ namespace Vsxmd.Units
         }
 
         private static string JoinMarkdownSpan(string x, string y) =>
-            x.EndsWith("\n\n")
+            x.EndsWith("\n\n", StringComparison.Ordinal)
                 ? $"{x}{y.TrimStart()}"
-                : y.StartsWith("\n\n")
+                : y.StartsWith("\n\n", StringComparison.Ordinal)
                 ? $"{x.TrimEnd()}{y}"
                 : $"{x}{y}";
 

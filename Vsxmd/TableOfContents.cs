@@ -8,7 +8,7 @@ namespace Vsxmd
 {
     using System.Collections.Generic;
     using System.Linq;
-    using Units;
+    using Vsxmd.Units;
 
     /// <summary>
     /// Table of contents.
@@ -42,9 +42,8 @@ namespace Vsxmd
         public IEnumerable<string> ToMarkdown() =>
             new[]
             {
-
                 $"## Contents",
-                this.memberUnits.Select(ToMarkdown).Join("\n")
+                this.memberUnits.Select(ToMarkdown).Join("\n"),
             };
 
         private static string ToMarkdown(MemberUnit memberUnit) =>

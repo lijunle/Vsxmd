@@ -31,7 +31,7 @@ namespace Vsxmd.Units
             new[]
             {
                 $"##### Example",
-                $"{this.ElementContent}"
+                $"{this.ElementContent}",
             };
 
         /// <summary>

@@ -25,7 +25,7 @@ namespace Vsxmd.Units
         {
             if (element.Name != elementName)
             {
-                throw new ArgumentException(nameof(element));
+                throw new ArgumentException("The element name is not expected", nameof(element));
             }
 
             this.Element = element;
