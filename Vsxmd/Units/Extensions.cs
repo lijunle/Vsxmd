@@ -9,7 +9,6 @@ namespace Vsxmd.Units
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text.RegularExpressions;
     using System.Xml.Linq;
 
     /// <summary>
@@ -161,13 +160,13 @@ namespace Vsxmd.Units
                 switch (child.Name.ToString())
                 {
                     case "see":
-                        return $"{child.ToSeeTagMarkdownSpan()}";
+                        return $"{child.ToSeeTagMarkdownSpan()}{child.NextNode.AsSpanMargin()}";
                     case "paramref":
                     case "typeparamref":
-                        return $"{child.Attribute("name")?.Value.AsCode()}";
+                        return $"{child.Attribute("name")?.Value?.AsCode()}{child.NextNode.AsSpanMargin()}";
                     case "c":
                     case "value":
-                        return $"{child.Value.AsCode()}";
+                        return $"{child.Value.AsCode()}{child.NextNode.AsSpanMargin()}";
                     case "code":
                         var lang = child.Attribute("lang")?.Value ?? string.Empty;
 
@@ -214,31 +213,26 @@ namespace Vsxmd.Units
             return result.Min();
         }
 
-        private static string JoinMarkdownSpan(string x, string y)
-        {
-            if (x.EndsWith("\n\n", StringComparison.Ordinal))
-            {
-                return $"{x}{y.TrimStart()}";
-            }
-
-            if (y.StartsWith("\n\n", StringComparison.Ordinal))
-            {
-                return $"{x.TrimEnd()}{y}";
-            }
-
-            // This is a workaround to append space after inline code block.
-            // The correct way to do this should be check relative elements positions inside `ToMarkdownSpan` method.
-            // However, `XElement` does not provide a way to access the start/end tag accurate positions.
-            if (x.EndsWith("`", StringComparison.Ordinal) && !Regex.IsMatch(y, @"^[`\.,;?)]"))
-            {
-                return $"{x} {y}";
-            }
-
-            return $"{x}{y}";
-        }
+        private static string JoinMarkdownSpan(string x, string y) =>
+            x.EndsWith("\n\n", StringComparison.Ordinal)
+                ? $"{x}{y.TrimStart()}"
+                : y.StartsWith("\n\n", StringComparison.Ordinal)
+                ? $"{x.TrimEnd()}{y}"
+                : $"{x}{y}";
 
         private static string ToSeeTagMarkdownSpan(this XElement seeTag) =>
             seeTag.Attribute("cref")?.Value?.ToReferenceLink(useShortName: true) ??
             seeTag.Attribute("langword")?.Value?.AsCode();
+
+        private static string AsSpanMargin(this XNode node)
+        {
+            var text = node as XText;
+            if (text != null && text.Value.StartsWith(" ", StringComparison.Ordinal))
+            {
+                return " ";
+            }
+
+            return string.Empty;
+        }
     }
 }

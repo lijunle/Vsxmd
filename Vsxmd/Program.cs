@@ -138,6 +138,18 @@ namespace Vsxmd
             internal string TestBacktickInSummary() => null;
 
             /// <summary>
+            /// Test space after inline elements.
+            /// <para>See <c>code block</c> should follow a space.</para>
+            /// <para>See a value at the end of a <value>sentence</value>.</para>
+            /// <para>See <see cref="TestSpaceAfterInlineElements"/> as a link.</para>
+            /// <para>See <paramref name="space" /> after a param ref.</para>
+            /// <para>See <typeparamref name="T" /> after a type param ref.</para>
+            /// <para>See <c>code block</c><value>and value</value> next to each other without space.</para>
+            /// </summary>
+            /// <returns>Nothing.</returns>
+            internal bool TestSpaceAfterInlineElements<T>(bool space) => space;
+
+            /// <summary>
             /// Test see tag with langword attribute. See <see langword="true"/>.
             /// </summary>
             /// <returns>Nothing.</returns>
