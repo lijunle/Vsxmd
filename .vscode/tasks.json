@@ -6,6 +6,10 @@
       "command": "dotnet",
       "type": "process",
       "args": ["build", "${workspaceFolder}/Vsxmd/Vsxmd.csproj"],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
       "problemMatcher": "$msCompile"
     }
   ]
