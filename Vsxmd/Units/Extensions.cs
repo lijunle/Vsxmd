@@ -9,6 +9,7 @@ namespace Vsxmd.Units
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Text.RegularExpressions;
     using System.Xml.Linq;
 
     /// <summary>
@@ -213,12 +214,28 @@ namespace Vsxmd.Units
             return result.Min();
         }
 
-        private static string JoinMarkdownSpan(string x, string y) =>
-            x.EndsWith("\n\n", StringComparison.Ordinal)
-                ? $"{x}{y.TrimStart()}"
-                : y.StartsWith("\n\n", StringComparison.Ordinal)
-                ? $"{x.TrimEnd()}{y}"
-                : $"{x}{y}";
+        private static string JoinMarkdownSpan(string x, string y)
+        {
+            if (x.EndsWith("\n\n", StringComparison.Ordinal))
+            {
+                return $"{x}{y.TrimStart()}";
+            }
+
+            if (y.StartsWith("\n\n", StringComparison.Ordinal))
+            {
+                return $"{x.TrimEnd()}{y}";
+            }
+
+            // This is a workaround to append space after inline code block.
+            // The correct way to do this should be check relative elements positions inside `ToMarkdownSpan` method.
+            // However, `XElement` does not provide a way to access the start/end tag accurate positions.
+            if (x.EndsWith("`", StringComparison.Ordinal) && !Regex.IsMatch(y, @"^[\.,;?)]"))
+            {
+                return $"{x} {y}";
+            }
+
+            return $"{x}{y}";
+        }
 
         private static string ToSeeTagMarkdownSpan(this XElement seeTag) =>
             seeTag.Attribute("cref")?.Value?.ToReferenceLink(useShortName: true) ??
