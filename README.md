@@ -27,17 +27,24 @@ This project is initially inspired from a [gist](https://gist.github.com/formix/
 # Markdown Path
 
 ## Customizing md path
+
 - The project property, `DocumentationMarkdown`, is used to specify the generated Markdown file path.
 - If not specified, it will be the same XML documentation file name with `.md` extension, under the same folder as the XML file.
+
 ### Example
+
 ```xml
 <PropertyGroup>
     <DocumentationMarkdown>'..\..\..\Readme.md</DocumentationMarkdown>
 </PropertyGroup>
 ```
+
 ## Configuring to delete XML configuration file
+
 - Optional parameter if you want to delete the XML configuration file after generating your md file
+
 ### Example
+
 ```xml
 <PropertyGroup>
     <VsxmdAutoDeleteXml>True</VsxmdAutoDeleteXml>
@@ -45,16 +52,17 @@ This project is initially inspired from a [gist](https://gist.github.com/formix/
 ```
 
 ## Using custom highlight code
+
 - To use custom highlight code on your md jus use the attribute `lang` inside your `<code>` tag
 
 ### Example
+
 ```xml
-\\\ <summary>
-\\\ <code lang="csharp">
-\\\ \\Do some suff
-\\\ </code>
-\\\ <\summary>
+<code lang="csharp">
+    // Some C# codes...
+</code>
 ```
+
 - What you put into `lang` property will be interpreted by your markdown reader, so you can use any markdown highlight, like `xml`, `ruby`, etc.
 
 # API
