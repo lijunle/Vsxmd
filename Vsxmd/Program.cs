@@ -100,7 +100,7 @@ namespace Vsxmd
             /// <para>See <see cref="TestGenericParameter{T1, T2}(Expression{Func{T1, T2, string}})"/>.</para>
             /// </summary>
             /// <returns>Nothing.</returns>
-            internal string TestGenericRefence() => null;
+            internal string TestGenericReference() => null;
 
             /// <summary>
             /// Test generic parameter type.
