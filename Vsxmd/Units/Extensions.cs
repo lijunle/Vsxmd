@@ -58,7 +58,7 @@ namespace Vsxmd.Units
         /// <param name="href">The href.</param>
         /// <returns>The anchor for the <paramref name="href"/>.</returns>
         internal static string ToAnchor(this string href) =>
-             $"<a name='{href}'></a>\n";
+            $"<a name='{href}'></a>\n";
 
         /// <summary>
         /// Generate "to here" link for the <paramref name="href"/>.
