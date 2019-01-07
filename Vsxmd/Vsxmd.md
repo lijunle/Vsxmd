@@ -1671,8 +1671,6 @@ See `space` after a param ref.
 
 See `T` after a type param ref.
 
-See `code block``and value` next to each other without space.
-
 ##### Returns
 
 Nothing.

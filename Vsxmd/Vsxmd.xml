@@ -115,7 +115,6 @@
             <para>See <see cref="M:Vsxmd.Program.Test.TestSpaceAfterInlineElements``1(System.Boolean)"/> as a link.</para>
             <para>See <paramref name="space" /> after a param ref.</para>
             <para>See <typeparamref name="T" /> after a type param ref.</para>
-            <para>See <c>code block</c><value>and value</value> next to each other without space.</para>
             </summary>
             <returns>Nothing.</returns>
         </member>

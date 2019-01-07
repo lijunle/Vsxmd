@@ -144,7 +144,6 @@ namespace Vsxmd
             /// <para>See <see cref="TestSpaceAfterInlineElements"/> as a link.</para>
             /// <para>See <paramref name="space" /> after a param ref.</para>
             /// <para>See <typeparamref name="T" /> after a type param ref.</para>
-            /// <para>See <c>code block</c><value>and value</value> next to each other without space.</para>
             /// </summary>
             /// <returns>Nothing.</returns>
             internal bool TestSpaceAfterInlineElements<T>(bool space) => space;
