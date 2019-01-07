@@ -229,7 +229,7 @@ namespace Vsxmd.Units
             // This is a workaround to append space after inline code block.
             // The correct way to do this should be check relative elements positions inside `ToMarkdownSpan` method.
             // However, `XElement` does not provide a way to access the start/end tag accurate positions.
-            if (x.EndsWith("`", StringComparison.Ordinal) && !Regex.IsMatch(y, @"^[\.,;?)]"))
+            if (x.EndsWith("`", StringComparison.Ordinal) && !Regex.IsMatch(y, @"^[`\.,;?)]"))
             {
                 return $"{x} {y}";
             }
