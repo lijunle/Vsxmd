@@ -186,7 +186,7 @@ Initializes a new instance of the [BaseUnit](#T-Vsxmd-Units-BaseUnit 'Vsxmd.Unit
 
 | Name | Description |
 | ---- | ----------- |
-| [System.ArgumentException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentException 'System.ArgumentException') | Throw if XML `element`name not matches the expected `elementName`. |
+| [System.ArgumentException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentException 'System.ArgumentException') | Throw if XML `element` name not matches the expected `elementName`. |
 
 <a name='P-Vsxmd-Units-BaseUnit-Element'></a>
 ### Element `property`
@@ -211,7 +211,7 @@ Returns the [XAttribute](http://msdn.microsoft.com/query/dev14.query?appId=Dev14
 
 ##### Returns
 
-An [XAttribute](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XAttribute 'System.Xml.Linq.XAttribute')value that has the specified `name`; `null`if there is no attribute with the specified `name`.
+An [XAttribute](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XAttribute 'System.Xml.Linq.XAttribute')value that has the specified `name`; `null` if there is no attribute with the specified `name`.
 
 ##### Parameters
 
@@ -451,9 +451,9 @@ Extensions helper.
 
 ##### Summary
 
-Wrap the `code`into Markdown backtick safely.
+Wrap the `code` into Markdown backtick safely.
 
-The backtick characters inside the `code`reverse as it is.
+The backtick characters inside the `code` reverse as it is.
 
 ##### Returns
 
@@ -491,7 +491,7 @@ The escaped content.
 
 ##### Summary
 
-Concatenates the `value`s with the `separator`.
+Concatenates the `value` s with the `separator`.
 
 ##### Returns
 
@@ -513,7 +513,7 @@ Gets the n-th last element from the `source`.
 
 ##### Returns
 
-The element at the specified position in the `source`sequence.
+The element at the specified position in the `source` sequence.
 
 ##### Parameters
 
@@ -533,7 +533,7 @@ The element at the specified position in the `source`sequence.
 
 ##### Summary
 
-Suffix the `suffix`to the `value`, and generate a new string.
+Suffix the `suffix` to the `value`, and generate a new string.
 
 ##### Returns
 
@@ -627,7 +627,7 @@ The member kind's lowercase name.
 ##### Summary
 
 Convert the inline XML nodes to Markdown text.
-For example, it works for `summary`and `returns`elements.
+For example, it works for `summary` and `returns` elements.
 
 ##### Returns
 
@@ -641,7 +641,7 @@ The generated Markdwon content.
 
 ##### Example
 
-This method converts the following `summary`element.
+This method converts the following `summary` element.
 
 ```
 <summary>The <paramref name="element" /> value is <value>null</value>, it throws <c>ArgumentException</c>. For more, see <see cref="M:Vsxmd.Units.Extensions.ToMarkdownText(System.Xml.Linq.XElement)" />.</summary>
@@ -912,7 +912,7 @@ For `(System.Collections.Generic.IEnumerable{System.String})`, returns `["T:Syst
 
 Convert the member name to Markdown reference link.
 
-If then name is under `System`namespace, the link points to MSDN.
+If then name is under `System` namespace, the link points to MSDN.
 
 Otherwise, the link points to this page anchor.
 
@@ -993,7 +993,7 @@ Gets the type name.
 
 ##### Summary
 
-Complement a type unit if the member unit `group`does not have one.
+Complement a type unit if the member unit `group` does not have one.
 One member unit group has the same [TypeName](#P-Vsxmd-Units-MemberUnit-TypeName 'Vsxmd.Units.MemberUnit.TypeName').
 
 ##### Returns
@@ -1182,9 +1182,9 @@ Usage syntax:
 Vsxmd.exe &lt;input-XML-path&gt; [output-Markdown-path]
 ```
 
-The `input-XML-path`argument is required. It references to the VS generated XML documentation file.
+The `input-XML-path` argument is required. It references to the VS generated XML documentation file.
 
-The `output-Markdown-path`argument is optional. It indicates the file path for the Markdown output file. When not specific, it will be a `.md`file with same file name as the XML documentation file, path at the XML documentation folder.
+The `output-Markdown-path` argument is optional. It indicates the file path for the Markdown output file. When not specific, it will be a `.md` file with same file name as the XML documentation file, path at the XML documentation folder.
 
 <a name='M-Vsxmd-Program-Main-System-String[]-'></a>
 ### Main(args) `method`
@@ -1526,7 +1526,7 @@ See \`should not inside code block\`.
 
 See `` `backtick inside code block` ``.
 
-See \``code block inside backtick`\`.
+See \` `code block inside backtick` \`.
 
 ##### Returns
 
@@ -1564,7 +1564,7 @@ This method has no parameters.
 
 Test generic parameter type.
 
-See `T1`and `T2`.
+See `T1` and `T2`.
 
 ##### Returns
 
