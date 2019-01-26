@@ -3,7 +3,7 @@
   <Target Name="Vsxmd" AfterTargets="PostBuildEvent">
     <PropertyGroup>
       <VsxmdBinaryDirectory Condition=" '$(VsxmdBinaryDirectory)' == '' ">$(MSBuildThisFileDirectory)/../tools</VsxmdBinaryDirectory>
-      <VsxmdBinary Condition=" ('$(MSBuildRuntimeType)' == 'Full' OR '$(MSBuildRuntimeType)' == '') AND EXISTS('$(VsxmdBinaryDirectory)/net46') ">$(VsxmdBinaryDirectory)/net46/Vsxmd.exe</VsxmdBinary>
+      <VsxmdBinary Condition=" ('$(MSBuildRuntimeType)' == 'Full' OR '$(MSBuildRuntimeType)' == '') AND EXISTS('$(VsxmdBinaryDirectory)/net46') ">"$(VsxmdBinaryDirectory)/net46/Vsxmd.exe"</VsxmdBinary>
       <VsxmdBinary Condition=" '$(MSBuildRuntimeType)' == 'Mono' AND EXISTS('$(VsxmdBinaryDirectory)/net46') ">mono "$(VsxmdBinaryDirectory)/net46/Vsxmd.exe"</VsxmdBinary>
       <VsxmdBinary Condition=" '$(MSBuildRuntimeType)' == 'Core' AND EXISTS('$(VsxmdBinaryDirectory)/netcoreapp2.2') ">dotnet "$(VsxmdBinaryDirectory)/netcoreapp2.2/Vsxmd.dll"</VsxmdBinary>
       <VsxmdCommand Condition=" '$(VsxmdBinary)' == '' ">echo "The Vsxmd command is not currently available."</VsxmdCommand>
