@@ -106,7 +106,7 @@
   - [TestGenericException()](#M-Vsxmd-Program-Test-TestGenericException 'Vsxmd.Program.Test.TestGenericException')
   - [TestGenericParameter\`\`2(expression)](#M-Vsxmd-Program-Test-TestGenericParameter``2-System-Linq-Expressions-Expression{System-Func{``0,``1,System-String}}- 'Vsxmd.Program.Test.TestGenericParameter``2(System.Linq.Expressions.Expression{System.Func{``0,``1,System.String}})')
   - [TestGenericPermission()](#M-Vsxmd-Program-Test-TestGenericPermission 'Vsxmd.Program.Test.TestGenericPermission')
-  - [TestGenericRefence()](#M-Vsxmd-Program-Test-TestGenericRefence 'Vsxmd.Program.Test.TestGenericRefence')
+  - [TestGenericReference()](#M-Vsxmd-Program-Test-TestGenericReference 'Vsxmd.Program.Test.TestGenericReference')
   - [TestParamWithoutDescription(p)](#M-Vsxmd-Program-Test-TestParamWithoutDescription-System-String- 'Vsxmd.Program.Test.TestParamWithoutDescription(System.String)')
   - [TestSeeLangword()](#M-Vsxmd-Program-Test-TestSeeLangword 'Vsxmd.Program.Test.TestSeeLangword')
 - [TestGenericType\`2](#T-Vsxmd-Program-TestGenericType`2 'Vsxmd.Program.TestGenericType`2')
@@ -364,7 +364,7 @@ This method has no parameters.
 ##### Summary
 
 Convert the example XML element to Markdown safely.
-If elemnt is `null`, return empty string.
+If element is `null`, return empty string.
 
 ##### Returns
 
@@ -423,7 +423,7 @@ This method has no parameters.
 ##### Summary
 
 Convert the exception XML element to Markdown safely.
-If elemnt is `null`, return empty string.
+If element is `null`, return empty string.
 
 ##### Returns
 
@@ -457,7 +457,7 @@ The backtick characters inside the `code`reverse as it is.
 
 ##### Returns
 
-The Markdwon code span.
+The Markdown code span.
 
 ##### Parameters
 
@@ -631,7 +631,7 @@ For example, it works for `summary`and `returns`elements.
 
 ##### Returns
 
-The generated Markdwon content.
+The generated Markdown content.
 
 ##### Parameters
 
@@ -686,7 +686,7 @@ Vsxmd
 
 ##### Summary
 
-Converter for XML docuement to Markdown syntax conversion.
+Converter for XML document to Markdown syntax conversion.
 
 <a name='M-Vsxmd-IConverter-ToMarkdown'></a>
 ### ToMarkdown() `method`
@@ -1058,7 +1058,7 @@ Initializes a new instance of the [ParamUnit](#T-Vsxmd-Units-ParamUnit 'Vsxmd.Un
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | element | [System.Xml.Linq.XElement](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XElement 'System.Xml.Linq.XElement') | The param XML element. |
-| paramType | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The paramter type corresponding to the param XML element. |
+| paramType | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The parameter type corresponding to the param XML element. |
 
 ##### Exceptions
 
@@ -1151,7 +1151,7 @@ This method has no parameters.
 ##### Summary
 
 Convert the permission XML element to Markdown safely.
-If elemnt is `null`, return empty string.
+If element is `null`, return empty string.
 
 ##### Returns
 
@@ -1250,7 +1250,7 @@ This method has no parameters.
 ##### Summary
 
 Convert the remarks XML element to Markdown safely.
-If elemnt is `null`, return empty string.
+If element is `null`, return empty string.
 
 ##### Returns
 
@@ -1309,7 +1309,7 @@ This method has no parameters.
 ##### Summary
 
 Convert the returns XML element to Markdown safely.
-If elemnt is `null`, return empty string.
+If element is `null`, return empty string.
 
 ##### Returns
 
@@ -1368,7 +1368,7 @@ This method has no parameters.
 ##### Summary
 
 Convert the seealso XML element to Markdown safely.
-If elemnt is `null`, return empty string.
+If element is `null`, return empty string.
 
 ##### Returns
 
@@ -1427,7 +1427,7 @@ This method has no parameters.
 ##### Summary
 
 Convert the summary XML element to Markdown safely.
-If elemnt is `null`, return empty string.
+If element is `null`, return empty string.
 
 ##### Returns
 
@@ -1604,8 +1604,8 @@ This method has no parameters.
 | ---- | ----------- |
 | [Vsxmd.Program.Test.TestGenericParameter\`\`2](#M-Vsxmd-Program-Test-TestGenericParameter``2-System-Linq-Expressions-Expression{System-Func{``0,``1,System-String}}- 'Vsxmd.Program.Test.TestGenericParameter``2(System.Linq.Expressions.Expression{System.Func{``0,``1,System.String}})') | Just for test. |
 
-<a name='M-Vsxmd-Program-Test-TestGenericRefence'></a>
-### TestGenericRefence() `method`
+<a name='M-Vsxmd-Program-Test-TestGenericReference'></a>
+### TestGenericReference() `method`
 
 ##### Summary
 
@@ -1744,7 +1744,7 @@ This method has no parameters.
 ##### Summary
 
 Convert the param XML element to Markdown safely.
-If elemnt is `null`, return empty string.
+If element is `null`, return empty string.
 
 ##### Returns
 

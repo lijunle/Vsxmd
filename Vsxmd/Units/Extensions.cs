@@ -86,7 +86,7 @@ namespace Vsxmd.Units
         /// <para>The backtick characters inside the <paramref name="code"/> reverse as it is.</para>
         /// </summary>
         /// <param name="code">The code span.</param>
-        /// <returns>The Markdwon code span.</returns>
+        /// <returns>The Markdown code span.</returns>
         /// <remarks>Reference: http://meta.stackexchange.com/questions/55437/how-can-the-backtick-character-be-included-in-code .</remarks>
         internal static string AsCode(this string code)
         {
@@ -129,7 +129,7 @@ namespace Vsxmd.Units
         /// For example, it works for <c>summary</c> and <c>returns</c> elements.
         /// </summary>
         /// <param name="element">The XML element.</param>
-        /// <returns>The generated Markdwon content.</returns>
+        /// <returns>The generated Markdown content.</returns>
         /// <example>
         /// This method converts the following <c>summary</c> element.
         /// <code>

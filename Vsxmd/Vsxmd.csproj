@@ -18,7 +18,6 @@
     </PackageReference>
     <AdditionalFiles Include="stylecop.json" />
   </ItemGroup>
-
   <!-- NuGet Metadata: https://docs.microsoft.com/en-us/dotnet/core/tools/csproj#nuget-metadata-properties -->
   <PropertyGroup>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -49,7 +48,6 @@
       <_BuildOutputInPackage Remove="$(MSBuildProjectDirectory)\**\$(DocumentationFile)" />
     </ItemGroup>
   </Target>
-
   <!-- Generate the Markdown file for itself -->
   <Target Name="VsxmdPreparation" AfterTargets="PostBuildEvent">
     <PropertyGroup>
