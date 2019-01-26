@@ -2,21 +2,11 @@
 <Project TreatAsLocalProperty="BinaryDirectory;VsxmdCommand">
   <Target Name="Vsxmd" AfterTargets="PostBuildEvent">
     <PropertyGroup>
-      <BinaryDirectory Condition=" '$(BinaryDirectory)' == '' ">
-        $(MSBuildThisFileDirectory)/../tools
-      </BinaryDirectory>
-      <VsxmdCommand>
-        echo "The Vsxmd command is not currently available."
-      </VsxmdCommand>
-      <VsxmdCommand Condition=" ('$(MSBuildRuntimeType)' == 'Full' OR '$(MSBuildRuntimeType)' == '') AND EXISTS('$(BinaryDirectory)/net46') ">
-        "$(BinaryDirectory)/net46/Vsxmd.exe" "$(DocumentationFile)" "$(DocumentationMarkdown)" "$(VsxmdAutoDeleteXml)"
-      </VsxmdCommand>
-      <VsxmdCommand Condition=" '$(MSBuildRuntimeType)' == 'Mono' AND EXISTS('$(BinaryDirectory)/net46') ">
-        mono "$(BinaryDirectory)/net46/Vsxmd.exe" "$(DocumentationFile)" "$(DocumentationMarkdown)" "$(VsxmdAutoDeleteXml)"
-      </VsxmdCommand>
-      <VsxmdCommand Condition=" '$(MSBuildRuntimeType)' == 'Core' AND EXISTS('$(BinaryDirectory)/netcoreapp2.2') ">
-        dotnet "$(BinaryDirectory)/netcoreapp2.2/Vsxmd.dll" "$(DocumentationFile)" "$(DocumentationMarkdown)" "$(VsxmdAutoDeleteXml)"
-      </VsxmdCommand>
+      <BinaryDirectory Condition=" '$(BinaryDirectory)' == '' "> $(MSBuildThisFileDirectory)/../tools </BinaryDirectory>
+      <VsxmdCommand> echo "The Vsxmd command is not currently available." </VsxmdCommand>
+      <VsxmdCommand Condition=" ('$(MSBuildRuntimeType)' == 'Full' OR '$(MSBuildRuntimeType)' == '') AND EXISTS('$(BinaryDirectory)/net46') "> "$(BinaryDirectory)/net46/Vsxmd.exe" "$(DocumentationFile)" "$(DocumentationMarkdown)" "$(VsxmdAutoDeleteXml)" </VsxmdCommand>
+      <VsxmdCommand Condition=" '$(MSBuildRuntimeType)' == 'Mono' AND EXISTS('$(BinaryDirectory)/net46') "> mono "$(BinaryDirectory)/net46/Vsxmd.exe" "$(DocumentationFile)" "$(DocumentationMarkdown)" "$(VsxmdAutoDeleteXml)" </VsxmdCommand>
+      <VsxmdCommand Condition=" '$(MSBuildRuntimeType)' == 'Core' AND EXISTS('$(BinaryDirectory)/netcoreapp2.2') "> dotnet "$(BinaryDirectory)/netcoreapp2.2/Vsxmd.dll" "$(DocumentationFile)" "$(DocumentationMarkdown)" "$(VsxmdAutoDeleteXml)" </VsxmdCommand>
     </PropertyGroup>
     <Message Text="Vsxmd starts to convert XML to Markdown." />
     <Exec Command="$(VsxmdCommand)" />
