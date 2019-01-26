@@ -51,7 +51,7 @@
   <!-- Generate the Markdown file for itself -->
   <Target Name="VsxmdPreparation" AfterTargets="PostBuildEvent">
     <PropertyGroup>
-      <BinaryDirectory>$(OutputPath)\..</BinaryDirectory>
+      <VsxmdBinaryDirectory>$(OutputPath)\..</VsxmdBinaryDirectory>
     </PropertyGroup>
   </Target>
   <Import Project="$(MSBuildThisFileDirectory)\build\Vsxmd.targets" />
