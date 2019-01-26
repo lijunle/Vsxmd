@@ -2,48 +2,52 @@
 
 [![Build status](https://ci.appveyor.com/api/projects/status/mxm9wcf5j5yrf1uu/branch/master?svg=true)](https://ci.appveyor.com/project/lijunle/vsxmd/branch/master)
 
-A MSBuild task to convert VS generated XML document to Markdown syntax.
+A MSBuild task to convert [XML documentation](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/xmldoc/xml-documentation-comments) to Markdown syntax. Support both .Net Framework and .Net Core projects.
 
-This project is initially inspired from a [gist](https://gist.github.com/formix/515d3d11ee7c1c252f92). But in the later releases, the implementation is rewritten.
+## Features
 
-# Features
-
-- Provide full information from the XML documentation.
+- Provide full information from the XML documentation file.
 - Provide easy reading facilities - parameter table, link tooltip, etc.
-- Provide table of contents and navigation links.
-- Provide type and member anchors.
-- Reference `System` types to MSDN pages.
-- Dynamic code highlighting through \<code lang=""\> tag
-- Option to delete auto generated XML configuration file
-- Option to create tables using pure markdown
+- Provide table of contents to type and member links.
+- Highlight code block through `<code lang="csharp">` tag.
+- Reference `System` types to official MSDN pages.
 
-# Usage
+## Get Started
+
+If you are using Visual Studio:
 
 - In Visual Studio, right click project name to open project properties window.
-- Open **Build** tab, in **Output** section, check **XML documentation file**.
+- Switch to **Build** tab, in **Output** section, check **XML documentation file** checkbox.
 - Install [Vsxmd](https://www.nuget.org/packages/Vsxmd/) package from NuGet.
-- Build the project, then a `.md` file is generated next to the XML document.
+- Build the project, then a markdown file is generated next to the XML documentation file.
 
-# Markdown Path
+If you are using .Net Core CLI:
 
-## Customizing md path
+- Open project's CSPROJ file, declare [`DocumentationFile`](https://docs.microsoft.com/en-us/visualstudio/msbuild/common-msbuild-project-properties) property in `PropertyGroup` section. The path is relative to the project directory. [MSBuild Reserved and Well-Known properties](https://docs.microsoft.com/en-us/visualstudio/msbuild/msbuild-reserved-and-well-known-properties) are also available for this property.
+- Run `dotnet add package Vsxmd` to install the the package to the project.
+- Run `dotnet build` to build the project and generate the XML documentation and Markdown files.
 
-- The project property, `DocumentationMarkdown`, is used to specify the generated Markdown file path.
-- If not specified, it will be the same XML documentation file name with `.md` extension, under the same folder as the XML file.
+## Vsxmd Options
 
-### Example
+There are some properties to customize the Markdown file generation process. They are all optional. If you want to use them, declare them in CSPROJ file's `PropertyGroup` section.
+
+### `DocumentationMarkdown`
+
+It is used to specify the generated Markdown file path. It defaults to the XML documentation file name with `.md` extension, under the same folder as the XML file. Similar to `DocumentationFile` property, the path is relative to the project directory and [MSBuild properties](https://docs.microsoft.com/en-us/visualstudio/msbuild/msbuild-reserved-and-well-known-properties) are available.
+
+#### Example
 
 ```xml
 <PropertyGroup>
-    <DocumentationMarkdown>'..\..\..\Readme.md</DocumentationMarkdown>
+    <DocumentationMarkdown>$(MSBuildProjectDirectory)\API.md</DocumentationMarkdown>
 </PropertyGroup>
 ```
 
-## Configuring to delete XML configuration file
+### `VsxmdAutoDeleteXml`
 
-- Optional parameter if you want to delete the XML configuration file after generating your md file
+A boolean flag to delete the XML documentation file after the Markdown file is generated.
 
-### Example
+#### Example
 
 ```xml
 <PropertyGroup>
@@ -51,38 +55,44 @@ This project is initially inspired from a [gist](https://gist.github.com/formix/
 </PropertyGroup>
 ```
 
-## Using custom highlight code
+## Extend XML documentation
 
-- To use custom highlight code on your md jus use the attribute `lang` inside your `<code>` tag
+There are some extended features based on XML documentation. They are not described in [XML recommended tags](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/xmldoc/recommended-tags-for-documentation-comments), but they are worth to use.
 
-### Example
+### Highlight Code Block
+
+To highlight code block in the Markdown file, declare the attribute `lang` in `<code>` tag and set it to a program language identifier.
+
+#### Example
 
 ```xml
-<code lang="csharp">
-    // Some C# codes...
+<code lang="javascript">
+    function test() {
+        console.log("notice the blank line before this function?");
+    }
 </code>
 ```
 
-- What you put into `lang` property will be interpreted by your markdown reader, so you can use any markdown highlight, like `xml`, `ruby`, etc.
+## Programmatic API
 
-# API
-
-This library provides the following public API to convert VS XML documentation to Markdown syntax programmatically.
+This library provides the following programmatic API to convert XML documentation file to Markdown syntax programmatically.
 
 - [Converter](https://github.com/lijunle/Vsxmd/blob/master/Vsxmd/Vsxmd.md#T-Vsxmd-Converter) : [IConverter](https://github.com/lijunle/Vsxmd/blob/master/Vsxmd/Vsxmd.md#T-Vsxmd-IConverter)
   - [string ToMarkdown()](https://github.com/lijunle/Vsxmd/blob/master/Vsxmd/Vsxmd.md#M-Vsxmd-IConverter-ToMarkdown)
-  - [static string ToMarkdown(document)](https://github.com/lijunle/Vsxmd/blob/master/Vsxmd/Vsxmd.md#M-Vsxmd-Converter-ToMarkdown-System-Xml-Linq-XDocument-)
+  - [static string ToMarkdown(XDocument document)](https://github.com/lijunle/Vsxmd/blob/master/Vsxmd/Vsxmd.md#M-Vsxmd-Converter-ToMarkdown-System-Xml-Linq-XDocument-)
 
-# Example
+## Markdown File Demo
 
-Check this project's documentation file, [Vsxmd.md](https://github.com/lijunle/Vsxmd/blob/master/Vsxmd/Vsxmd.md), which is generated by this project.
+The best demo is this project's documentation file, [Vsxmd.md](https://github.com/lijunle/Vsxmd/blob/master/Vsxmd/Vsxmd.md). It is generated by this project itself.
 
-# Known Issues
+## Known Issue
 
-The syntax for the [`list`](https://msdn.microsoft.com/en-us/library/y3ww3c7e.aspx) comment tag is not well defined. It will be skipped during render.
+The syntax for the [`list`](https://msdn.microsoft.com/en-us/library/y3ww3c7e.aspx) comment tag is not well defined. It will be skipped during render. If you have ideas, please [open an issue](https://github.com/lijunle/Vsxmd/issues).
 
-If you have ideas, please [open an issue](https://github.com/lijunle/Vsxmd/issues).
+## Credits
 
-# License
+This project is initially inspired from a [gist](https://gist.github.com/formix/515d3d11ee7c1c252f92). But in the later releases, the implementation is rewritten.
+
+## License
 
 MIT License.
