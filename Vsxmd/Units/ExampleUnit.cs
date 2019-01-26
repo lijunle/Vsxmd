@@ -36,7 +36,7 @@ namespace Vsxmd.Units
 
         /// <summary>
         /// Convert the example XML element to Markdown safely.
-        /// If elemnt is <value>null</value>, return empty string.
+        /// If element is <value>null</value>, return empty string.
         /// </summary>
         /// <param name="element">The example XML element.</param>
         /// <returns>The generated Markdown.</returns>

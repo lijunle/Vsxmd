@@ -39,7 +39,7 @@ namespace Vsxmd.Units
 
         /// <summary>
         /// Convert the param XML element to Markdown safely.
-        /// If elemnt is <value>null</value>, return empty string.
+        /// If element is <value>null</value>, return empty string.
         /// </summary>
         /// <param name="elements">The param XML element list.</param>
         /// <returns>The generated Markdown.</returns>

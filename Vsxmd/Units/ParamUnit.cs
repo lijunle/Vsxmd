@@ -22,7 +22,7 @@ namespace Vsxmd.Units
         /// Initializes a new instance of the <see cref="ParamUnit"/> class.
         /// </summary>
         /// <param name="element">The param XML element.</param>
-        /// <param name="paramType">The paramter type corresponding to the param XML element.</param>
+        /// <param name="paramType">The parameter type corresponding to the param XML element.</param>
         /// <exception cref="ArgumentException">Throw if XML element name is not <c>param</c>.</exception>
         internal ParamUnit(XElement element, string paramType)
             : base(element, "param")

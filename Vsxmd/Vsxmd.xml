@@ -25,7 +25,7 @@
         </member>
         <member name="T:Vsxmd.IConverter">
             <summary>
-            Converter for XML docuement to Markdown syntax conversion.
+            Converter for XML document to Markdown syntax conversion.
             </summary>
         </member>
         <member name="M:Vsxmd.IConverter.ToMarkdown">
@@ -67,7 +67,7 @@
             <param name="p"></param>
             <returns>Nothing.</returns>
         </member>
-        <member name="M:Vsxmd.Program.Test.TestGenericRefence">
+        <member name="M:Vsxmd.Program.Test.TestGenericReference">
             <summary>
             Test generic reference type.
             <para>See <see cref="M:Vsxmd.Program.Test.TestGenericParameter``2(System.Linq.Expressions.Expression{System.Func{``0,``1,System.String}})"/>.</para>
@@ -248,7 +248,7 @@
         <member name="M:Vsxmd.Units.ExampleUnit.ToMarkdown(System.Xml.Linq.XElement)">
             <summary>
             Convert the example XML element to Markdown safely.
-            If elemnt is <value>null</value>, return empty string.
+            If element is <value>null</value>, return empty string.
             </summary>
             <param name="element">The example XML element.</param>
             <returns>The generated Markdown.</returns>
@@ -271,7 +271,7 @@
         <member name="M:Vsxmd.Units.ExceptionUnit.ToMarkdown(System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement})">
             <summary>
             Convert the exception XML element to Markdown safely.
-            If elemnt is <value>null</value>, return empty string.
+            If element is <value>null</value>, return empty string.
             </summary>
             <param name="elements">The exception XML element list.</param>
             <returns>The generated Markdown.</returns>
@@ -343,7 +343,7 @@
             <para>The backtick characters inside the <paramref name="code"/> reverse as it is.</para>
             </summary>
             <param name="code">The code span.</param>
-            <returns>The Markdwon code span.</returns>
+            <returns>The Markdown code span.</returns>
             <remarks>Reference: http://meta.stackexchange.com/questions/55437/how-can-the-backtick-character-be-included-in-code .</remarks>
         </member>
         <member name="M:Vsxmd.Units.Extensions.NthLast``1(System.Collections.Generic.IEnumerable{``0},System.Int32)">
@@ -370,7 +370,7 @@
             For example, it works for <c>summary</c> and <c>returns</c> elements.
             </summary>
             <param name="element">The XML element.</param>
-            <returns>The generated Markdwon content.</returns>
+            <returns>The generated Markdown content.</returns>
             <example>
             This method converts the following <c>summary</c> element.
             <code>
@@ -567,7 +567,7 @@
             Initializes a new instance of the <see cref="T:Vsxmd.Units.ParamUnit"/> class.
             </summary>
             <param name="element">The param XML element.</param>
-            <param name="paramType">The paramter type corresponding to the param XML element.</param>
+            <param name="paramType">The parameter type corresponding to the param XML element.</param>
             <exception cref="T:System.ArgumentException">Throw if XML element name is not <c>param</c>.</exception>
         </member>
         <member name="M:Vsxmd.Units.ParamUnit.ToMarkdown">
@@ -605,7 +605,7 @@
         <member name="M:Vsxmd.Units.PermissionUnit.ToMarkdown(System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement})">
             <summary>
             Convert the permission XML element to Markdown safely.
-            If elemnt is <value>null</value>, return empty string.
+            If element is <value>null</value>, return empty string.
             </summary>
             <param name="elements">The permission XML element list.</param>
             <returns>The generated Markdown.</returns>
@@ -628,7 +628,7 @@
         <member name="M:Vsxmd.Units.RemarksUnit.ToMarkdown(System.Xml.Linq.XElement)">
             <summary>
             Convert the remarks XML element to Markdown safely.
-            If elemnt is <value>null</value>, return empty string.
+            If element is <value>null</value>, return empty string.
             </summary>
             <param name="element">The remarks XML element.</param>
             <returns>The generated Markdown.</returns>
@@ -651,7 +651,7 @@
         <member name="M:Vsxmd.Units.ReturnsUnit.ToMarkdown(System.Xml.Linq.XElement)">
             <summary>
             Convert the returns XML element to Markdown safely.
-            If elemnt is <value>null</value>, return empty string.
+            If element is <value>null</value>, return empty string.
             </summary>
             <param name="element">The returns XML element.</param>
             <returns>The generated Markdown.</returns>
@@ -674,7 +674,7 @@
         <member name="M:Vsxmd.Units.SeealsoUnit.ToMarkdown(System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement})">
             <summary>
             Convert the seealso XML element to Markdown safely.
-            If elemnt is <value>null</value>, return empty string.
+            If element is <value>null</value>, return empty string.
             </summary>
             <param name="elements">The seealso XML element list.</param>
             <returns>The generated Markdown.</returns>
@@ -697,7 +697,7 @@
         <member name="M:Vsxmd.Units.SummaryUnit.ToMarkdown(System.Xml.Linq.XElement)">
             <summary>
             Convert the summary XML element to Markdown safely.
-            If elemnt is <value>null</value>, return empty string.
+            If element is <value>null</value>, return empty string.
             </summary>
             <param name="element">The summary XML element.</param>
             <returns>The generated Markdown.</returns>
@@ -720,7 +720,7 @@
         <member name="M:Vsxmd.Units.TypeparamUnit.ToMarkdown(System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement})">
             <summary>
             Convert the param XML element to Markdown safely.
-            If elemnt is <value>null</value>, return empty string.
+            If element is <value>null</value>, return empty string.
             </summary>
             <param name="elements">The param XML element list.</param>
             <returns>The generated Markdown.</returns>
