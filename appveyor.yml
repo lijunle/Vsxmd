@@ -36,13 +36,3 @@ test_script:
 
 artifacts:
   - path: 'Vsxmd\**\*.nupkg'
-
-deploy:
-  - release: v$(APPVEYOR_BUILD_VERSION)
-    provider: GitHub
-    draft: false
-    prerelease: false
-    auth_token:
-      secure: jvNlko7Yh8M98umyLQhc8u/RQsaYWXA2ni9+7ku3V9E6KqjGbmRO+4Veq71m2jmz
-    on:
-      appveyor_repo_tag: true
