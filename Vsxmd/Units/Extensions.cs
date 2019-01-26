@@ -58,7 +58,7 @@ namespace Vsxmd.Units
         /// <param name="href">The href.</param>
         /// <returns>The anchor for the <paramref name="href"/>.</returns>
         internal static string ToAnchor(this string href) =>
-             $"<a name='{href}'></a>\n";
+            $"<a name='{href}'></a>\n";
 
         /// <summary>
         /// Generate "to here" link for the <paramref name="href"/>.
@@ -160,13 +160,13 @@ namespace Vsxmd.Units
                 switch (child.Name.ToString())
                 {
                     case "see":
-                        return $"{child.ToSeeTagMarkdownSpan()}";
+                        return $"{child.ToSeeTagMarkdownSpan()}{child.NextNode.AsSpanMargin()}";
                     case "paramref":
                     case "typeparamref":
-                        return $"{child.Attribute("name")?.Value.AsCode()}";
+                        return $"{child.Attribute("name")?.Value?.AsCode()}{child.NextNode.AsSpanMargin()}";
                     case "c":
                     case "value":
-                        return $"{child.Value.AsCode()}";
+                        return $"{child.Value.AsCode()}{child.NextNode.AsSpanMargin()}";
                     case "code":
                         var lang = child.Attribute("lang")?.Value ?? string.Empty;
 
@@ -223,5 +223,16 @@ namespace Vsxmd.Units
         private static string ToSeeTagMarkdownSpan(this XElement seeTag) =>
             seeTag.Attribute("cref")?.Value?.ToReferenceLink(useShortName: true) ??
             seeTag.Attribute("langword")?.Value?.AsCode();
+
+        private static string AsSpanMargin(this XNode node)
+        {
+            var text = node as XText;
+            if (text != null && text.Value.StartsWith(" ", StringComparison.Ordinal))
+            {
+                return " ";
+            }
+
+            return string.Empty;
+        }
     }
 }
