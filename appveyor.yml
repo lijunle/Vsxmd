@@ -43,6 +43,6 @@ deploy:
     draft: false
     prerelease: false
     auth_token:
-      secure: cApkFZuYfz7loLotMfbhb53ZIfjjfbY7dr46eu6Q9+yAV+KuSGYGcVTG8Bgx8wka
+      secure: jvNlko7Yh8M98umyLQhc8u/RQsaYWXA2ni9+7ku3V9E6KqjGbmRO+4Veq71m2jmz
     on:
       appveyor_repo_tag: true
