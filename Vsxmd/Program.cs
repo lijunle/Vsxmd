@@ -11,6 +11,7 @@ namespace Vsxmd
     using System.IO;
     using System.Linq;
     using System.Linq.Expressions;
+    using System.Reflection;
     using System.Xml.Linq;
 
     /// <summary>
@@ -18,9 +19,13 @@ namespace Vsxmd
     /// </summary>
     /// <remarks>
     /// Usage syntax:
-    /// <code>Vsxmd.exe &lt;input-XML-path&gt; [output-Markdown-path]</code>
+    /// <code>Vsxmd.exe &lt;input-XML-path&gt; [output-Markdown-path] [should-delete-xml] [assembly-path] [should-skip-internal] [should-skip-non-browsable]</code>
     /// <para>The <c>input-XML-path</c> argument is required. It references to the VS generated XML documentation file.</para>
     /// <para>The <c>output-Markdown-path</c> argument is optional. It indicates the file path for the Markdown output file. When not specific, it will be a <c>.md</c> file with same file name as the XML documentation file, path at the XML documentation folder.</para>
+    /// <para>The <c>should-delete-xml</c> argument is optional. Pass "true" to delete the original XML file after generating the markdown.</para>
+    /// <para>The <c>assembly-path</c> argument is optional. It indicates the file path for the assembly corresponding to the XML file. This is needed to support the skip arguments.</para>
+    /// <para>The <c>should-skip-internal</c> argument is optional. Pass "true" to exclude internal types and members from the markdown. Requires the assembly-path argument.</para>
+    /// <para>The <c>should-skip-non-browsable</c> argument is optional. Pass "true" to exclude types and members marked with the <see cref="System.ComponentModel.EditorBrowsableAttribute"/> with a value of <see cref="System.ComponentModel.EditorBrowsableState.Never"/>. Requires the assembly-path argument.</para>
     /// </remarks>
     internal static class Program
     {
@@ -47,19 +52,33 @@ namespace Vsxmd
                     markdownPath = Path.ChangeExtension(xmlPath, ".md");
                 }
 
+                Assembly assembly = null;
+                string assemblyPath = args.ElementAtOrDefault(3);
+                var settings = new ConverterSettings
+                {
+                    ShouldSkipInternal = BoolArgumentOrDefault(args, 4),
+                    ShouldSkipNonBrowsable = BoolArgumentOrDefault(args, 5),
+                };
+
+                if (settings.ShouldSkipInternal || settings.ShouldSkipNonBrowsable)
+                {
+                    if (string.IsNullOrWhiteSpace(assemblyPath))
+                    {
+                        Console.WriteLine("Assembly path must be supplied when skipping members");
+                        return;
+                    }
+
+                    AppDomain.CurrentDomain.AssemblyResolve += (s, e) => ResolveDependency(Path.GetDirectoryName(assemblyPath), e);
+                    assembly = Assembly.LoadFile(assemblyPath);
+                }
+
                 var document = XDocument.Load(xmlPath);
-                var converter = new Converter(document);
-                var markdown = converter.ToMarkdown();
+                var converter = new Converter(document, assembly);
+                var markdown = converter.ToMarkdown(settings);
 
                 File.WriteAllText(markdownPath, markdown);
 
-                string vsxmdAutoDeleteXml = args.ElementAtOrDefault(2);
-                if (string.IsNullOrWhiteSpace(vsxmdAutoDeleteXml))
-                {
-                    return;
-                }
-
-                var shouldDelete = Convert.ToBoolean(vsxmdAutoDeleteXml, CultureInfo.InvariantCulture);
+                var shouldDelete = BoolArgumentOrDefault(args, 2);
                 if (shouldDelete)
                 {
                     File.Delete(xmlPath);
@@ -72,6 +91,29 @@ namespace Vsxmd
                 // Ignore errors. Do not impact on project build
                 return;
             }
+        }
+
+        private static bool BoolArgumentOrDefault(string[] args, int index)
+        {
+            string arg = args.ElementAtOrDefault(index);
+            if (string.IsNullOrWhiteSpace(arg))
+            {
+                return false;
+            }
+
+            return Convert.ToBoolean(arg, CultureInfo.InvariantCulture);
+        }
+
+        private static Assembly ResolveDependency(string searchPath, ResolveEventArgs args)
+        {
+            // Look for missing dependencies next to the assembly we loaded originally.
+            var assemblyPath = Path.Combine(searchPath, new AssemblyName(args.Name).Name + ".dll");
+            if (File.Exists(assemblyPath))
+            {
+                return Assembly.LoadFile(assemblyPath);
+            }
+
+            return null;
         }
 
         private class Test

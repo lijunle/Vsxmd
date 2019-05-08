@@ -56,6 +56,34 @@ A boolean flag to delete the XML documentation file after the Markdown file is g
 </PropertyGroup>
 ```
 
+### `VsxmdSkipInternal`
+
+A boolean flag to skip types and members that are internal, or protected inside a sealed type, in the generated Markdown file.
+This flag depends on the ability to load the assembly associated with the XML documentation file. Types that have dependencies on other assemblies that are missing may be added to the Markdown file instead of being skipped.
+For the most reliable results, all dependencies should be next to the assembly or installed globally.
+
+#### Example
+
+```xml
+<PropertyGroup>
+    <VsxmdSkipInternal>True</VsxmdSkipInternal>
+</PropertyGroup>
+```
+
+### `VsxmdSkipNonBrowsable`
+
+A boolean flag to skip types and members that are marked with the `[EditorBrowsable(EditorBrowsableState.Never)]` attribute in the generated Markdown file.
+This flag depends on the ability to load the assembly associated with the XML documentation file. Types that have dependencies on other assemblies that are missing may be added to the Markdown file instead of being skipped.
+For the most reliable results, all dependencies should be next to the assembly or installed globally.
+
+#### Example
+
+```xml
+<PropertyGroup>
+    <VsxmdSkipNonBrowsable>True</VsxmdSkipNonBrowsable>
+</PropertyGroup>
+```
+
 ## Extend XML documentation
 
 There are some extended features based on XML documentation. They are not described in [XML recommended tags](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/xmldoc/recommended-tags-for-documentation-comments), but they are worth to use.
@@ -78,9 +106,10 @@ To highlight code block in the Markdown file, declare the attribute `lang` in `<
 
 This library provides the following programmatic API to convert XML documentation file to Markdown syntax programmatically.
 
-- [Converter](https://github.com/lijunle/Vsxmd/blob/master/Vsxmd/Vsxmd.md#T-Vsxmd-Converter) : [IConverter](https://github.com/lijunle/Vsxmd/blob/master/Vsxmd/Vsxmd.md#T-Vsxmd-IConverter)
-  - [string ToMarkdown()](https://github.com/lijunle/Vsxmd/blob/master/Vsxmd/Vsxmd.md#M-Vsxmd-IConverter-ToMarkdown)
-  - [static string ToMarkdown(XDocument document)](https://github.com/lijunle/Vsxmd/blob/master/Vsxmd/Vsxmd.md#M-Vsxmd-Converter-ToMarkdown-System-Xml-Linq-XDocument-)
+- [Converter](Vsxmd/Vsxmd.md#T-Vsxmd-Converter) : [IConverter](Vsxmd/Vsxmd.md#T-Vsxmd-IConverter)
+  - [string ToMarkdown()](Vsxmd/Vsxmd.md#M-Vsxmd-IConverter-ToMarkdown)
+  - [string ToMarkdown(ConverterSettings settings)](Vsxmd/Vsxmd.md#M-Vsxmd-Converter-ToMarkdown-Vsxmd-ConverterSettings-)
+  - [static string ToMarkdown(XDocument document)](Vsxmd/Vsxmd.md#M-Vsxmd-Converter-ToMarkdown-System-Xml-Linq-XDocument-)
 
 ## Markdown File Demo
 
