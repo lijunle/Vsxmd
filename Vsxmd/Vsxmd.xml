@@ -438,6 +438,11 @@
             Method.
             </summary>
         </member>
+        <member name="F:Vsxmd.Units.MemberKind.Event">
+            <summary>
+            Event.
+            </summary>
+        </member>
         <member name="T:Vsxmd.Units.MemberName">
             <summary>
             Member name.

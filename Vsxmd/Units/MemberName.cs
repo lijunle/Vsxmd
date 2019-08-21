@@ -54,6 +54,8 @@ namespace Vsxmd.Units
             ? MemberKind.Constants
             : this.type == 'P'
             ? MemberKind.Property
+            : this.type == 'E'
+            ? MemberKind.Event
             : this.type == 'M' && this.name.Contains(".#ctor")
             ? MemberKind.Constructor
             : this.type == 'M' && !this.name.Contains(".#ctor")
@@ -67,7 +69,8 @@ namespace Vsxmd.Units
         internal string Link =>
             this.Kind == MemberKind.Type ||
             this.Kind == MemberKind.Constants ||
-            this.Kind == MemberKind.Property
+            this.Kind == MemberKind.Property ||
+            this.Kind == MemberKind.Event
             ? $"[{this.FriendlyName.Escape()}](#{this.Href} '{this.StrippedName}')"
             : this.Kind == MemberKind.Constructor ||
               this.Kind == MemberKind.Method
@@ -86,7 +89,8 @@ namespace Vsxmd.Units
             this.Kind == MemberKind.Type
             ? $"{this.Href.ToAnchor()}## {this.FriendlyName.Escape()} `{this.Kind.ToLowerString()}`"
             : this.Kind == MemberKind.Constants ||
-              this.Kind == MemberKind.Property
+              this.Kind == MemberKind.Property ||
+              this.Kind == MemberKind.Event
             ? $"{this.Href.ToAnchor()}### {this.FriendlyName.Escape()} `{this.Kind.ToLowerString()}`"
             : this.Kind == MemberKind.Constructor ||
               this.Kind == MemberKind.Method
@@ -111,6 +115,7 @@ namespace Vsxmd.Units
             ? this.NameSegments.TakeAllButLast(1).Join(".")
             : this.Kind == MemberKind.Constants ||
               this.Kind == MemberKind.Property ||
+              this.Kind == MemberKind.Event ||
               this.Kind == MemberKind.Constructor ||
               this.Kind == MemberKind.Method
             ? this.NameSegments.TakeAllButLast(2).Join(".")
@@ -121,6 +126,7 @@ namespace Vsxmd.Units
             ? this.NameSegments.Last()
             : this.Kind == MemberKind.Constants ||
               this.Kind == MemberKind.Property ||
+              this.Kind == MemberKind.Event ||
               this.Kind == MemberKind.Constructor ||
               this.Kind == MemberKind.Method
             ? this.NameSegments.NthLast(2)
@@ -149,6 +155,7 @@ namespace Vsxmd.Units
             ? this.TypeShortName
             : this.Kind == MemberKind.Constants ||
               this.Kind == MemberKind.Property ||
+              this.Kind == MemberKind.Event ||
               this.Kind == MemberKind.Constructor ||
               this.Kind == MemberKind.Method
             ? this.NameSegments.Last()
@@ -225,6 +232,7 @@ namespace Vsxmd.Units
             ? this.TypeShortName
             : this.Kind == MemberKind.Constants ||
               this.Kind == MemberKind.Property ||
+              this.Kind == MemberKind.Event ||
               this.Kind == MemberKind.Method
             ? this.FriendlyName
             : this.Kind == MemberKind.Constructor

@@ -40,5 +40,10 @@ namespace Vsxmd.Units
         /// Method.
         /// </summary>
         Method,
+
+        /// <summary>
+        /// Event.
+        /// </summary>
+        Event,
     }
 }

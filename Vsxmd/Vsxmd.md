@@ -45,6 +45,7 @@
 - [MemberKind](#T-Vsxmd-Units-MemberKind 'Vsxmd.Units.MemberKind')
   - [Constants](#F-Vsxmd-Units-MemberKind-Constants 'Vsxmd.Units.MemberKind.Constants')
   - [Constructor](#F-Vsxmd-Units-MemberKind-Constructor 'Vsxmd.Units.MemberKind.Constructor')
+  - [Event](#F-Vsxmd-Units-MemberKind-Event 'Vsxmd.Units.MemberKind.Event')
   - [Method](#F-Vsxmd-Units-MemberKind-Method 'Vsxmd.Units.MemberKind.Method')
   - [NotSupported](#F-Vsxmd-Units-MemberKind-NotSupported 'Vsxmd.Units.MemberKind.NotSupported')
   - [Property](#F-Vsxmd-Units-MemberKind-Property 'Vsxmd.Units.MemberKind.Property')
@@ -110,6 +111,8 @@
   - [TestParamWithoutDescription(p)](#M-Vsxmd-Program-Test-TestParamWithoutDescription-System-String- 'Vsxmd.Program.Test.TestParamWithoutDescription(System.String)')
   - [TestSeeLangword()](#M-Vsxmd-Program-Test-TestSeeLangword 'Vsxmd.Program.Test.TestSeeLangword')
   - [TestSpaceAfterInlineElements\`\`1()](#M-Vsxmd-Program-Test-TestSpaceAfterInlineElements``1-System-Boolean- 'Vsxmd.Program.Test.TestSpaceAfterInlineElements``1(System.Boolean)')
+  - [CustomizedEventHappened](#E-Vsxmd-Program-Test-CustomizedEventHappened 'Vsxmd.Program.Test.CustomizedEventHappened')
+  - [DefaultEventHappened](#E-Vsxmd-Program-Test-DefaultEventHappened 'Vsxmd.Program.Test.DefaultEventHappened')
 - [TestGenericType\`2](#T-Vsxmd-Program-TestGenericType`2 'Vsxmd.Program.TestGenericType`2')
   - [TestGenericMethod\`\`2()](#M-Vsxmd-Program-TestGenericType`2-TestGenericMethod``2 'Vsxmd.Program.TestGenericType`2.TestGenericMethod``2')
 - [TypeparamUnit](#T-Vsxmd-Units-TypeparamUnit 'Vsxmd.Units.TypeparamUnit')
@@ -754,6 +757,13 @@ Constants
 ##### Summary
 
 Constructor.
+
+<a name='F-Vsxmd-Units-MemberKind-Event'></a>
+### Event `constants`
+
+##### Summary
+
+Event.
 
 <a name='F-Vsxmd-Units-MemberKind-Method'></a>
 ### Method `constants`
@@ -1678,6 +1688,20 @@ Nothing.
 ##### Parameters
 
 This method has no parameters.
+
+<a name='E-Vsxmd-Program-Test-CustomizedEventHappened'></a>
+### CustomizedEventHappened `event`
+
+##### Summary
+
+Test customized event handler.
+
+<a name='E-Vsxmd-Program-Test-DefaultEventHappened'></a>
+### DefaultEventHappened `event`
+
+##### Summary
+
+Test default event handler.
 
 <a name='T-Vsxmd-Program-TestGenericType`2'></a>
 ## TestGenericType\`2 `type`
