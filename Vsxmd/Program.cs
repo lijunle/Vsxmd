@@ -84,7 +84,21 @@ namespace Vsxmd
             /// <permission cref="Program">Just for test.</permission>
             internal Test()
             {
+                this.DefaultEventHappened(this, new EventArgs());
+                this.CustomizedEventHappened(this);
             }
+
+            internal delegate void CustomizedEventHandler(object o);
+
+            /// <summary>
+            /// Test default event handler.
+            /// </summary>
+            internal event EventHandler DefaultEventHappened;
+
+            /// <summary>
+            /// Test customized event handler.
+            /// </summary>
+            internal event CustomizedEventHandler CustomizedEventHappened;
 
 #pragma warning disable SA1614 // Element parameter documentation must have text
             /// <summary>

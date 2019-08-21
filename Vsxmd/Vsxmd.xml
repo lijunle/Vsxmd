@@ -60,6 +60,16 @@
             </summary>
             <permission cref="T:Vsxmd.Program">Just for test.</permission>
         </member>
+        <member name="E:Vsxmd.Program.Test.DefaultEventHappened">
+            <summary>
+            Test default event handler.
+            </summary>
+        </member>
+        <member name="E:Vsxmd.Program.Test.CustomizedEventHappened">
+            <summary>
+            Test customized event handler.
+            </summary>
+        </member>
         <member name="M:Vsxmd.Program.Test.TestParamWithoutDescription(System.String)">
             <summary>
             Test a param tag without description.
