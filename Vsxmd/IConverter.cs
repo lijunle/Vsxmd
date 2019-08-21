@@ -16,5 +16,12 @@ namespace Vsxmd
         /// </summary>
         /// <returns>The generated Markdown content.</returns>
         string ToMarkdown();
+
+        /// <summary>
+        /// Convert to Markdown syntax.
+        /// </summary>
+        /// <param name="settings">The settings to use during the conversion.</param>
+        /// <returns>The generated Markdown content.</returns>
+        string ToMarkdown(ConverterSettings settings);
     }
 }

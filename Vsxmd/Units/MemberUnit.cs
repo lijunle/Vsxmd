@@ -10,12 +10,14 @@ namespace Vsxmd.Units
     using System.Collections.Generic;
     using System.Linq;
     using System.Xml.Linq;
+    using Vsxmd.Reflection;
 
     /// <summary>
     /// Member unit.
     /// </summary>
     internal class MemberUnit : BaseUnit
     {
+        private readonly MemberAccess access;
         private readonly MemberName name;
 
         static MemberUnit()
@@ -27,13 +29,16 @@ namespace Vsxmd.Units
         /// Initializes a new instance of the <see cref="MemberUnit"/> class.
         /// </summary>
         /// <param name="element">The member XML element.</param>
+        /// <param name="assembly">The member's owning assembly, if known.</param>
         /// <exception cref="ArgumentException">Throw if XML element name is not <c>member</c>.</exception>
-        internal MemberUnit(XElement element)
+        internal MemberUnit(XElement element, AssemblyReflector assembly)
             : base(element, "member")
         {
             this.name = new MemberName(
                 this.GetAttribute("name"),
                 this.GetChildren("param").Select(x => x.Attribute("name").Value));
+
+            this.access = new MemberAccess(this.name, assembly);
         }
 
         /// <summary>
@@ -125,22 +130,35 @@ namespace Vsxmd.Units
                 .Concat(this.Seealsos);
 
         /// <summary>
+        /// Determines if the member should be skipped in documentation.
+        /// </summary>
+        /// <param name="settings">The settings being used for the conversion.</param>
+        /// <returns>True if the member should not be in the documentation.</returns>
+        public bool ShouldSkipMember(ConverterSettings settings)
+        {
+            return (settings.ShouldSkipInternal && !this.access.IsVisible)
+                || (settings.ShouldSkipNonBrowsable && !this.access.IsBrowsable);
+        }
+
+        /// <summary>
         /// Complement a type unit if the member unit <paramref name="group"/> does not have one.
         /// One member unit group has the same <see cref="TypeName"/>.
         /// </summary>
         /// <param name="group">The member unit group.</param>
+        /// <param name="assembly">The owning assembly, or null if unknown.</param>
         /// <returns>The complemented member unit group.</returns>
         internal static IEnumerable<MemberUnit> ComplementType(
-            IEnumerable<MemberUnit> group) =>
+            IEnumerable<MemberUnit> group, AssemblyReflector assembly) =>
             group.Any(unit => unit.Kind == MemberKind.Type)
                 ? group
-                : group.Concat(new[] { Create(group.First().TypeName) });
+                : group.Concat(new[] { Create(group.First().TypeName, assembly) });
 
-        private static MemberUnit Create(string typeName) =>
+        private static MemberUnit Create(string typeName, AssemblyReflector assembly) =>
             new MemberUnit(
                 new XElement(
                     "member",
-                    new XAttribute("name", $"T:{typeName}")));
+                    new XAttribute("name", $"T:{typeName}")),
+                assembly);
 
         private class MemberUnitComparer : IComparer<MemberUnit>
         {

@@ -13,6 +13,13 @@
             </summary>
             <param name="document">The XML document.</param>
         </member>
+        <member name="M:Vsxmd.Converter.#ctor(System.Xml.Linq.XDocument,System.Reflection.Assembly)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Vsxmd.Converter"/> class.
+            </summary>
+            <param name="document">The XML document.</param>
+            <param name="assembly">The owning assembly, or null if unknown.</param>
+        </member>
         <member name="M:Vsxmd.Converter.ToMarkdown(System.Xml.Linq.XDocument)">
             <summary>
             Convert VS XML document to Markdown syntax.
@@ -22,6 +29,29 @@
         </member>
         <member name="M:Vsxmd.Converter.ToMarkdown">
             <inheritdoc/>
+        </member>
+        <member name="M:Vsxmd.Converter.ToMarkdown(Vsxmd.ConverterSettings)">
+            <summary>
+            Convert to Markdown syntax.
+            </summary>
+            <param name="settings">The settings to use during the conversion.</param>
+            <returns>The generated Markdown content.</returns>
+        </member>
+        <member name="T:Vsxmd.ConverterSettings">
+            <summary>
+            Contains settings for the conversion process.
+            </summary>
+        </member>
+        <member name="P:Vsxmd.ConverterSettings.ShouldSkipInternal">
+            <summary>
+            Gets or sets a value indicating whether internal members should be skipped in the documentation.
+            </summary>
+        </member>
+        <member name="P:Vsxmd.ConverterSettings.ShouldSkipNonBrowsable">
+            <summary>
+            Gets or sets a value indicating whether members marked with
+            <see cref="F:System.ComponentModel.EditorBrowsableState.Never"/> should be skipped in the documentation.
+            </summary>
         </member>
         <member name="T:Vsxmd.IConverter">
             <summary>
@@ -34,15 +64,26 @@
             </summary>
             <returns>The generated Markdown content.</returns>
         </member>
+        <member name="M:Vsxmd.IConverter.ToMarkdown(Vsxmd.ConverterSettings)">
+            <summary>
+            Convert to Markdown syntax.
+            </summary>
+            <param name="settings">The settings to use during the conversion.</param>
+            <returns>The generated Markdown content.</returns>
+        </member>
         <member name="T:Vsxmd.Program">
             <summary>
             Program entry.
             </summary>
             <remarks>
             Usage syntax:
-            <code>Vsxmd.exe &lt;input-XML-path&gt; [output-Markdown-path]</code>
+            <code>Vsxmd.exe &lt;input-XML-path&gt; [output-Markdown-path] [should-delete-xml] [assembly-path] [should-skip-internal] [should-skip-non-browsable]</code>
             <para>The <c>input-XML-path</c> argument is required. It references to the VS generated XML documentation file.</para>
             <para>The <c>output-Markdown-path</c> argument is optional. It indicates the file path for the Markdown output file. When not specific, it will be a <c>.md</c> file with same file name as the XML documentation file, path at the XML documentation folder.</para>
+            <para>The <c>should-delete-xml</c> argument is optional. Pass "true" to delete the original XML file after generating the markdown.</para>
+            <para>The <c>assembly-path</c> argument is optional. It indicates the file path for the assembly corresponding to the XML file. This is needed to support the skip arguments.</para>
+            <para>The <c>should-skip-internal</c> argument is optional. Pass "true" to exclude internal types and members from the markdown. Requires the assembly-path argument.</para>
+            <para>The <c>should-skip-non-browsable</c> argument is optional. Pass "true" to exclude types and members marked with the <see cref="T:System.ComponentModel.EditorBrowsableAttribute"/> with a value of <see cref="F:System.ComponentModel.EditorBrowsableState.Never"/>. Requires the assembly-path argument.</para>
             </remarks>
         </member>
         <member name="M:Vsxmd.Program.Main(System.String[])">
@@ -140,6 +181,139 @@
             <typeparam name="T3">Generic type 3.</typeparam>
             <typeparam name="T4">Generic type 4.</typeparam>
             <returns>Nothing.</returns>
+        </member>
+        <member name="T:Vsxmd.Reflection.AssemblyReflector">
+            <summary>
+            Reflection helpers for an <see cref="T:System.Reflection.Assembly"/>.
+            </summary>
+        </member>
+        <member name="M:Vsxmd.Reflection.AssemblyReflector.#ctor(System.Reflection.Assembly)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Vsxmd.Reflection.AssemblyReflector"/> class.
+            </summary>
+            <param name="assembly">The assembly, or null to disable reflection.</param>
+        </member>
+        <member name="M:Vsxmd.Reflection.AssemblyReflector.GetType(System.String)">
+            <summary>
+            Gets a type from the assembly.
+            </summary>
+            <param name="name">The name of the type.</param>
+            <returns>The type.</returns>
+        </member>
+        <member name="M:Vsxmd.Reflection.AssemblyReflector.GetType(System.String,Vsxmd.Reflection.TypeReflector)">
+            <summary>
+            Gets a type from the assembly.
+            </summary>
+            <param name="name">The name of the type.</param>
+            <param name="parent">The parent type if <paramref name="name"/> refers to a nested type.</param>
+            <returns>The type.</returns>
+        </member>
+        <member name="T:Vsxmd.Reflection.FieldReflector">
+            <summary>
+            Reflection helpers for a single <see cref="T:System.Reflection.FieldInfo"/>.
+            </summary>
+        </member>
+        <member name="M:Vsxmd.Reflection.FieldReflector.#ctor(System.Reflection.FieldInfo)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Vsxmd.Reflection.FieldReflector"/> class.
+            </summary>
+            <param name="field">The field, or null to use default properties.</param>
+        </member>
+        <member name="P:Vsxmd.Reflection.FieldReflector.IsVisible">
+            <inheritdoc/>
+        </member>
+        <member name="T:Vsxmd.Reflection.MemberReflector">
+            <summary>
+            Reflection helpers for a single <see cref="T:System.Reflection.MemberInfo"/>.
+            </summary>
+        </member>
+        <member name="M:Vsxmd.Reflection.MemberReflector.#ctor(System.Reflection.MemberInfo)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Vsxmd.Reflection.MemberReflector"/> class.
+            </summary>
+            <param name="member">The member, or null to use default properties.</param>
+        </member>
+        <member name="P:Vsxmd.Reflection.MemberReflector.IsBrowsable">
+            <summary>
+            Gets a value indicating whether the member is intended to be discovered outside the assembly.
+            </summary>
+        </member>
+        <member name="P:Vsxmd.Reflection.MemberReflector.IsVisible">
+            <summary>
+            Gets a value indicating whether the member is visible outside of the assembly.
+            </summary>
+        </member>
+        <member name="T:Vsxmd.Reflection.MethodReflector">
+            <summary>
+            Reflection helpers for a single <see cref="T:System.Reflection.MethodBase"/>.
+            </summary>
+        </member>
+        <member name="M:Vsxmd.Reflection.MethodReflector.#ctor(System.Reflection.MethodBase)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Vsxmd.Reflection.MethodReflector"/> class.
+            </summary>
+            <param name="method">The method, or null to use default properties.</param>
+        </member>
+        <member name="P:Vsxmd.Reflection.MethodReflector.IsVisible">
+            <inheritdoc/>
+        </member>
+        <member name="P:Vsxmd.Reflection.MethodReflector.Parameters">
+            <summary>
+            Gets the method's parameters, or null if the method could not be loaded.
+            </summary>
+        </member>
+        <member name="T:Vsxmd.Reflection.TypeReflector">
+            <summary>
+            Reflection helpers for a single <see cref="T:System.Type"/>.
+            </summary>
+        </member>
+        <member name="M:Vsxmd.Reflection.TypeReflector.#ctor(System.Type,Vsxmd.Reflection.TypeReflector)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Vsxmd.Reflection.TypeReflector"/> class.
+            </summary>
+            <param name="type">The type.</param>
+            <param name="parent">The parent type if <paramref name="type"/> is a nested type, or null if not.</param>
+        </member>
+        <member name="P:Vsxmd.Reflection.TypeReflector.Constructors">
+            <summary>
+            Gets the constructors defined for the type.
+            </summary>
+        </member>
+        <member name="P:Vsxmd.Reflection.TypeReflector.IsBrowsable">
+            <summary>
+            Gets a value indicating whether the type is intended to be discovered outside the assembly.
+            </summary>
+        </member>
+        <member name="P:Vsxmd.Reflection.TypeReflector.IsVisible">
+            <summary>
+            Gets a value indicating whether the type is visible outside the assembly.
+            </summary>
+        </member>
+        <member name="P:Vsxmd.Reflection.TypeReflector.FullName">
+            <summary>
+            Gets the type's full name.
+            </summary>
+        </member>
+        <member name="M:Vsxmd.Reflection.TypeReflector.GetField(System.String)">
+            <summary>
+            Gets the field with the given name.
+            </summary>
+            <param name="name">The name of the field.</param>
+            <returns>The field.</returns>
+        </member>
+        <member name="M:Vsxmd.Reflection.TypeReflector.GetMethods(System.String)">
+            <summary>
+            Returns all method overloads with the given name.
+            </summary>
+            <param name="name">The name of the methods to return.</param>
+            <returns>The methods.</returns>
+        </member>
+        <member name="M:Vsxmd.Reflection.TypeReflector.GetProperty(System.String)">
+            <summary>
+            Returns a method for accessing a property with the given name.
+            </summary>
+            <param name="name">The name of the property to return.</param>
+            <returns>The accessor.</returns>
         </member>
         <member name="T:Vsxmd.TableOfContents">
             <summary>
@@ -393,6 +567,28 @@
             </summary>
             <returns>The generated Markdown content.</returns>
         </member>
+        <member name="T:Vsxmd.Units.MemberAccess">
+            <summary>
+            Member access scope.
+            </summary>
+        </member>
+        <member name="M:Vsxmd.Units.MemberAccess.#ctor(Vsxmd.Units.MemberName,Vsxmd.Reflection.AssemblyReflector)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Vsxmd.Units.MemberAccess"/> class.
+            </summary>
+            <param name="name">The member name.</param>
+            <param name="assembly">The assembly owning the member, or null if not known.</param>
+        </member>
+        <member name="P:Vsxmd.Units.MemberAccess.IsBrowsable">
+            <summary>
+            Gets a value indicating whether the type is intended to be discovered outside the assembly.
+            </summary>
+        </member>
+        <member name="P:Vsxmd.Units.MemberAccess.IsVisible">
+            <summary>
+            Gets a value indicating whether the member is visible outside of the assembly.
+            </summary>
+        </member>
         <member name="T:Vsxmd.Units.MemberKind">
             <summary>
             The member kind.
@@ -482,6 +678,13 @@
             <value>The namespace name.</value>
             <example><c>System</c>, <c>Vsxmd</c>, <c>Vsxmd.Units</c>.</example>
         </member>
+        <member name="P:Vsxmd.Units.MemberName.FriendlyName">
+            <summary>
+            Gets the friendly name.
+            </summary>
+            <value>The friendly name.</value>
+            <example><c>ToString</c>, <c>#ctor</c>.</example>
+        </member>
         <member name="M:Vsxmd.Units.MemberName.CompareTo(Vsxmd.Units.MemberName)">
             <inheritdoc />
         </member>
@@ -511,11 +714,12 @@
             Member unit.
             </summary>
         </member>
-        <member name="M:Vsxmd.Units.MemberUnit.#ctor(System.Xml.Linq.XElement)">
+        <member name="M:Vsxmd.Units.MemberUnit.#ctor(System.Xml.Linq.XElement,Vsxmd.Reflection.AssemblyReflector)">
             <summary>
             Initializes a new instance of the <see cref="T:Vsxmd.Units.MemberUnit"/> class.
             </summary>
             <param name="element">The member XML element.</param>
+            <param name="assembly">The member's owning assembly, if known.</param>
             <exception cref="T:System.ArgumentException">Throw if XML element name is not <c>member</c>.</exception>
         </member>
         <member name="P:Vsxmd.Units.MemberUnit.Comparer">
@@ -546,12 +750,20 @@
         <member name="M:Vsxmd.Units.MemberUnit.ToMarkdown">
             <inheritdoc />
         </member>
-        <member name="M:Vsxmd.Units.MemberUnit.ComplementType(System.Collections.Generic.IEnumerable{Vsxmd.Units.MemberUnit})">
+        <member name="M:Vsxmd.Units.MemberUnit.ShouldSkipMember(Vsxmd.ConverterSettings)">
+            <summary>
+            Determines if the member should be skipped in documentation.
+            </summary>
+            <param name="settings">The settings being used for the conversion.</param>
+            <returns>True if the member should not be in the documentation.</returns>
+        </member>
+        <member name="M:Vsxmd.Units.MemberUnit.ComplementType(System.Collections.Generic.IEnumerable{Vsxmd.Units.MemberUnit},Vsxmd.Reflection.AssemblyReflector)">
             <summary>
             Complement a type unit if the member unit <paramref name="group"/> does not have one.
             One member unit group has the same <see cref="P:Vsxmd.Units.MemberUnit.TypeName"/>.
             </summary>
             <param name="group">The member unit group.</param>
+            <param name="assembly">The owning assembly, or null if unknown.</param>
             <returns>The complemented member unit group.</returns>
         </member>
         <member name="M:Vsxmd.Units.MemberUnit.MemberUnitComparer.Compare(Vsxmd.Units.MemberUnit,Vsxmd.Units.MemberUnit)">
