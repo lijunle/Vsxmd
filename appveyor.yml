@@ -14,9 +14,6 @@ platform:
 configuration:
   - Release
 
-matrix:
-  fast_finish: true
-
 dotnet_csproj:
   patch: true
   file: '**\*.csproj'
@@ -27,7 +24,7 @@ dotnet_csproj:
   informational_version: "{version}"
 
 before_build:
-  - ps: ./Vsxmd/Test.ps1 -Prepare
+  - ps: Vsxmd\Test.ps1 -Prepare
 
 build_script:
   - dotnet publish /p:PublishSingleFile=true /p:PublishTrimmed=true --runtime linux-x64
@@ -36,7 +33,7 @@ build_script:
   - dotnet publish /p:PublishSingleFile=true /p:PublishTrimmed=true --runtime win-x86
 
 test_script:
-  - ps: ./Vsxmd/Test.ps1 -Run
+  - ps: Vsxmd\Test.ps1 -Run
 
 after_test:
   - 7z a -r Vsxmd\obj\Vsxmd.zip Vsxmd\bin\Release
