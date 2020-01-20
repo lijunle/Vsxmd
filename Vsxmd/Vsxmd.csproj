@@ -19,7 +19,6 @@
   </ItemGroup>
   <!-- NuGet Metadata: https://docs.microsoft.com/en-us/dotnet/core/tools/csproj#nuget-metadata-properties -->
   <PropertyGroup>
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <Title>Vsxmd</Title>
     <Version>0.0.0</Version>
     <Authors>Junle Li, Sales Lessa Lopes</Authors>
@@ -28,25 +27,24 @@
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/lijunle/Vsxmd</PackageProjectUrl>
     <PackageTags>Vsxmd VS XML document Markdown</PackageTags>
-    <BuildOutputTargetFolder>tools</BuildOutputTargetFolder>
     <DevelopmentDependency>true</DevelopmentDependency>
-    <IncludeBuildOutput>true</IncludeBuildOutput>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
     <IncludeSymbols>true</IncludeSymbols>
     <IncludeSource>true</IncludeSource>
-    <GenerateNuspecDependsOn>ExcludeDocumentationFile</GenerateNuspecDependsOn>
+    <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
   </PropertyGroup>
+  <ItemGroup>
+    <!-- The parameter _PackageFiles is declared in NuGet.Build.Tasks.Pack.targets -->
+    <_PackageFiles Include="bin\$(Configuration)\$(TargetFramework)\linux-x64\publish\" PackagePath="tools\linux-x64\" />
+    <_PackageFiles Include="bin\$(Configuration)\$(TargetFramework)\osx-x64\publish\" PackagePath="tools\osx-x64\" />
+    <_PackageFiles Include="bin\$(Configuration)\$(TargetFramework)\win-x64\publish\" PackagePath="tools\win-x64\" />
+    <_PackageFiles Include="bin\$(Configuration)\$(TargetFramework)\win-x86\publish\" PackagePath="tools\win-x86\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="..\LICENSE" Link="LICENSE" PackagePath="\" />
     <Content Include="build\Vsxmd.targets" PackagePath="build\" />
     <Content Include="buildMultiTargeting\Vsxmd.targets" PackagePath="buildMultiTargeting\" />
   </ItemGroup>
-  <Target Name="ExcludeDocumentationFile">
-    <ItemGroup>
-      <!-- The _BuildOutputInPackage item group is declared in NuGet.Build.Tasks.Pack.targets -->
-      <_BuildOutputInPackage Remove="$(MSBuildProjectDirectory)\$(DocumentationFile)" />
-      <_BuildOutputInPackage Remove="$(MSBuildProjectDirectory)\**\$(DocumentationFile)" />
-    </ItemGroup>
-  </Target>
   <!-- Generate the Markdown file for itself -->
   <Target Name="VsxmdPreparation" AfterTargets="PostBuildEvent">
     <PropertyGroup>
