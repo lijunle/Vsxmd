@@ -29,16 +29,14 @@
     <PackageTags>Vsxmd VS XML document Markdown</PackageTags>
     <DevelopmentDependency>true</DevelopmentDependency>
     <IncludeBuildOutput>false</IncludeBuildOutput>
-    <IncludeSymbols>true</IncludeSymbols>
-    <IncludeSource>true</IncludeSource>
     <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
   </PropertyGroup>
   <ItemGroup>
     <!-- The parameter _PackageFiles is declared in NuGet.Build.Tasks.Pack.targets -->
-    <_PackageFiles Include="bin\$(Configuration)\$(TargetFramework)\linux-x64\publish\" PackagePath="tools\linux-x64\" />
-    <_PackageFiles Include="bin\$(Configuration)\$(TargetFramework)\osx-x64\publish\" PackagePath="tools\osx-x64\" />
-    <_PackageFiles Include="bin\$(Configuration)\$(TargetFramework)\win-x64\publish\" PackagePath="tools\win-x64\" />
-    <_PackageFiles Include="bin\$(Configuration)\$(TargetFramework)\win-x86\publish\" PackagePath="tools\win-x86\" />
+    <_PackageFiles Include="bin\$(Configuration)\$(TargetFramework)\linux-x64\publish\Vsxmd" PackagePath="tools\linux-x64\" />
+    <_PackageFiles Include="bin\$(Configuration)\$(TargetFramework)\osx-x64\publish\Vsxmd" PackagePath="tools\osx-x64\" />
+    <_PackageFiles Include="bin\$(Configuration)\$(TargetFramework)\win-x64\publish\Vsxmd.exe" PackagePath="tools\win-x64\" />
+    <_PackageFiles Include="bin\$(Configuration)\$(TargetFramework)\win-x86\publish\Vsxmd.exe" PackagePath="tools\win-x86\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="..\LICENSE" Link="LICENSE" PackagePath="\" />
