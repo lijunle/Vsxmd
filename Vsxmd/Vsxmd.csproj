@@ -53,6 +53,6 @@
       <VsxmdBinaryDirectory>$(OutputPath)\..</VsxmdBinaryDirectory>
     </PropertyGroup>
   </Target>
-  <Import Project="$(MSBuildThisFileDirectory)\build\Vsxmd.targets" />
+  <!-- Import Project="$(MSBuildThisFileDirectory)\build\Vsxmd.targets" / -->
 
 </Project>
