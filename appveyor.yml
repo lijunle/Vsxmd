@@ -30,10 +30,10 @@ before_build:
   - ps: ./Vsxmd/Test.ps1 -Prepare
 
 build_script:
-  - dotnet publish --runtime win-x64
-  - dotnet publish --runtime win-x86
-  - dotnet publish --runtime linux-x64
-  - dotnet publish --runtime osx-x64
+  - dotnet publish /p:PublishSingleFile=true /p:PublishTrimmed=true --runtime linux-x64
+  - dotnet publish /p:PublishSingleFile=true /p:PublishTrimmed=true --runtime osx-x64
+  - dotnet publish /p:PublishSingleFile=true /p:PublishTrimmed=true --runtime win-x64
+  - dotnet publish /p:PublishSingleFile=true /p:PublishTrimmed=true --runtime win-x86
   - 7z a -r Vsxmd\obj\Vsxmd.zip Vsxmd\bin\Release
 
 test_script:
