@@ -20,7 +20,7 @@
   </ItemGroup>
   <!-- NuGet Metadata: https://docs.microsoft.com/en-us/dotnet/core/tools/csproj#nuget-metadata-properties -->
   <PropertyGroup>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <Title>Vsxmd</Title>
     <Version>0.0.0</Version>
     <Authors>Junle Li, Sales Lessa Lopes</Authors>
