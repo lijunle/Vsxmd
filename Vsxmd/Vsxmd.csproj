@@ -45,9 +45,15 @@
   <!-- Generate the Markdown file for itself -->
   <Target Name="VsxmdPreparation" AfterTargets="PostBuildEvent">
     <PropertyGroup>
-      <VsxmdBinaryDirectory>$(OutputPath)\..</VsxmdBinaryDirectory>
+      <VsxmdRuntime Condition=" $([MSBuild]::IsOsPlatform('Linux')) ">linux-x64</VsxmdRuntime>
+      <VsxmdRuntime Condition=" $([MSBuild]::IsOsPlatform('OSX')) ">osx-x64</VsxmdRuntime>
+      <VsxmdRuntime Condition=" $([MSBuild]::IsOsPlatform('Windows')) AND '$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)' == 'X64' ">win-x64</VsxmdRuntime>
+      <VsxmdRuntime Condition=" $([MSBuild]::IsOsPlatform('Windows')) AND '$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)' == 'X86' ">win-x86</VsxmdRuntime>
+      <VsxmdBinary Condition=" '$(RuntimeIdentifier)' == '' AND EXISTS('$(OutputPath)/Vsxmd.dll') ">$(OutputPath)/Vsxmd</VsxmdBinary>
+      <VsxmdBinary Condition=" '$(RuntimeIdentifier)' != '' AND EXISTS('$(OutputPath)/../Vsxmd.dll') ">$(OutputPath)/../Vsxmd</VsxmdBinary>
+      <VsxmdBinary Condition=" '$(RuntimeIdentifier)' != '' AND EXISTS('$(OutputPath)/../$(VsxmdRuntime)/Vsxmd.dll') ">$(OutputPath)/../$(VsxmdRuntime)/Vsxmd</VsxmdBinary>
     </PropertyGroup>
   </Target>
-  <!-- Import Project="$(MSBuildThisFileDirectory)\build\Vsxmd.targets" / -->
+  <Import Project="$(MSBuildThisFileDirectory)\build\Vsxmd.targets" />
 
 </Project>
