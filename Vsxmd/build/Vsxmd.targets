@@ -7,7 +7,8 @@
       <VsxmdRuntime Condition=" $([MSBuild]::IsOsPlatform('Windows')) AND '$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)' == 'X64' ">win-x64</VsxmdRuntime>
       <VsxmdRuntime Condition=" $([MSBuild]::IsOsPlatform('Windows')) AND '$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)' == 'X86' ">win-x86</VsxmdRuntime>
       <VsxmdBinaryDirectory>$(MSBuildThisFileDirectory)/../tools/$(VsxmdRuntime)</VsxmdBinaryDirectory>
-      <VsxmdBinary Condition=" '$(VsxmdBinary)' == '' AND EXISTS('$(VsxmdBinaryDirectory/Vsxmd.dll') ">$(VsxmdBinaryDirectory)/Vsxmd</VsxmdBinary>
+      <VsxmdBinary Condition=" '$(VsxmdBinary)' == '' AND EXISTS('$(VsxmdBinaryDirectory)/Vsxmd') ">$(VsxmdBinaryDirectory)/Vsxmd</VsxmdBinary>
+      <VsxmdBinary Condition=" '$(VsxmdBinary)' == '' AND EXISTS('$(VsxmdBinaryDirectory)/Vsxmd.exe') ">$(VsxmdBinaryDirectory)/Vsxmd.exe</VsxmdBinary>
       <VsxmdCommand Condition=" '$(VsxmdBinary)' == '' ">echo "The Vsxmd command is not currently available."</VsxmdCommand>
       <VsxmdCommand Condition=" '$(VsxmdBinary)' != '' ">"$(VsxmdBinary)" "$(DocumentationFile)" "$(DocumentationMarkdown)" "$(VsxmdAutoDeleteXml)"</VsxmdCommand>
     </PropertyGroup>
