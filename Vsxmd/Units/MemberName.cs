@@ -54,9 +54,9 @@ namespace Vsxmd.Units
             ? MemberKind.Constants
             : this.type == 'P'
             ? MemberKind.Property
-            : this.type == 'M' && this.name.Contains(".#ctor")
+            : this.type == 'M' && this.name.Contains(".#ctor", StringComparison.InvariantCulture)
             ? MemberKind.Constructor
-            : this.type == 'M' && !this.name.Contains(".#ctor")
+            : this.type == 'M' && !this.name.Contains(".#ctor", StringComparison.InvariantCulture)
             ? MemberKind.Method
             : MemberKind.NotSupported;
 

@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project TreatAsLocalProperty="VsxmdBinaryDirectory;VsxmdBinary;VsxmdCommand" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project TreatAsLocalProperty="VsxmdRuntime;VsxmdBinaryDirectory;VsxmdBinary;VsxmdCommand" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Target Name="Vsxmd" AfterTargets="PostBuildEvent">
     <PropertyGroup>
-      <VsxmdBinaryDirectory Condition=" '$(VsxmdBinaryDirectory)' == '' ">$(MSBuildThisFileDirectory)/../tools</VsxmdBinaryDirectory>
-      <VsxmdBinary Condition=" ('$(MSBuildRuntimeType)' == 'Full' OR '$(MSBuildRuntimeType)' == '') AND EXISTS('$(VsxmdBinaryDirectory)/net46') ">"$(VsxmdBinaryDirectory)/net46/Vsxmd.exe"</VsxmdBinary>
-      <VsxmdBinary Condition=" '$(MSBuildRuntimeType)' == 'Mono' AND EXISTS('$(VsxmdBinaryDirectory)/net46') ">mono "$(VsxmdBinaryDirectory)/net46/Vsxmd.exe"</VsxmdBinary>
-      <VsxmdBinary Condition=" '$(MSBuildRuntimeType)' == 'Core' AND EXISTS('$(VsxmdBinaryDirectory)/netcoreapp2.2') ">dotnet "$(VsxmdBinaryDirectory)/netcoreapp2.2/Vsxmd.dll"</VsxmdBinary>
+      <VsxmdRuntime Condition=" $([MSBuild]::IsOsPlatform('Linux')) ">linux-x64</VsxmdRuntime>
+      <VsxmdRuntime Condition=" $([MSBuild]::IsOsPlatform('OSX')) ">osx-x64</VsxmdRuntime>
+      <VsxmdRuntime Condition=" $([MSBuild]::IsOsPlatform('Windows')) AND '$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)' == 'X64' ">win-x64</VsxmdRuntime>
+      <VsxmdRuntime Condition=" $([MSBuild]::IsOsPlatform('Windows')) AND '$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)' == 'X86' ">win-x86</VsxmdRuntime>
+      <VsxmdBinaryDirectory>$(MSBuildThisFileDirectory)/../tools/$(VsxmdRuntime)</VsxmdBinaryDirectory>
+      <VsxmdBinary Condition=" '$(VsxmdBinary)' == '' AND EXISTS('$(VsxmdBinaryDirectory)/Vsxmd') ">$(VsxmdBinaryDirectory)/Vsxmd</VsxmdBinary>
+      <VsxmdBinary Condition=" '$(VsxmdBinary)' == '' AND EXISTS('$(VsxmdBinaryDirectory)/Vsxmd.exe') ">$(VsxmdBinaryDirectory)/Vsxmd.exe</VsxmdBinary>
       <VsxmdCommand Condition=" '$(VsxmdBinary)' == '' ">echo "The Vsxmd command is not currently available."</VsxmdCommand>
-      <VsxmdCommand Condition=" '$(VsxmdBinary)' != '' ">$(VsxmdBinary) "$(DocumentationFile)" "$(DocumentationMarkdown)" "$(VsxmdAutoDeleteXml)"</VsxmdCommand>
+      <VsxmdCommand Condition=" '$(VsxmdBinary)' != '' ">"$(VsxmdBinary)" "$(DocumentationFile)" "$(DocumentationMarkdown)" "$(VsxmdAutoDeleteXml)"</VsxmdCommand>
     </PropertyGroup>
     <Message Text="Vsxmd starts to convert XML to Markdown." />
     <Exec Command="$(VsxmdCommand)" />

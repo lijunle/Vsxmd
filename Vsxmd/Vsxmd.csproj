@@ -3,8 +3,7 @@
   <!-- Project Metadata -->
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFrameworks Condition=" '$(MSBuildRuntimeType)' == 'Core' ">netcoreapp2.2</TargetFrameworks>
-    <TargetFrameworks Condition=" '$(MSBuildRuntimeType)' != 'Core' ">netcoreapp2.2;net46</TargetFrameworks>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <DocumentationFile>Vsxmd.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
@@ -20,38 +19,39 @@
   </ItemGroup>
   <!-- NuGet Metadata: https://docs.microsoft.com/en-us/dotnet/core/tools/csproj#nuget-metadata-properties -->
   <PropertyGroup>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Title>Vsxmd</Title>
     <Version>0.0.0</Version>
     <Authors>Junle Li, Sales Lessa Lopes</Authors>
     <Description>VS XML documentation -&gt; Markdown syntax.</Description>
-    <Copyright>Copyright 2018</Copyright>
+    <Copyright>Copyright 2015-Present</Copyright>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/lijunle/Vsxmd</PackageProjectUrl>
     <PackageTags>Vsxmd VS XML document Markdown</PackageTags>
-    <BuildOutputTargetFolder>tools</BuildOutputTargetFolder>
     <DevelopmentDependency>true</DevelopmentDependency>
-    <IncludeBuildOutput>true</IncludeBuildOutput>
-    <IncludeSymbols>true</IncludeSymbols>
-    <IncludeSource>true</IncludeSource>
-    <GenerateNuspecDependsOn>ExcludeDocumentationFile</GenerateNuspecDependsOn>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
   </PropertyGroup>
+  <ItemGroup>
+    <!-- The parameter _PackageFiles is declared in NuGet.Build.Tasks.Pack.targets -->
+    <_PackageFiles Include="bin\$(Configuration)\$(TargetFramework)\linux-x64\publish\Vsxmd" PackagePath="tools\linux-x64\" />
+    <_PackageFiles Include="bin\$(Configuration)\$(TargetFramework)\osx-x64\publish\Vsxmd" PackagePath="tools\osx-x64\" />
+    <_PackageFiles Include="bin\$(Configuration)\$(TargetFramework)\win-x64\publish\Vsxmd.exe" PackagePath="tools\win-x64\" />
+    <_PackageFiles Include="bin\$(Configuration)\$(TargetFramework)\win-x86\publish\Vsxmd.exe" PackagePath="tools\win-x86\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="..\LICENSE" Link="LICENSE" PackagePath="\" />
     <Content Include="build\Vsxmd.targets" PackagePath="build\" />
-    <Content Include="buildMultiTargeting\Vsxmd.targets" PackagePath="buildMultiTargeting\" />
   </ItemGroup>
-  <Target Name="ExcludeDocumentationFile">
-    <ItemGroup>
-      <!-- The _BuildOutputInPackage item group is declared in NuGet.Build.Tasks.Pack.targets -->
-      <_BuildOutputInPackage Remove="$(MSBuildProjectDirectory)\$(DocumentationFile)" />
-      <_BuildOutputInPackage Remove="$(MSBuildProjectDirectory)\**\$(DocumentationFile)" />
-    </ItemGroup>
-  </Target>
   <!-- Generate the Markdown file for itself -->
   <Target Name="VsxmdPreparation" AfterTargets="PostBuildEvent">
     <PropertyGroup>
-      <VsxmdBinaryDirectory>$(OutputPath)\..</VsxmdBinaryDirectory>
+      <VsxmdRuntime Condition=" $([MSBuild]::IsOsPlatform('Linux')) ">linux-x64</VsxmdRuntime>
+      <VsxmdRuntime Condition=" $([MSBuild]::IsOsPlatform('OSX')) ">osx-x64</VsxmdRuntime>
+      <VsxmdRuntime Condition=" $([MSBuild]::IsOsPlatform('Windows')) AND '$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)' == 'X64' ">win-x64</VsxmdRuntime>
+      <VsxmdRuntime Condition=" $([MSBuild]::IsOsPlatform('Windows')) AND '$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)' == 'X86' ">win-x86</VsxmdRuntime>
+      <VsxmdBinary Condition=" '$(RuntimeIdentifier)' == '' AND EXISTS('$(OutputPath)/Vsxmd.dll') ">$(OutputPath)/Vsxmd</VsxmdBinary>
+      <VsxmdBinary Condition=" '$(RuntimeIdentifier)' != '' AND EXISTS('$(OutputPath)/../Vsxmd.dll') ">$(OutputPath)/../Vsxmd</VsxmdBinary>
+      <VsxmdBinary Condition=" '$(RuntimeIdentifier)' != '' AND EXISTS('$(OutputPath)/../$(VsxmdRuntime)/Vsxmd.dll') ">$(OutputPath)/../$(VsxmdRuntime)/Vsxmd</VsxmdBinary>
     </PropertyGroup>
   </Target>
   <Import Project="$(MSBuildThisFileDirectory)\build\Vsxmd.targets" />
