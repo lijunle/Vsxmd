@@ -27,6 +27,7 @@ before_build:
   - ps: Vsxmd\Test.ps1 -Prepare
 
 build_script:
+  - dotnet publish /p:PublishSingleFile=true /p:PublishTrimmed=true --verbosity normal --runtime linux-musl-x64
   - dotnet publish /p:PublishSingleFile=true /p:PublishTrimmed=true --verbosity normal --runtime linux-x64
   - dotnet publish /p:PublishSingleFile=true /p:PublishTrimmed=true --verbosity normal --runtime osx-x64
   - dotnet publish /p:PublishSingleFile=true /p:PublishTrimmed=true --verbosity normal --runtime win-x64
