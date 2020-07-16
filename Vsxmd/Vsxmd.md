@@ -29,8 +29,10 @@
 - [Extensions](#T-Vsxmd-Units-Extensions 'Vsxmd.Units.Extensions')
   - [AsCode(code)](#M-Vsxmd-Units-Extensions-AsCode-System-String- 'Vsxmd.Units.Extensions.AsCode(System.String)')
   - [Escape(content)](#M-Vsxmd-Units-Extensions-Escape-System-String- 'Vsxmd.Units.Extensions.Escape(System.String)')
+  - [EscapeBackticks()](#M-Vsxmd-Units-Extensions-EscapeBackticks-System-String- 'Vsxmd.Units.Extensions.EscapeBackticks(System.String)')
   - [Join(value,separator)](#M-Vsxmd-Units-Extensions-Join-System-Collections-Generic-IEnumerable{System-String},System-String- 'Vsxmd.Units.Extensions.Join(System.Collections.Generic.IEnumerable{System.String},System.String)')
   - [NthLast\`\`1(source,index)](#M-Vsxmd-Units-Extensions-NthLast``1-System-Collections-Generic-IEnumerable{``0},System-Int32- 'Vsxmd.Units.Extensions.NthLast``1(System.Collections.Generic.IEnumerable{``0},System.Int32)')
+  - [ParseBrackets(str)](#M-Vsxmd-Units-Extensions-ParseBrackets-System-String- 'Vsxmd.Units.Extensions.ParseBrackets(System.String)')
   - [Suffix(value,suffix)](#M-Vsxmd-Units-Extensions-Suffix-System-String,System-String- 'Vsxmd.Units.Extensions.Suffix(System.String,System.String)')
   - [TakeAllButLast\`\`1(source,count)](#M-Vsxmd-Units-Extensions-TakeAllButLast``1-System-Collections-Generic-IEnumerable{``0},System-Int32- 'Vsxmd.Units.Extensions.TakeAllButLast``1(System.Collections.Generic.IEnumerable{``0},System.Int32)')
   - [ToAnchor(href)](#M-Vsxmd-Units-Extensions-ToAnchor-System-String- 'Vsxmd.Units.Extensions.ToAnchor(System.String)')
@@ -452,9 +454,7 @@ Extensions helper.
 
 ##### Summary
 
-Wrap the `code` into Markdown backtick safely.
-
-The backtick characters inside the `code` reverse as it is.
+Parse the `code` into a markdown-safe format.
 
 ##### Returns
 
@@ -465,10 +465,6 @@ The Markdown code span.
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | code | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The code span. |
-
-##### Remarks
-
-Reference: http://meta.stackexchange.com/questions/55437/how-can-the-backtick-character-be-included-in-code .
 
 <a name='M-Vsxmd-Units-Extensions-Escape-System-String-'></a>
 ### Escape(content) `method`
@@ -486,6 +482,27 @@ The escaped content.
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | content | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The content. |
+
+<a name='M-Vsxmd-Units-Extensions-EscapeBackticks-System-String-'></a>
+### EscapeBackticks() `method`
+
+##### Summary
+
+Wrap the `str` into Markdown backtick safely.
+
+The backtick characters inside the `str` reverse as it is.
+
+##### Returns
+
+Markdown with escaped back ticks.
+
+##### Parameters
+
+This method has no parameters.
+
+##### Remarks
+
+Reference: http://meta.stackexchange.com/questions/55437/how-can-the-backtick-character-be-included-in-code .
 
 <a name='M-Vsxmd-Units-Extensions-Join-System-Collections-Generic-IEnumerable{System-String},System-String-'></a>
 ### Join(value,separator) `method`
@@ -528,6 +545,23 @@ The element at the specified position in the `source` sequence.
 | Name | Description |
 | ---- | ----------- |
 | TSource | The type of the elements of `source`. |
+
+<a name='M-Vsxmd-Units-Extensions-ParseBrackets-System-String-'></a>
+### ParseBrackets(str) `method`
+
+##### Summary
+
+Parse the brackets from XML-safe to Markdown formatting.
+
+##### Returns
+
+String with converted brackets
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| str | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | [String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') to format |
 
 <a name='M-Vsxmd-Units-Extensions-Suffix-System-String,System-String-'></a>
 ### Suffix(value,suffix) `method`
