@@ -50,7 +50,7 @@ namespace Vsxmd.Units
         /// <param name="content">The content.</param>
         /// <returns>The escaped content.</returns>
         internal static string Escape(this string content) =>
-            content.Replace("`", @"\`");
+            content.Replace("`", @"\`", StringComparison.InvariantCulture);
 
         /// <summary>
         /// Generate an anchor for the <paramref name="href"/>.
@@ -91,7 +91,7 @@ namespace Vsxmd.Units
         internal static string AsCode(this string code)
         {
             string backticks = "`";
-            while (code.Contains(backticks))
+            while (code.Contains(backticks, StringComparison.InvariantCulture))
             {
                 backticks += "`";
             }
@@ -151,7 +151,7 @@ namespace Vsxmd.Units
             var text = node as XText;
             if (text != null)
             {
-                return text.Value.Escape().TrimStart(' ').Replace("            ", string.Empty);
+                return text.Value.Escape().TrimStart(' ').Replace("            ", string.Empty, StringComparison.InvariantCulture);
             }
 
             var child = node as XElement;
@@ -170,7 +170,7 @@ namespace Vsxmd.Units
                     case "code":
                         var lang = child.Attribute("lang")?.Value ?? string.Empty;
 
-                        string value = child.Nodes().First().ToString().Replace("\t", "    ");
+                        string value = child.Nodes().First().ToString().Replace("\t", "    ", StringComparison.InvariantCulture);
                         var indexOf = FindIndexOf(value);
 
                         var codeblockLines = value.Split(Environment.NewLine.ToCharArray())

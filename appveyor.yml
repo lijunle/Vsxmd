@@ -1,8 +1,7 @@
 version: 0.0.{build}
 
 image:
-  - Visual Studio 2017
-  - Ubuntu
+  - Visual Studio 2019
 
 shallow_clone: true
 
@@ -15,9 +14,6 @@ platform:
 configuration:
   - Release
 
-matrix:
-  fast_finish: true
-
 dotnet_csproj:
   patch: true
   file: '**\*.csproj'
@@ -28,11 +24,22 @@ dotnet_csproj:
   informational_version: "{version}"
 
 before_build:
-  - ps: msbuild -t:restore
-  - ps: ./Vsxmd/Test.ps1 -Prepare
+  - ps: Vsxmd\Test.ps1 -Prepare
+
+build_script:
+  - dotnet publish /p:PublishSingleFile=true /p:PublishTrimmed=true --verbosity normal --runtime linux-musl-x64
+  - dotnet publish /p:PublishSingleFile=true /p:PublishTrimmed=true --verbosity normal --runtime linux-x64
+  - dotnet publish /p:PublishSingleFile=true /p:PublishTrimmed=true --verbosity normal --runtime osx-x64
+  - dotnet publish /p:PublishSingleFile=true /p:PublishTrimmed=true --verbosity normal --runtime win-x64
+  - dotnet publish /p:PublishSingleFile=true /p:PublishTrimmed=true --verbosity normal --runtime win-x86
 
 test_script:
-  - ps: ./Vsxmd/Test.ps1 -Run
+  - ps: Vsxmd\Test.ps1 -Run
+
+after_test:
+  - 7z a -r Vsxmd\obj\Vsxmd.zip Vsxmd\bin\Release
+  - dotnet pack Vsxmd --no-restore --no-build
 
 artifacts:
+  - path: 'Vsxmd\obj\Vsxmd.zip'
   - path: 'Vsxmd\**\*.nupkg'
