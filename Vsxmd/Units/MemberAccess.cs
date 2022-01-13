@@ -127,7 +127,7 @@ namespace Vsxmd.Units
                     }
 
                     var docParameterName = paramTypes[i].Substring(2);
-                    var genericBracketIndex = docParameterName.IndexOf('{');
+                    var genericBracketIndex = docParameterName.IndexOf('{', StringComparison.Ordinal);
                     var endGenericIndex = docParameterName.LastIndexOf('}');
                     if (genericBracketIndex > 0 && endGenericIndex > genericBracketIndex)
                     {
