@@ -82,23 +82,16 @@ namespace Vsxmd.Units
             new MemberName(memberName).ToReferenceLink(useShortName);
 
         /// <summary>
-        /// Wrap the <paramref name="code"/> into Markdown backtick safely.
-        /// <para>The backtick characters inside the <paramref name="code"/> reverse as it is.</para>
+        /// Parse the <paramref name="code"/> into a markdown-safe format.
         /// </summary>
         /// <param name="code">The code span.</param>
         /// <returns>The Markdown code span.</returns>
-        /// <remarks>Reference: http://meta.stackexchange.com/questions/55437/how-can-the-backtick-character-be-included-in-code .</remarks>
         internal static string AsCode(this string code)
         {
-            string backticks = "`";
-            while (code.Contains(backticks, StringComparison.InvariantCulture))
-            {
-                backticks += "`";
-            }
+            code = EscapeBackticks(code);
+            code = ParseBrackets(code);
 
-            return code.StartsWith("`", StringComparison.Ordinal) || code.EndsWith("`", StringComparison.Ordinal)
-                ? $"{backticks} {code} {backticks}"
-                : $"{backticks}{code}{backticks}";
+            return code;
         }
 
         /// <summary>
@@ -233,6 +226,49 @@ namespace Vsxmd.Units
             }
 
             return string.Empty;
+        }
+
+        /// <summary>
+        /// Wrap the <paramref name="str"/> into Markdown backtick safely.
+        /// <para>The backtick characters inside the <paramref name="str"/> reverse as it is.</para>
+        /// </summary>
+        /// <remarks>Reference: http://meta.stackexchange.com/questions/55437/how-can-the-backtick-character-be-included-in-code .</remarks>
+        /// <returns>Markdown with escaped back ticks.</returns>
+        private static string EscapeBackticks(string str)
+        {
+            string backticks = "`";
+            while (str.Contains(backticks, StringComparison.InvariantCulture))
+            {
+                backticks += "`";
+            }
+
+            return str.StartsWith("`", StringComparison.Ordinal) || str.EndsWith("`", StringComparison.Ordinal)
+                ? $"{backticks} {str} {backticks}"
+                : $"{backticks}{str}{backticks}";
+        }
+
+        /// <summary>
+        /// Parse the brackets from XML-safe to Markdown formatting.
+        /// </summary>
+        /// <param name="str"><see cref="string"/> to format</param>
+        /// <returns>String with converted brackets.</returns>
+        private static string ParseBrackets(string str)
+        {
+            Dictionary<string, string> bracketsToReplace = new Dictionary<string, string>
+            {
+                { "&lt;", "<" },
+                { "&gt;", ">" }
+            };
+
+            foreach (var (originalSymbol, newSymbol) in bracketsToReplace)
+            {
+                while (str.Contains(originalSymbol, StringComparison.InvariantCulture))
+                {
+                    str = str.Replace(originalSymbol, newSymbol, StringComparison.InvariantCulture);
+                }
+            }
+
+            return str;
         }
     }
 }
