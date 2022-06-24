@@ -555,13 +555,13 @@ Parse the brackets from XML-safe to Markdown formatting.
 
 ##### Returns
 
-String with converted brackets
+String with converted brackets.
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| str | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | [String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') to format |
+| str | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | [String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') to format. |
 
 <a name='M-Vsxmd-Units-Extensions-Suffix-System-String,System-String-'></a>
 ### Suffix(value,suffix) `method`

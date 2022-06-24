@@ -392,8 +392,8 @@
             <summary>
             Parse the brackets from XML-safe to Markdown formatting.
             </summary>
-            <param name="str"><see cref="T:System.String"/> to format</param>
-            <returns>String with converted brackets</returns>
+            <param name="str"><see cref="T:System.String"/> to format.</param>
+            <returns>String with converted brackets.</returns>
         </member>
         <member name="T:Vsxmd.Units.IUnit">
             <summary>
