@@ -249,7 +249,7 @@ namespace Vsxmd.Units
         /// <summary>
         /// Parse the brackets from XML-safe to Markdown formatting.
         /// </summary>
-        /// <param name="str"><see cref="string"/> to format</param>
+        /// <param name="str"><see cref="string"/> to format.</param>
         /// <returns>String with converted brackets.</returns>
         private static string ParseBrackets(this string str)
         {
