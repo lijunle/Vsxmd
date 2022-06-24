@@ -88,10 +88,9 @@ namespace Vsxmd.Units
         /// <returns>The Markdown code span.</returns>
         internal static string AsCode(this string code)
         {
-            code = EscapeBackticks(code);
-            code = ParseBrackets(code);
-
-            return code;
+            return code
+                .EscapeBackticks()
+                .ParseBrackets();
         }
 
         /// <summary>
@@ -234,7 +233,7 @@ namespace Vsxmd.Units
         /// </summary>
         /// <remarks>Reference: http://meta.stackexchange.com/questions/55437/how-can-the-backtick-character-be-included-in-code .</remarks>
         /// <returns>Markdown with escaped back ticks.</returns>
-        private static string EscapeBackticks(string str)
+        private static string EscapeBackticks(this string str)
         {
             string backticks = "`";
             while (str.Contains(backticks, StringComparison.InvariantCulture))
@@ -252,9 +251,9 @@ namespace Vsxmd.Units
         /// </summary>
         /// <param name="str"><see cref="string"/> to format</param>
         /// <returns>String with converted brackets.</returns>
-        private static string ParseBrackets(string str)
+        private static string ParseBrackets(this string str)
         {
-            Dictionary<string, string> bracketsToReplace = new Dictionary<string, string>
+            var bracketsToReplace = new Dictionary<string, string>
             {
                 { "&lt;", "<" },
                 { "&gt;", ">" },
