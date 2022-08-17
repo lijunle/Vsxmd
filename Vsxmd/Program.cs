@@ -47,11 +47,21 @@ namespace Vsxmd
                     markdownPath = Path.ChangeExtension(xmlPath, ".md");
                 }
 
+                string vsxmdLineEnding = args.ElementAtOrDefault(3);
+                string lineEndingToken = vsxmdLineEnding.ToLower(CultureInfo.InvariantCulture) switch
+                {
+                    "crlf" => "\r\n",
+                    "cr" => "\r",
+                    "lf" => "\n",
+                    _ => "\n",
+                };
+
                 var document = XDocument.Load(xmlPath);
                 var converter = new Converter(document);
                 var markdown = converter.ToMarkdown();
 
-                File.WriteAllText(markdownPath, markdown);
+                var mdLines = markdown.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
+                File.WriteAllText(markdownPath, string.Join(lineEndingToken, mdLines));
 
                 string vsxmdAutoDeleteXml = args.ElementAtOrDefault(2);
                 if (string.IsNullOrWhiteSpace(vsxmdAutoDeleteXml))
