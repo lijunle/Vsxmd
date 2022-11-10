@@ -22,6 +22,14 @@ If you are using Visual Studio:
 - Install [Vsxmd](https://www.nuget.org/packages/Vsxmd/) package from NuGet.
 - Build the project, then a markdown file is generated next to the XML documentation file.
 
+If you are using Rider:
+
+- Open the .csproj of your project
+- Add `<GenerateDocumentationFile>true</GenerateDocumentationFile>` to the `PropertyGroup` section.
+- Add `<DocumentationMarkdown>$(MSBuildProjectDirectory)\Readme.md</DocumentationMarkdown>` to the `PropertyGroup` section.
+- Install [Vsxmd](https://www.nuget.org/packages/Vsxmd/) package from NuGet.
+- Build the project, then a markdown file is generated next to the XML documentation file.
+
 If you are using .Net Core CLI:
 
 - Open project's CSPROJ file, declare [`DocumentationFile`](https://docs.microsoft.com/en-us/visualstudio/msbuild/common-msbuild-project-properties) property in `PropertyGroup` section. The path is relative to the project directory. [MSBuild Reserved and Well-Known properties](https://docs.microsoft.com/en-us/visualstudio/msbuild/msbuild-reserved-and-well-known-properties) are also available for this property.
