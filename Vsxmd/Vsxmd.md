@@ -3,6 +3,10 @@
 
 ## Contents
 
+- [AssemblyReflector](#T-Vsxmd-Reflection-AssemblyReflector 'Vsxmd.Reflection.AssemblyReflector')
+  - [#ctor(assembly)](#M-Vsxmd-Reflection-AssemblyReflector-#ctor-System-Reflection-Assembly- 'Vsxmd.Reflection.AssemblyReflector.#ctor(System.Reflection.Assembly)')
+  - [GetType(name)](#M-Vsxmd-Reflection-AssemblyReflector-GetType-System-String- 'Vsxmd.Reflection.AssemblyReflector.GetType(System.String)')
+  - [GetType(name,parent)](#M-Vsxmd-Reflection-AssemblyReflector-GetType-System-String,Vsxmd-Reflection-TypeReflector- 'Vsxmd.Reflection.AssemblyReflector.GetType(System.String,Vsxmd.Reflection.TypeReflector)')
 - [AssemblyUnit](#T-Vsxmd-Units-AssemblyUnit 'Vsxmd.Units.AssemblyUnit')
   - [#ctor(element)](#M-Vsxmd-Units-AssemblyUnit-#ctor-System-Xml-Linq-XElement- 'Vsxmd.Units.AssemblyUnit.#ctor(System.Xml.Linq.XElement)')
   - [ToMarkdown()](#M-Vsxmd-Units-AssemblyUnit-ToMarkdown 'Vsxmd.Units.AssemblyUnit.ToMarkdown')
@@ -16,8 +20,13 @@
   - [ToMarkdown()](#M-Vsxmd-Units-BaseUnit-ToMarkdown 'Vsxmd.Units.BaseUnit.ToMarkdown')
 - [Converter](#T-Vsxmd-Converter 'Vsxmd.Converter')
   - [#ctor(document)](#M-Vsxmd-Converter-#ctor-System-Xml-Linq-XDocument- 'Vsxmd.Converter.#ctor(System.Xml.Linq.XDocument)')
+  - [#ctor(document,assembly)](#M-Vsxmd-Converter-#ctor-System-Xml-Linq-XDocument,System-Reflection-Assembly- 'Vsxmd.Converter.#ctor(System.Xml.Linq.XDocument,System.Reflection.Assembly)')
   - [ToMarkdown(document)](#M-Vsxmd-Converter-ToMarkdown-System-Xml-Linq-XDocument- 'Vsxmd.Converter.ToMarkdown(System.Xml.Linq.XDocument)')
   - [ToMarkdown()](#M-Vsxmd-Converter-ToMarkdown 'Vsxmd.Converter.ToMarkdown')
+  - [ToMarkdown(settings)](#M-Vsxmd-Converter-ToMarkdown-Vsxmd-ConverterSettings- 'Vsxmd.Converter.ToMarkdown(Vsxmd.ConverterSettings)')
+- [ConverterSettings](#T-Vsxmd-ConverterSettings 'Vsxmd.ConverterSettings')
+  - [ShouldSkipInternal](#P-Vsxmd-ConverterSettings-ShouldSkipInternal 'Vsxmd.ConverterSettings.ShouldSkipInternal')
+  - [ShouldSkipNonBrowsable](#P-Vsxmd-ConverterSettings-ShouldSkipNonBrowsable 'Vsxmd.ConverterSettings.ShouldSkipNonBrowsable')
 - [ExampleUnit](#T-Vsxmd-Units-ExampleUnit 'Vsxmd.Units.ExampleUnit')
   - [#ctor(element)](#M-Vsxmd-Units-ExampleUnit-#ctor-System-Xml-Linq-XElement- 'Vsxmd.Units.ExampleUnit.#ctor(System.Xml.Linq.XElement)')
   - [ToMarkdown()](#M-Vsxmd-Units-ExampleUnit-ToMarkdown 'Vsxmd.Units.ExampleUnit.ToMarkdown')
@@ -38,10 +47,18 @@
   - [ToLowerString(memberKind)](#M-Vsxmd-Units-Extensions-ToLowerString-Vsxmd-Units-MemberKind- 'Vsxmd.Units.Extensions.ToLowerString(Vsxmd.Units.MemberKind)')
   - [ToMarkdownText(element)](#M-Vsxmd-Units-Extensions-ToMarkdownText-System-Xml-Linq-XElement- 'Vsxmd.Units.Extensions.ToMarkdownText(System.Xml.Linq.XElement)')
   - [ToReferenceLink(memberName,useShortName)](#M-Vsxmd-Units-Extensions-ToReferenceLink-System-String,System-Boolean- 'Vsxmd.Units.Extensions.ToReferenceLink(System.String,System.Boolean)')
+- [FieldReflector](#T-Vsxmd-Reflection-FieldReflector 'Vsxmd.Reflection.FieldReflector')
+  - [#ctor(field)](#M-Vsxmd-Reflection-FieldReflector-#ctor-System-Reflection-FieldInfo- 'Vsxmd.Reflection.FieldReflector.#ctor(System.Reflection.FieldInfo)')
+  - [IsVisible](#P-Vsxmd-Reflection-FieldReflector-IsVisible 'Vsxmd.Reflection.FieldReflector.IsVisible')
 - [IConverter](#T-Vsxmd-IConverter 'Vsxmd.IConverter')
   - [ToMarkdown()](#M-Vsxmd-IConverter-ToMarkdown 'Vsxmd.IConverter.ToMarkdown')
+  - [ToMarkdown(settings)](#M-Vsxmd-IConverter-ToMarkdown-Vsxmd-ConverterSettings- 'Vsxmd.IConverter.ToMarkdown(Vsxmd.ConverterSettings)')
 - [IUnit](#T-Vsxmd-Units-IUnit 'Vsxmd.Units.IUnit')
   - [ToMarkdown()](#M-Vsxmd-Units-IUnit-ToMarkdown 'Vsxmd.Units.IUnit.ToMarkdown')
+- [MemberAccess](#T-Vsxmd-Units-MemberAccess 'Vsxmd.Units.MemberAccess')
+  - [#ctor(name,assembly)](#M-Vsxmd-Units-MemberAccess-#ctor-Vsxmd-Units-MemberName,Vsxmd-Reflection-AssemblyReflector- 'Vsxmd.Units.MemberAccess.#ctor(Vsxmd.Units.MemberName,Vsxmd.Reflection.AssemblyReflector)')
+  - [IsBrowsable](#P-Vsxmd-Units-MemberAccess-IsBrowsable 'Vsxmd.Units.MemberAccess.IsBrowsable')
+  - [IsVisible](#P-Vsxmd-Units-MemberAccess-IsVisible 'Vsxmd.Units.MemberAccess.IsVisible')
 - [MemberKind](#T-Vsxmd-Units-MemberKind 'Vsxmd.Units.MemberKind')
   - [Constants](#F-Vsxmd-Units-MemberKind-Constants 'Vsxmd.Units.MemberKind.Constants')
   - [Constructor](#F-Vsxmd-Units-MemberKind-Constructor 'Vsxmd.Units.MemberKind.Constructor')
@@ -53,6 +70,7 @@
   - [#ctor(name,paramNames)](#M-Vsxmd-Units-MemberName-#ctor-System-String,System-Collections-Generic-IEnumerable{System-String}- 'Vsxmd.Units.MemberName.#ctor(System.String,System.Collections.Generic.IEnumerable{System.String})')
   - [#ctor(name)](#M-Vsxmd-Units-MemberName-#ctor-System-String- 'Vsxmd.Units.MemberName.#ctor(System.String)')
   - [Caption](#P-Vsxmd-Units-MemberName-Caption 'Vsxmd.Units.MemberName.Caption')
+  - [FriendlyName](#P-Vsxmd-Units-MemberName-FriendlyName 'Vsxmd.Units.MemberName.FriendlyName')
   - [Kind](#P-Vsxmd-Units-MemberName-Kind 'Vsxmd.Units.MemberName.Kind')
   - [Link](#P-Vsxmd-Units-MemberName-Link 'Vsxmd.Units.MemberName.Link')
   - [Namespace](#P-Vsxmd-Units-MemberName-Namespace 'Vsxmd.Units.MemberName.Namespace')
@@ -60,16 +78,25 @@
   - [CompareTo()](#M-Vsxmd-Units-MemberName-CompareTo-Vsxmd-Units-MemberName- 'Vsxmd.Units.MemberName.CompareTo(Vsxmd.Units.MemberName)')
   - [GetParamTypes()](#M-Vsxmd-Units-MemberName-GetParamTypes 'Vsxmd.Units.MemberName.GetParamTypes')
   - [ToReferenceLink(useShortName)](#M-Vsxmd-Units-MemberName-ToReferenceLink-System-Boolean- 'Vsxmd.Units.MemberName.ToReferenceLink(System.Boolean)')
+- [MemberReflector](#T-Vsxmd-Reflection-MemberReflector 'Vsxmd.Reflection.MemberReflector')
+  - [#ctor(member)](#M-Vsxmd-Reflection-MemberReflector-#ctor-System-Reflection-MemberInfo- 'Vsxmd.Reflection.MemberReflector.#ctor(System.Reflection.MemberInfo)')
+  - [IsBrowsable](#P-Vsxmd-Reflection-MemberReflector-IsBrowsable 'Vsxmd.Reflection.MemberReflector.IsBrowsable')
+  - [IsVisible](#P-Vsxmd-Reflection-MemberReflector-IsVisible 'Vsxmd.Reflection.MemberReflector.IsVisible')
 - [MemberUnit](#T-Vsxmd-Units-MemberUnit 'Vsxmd.Units.MemberUnit')
-  - [#ctor(element)](#M-Vsxmd-Units-MemberUnit-#ctor-System-Xml-Linq-XElement- 'Vsxmd.Units.MemberUnit.#ctor(System.Xml.Linq.XElement)')
+  - [#ctor(element,assembly)](#M-Vsxmd-Units-MemberUnit-#ctor-System-Xml-Linq-XElement,Vsxmd-Reflection-AssemblyReflector- 'Vsxmd.Units.MemberUnit.#ctor(System.Xml.Linq.XElement,Vsxmd.Reflection.AssemblyReflector)')
   - [Comparer](#P-Vsxmd-Units-MemberUnit-Comparer 'Vsxmd.Units.MemberUnit.Comparer')
   - [Kind](#P-Vsxmd-Units-MemberUnit-Kind 'Vsxmd.Units.MemberUnit.Kind')
   - [Link](#P-Vsxmd-Units-MemberUnit-Link 'Vsxmd.Units.MemberUnit.Link')
   - [TypeName](#P-Vsxmd-Units-MemberUnit-TypeName 'Vsxmd.Units.MemberUnit.TypeName')
-  - [ComplementType(group)](#M-Vsxmd-Units-MemberUnit-ComplementType-System-Collections-Generic-IEnumerable{Vsxmd-Units-MemberUnit}- 'Vsxmd.Units.MemberUnit.ComplementType(System.Collections.Generic.IEnumerable{Vsxmd.Units.MemberUnit})')
+  - [ComplementType(group,assembly)](#M-Vsxmd-Units-MemberUnit-ComplementType-System-Collections-Generic-IEnumerable{Vsxmd-Units-MemberUnit},Vsxmd-Reflection-AssemblyReflector- 'Vsxmd.Units.MemberUnit.ComplementType(System.Collections.Generic.IEnumerable{Vsxmd.Units.MemberUnit},Vsxmd.Reflection.AssemblyReflector)')
+  - [ShouldSkipMember(settings)](#M-Vsxmd-Units-MemberUnit-ShouldSkipMember-Vsxmd-ConverterSettings- 'Vsxmd.Units.MemberUnit.ShouldSkipMember(Vsxmd.ConverterSettings)')
   - [ToMarkdown()](#M-Vsxmd-Units-MemberUnit-ToMarkdown 'Vsxmd.Units.MemberUnit.ToMarkdown')
 - [MemberUnitComparer](#T-Vsxmd-Units-MemberUnit-MemberUnitComparer 'Vsxmd.Units.MemberUnit.MemberUnitComparer')
   - [Compare()](#M-Vsxmd-Units-MemberUnit-MemberUnitComparer-Compare-Vsxmd-Units-MemberUnit,Vsxmd-Units-MemberUnit- 'Vsxmd.Units.MemberUnit.MemberUnitComparer.Compare(Vsxmd.Units.MemberUnit,Vsxmd.Units.MemberUnit)')
+- [MethodReflector](#T-Vsxmd-Reflection-MethodReflector 'Vsxmd.Reflection.MethodReflector')
+  - [#ctor(method)](#M-Vsxmd-Reflection-MethodReflector-#ctor-System-Reflection-MethodBase- 'Vsxmd.Reflection.MethodReflector.#ctor(System.Reflection.MethodBase)')
+  - [IsVisible](#P-Vsxmd-Reflection-MethodReflector-IsVisible 'Vsxmd.Reflection.MethodReflector.IsVisible')
+  - [Parameters](#P-Vsxmd-Reflection-MethodReflector-Parameters 'Vsxmd.Reflection.MethodReflector.Parameters')
 - [ParamUnit](#T-Vsxmd-Units-ParamUnit 'Vsxmd.Units.ParamUnit')
   - [#ctor(element,paramType)](#M-Vsxmd-Units-ParamUnit-#ctor-System-Xml-Linq-XElement,System-String- 'Vsxmd.Units.ParamUnit.#ctor(System.Xml.Linq.XElement,System.String)')
   - [ToMarkdown()](#M-Vsxmd-Units-ParamUnit-ToMarkdown 'Vsxmd.Units.ParamUnit.ToMarkdown')
@@ -112,10 +139,78 @@
   - [TestSpaceAfterInlineElements\`\`1()](#M-Vsxmd-Program-Test-TestSpaceAfterInlineElements``1-System-Boolean- 'Vsxmd.Program.Test.TestSpaceAfterInlineElements``1(System.Boolean)')
 - [TestGenericType\`2](#T-Vsxmd-Program-TestGenericType`2 'Vsxmd.Program.TestGenericType`2')
   - [TestGenericMethod\`\`2()](#M-Vsxmd-Program-TestGenericType`2-TestGenericMethod``2 'Vsxmd.Program.TestGenericType`2.TestGenericMethod``2')
+- [TypeReflector](#T-Vsxmd-Reflection-TypeReflector 'Vsxmd.Reflection.TypeReflector')
+  - [#ctor(type,parent)](#M-Vsxmd-Reflection-TypeReflector-#ctor-System-Type,Vsxmd-Reflection-TypeReflector- 'Vsxmd.Reflection.TypeReflector.#ctor(System.Type,Vsxmd.Reflection.TypeReflector)')
+  - [Constructors](#P-Vsxmd-Reflection-TypeReflector-Constructors 'Vsxmd.Reflection.TypeReflector.Constructors')
+  - [FullName](#P-Vsxmd-Reflection-TypeReflector-FullName 'Vsxmd.Reflection.TypeReflector.FullName')
+  - [IsBrowsable](#P-Vsxmd-Reflection-TypeReflector-IsBrowsable 'Vsxmd.Reflection.TypeReflector.IsBrowsable')
+  - [IsVisible](#P-Vsxmd-Reflection-TypeReflector-IsVisible 'Vsxmd.Reflection.TypeReflector.IsVisible')
+  - [GetField(name)](#M-Vsxmd-Reflection-TypeReflector-GetField-System-String- 'Vsxmd.Reflection.TypeReflector.GetField(System.String)')
+  - [GetMethods(name)](#M-Vsxmd-Reflection-TypeReflector-GetMethods-System-String- 'Vsxmd.Reflection.TypeReflector.GetMethods(System.String)')
+  - [GetProperty(name)](#M-Vsxmd-Reflection-TypeReflector-GetProperty-System-String- 'Vsxmd.Reflection.TypeReflector.GetProperty(System.String)')
 - [TypeparamUnit](#T-Vsxmd-Units-TypeparamUnit 'Vsxmd.Units.TypeparamUnit')
   - [#ctor(element)](#M-Vsxmd-Units-TypeparamUnit-#ctor-System-Xml-Linq-XElement- 'Vsxmd.Units.TypeparamUnit.#ctor(System.Xml.Linq.XElement)')
   - [ToMarkdown()](#M-Vsxmd-Units-TypeparamUnit-ToMarkdown 'Vsxmd.Units.TypeparamUnit.ToMarkdown')
   - [ToMarkdown(elements)](#M-Vsxmd-Units-TypeparamUnit-ToMarkdown-System-Collections-Generic-IEnumerable{System-Xml-Linq-XElement}- 'Vsxmd.Units.TypeparamUnit.ToMarkdown(System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement})')
+
+<a name='T-Vsxmd-Reflection-AssemblyReflector'></a>
+## AssemblyReflector `type`
+
+##### Namespace
+
+Vsxmd.Reflection
+
+##### Summary
+
+Reflection helpers for an [Assembly](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Reflection.Assembly 'System.Reflection.Assembly').
+
+<a name='M-Vsxmd-Reflection-AssemblyReflector-#ctor-System-Reflection-Assembly-'></a>
+### #ctor(assembly) `constructor`
+
+##### Summary
+
+Initializes a new instance of the [AssemblyReflector](#T-Vsxmd-Reflection-AssemblyReflector 'Vsxmd.Reflection.AssemblyReflector') class.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| assembly | [System.Reflection.Assembly](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Reflection.Assembly 'System.Reflection.Assembly') | The assembly, or null to disable reflection. |
+
+<a name='M-Vsxmd-Reflection-AssemblyReflector-GetType-System-String-'></a>
+### GetType(name) `method`
+
+##### Summary
+
+Gets a type from the assembly.
+
+##### Returns
+
+The type.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| name | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The name of the type. |
+
+<a name='M-Vsxmd-Reflection-AssemblyReflector-GetType-System-String,Vsxmd-Reflection-TypeReflector-'></a>
+### GetType(name,parent) `method`
+
+##### Summary
+
+Gets a type from the assembly.
+
+##### Returns
+
+The type.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| name | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The name of the type. |
+| parent | [Vsxmd.Reflection.TypeReflector](#T-Vsxmd-Reflection-TypeReflector 'Vsxmd.Reflection.TypeReflector') | The parent type if `name` refers to a nested type. |
 
 <a name='T-Vsxmd-Units-AssemblyUnit'></a>
 ## AssemblyUnit `type`
@@ -290,6 +385,20 @@ Initializes a new instance of the [Converter](#T-Vsxmd-Converter 'Vsxmd.Converte
 | ---- | ---- | ----------- |
 | document | [System.Xml.Linq.XDocument](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XDocument 'System.Xml.Linq.XDocument') | The XML document. |
 
+<a name='M-Vsxmd-Converter-#ctor-System-Xml-Linq-XDocument,System-Reflection-Assembly-'></a>
+### #ctor(document,assembly) `constructor`
+
+##### Summary
+
+Initializes a new instance of the [Converter](#T-Vsxmd-Converter 'Vsxmd.Converter') class.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| document | [System.Xml.Linq.XDocument](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XDocument 'System.Xml.Linq.XDocument') | The XML document. |
+| assembly | [System.Reflection.Assembly](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Reflection.Assembly 'System.Reflection.Assembly') | The owning assembly, or null if unknown. |
+
 <a name='M-Vsxmd-Converter-ToMarkdown-System-Xml-Linq-XDocument-'></a>
 ### ToMarkdown(document) `method`
 
@@ -317,6 +426,49 @@ The generated Markdown content.
 ##### Parameters
 
 This method has no parameters.
+
+<a name='M-Vsxmd-Converter-ToMarkdown-Vsxmd-ConverterSettings-'></a>
+### ToMarkdown(settings) `method`
+
+##### Summary
+
+Convert to Markdown syntax.
+
+##### Returns
+
+The generated Markdown content.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| settings | [Vsxmd.ConverterSettings](#T-Vsxmd-ConverterSettings 'Vsxmd.ConverterSettings') | The settings to use during the conversion. |
+
+<a name='T-Vsxmd-ConverterSettings'></a>
+## ConverterSettings `type`
+
+##### Namespace
+
+Vsxmd
+
+##### Summary
+
+Contains settings for the conversion process.
+
+<a name='P-Vsxmd-ConverterSettings-ShouldSkipInternal'></a>
+### ShouldSkipInternal `property`
+
+##### Summary
+
+Gets or sets a value indicating whether internal members should be skipped in the documentation.
+
+<a name='P-Vsxmd-ConverterSettings-ShouldSkipNonBrowsable'></a>
+### ShouldSkipNonBrowsable `property`
+
+##### Summary
+
+Gets or sets a value indicating whether members marked with
+[Never](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ComponentModel.EditorBrowsableState.Never 'System.ComponentModel.EditorBrowsableState.Never') should be skipped in the documentation.
 
 <a name='T-Vsxmd-Units-ExampleUnit'></a>
 ## ExampleUnit `type`
@@ -678,6 +830,37 @@ For `T:Vsxmd.Units.MemberUnit`, convert it to `[MemberUnit](#T-Vsxmd.Units.Membe
 
 For `T:System.ArgumentException`, convert it to `[ArgumentException](http://msdn/path/to/System.ArgumentException)`.
 
+<a name='T-Vsxmd-Reflection-FieldReflector'></a>
+## FieldReflector `type`
+
+##### Namespace
+
+Vsxmd.Reflection
+
+##### Summary
+
+Reflection helpers for a single [FieldInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Reflection.FieldInfo 'System.Reflection.FieldInfo').
+
+<a name='M-Vsxmd-Reflection-FieldReflector-#ctor-System-Reflection-FieldInfo-'></a>
+### #ctor(field) `constructor`
+
+##### Summary
+
+Initializes a new instance of the [FieldReflector](#T-Vsxmd-Reflection-FieldReflector 'Vsxmd.Reflection.FieldReflector') class.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| field | [System.Reflection.FieldInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Reflection.FieldInfo 'System.Reflection.FieldInfo') | The field, or null to use default properties. |
+
+<a name='P-Vsxmd-Reflection-FieldReflector-IsVisible'></a>
+### IsVisible `property`
+
+##### Summary
+
+*Inherit from parent.*
+
 <a name='T-Vsxmd-IConverter'></a>
 ## IConverter `type`
 
@@ -704,6 +887,23 @@ The generated Markdown content.
 
 This method has no parameters.
 
+<a name='M-Vsxmd-IConverter-ToMarkdown-Vsxmd-ConverterSettings-'></a>
+### ToMarkdown(settings) `method`
+
+##### Summary
+
+Convert to Markdown syntax.
+
+##### Returns
+
+The generated Markdown content.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| settings | [Vsxmd.ConverterSettings](#T-Vsxmd-ConverterSettings 'Vsxmd.ConverterSettings') | The settings to use during the conversion. |
+
 <a name='T-Vsxmd-Units-IUnit'></a>
 ## IUnit `type`
 
@@ -729,6 +929,45 @@ The generated Markdown content.
 ##### Parameters
 
 This method has no parameters.
+
+<a name='T-Vsxmd-Units-MemberAccess'></a>
+## MemberAccess `type`
+
+##### Namespace
+
+Vsxmd.Units
+
+##### Summary
+
+Member access scope.
+
+<a name='M-Vsxmd-Units-MemberAccess-#ctor-Vsxmd-Units-MemberName,Vsxmd-Reflection-AssemblyReflector-'></a>
+### #ctor(name,assembly) `constructor`
+
+##### Summary
+
+Initializes a new instance of the [MemberAccess](#T-Vsxmd-Units-MemberAccess 'Vsxmd.Units.MemberAccess') class.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| name | [Vsxmd.Units.MemberName](#T-Vsxmd-Units-MemberName 'Vsxmd.Units.MemberName') | The member name. |
+| assembly | [Vsxmd.Reflection.AssemblyReflector](#T-Vsxmd-Reflection-AssemblyReflector 'Vsxmd.Reflection.AssemblyReflector') | The assembly owning the member, or null if not known. |
+
+<a name='P-Vsxmd-Units-MemberAccess-IsBrowsable'></a>
+### IsBrowsable `property`
+
+##### Summary
+
+Gets a value indicating whether the type is intended to be discovered outside the assembly.
+
+<a name='P-Vsxmd-Units-MemberAccess-IsVisible'></a>
+### IsVisible `property`
+
+##### Summary
+
+Gets a value indicating whether the member is visible outside of the assembly.
 
 <a name='T-Vsxmd-Units-MemberKind'></a>
 ## MemberKind `type`
@@ -834,6 +1073,17 @@ For [Type](#F-Vsxmd-Units-MemberKind-Type 'Vsxmd.Units.MemberKind.Type'), show a
 
 For other kinds, show as `### Vsxmd.Units.MemberName.Caption [#](#here) [^](#contents)`.
 
+<a name='P-Vsxmd-Units-MemberName-FriendlyName'></a>
+### FriendlyName `property`
+
+##### Summary
+
+Gets the friendly name.
+
+##### Example
+
+`ToString`, `#ctor`.
+
 <a name='P-Vsxmd-Units-MemberName-Kind'></a>
 ### Kind `property`
 
@@ -927,6 +1177,44 @@ The generated Markdown reference link.
 | ---- | ---- | ----------- |
 | useShortName | [System.Boolean](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Boolean 'System.Boolean') | Indicate if use short type name. |
 
+<a name='T-Vsxmd-Reflection-MemberReflector'></a>
+## MemberReflector `type`
+
+##### Namespace
+
+Vsxmd.Reflection
+
+##### Summary
+
+Reflection helpers for a single [MemberInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Reflection.MemberInfo 'System.Reflection.MemberInfo').
+
+<a name='M-Vsxmd-Reflection-MemberReflector-#ctor-System-Reflection-MemberInfo-'></a>
+### #ctor(member) `constructor`
+
+##### Summary
+
+Initializes a new instance of the [MemberReflector](#T-Vsxmd-Reflection-MemberReflector 'Vsxmd.Reflection.MemberReflector') class.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| member | [System.Reflection.MemberInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Reflection.MemberInfo 'System.Reflection.MemberInfo') | The member, or null to use default properties. |
+
+<a name='P-Vsxmd-Reflection-MemberReflector-IsBrowsable'></a>
+### IsBrowsable `property`
+
+##### Summary
+
+Gets a value indicating whether the member is intended to be discovered outside the assembly.
+
+<a name='P-Vsxmd-Reflection-MemberReflector-IsVisible'></a>
+### IsVisible `property`
+
+##### Summary
+
+Gets a value indicating whether the member is visible outside of the assembly.
+
 <a name='T-Vsxmd-Units-MemberUnit'></a>
 ## MemberUnit `type`
 
@@ -938,8 +1226,8 @@ Vsxmd.Units
 
 Member unit.
 
-<a name='M-Vsxmd-Units-MemberUnit-#ctor-System-Xml-Linq-XElement-'></a>
-### #ctor(element) `constructor`
+<a name='M-Vsxmd-Units-MemberUnit-#ctor-System-Xml-Linq-XElement,Vsxmd-Reflection-AssemblyReflector-'></a>
+### #ctor(element,assembly) `constructor`
 
 ##### Summary
 
@@ -950,6 +1238,7 @@ Initializes a new instance of the [MemberUnit](#T-Vsxmd-Units-MemberUnit 'Vsxmd.
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | element | [System.Xml.Linq.XElement](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XElement 'System.Xml.Linq.XElement') | The member XML element. |
+| assembly | [Vsxmd.Reflection.AssemblyReflector](#T-Vsxmd-Reflection-AssemblyReflector 'Vsxmd.Reflection.AssemblyReflector') | The member's owning assembly, if known. |
 
 ##### Exceptions
 
@@ -989,8 +1278,8 @@ Gets the type name.
 
 `Vsxmd.Program`, `Vsxmd.Units.TypeUnit`.
 
-<a name='M-Vsxmd-Units-MemberUnit-ComplementType-System-Collections-Generic-IEnumerable{Vsxmd-Units-MemberUnit}-'></a>
-### ComplementType(group) `method`
+<a name='M-Vsxmd-Units-MemberUnit-ComplementType-System-Collections-Generic-IEnumerable{Vsxmd-Units-MemberUnit},Vsxmd-Reflection-AssemblyReflector-'></a>
+### ComplementType(group,assembly) `method`
 
 ##### Summary
 
@@ -1006,6 +1295,24 @@ The complemented member unit group.
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | group | [System.Collections.Generic.IEnumerable{Vsxmd.Units.MemberUnit}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable 'System.Collections.Generic.IEnumerable{Vsxmd.Units.MemberUnit}') | The member unit group. |
+| assembly | [Vsxmd.Reflection.AssemblyReflector](#T-Vsxmd-Reflection-AssemblyReflector 'Vsxmd.Reflection.AssemblyReflector') | The owning assembly, or null if unknown. |
+
+<a name='M-Vsxmd-Units-MemberUnit-ShouldSkipMember-Vsxmd-ConverterSettings-'></a>
+### ShouldSkipMember(settings) `method`
+
+##### Summary
+
+Determines if the member should be skipped in documentation.
+
+##### Returns
+
+True if the member should not be in the documentation.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| settings | [Vsxmd.ConverterSettings](#T-Vsxmd-ConverterSettings 'Vsxmd.ConverterSettings') | The settings being used for the conversion. |
 
 <a name='M-Vsxmd-Units-MemberUnit-ToMarkdown'></a>
 ### ToMarkdown() `method`
@@ -1035,6 +1342,44 @@ Vsxmd.Units.MemberUnit
 ##### Parameters
 
 This method has no parameters.
+
+<a name='T-Vsxmd-Reflection-MethodReflector'></a>
+## MethodReflector `type`
+
+##### Namespace
+
+Vsxmd.Reflection
+
+##### Summary
+
+Reflection helpers for a single [MethodBase](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Reflection.MethodBase 'System.Reflection.MethodBase').
+
+<a name='M-Vsxmd-Reflection-MethodReflector-#ctor-System-Reflection-MethodBase-'></a>
+### #ctor(method) `constructor`
+
+##### Summary
+
+Initializes a new instance of the [MethodReflector](#T-Vsxmd-Reflection-MethodReflector 'Vsxmd.Reflection.MethodReflector') class.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| method | [System.Reflection.MethodBase](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Reflection.MethodBase 'System.Reflection.MethodBase') | The method, or null to use default properties. |
+
+<a name='P-Vsxmd-Reflection-MethodReflector-IsVisible'></a>
+### IsVisible `property`
+
+##### Summary
+
+*Inherit from parent.*
+
+<a name='P-Vsxmd-Reflection-MethodReflector-Parameters'></a>
+### Parameters `property`
+
+##### Summary
+
+Gets the method's parameters, or null if the method could not be loaded.
 
 <a name='T-Vsxmd-Units-ParamUnit'></a>
 ## ParamUnit `type`
@@ -1180,12 +1525,20 @@ Program entry.
 Usage syntax:
 
 ```
-Vsxmd.exe &lt;input-XML-path&gt; [output-Markdown-path]
+Vsxmd.exe &lt;input-XML-path&gt; [output-Markdown-path] [should-delete-xml] [assembly-path] [should-skip-internal] [should-skip-non-browsable]
 ```
 
 The `input-XML-path` argument is required. It references to the VS generated XML documentation file.
 
 The `output-Markdown-path` argument is optional. It indicates the file path for the Markdown output file. When not specific, it will be a `.md` file with same file name as the XML documentation file, path at the XML documentation folder.
+
+The `should-delete-xml` argument is optional. Pass "true" to delete the original XML file after generating the markdown.
+
+The `assembly-path` argument is optional. It indicates the file path for the assembly corresponding to the XML file. This is needed to support the skip arguments.
+
+The `should-skip-internal` argument is optional. Pass "true" to exclude internal types and members from the markdown. Requires the assembly-path argument.
+
+The `should-skip-non-browsable` argument is optional. Pass "true" to exclude types and members marked with the [EditorBrowsableAttribute](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ComponentModel.EditorBrowsableAttribute 'System.ComponentModel.EditorBrowsableAttribute') with a value of [Never](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ComponentModel.EditorBrowsableState.Never 'System.ComponentModel.EditorBrowsableState.Never'). Requires the assembly-path argument.
 
 <a name='M-Vsxmd-Program-Main-System-String[]-'></a>
 ### Main(args) `method`
@@ -1722,6 +2075,110 @@ This method has no parameters.
 | ---- | ----------- |
 | T3 | Generic type 3. |
 | T4 | Generic type 4. |
+
+<a name='T-Vsxmd-Reflection-TypeReflector'></a>
+## TypeReflector `type`
+
+##### Namespace
+
+Vsxmd.Reflection
+
+##### Summary
+
+Reflection helpers for a single [Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type').
+
+<a name='M-Vsxmd-Reflection-TypeReflector-#ctor-System-Type,Vsxmd-Reflection-TypeReflector-'></a>
+### #ctor(type,parent) `constructor`
+
+##### Summary
+
+Initializes a new instance of the [TypeReflector](#T-Vsxmd-Reflection-TypeReflector 'Vsxmd.Reflection.TypeReflector') class.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| type | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') | The type. |
+| parent | [Vsxmd.Reflection.TypeReflector](#T-Vsxmd-Reflection-TypeReflector 'Vsxmd.Reflection.TypeReflector') | The parent type if `type` is a nested type, or null if not. |
+
+<a name='P-Vsxmd-Reflection-TypeReflector-Constructors'></a>
+### Constructors `property`
+
+##### Summary
+
+Gets the constructors defined for the type.
+
+<a name='P-Vsxmd-Reflection-TypeReflector-FullName'></a>
+### FullName `property`
+
+##### Summary
+
+Gets the type's full name.
+
+<a name='P-Vsxmd-Reflection-TypeReflector-IsBrowsable'></a>
+### IsBrowsable `property`
+
+##### Summary
+
+Gets a value indicating whether the type is intended to be discovered outside the assembly.
+
+<a name='P-Vsxmd-Reflection-TypeReflector-IsVisible'></a>
+### IsVisible `property`
+
+##### Summary
+
+Gets a value indicating whether the type is visible outside the assembly.
+
+<a name='M-Vsxmd-Reflection-TypeReflector-GetField-System-String-'></a>
+### GetField(name) `method`
+
+##### Summary
+
+Gets the field with the given name.
+
+##### Returns
+
+The field.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| name | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The name of the field. |
+
+<a name='M-Vsxmd-Reflection-TypeReflector-GetMethods-System-String-'></a>
+### GetMethods(name) `method`
+
+##### Summary
+
+Returns all method overloads with the given name.
+
+##### Returns
+
+The methods.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| name | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The name of the methods to return. |
+
+<a name='M-Vsxmd-Reflection-TypeReflector-GetProperty-System-String-'></a>
+### GetProperty(name) `method`
+
+##### Summary
+
+Returns a method for accessing a property with the given name.
+
+##### Returns
+
+The accessor.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| name | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The name of the property to return. |
 
 <a name='T-Vsxmd-Units-TypeparamUnit'></a>
 ## TypeparamUnit `type`

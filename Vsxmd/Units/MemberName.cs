@@ -116,6 +116,21 @@ namespace Vsxmd.Units
             ? this.NameSegments.TakeAllButLast(2).Join(".")
             : string.Empty;
 
+        /// <summary>
+        /// Gets the friendly name.
+        /// </summary>
+        /// <value>The friendly name.</value>
+        /// <example><c>ToString</c>, <c>#ctor</c>.</example>
+        internal string FriendlyName =>
+            this.Kind == MemberKind.Type
+            ? this.TypeShortName
+            : this.Kind == MemberKind.Constants ||
+              this.Kind == MemberKind.Property ||
+              this.Kind == MemberKind.Constructor ||
+              this.Kind == MemberKind.Method
+            ? this.NameSegments.Last()
+            : string.Empty;
+
         private string TypeShortName =>
             this.Kind == MemberKind.Type
             ? this.NameSegments.Last()
@@ -144,16 +159,6 @@ namespace Vsxmd.Units
         private IEnumerable<string> NameSegments =>
             this.LongName.Split('.');
 
-        private string FriendlyName =>
-            this.Kind == MemberKind.Type
-            ? this.TypeShortName
-            : this.Kind == MemberKind.Constants ||
-              this.Kind == MemberKind.Property ||
-              this.Kind == MemberKind.Constructor ||
-              this.Kind == MemberKind.Method
-            ? this.NameSegments.Last()
-            : string.Empty;
-
         /// <inheritdoc />
         public int CompareTo(MemberName other) =>
             this.TypeShortName != other.TypeShortName
@@ -174,7 +179,13 @@ namespace Vsxmd.Units
         /// </example>
         internal IEnumerable<string> GetParamTypes()
         {
-            var paramString = this.name.Split('(').Last().Trim(')');
+            var paramSplit = this.name.Split('(');
+            if (paramSplit.Length == 1)
+            {
+                return Enumerable.Empty<string>();
+            }
+
+            var paramString = paramSplit.Last().Trim(')');
 
             var delta = 0;
             var list = new List<StringBuilder>()
