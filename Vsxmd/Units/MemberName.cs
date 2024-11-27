@@ -68,10 +68,10 @@ namespace Vsxmd.Units
             this.Kind == MemberKind.Type ||
             this.Kind == MemberKind.Constants ||
             this.Kind == MemberKind.Property
-            ? $"[{this.FriendlyName.Escape()}](#{this.Href} '{this.StrippedName}')"
+            ? $"[{this.FriendlyName.Escape()}](#{this.Href})"
             : this.Kind == MemberKind.Constructor ||
               this.Kind == MemberKind.Method
-            ? $"[{this.FriendlyName.Escape()}({this.paramNames.Join(",")})](#{this.Href} '{this.StrippedName}')"
+            ? $"[{this.FriendlyName.Escape()}({this.paramNames.Join(",")})](#{this.Href})"
             : string.Empty;
 
         /// <summary>
@@ -130,7 +130,9 @@ namespace Vsxmd.Units
             .Replace('.', '-')
             .Replace(':', '-')
             .Replace('(', '-')
-            .Replace(')', '-');
+            .Replace(')', '-')
+            .ToLower()
+            [2..];
 
         private string StrippedName =>
             this.name.Substring(2);
@@ -216,7 +218,7 @@ namespace Vsxmd.Units
         internal string ToReferenceLink(bool useShortName) =>
             $"{this.Namespace}.".StartsWith("System.", StringComparison.Ordinal)
             ? $"[{this.GetReferenceName(useShortName).Escape()}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:{this.MsdnName} '{this.StrippedName}')"
-            : $"[{this.GetReferenceName(useShortName).Escape()}](#{this.Href} '{this.StrippedName}')";
+            : $"[{this.GetReferenceName(useShortName).Escape()}](#{this.Href})";
 
         private string GetReferenceName(bool useShortName) =>
             !useShortName
