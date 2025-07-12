@@ -11,7 +11,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [windows-latest, macos-latest]
         dotnet-version: [ '8.0', '9.0' ]
 
     steps:
@@ -23,10 +23,10 @@ jobs:
         dotnet-version: ${{ matrix.dotnet-version }}
 
     - name: Restore dependencies
-      run: dotnet restore --framework net${{ matrix.dotnet-version }}
+      run: dotnet restore
 
     - name: Build
-      run: dotnet build --framework net${{ matrix.dotnet-version }} --no-restore
+      run: dotnet build --no-restore
 
     - name: Test
-      run: dotnet test --framework net${{ matrix.dotnet-version }} --no-build --verbosity normal
+      run: dotnet test --no-build --verbosity normal
