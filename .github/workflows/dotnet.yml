@@ -23,10 +23,10 @@ jobs:
         dotnet-version: ${{ matrix.dotnet-version }}
 
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore --framework net${{ matrix.dotnet-version.Split('.')[0] }}
 
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build --framework net${{ matrix.dotnet-version.Split('.')[0] }} --no-restore
 
     - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test --framework net${{ matrix.dotnet-version.Split('.')[0] }} --no-build --verbosity normal
