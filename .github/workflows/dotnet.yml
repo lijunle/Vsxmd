@@ -12,7 +12,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
-        dotnet-version: [ '8.0.x', '9.0.x' ]
+        dotnet-version: [ '8.0', '9.0' ]
 
     steps:
     - uses: actions/checkout@v4
@@ -23,10 +23,10 @@ jobs:
         dotnet-version: ${{ matrix.dotnet-version }}
 
     - name: Restore dependencies
-      run: dotnet restore --framework net${{ matrix.dotnet-version.Split('.')[0] }}
+      run: dotnet restore --framework net${{ matrix.dotnet-version }}
 
     - name: Build
-      run: dotnet build --framework net${{ matrix.dotnet-version.Split('.')[0] }} --no-restore
+      run: dotnet build --framework net${{ matrix.dotnet-version }} --no-restore
 
     - name: Test
-      run: dotnet test --framework net${{ matrix.dotnet-version.Split('.')[0] }} --no-build --verbosity normal
+      run: dotnet test --framework net${{ matrix.dotnet-version }} --no-build --verbosity normal
