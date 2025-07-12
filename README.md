@@ -1,6 +1,6 @@
 # Vsxmd
 
-[![AppVeyor](https://img.shields.io/appveyor/ci/lijunle/Vsxmd/master.svg?logo=AppVeyor&logoColor=white)](https://ci.appveyor.com/project/lijunle/vsxmd/branch/master)
+[![GitHub Workflow](https://github.com/lijunle/Vsxmd/actions/workflows/dotnet.yml/badge.svg)](https://github.com/lijunle/Vsxmd/actions/workflows/dotnet.yml)
 [![NuGet](https://img.shields.io/nuget/v/Vsxmd.svg?logo=NuGet&logoColor=white)](https://www.nuget.org/packages/Vsxmd)
 
 A MSBuild task to convert [XML documentation](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/xmldoc/xml-documentation-comments) to Markdown syntax. Support both .Net Framework and .Net Core projects.
