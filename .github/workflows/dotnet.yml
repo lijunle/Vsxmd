@@ -23,7 +23,12 @@ jobs:
 
       - name: Set version from tag if exists
         if: startsWith(github.ref, 'refs/tags/')
-        run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $env:GITHUB_ENV
+        shell: pwsh
+        run: echo "VERSION=$($env:GITHUB_REF -replace 'refs/tags/v', '')" >> $env:GITHUB_ENV
+
+      - name: Debug GITHUB_ENV contents
+        shell: pwsh
+        run: Get-Content $env:GITHUB_ENV
 
       - name: Setup .NET SDK
         uses: actions/setup-dotnet@v4
