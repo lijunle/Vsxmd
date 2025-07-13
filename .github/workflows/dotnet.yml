@@ -57,7 +57,7 @@ jobs:
     - name: Upload Vsxmd.zip artifact
       uses: actions/upload-artifact@v4
       with:
-        name: Vsxmd.zip
+        name: Vsxmd
         path: Vsxmd/bin/Release
 
     - name: Upload NuGet packages
