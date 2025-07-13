@@ -54,11 +54,11 @@ jobs:
     - name: Upload Vsxmd.zip artifact
       uses: actions/upload-artifact@v4
       with:
-        name: Vsxmd
+        name: Vsxmd-Release-${{ env.VERSION }}
         path: Vsxmd/bin/Release
 
     - name: Upload NuGet packages
       uses: actions/upload-artifact@v4
       with:
-        name: NuGet-packages
+        name: Vsxmd-NuGet-${{ env.VERSION }}
         path: Vsxmd/**/*.nupkg
