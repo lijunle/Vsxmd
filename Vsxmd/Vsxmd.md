@@ -1214,7 +1214,7 @@ Program entry.
 Usage syntax:
 
 ```
-Vsxmd.exe &lt;input-XML-path&gt; [output-Markdown-path]
+Vsxmd.exe <input-XML-path> [output-Markdown-path]
 ```
 
 The `input-XML-path` argument is required. It references to the VS generated XML documentation file.
@@ -1566,7 +1566,7 @@ See \``code block inside backtick`\`.
 See `<XML> encoding will be decoded`.
 
 ```plain
-&lt;XML&gt; in full code block will be decoded.
+<XML> in full code block will be decoded.
 ```
 
 ##### Returns

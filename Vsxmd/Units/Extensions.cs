@@ -167,7 +167,7 @@ namespace Vsxmd.Units
 
                         var codeblockLines = value.Split(Environment.NewLine.ToCharArray())
                             .Where(t => t.Length > indexOf)
-                            .Select(t => t.Substring(indexOf));
+                            .Select(t => t.Substring(indexOf).ParseBrackets());
                         var codeblock = string.Join("\n", codeblockLines);
 
                         return $"\n\n```{lang}\n{codeblock}\n```\n\n";
