@@ -2,31 +2,126 @@ name: .NET
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
+
+permissions:
+  contents: read
+  packages: write
 
 jobs:
-  build:
+  publish:
+    runs-on: windows-latest
+    env:
+      VERSION: 0.0.${{ github.run_number }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set version from tag if exists
+        if: startsWith(github.ref, 'refs/tags/')
+        run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $env:GITHUB_ENV
+
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v4
+
+      - name: Build and publish linux-musl-x64
+        run: dotnet publish Vsxmd -c Release /p:PublishSingleFile=true /p:PublishTrimmed=true /p:Version=${{ env.VERSION }} --verbosity normal --runtime linux-musl-x64
+
+      - name: Build and publish linux-x64
+        run: dotnet publish Vsxmd -c Release /p:PublishSingleFile=true /p:PublishTrimmed=true /p:Version=${{ env.VERSION }} --verbosity normal --runtime linux-x64
+
+      - name: Build and publish osx-x64
+        run: dotnet publish Vsxmd -c Release /p:PublishSingleFile=true /p:PublishTrimmed=true /p:Version=${{ env.VERSION }} --verbosity normal --runtime osx-x64
+
+      - name: Build and publish win-x64
+        run: dotnet publish Vsxmd -c Release /p:PublishSingleFile=true /p:PublishTrimmed=true /p:Version=${{ env.VERSION }} --verbosity normal --runtime win-x64
+
+      - name: Build and publish win-x86
+        run: dotnet publish Vsxmd -c Release /p:PublishSingleFile=true /p:PublishTrimmed=true /p:Version=${{ env.VERSION }} --verbosity normal --runtime win-x86
+
+      - name: Check for unexpected file changes
+        run: git diff --exit-code || (git diff && exit 1)
+
+      - name: Pack NuGet package
+        run: dotnet pack Vsxmd --no-restore --no-build -c Release /p:Version=${{ env.VERSION }}
+
+      - name: Push to GitHub Package Registry
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+        run: dotnet nuget push "Vsxmd/**/*.nupkg" --source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" --api-key ${{ secrets.GITHUB_TOKEN }} --skip-duplicate
+
+      - name: Upload Vsxmd artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Vsxmd-${{ env.VERSION }}
+          path: Vsxmd/bin/Release
+
+  build-linux:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        container:
+          - mcr.microsoft.com/dotnet/sdk:8.0-alpine
+          - mcr.microsoft.com/dotnet/sdk:8.0
+
+    container:
+      image: ${{ matrix.container }}
+
+    steps:
+      - name: Install Git
+        run: (apk add --no-cache git) || (apt-get update && apt-get install -y git)
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Fix directory ownership
+        run: chown -R $(id -u):$(id -g) .
+
+      - name: Detect libc
+        run: ls -la /lib*/ld-*
+
+      - name: Build project
+        run: dotnet build Vsxmd -c Release --verbosity normal
+
+      - name: Check for unexpected file changes
+        run: git diff --exit-code || (git diff && exit 1)
+
+  build-macos:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [windows-latest, macos-latest]
-        dotnet-version: [ '8.0', '9.0' ]
+        os: [macos-latest, macos-13]
 
     steps:
-    - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-    - name: Setup .NET SDK ${{ matrix.dotnet-version }}
-      uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: ${{ matrix.dotnet-version }}
+      - name: Show architecture
+        run: uname -m
 
-    - name: Restore dependencies
-      run: dotnet restore
+      - name: Build project
+        run: dotnet build Vsxmd -c Release --verbosity normal
 
-    - name: Build
-      run: dotnet build --no-restore
+      - name: Check for unexpected file changes
+        run: git diff --exit-code || (git diff && exit 1)
 
-    - name: Test
-      run: dotnet test --no-build --verbosity normal
+  build-windows:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [windows-latest, windows-11-arm]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Show architecture
+        run: echo $env:PROCESSOR_ARCHITECTURE
+
+      - name: Build project
+        run: dotnet build Vsxmd -c Release --verbosity normal
+
+      - name: Check for unexpected file changes
+        run: git diff --exit-code || (git diff && exit 1)
