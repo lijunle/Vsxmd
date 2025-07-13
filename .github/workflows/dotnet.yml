@@ -71,7 +71,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Detect musl libc
-        run: ldd --version && ls -la /lib/ld-musl*
+        run: ls -la /lib/ld-musl*
 
       - name: Build project
         run: dotnet build Vsxmd -c Release
