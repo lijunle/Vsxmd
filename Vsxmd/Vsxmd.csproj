@@ -32,6 +32,7 @@
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
     <StartupObject>Vsxmd.Program</StartupObject>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
   <ItemGroup>
     <!-- The parameter _PackageFiles is declared in NuGet.Build.Tasks.Pack.targets -->
@@ -44,6 +45,7 @@
     <_PackageFiles Include="bin\$(Configuration)\$(TargetFramework)\win-x86\publish\Vsxmd.exe" PackagePath="tools\win-x86\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="..\README.md" Link="README.md" PackagePath="\" />
     <Content Include="..\LICENSE" Link="LICENSE" PackagePath="\" />
     <Content Include="build\Vsxmd.targets" PackagePath="build\" />
   </ItemGroup>
