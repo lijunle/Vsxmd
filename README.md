@@ -1,6 +1,6 @@
 # Vsxmd
 
-[![AppVeyor](https://img.shields.io/appveyor/ci/lijunle/Vsxmd/master.svg?logo=AppVeyor&logoColor=white)](https://ci.appveyor.com/project/lijunle/vsxmd/branch/master)
+[![GitHub Workflow](https://github.com/lijunle/Vsxmd/actions/workflows/dotnet.yml/badge.svg)](https://github.com/lijunle/Vsxmd/actions/workflows/dotnet.yml)
 [![NuGet](https://img.shields.io/nuget/v/Vsxmd.svg?logo=NuGet&logoColor=white)](https://www.nuget.org/packages/Vsxmd)
 
 A MSBuild task to convert [XML documentation](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/xmldoc/xml-documentation-comments) to Markdown syntax. Support both .Net Framework and .Net Core projects.
@@ -19,6 +19,14 @@ If you are using Visual Studio:
 
 - In Visual Studio, right click project name to open project properties window.
 - Switch to **Build** tab, in **Output** section, check **XML documentation file** checkbox.
+- Install [Vsxmd](https://www.nuget.org/packages/Vsxmd/) package from NuGet.
+- Build the project, then a markdown file is generated next to the XML documentation file.
+
+If you are using Rider:
+
+- Open the .csproj of your project
+- Add `<GenerateDocumentationFile>true</GenerateDocumentationFile>` to the `PropertyGroup` section.
+- Add `<DocumentationMarkdown>$(MSBuildProjectDirectory)\Readme.md</DocumentationMarkdown>` to the `PropertyGroup` section.
 - Install [Vsxmd](https://www.nuget.org/packages/Vsxmd/) package from NuGet.
 - Build the project, then a markdown file is generated next to the XML documentation file.
 
