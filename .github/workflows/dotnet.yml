@@ -70,6 +70,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Fix directory ownership
+        run: chown -R $(id -u):$(id -g) .
+
       - name: Detect musl libc
         run: ls -la /lib/ld-musl*
 
@@ -77,4 +80,4 @@ jobs:
         run: dotnet build Vsxmd -c Release --verbosity normal
 
       - name: Check for unexpected file changes
-        run: pwd && ls -la && git diff --exit-code || (git diff && exit 1)
+        run: pwd && ls -la && ls -la Vsxmd && git diff --exit-code || (git diff && exit 1)
