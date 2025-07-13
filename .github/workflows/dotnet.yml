@@ -80,4 +80,4 @@ jobs:
         run: dotnet build Vsxmd -c Release --verbosity normal
 
       - name: Check for unexpected file changes
-        run: pwd && ls -la && ls -la Vsxmd && git diff --exit-code || (git diff && exit 1)
+        run: git diff --exit-code || (git diff && exit 1)
