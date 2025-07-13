@@ -25,6 +25,7 @@
     <Authors>Junle Li, Sales Lessa Lopes</Authors>
     <Description>VS XML documentation -&gt; Markdown syntax.</Description>
     <Copyright>Copyright 2015-Present</Copyright>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/lijunle/Vsxmd</PackageProjectUrl>
     <PackageTags>Vsxmd VS XML document Markdown</PackageTags>
@@ -32,7 +33,6 @@
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
     <StartupObject>Vsxmd.Program</StartupObject>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
   <ItemGroup>
     <!-- The parameter _PackageFiles is declared in NuGet.Build.Tasks.Pack.targets -->
