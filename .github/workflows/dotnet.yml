@@ -29,9 +29,6 @@ jobs:
       shell: pwsh
       run: ./Vsxmd/Test.ps1 -Prepare
 
-    - name: Restore dependencies
-      run: dotnet restore Vsxmd
-      
     - name: Build and publish linux-musl-x64
       run: dotnet publish Vsxmd -c Release /p:PublishSingleFile=true /p:PublishTrimmed=true /p:Version=${{ env.VERSION }} --verbosity normal --runtime linux-musl-x64
 
