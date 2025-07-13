@@ -4,7 +4,8 @@
     <PropertyGroup>
       <VsxmdRuntime Condition=" $([MSBuild]::IsOsPlatform('Linux')) ">linux-x64</VsxmdRuntime>
       <VsxmdRuntime Condition=" $([MSBuild]::IsOsPlatform('Linux')) AND (EXISTS('/lib/ld-musl-x86_64.so.1') OR EXISTS('/usr/lib/ld-musl-x86_64.so.1')) ">linux-musl-x64</VsxmdRuntime>
-      <VsxmdRuntime Condition=" $([MSBuild]::IsOsPlatform('OSX')) ">osx-x64</VsxmdRuntime>
+      <VsxmdRuntime Condition=" $([MSBuild]::IsOsPlatform('OSX')) AND '$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)' == 'Arm64' ">osx-arm64</VsxmdRuntime>
+      <VsxmdRuntime Condition=" $([MSBuild]::IsOsPlatform('OSX')) AND '$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)' == 'X64' ">osx-x64</VsxmdRuntime>
       <VsxmdRuntime Condition=" $([MSBuild]::IsOsPlatform('Windows')) AND '$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)' == 'X64' ">win-x64</VsxmdRuntime>
       <VsxmdRuntime Condition=" $([MSBuild]::IsOsPlatform('Windows')) AND '$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)' == 'X86' ">win-x86</VsxmdRuntime>
       <VsxmdBinaryDirectory>$(MSBuildThisFileDirectory)/../tools/$(VsxmdRuntime)</VsxmdBinaryDirectory>

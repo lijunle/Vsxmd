@@ -33,6 +33,9 @@ jobs:
       - name: Build and publish linux-x64
         run: dotnet publish Vsxmd -c Release /p:PublishSingleFile=true /p:PublishTrimmed=true /p:Version=${{ env.VERSION }} --verbosity normal --runtime linux-x64
 
+      - name: Build and publish osx-arm64
+        run: dotnet publish Vsxmd -c Release /p:PublishSingleFile=true /p:PublishTrimmed=true /p:Version=${{ env.VERSION }} --verbosity normal --runtime osx-arm64
+
       - name: Build and publish osx-x64
         run: dotnet publish Vsxmd -c Release /p:PublishSingleFile=true /p:PublishTrimmed=true /p:Version=${{ env.VERSION }} --verbosity normal --runtime osx-x64
 
