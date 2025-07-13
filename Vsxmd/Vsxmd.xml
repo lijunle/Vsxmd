@@ -126,6 +126,15 @@
             </summary>
             <returns>Nothing.</returns>
         </member>
+        <member name="M:Vsxmd.Program.Test.TestSeeAlsoTag">
+            <summary>
+            Test see also tag.
+            </summary>
+            <returns>Nothing.</returns>
+            <seealso></seealso>
+            <seealso cref="M:Vsxmd.Program.Test.TestSeeAlsoTag" />
+            <seealso href="https://github.com">GitHub</seealso>
+        </member>
         <member name="T:Vsxmd.Program.TestGenericType`2">
             <summary>
             Test generic type.

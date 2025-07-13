@@ -69,6 +69,6 @@ namespace Vsxmd.Units
         /// <param name="name">The <see cref="XName"/> of the <see cref="XAttribute"/> to get.</param>
         /// <returns>An <see cref="XAttribute"/> value that has the specified <paramref name="name"/>; <value>null</value> if there is no attribute with the specified <paramref name="name"/>.</returns>
         protected string GetAttribute(XName name) =>
-            this.Element.Attribute(name).Value;
+            this.Element.Attribute(name)?.Value;
     }
 }
