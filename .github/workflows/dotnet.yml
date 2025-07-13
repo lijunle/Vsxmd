@@ -27,10 +27,6 @@ jobs:
       - name: Setup .NET SDK
         uses: actions/setup-dotnet@v4
 
-      - name: Prepare markdown and XML files for testing
-        shell: pwsh
-        run: ./Vsxmd/Test.ps1 -Prepare
-
       - name: Build and publish linux-musl-x64
         run: dotnet publish Vsxmd -c Release /p:PublishSingleFile=true /p:PublishTrimmed=true /p:Version=${{ env.VERSION }} --verbosity normal --runtime linux-musl-x64
 
@@ -46,9 +42,8 @@ jobs:
       - name: Build and publish win-x86
         run: dotnet publish Vsxmd -c Release /p:PublishSingleFile=true /p:PublishTrimmed=true /p:Version=${{ env.VERSION }} --verbosity normal --runtime win-x86
 
-      - name: Test Markdown and XML files
-        shell: pwsh
-        run: ./Vsxmd/Test.ps1 -Run
+      - name: Check for unexpected file changes
+        run: git diff --exit-code || (git diff && exit 1)
 
       - name: Pack NuGet package
         run: dotnet pack Vsxmd --no-restore --no-build -c Release /p:Version=${{ env.VERSION }}
@@ -80,3 +75,6 @@ jobs:
 
       - name: Build project
         run: dotnet build Vsxmd -c Release
+
+      - name: Check for unexpected file changes
+        run: git diff --exit-code || (git diff && exit 1)
