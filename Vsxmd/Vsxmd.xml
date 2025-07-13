@@ -133,7 +133,7 @@
             <returns>Nothing.</returns>
             <seealso></seealso>
             <seealso cref="M:Vsxmd.Program.Test.TestSeeAlsoTag" />
-            <seealso href="https://github.com">Github</seealso>
+            <seealso href="https://github.com">GitHub</seealso>
         </member>
         <member name="T:Vsxmd.Program.TestGenericType`2">
             <summary>

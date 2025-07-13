@@ -162,7 +162,7 @@ namespace Vsxmd
             /// <returns>Nothing.</returns>
             /// <seealso></seealso>
             /// <seealso cref="TestSeeAlsoTag" />
-            /// <seealso href="https://github.com">Github</seealso>
+            /// <seealso href="https://github.com">GitHub</seealso>
             internal string TestSeeAlsoTag() => null;
         }
 

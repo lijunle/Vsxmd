@@ -1699,7 +1699,7 @@ This method has no parameters.
 
 - (empty reference)
 - [Vsxmd.Program.Test.TestSeeAlsoTag](#M-Vsxmd-Program-Test-TestSeeAlsoTag 'Vsxmd.Program.Test.TestSeeAlsoTag')
-- [Github](https://github.com)
+- [GitHub](https://github.com)
 
 <a name='M-Vsxmd-Program-Test-TestSeeLangword'></a>
 ### TestSeeLangword() `method`
