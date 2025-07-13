@@ -58,14 +58,20 @@ jobs:
           name: Vsxmd-${{ env.VERSION }}
           path: Vsxmd/bin/Release
 
-  build-alpine:
+  build-linux:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        container:
+          - mcr.microsoft.com/dotnet/sdk:8.0-alpine
+          - mcr.microsoft.com/dotnet/sdk:8.0
+
     container:
-      image: mcr.microsoft.com/dotnet/sdk:8.0-alpine
+      image: ${{ matrix.container }}
 
     steps:
       - name: Install Git
-        run: apk add --no-cache git
+        run: (apk add --no-cache git) || (apt-get update && apt-get install -y git)
 
       - name: Checkout code
         uses: actions/checkout@v4
