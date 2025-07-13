@@ -8,25 +8,60 @@ on:
 
 jobs:
   build:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [windows-latest, macos-latest]
-        dotnet-version: [ '8.0', '9.0' ]
+    runs-on: windows-latest
+    env:
+      VERSION: 0.0.${{ github.run_number }}
 
     steps:
-    - uses: actions/checkout@v4
-
-    - name: Setup .NET SDK ${{ matrix.dotnet-version }}
-      uses: actions/setup-dotnet@v4
+    - name: Checkout code
+      uses: actions/checkout@v4
       with:
-        dotnet-version: ${{ matrix.dotnet-version }}
+        fetch-depth: 1
+
+    - name: Set version from tag if exists
+      if: startsWith(github.ref, 'refs/tags/')
+      run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $env:GITHUB_ENV
+
+    - name: Setup .NET SDK
+      uses: actions/setup-dotnet@v4
+
+    - name: Prepare markdown and XML files for testing
+      shell: pwsh
+      run: ./Vsxmd/Test.ps1 -Prepare
 
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore Vsxmd
+      
+    - name: Build and publish linux-musl-x64
+      run: dotnet publish Vsxmd -c Release /p:PublishSingleFile=true /p:PublishTrimmed=true /p:Version=${{ env.VERSION }} --verbosity normal --runtime linux-musl-x64
 
-    - name: Build
-      run: dotnet build --no-restore
+    - name: Build and publish linux-x64
+      run: dotnet publish Vsxmd -c Release /p:PublishSingleFile=true /p:PublishTrimmed=true /p:Version=${{ env.VERSION }} --verbosity normal --runtime linux-x64
 
-    - name: Test
-      run: dotnet test --no-build --verbosity normal
+    - name: Build and publish osx-x64
+      run: dotnet publish Vsxmd -c Release /p:PublishSingleFile=true /p:PublishTrimmed=true /p:Version=${{ env.VERSION }} --verbosity normal --runtime osx-x64
+
+    - name: Build and publish win-x64
+      run: dotnet publish Vsxmd -c Release /p:PublishSingleFile=true /p:PublishTrimmed=true /p:Version=${{ env.VERSION }} --verbosity normal --runtime win-x64
+
+    - name: Build and publish win-x86
+      run: dotnet publish Vsxmd -c Release /p:PublishSingleFile=true /p:PublishTrimmed=true /p:Version=${{ env.VERSION }} --verbosity normal --runtime win-x86
+
+    - name: Test Markdown and XML files
+      shell: pwsh
+      run: ./Vsxmd/Test.ps1 -Run
+      
+    - name: Pack NuGet package
+      run: dotnet pack Vsxmd --no-restore --no-build -c Release /p:Version=${{ env.VERSION }}
+      
+    - name: Upload Vsxmd.zip artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: Vsxmd.zip
+        path: Vsxmd/bin/Release
+
+    - name: Upload NuGet packages
+      uses: actions/upload-artifact@v4
+      with:
+        name: NuGet-packages
+        path: Vsxmd/**/*.nupkg

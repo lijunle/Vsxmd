@@ -3,7 +3,7 @@
   <!-- Project Metadata -->
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
+    <TargetFramework>net8.0</TargetFramework>
     <DocumentationFile>Vsxmd.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
@@ -17,6 +17,7 @@
     </PackageReference>
     <AdditionalFiles Include="stylecop.json" />
   </ItemGroup>
+
   <!-- NuGet Metadata: https://docs.microsoft.com/en-us/dotnet/core/tools/csproj#nuget-metadata-properties -->
   <PropertyGroup>
     <Title>Vsxmd</Title>
@@ -44,6 +45,7 @@
     <Content Include="..\LICENSE" Link="LICENSE" PackagePath="\" />
     <Content Include="build\Vsxmd.targets" PackagePath="build\" />
   </ItemGroup>
+
   <!-- Generate the Markdown file for itself -->
   <Target Name="VsxmdPreparation" AfterTargets="PostBuildEvent">
     <PropertyGroup>
@@ -58,4 +60,5 @@
     </PropertyGroup>
   </Target>
   <Import Project="$(MSBuildThisFileDirectory)\build\Vsxmd.targets" />
+
 </Project>
