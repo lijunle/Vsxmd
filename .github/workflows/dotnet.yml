@@ -51,14 +51,14 @@ jobs:
     - name: Test Markdown and XML files
       shell: pwsh
       run: ./Vsxmd/Test.ps1 -Run
-      
+
     - name: Pack NuGet package
       run: dotnet pack Vsxmd --no-restore --no-build -c Release /p:Version=${{ env.VERSION }}
 
     - name: Push to GitHub Package Registry
       if: github.event_name == 'push' && github.ref == 'refs/heads/master'
       run: dotnet nuget push "Vsxmd/**/*.nupkg" --source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" --api-key ${{ secrets.GITHUB_TOKEN }} --skip-duplicate
-      
+
     - name: Upload Vsxmd artifact
       uses: actions/upload-artifact@v4
       with:
