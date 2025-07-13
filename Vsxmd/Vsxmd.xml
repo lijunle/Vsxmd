@@ -104,6 +104,8 @@
             <para>See `should not inside code block`.</para>
             <para>See <c>`backtick inside code block`</c>.</para>
             <para>See `<c>code block inside backtick</c>`.</para>
+            <para>See <c>&lt;XML&gt; encoding will be decoded</c>.</para>
+            <code lang="plain">&lt;XML&gt; in full code block will be decoded.</code>
             </summary>
             <returns>Nothing.</returns>
         </member>

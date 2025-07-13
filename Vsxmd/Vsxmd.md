@@ -1563,6 +1563,12 @@ See `` `backtick inside code block` ``.
 
 See \``code block inside backtick`\`.
 
+See `<XML> encoding will be decoded`.
+
+```plain
+&lt;XML&gt; in full code block will be decoded.
+```
+
 ##### Returns
 
 Nothing.
