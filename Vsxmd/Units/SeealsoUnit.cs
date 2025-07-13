@@ -29,13 +29,13 @@ namespace Vsxmd.Units
         /// <inheritdoc />
         public override IEnumerable<string> ToMarkdown()
         {
-            var cref = this.Element.Attribute("cref")?.Value;
+            var cref = this.GetAttribute("cref");
             if (!string.IsNullOrEmpty(cref))
             {
                 return new[] { $"- {cref.ToReferenceLink()}" };
             }
 
-            var href = this.Element.Attribute("href")?.Value;
+            var href = this.GetAttribute("href");
             if (!string.IsNullOrEmpty(href))
             {
                 var text = this.ElementContent;
@@ -43,6 +43,7 @@ namespace Vsxmd.Units
                 {
                     text = href;
                 }
+
                 return new[] { $"- [{text}]({href})" };
             }
 
