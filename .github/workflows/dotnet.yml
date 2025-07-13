@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [ master ]
 
+permissions:
+  contents: read
+  packages: write
+
 jobs:
   build:
     runs-on: windows-latest
@@ -50,15 +54,13 @@ jobs:
       
     - name: Pack NuGet package
       run: dotnet pack Vsxmd --no-restore --no-build -c Release /p:Version=${{ env.VERSION }}
-      
-    - name: Upload Vsxmd.zip artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: Vsxmd-Release-${{ env.VERSION }}
-        path: Vsxmd/bin/Release
 
-    - name: Upload NuGet packages
+    - name: Push to GitHub Package Registry
+      if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+      run: dotnet nuget push "Vsxmd/**/*.nupkg" --source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" --api-key ${{ secrets.GITHUB_TOKEN }} --skip-duplicate
+      
+    - name: Upload Vsxmd artifact
       uses: actions/upload-artifact@v4
       with:
-        name: Vsxmd-NuGet-${{ env.VERSION }}
-        path: Vsxmd/**/*.nupkg
+        name: Vsxmd-${{ env.VERSION }}
+        path: Vsxmd/bin/Release
