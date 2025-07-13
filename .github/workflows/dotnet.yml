@@ -79,8 +79,8 @@ jobs:
       - name: Fix directory ownership
         run: chown -R $(id -u):$(id -g) .
 
-      - name: Detect musl libc
-        run: ls -la /lib/ld-musl*
+      - name: Detect libc
+        run: ls -la /lib*/ld-*
 
       - name: Build project
         run: dotnet build Vsxmd -c Release --verbosity normal
