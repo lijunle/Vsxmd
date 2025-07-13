@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "Vsxmd": {
+      "commandName": "Project",
+      "commandLineArgs": "Vsxmd.xml",
+      "workingDirectory": "."
+    }
+  }
+}
