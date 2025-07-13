@@ -261,10 +261,7 @@ namespace Vsxmd.Units
 
             foreach (var (originalSymbol, newSymbol) in bracketsToReplace)
             {
-                while (str.Contains(originalSymbol, StringComparison.InvariantCulture))
-                {
-                    str = str.Replace(originalSymbol, newSymbol, StringComparison.InvariantCulture);
-                }
+                str = str.Replace(originalSymbol, newSymbol, StringComparison.InvariantCulture);
             }
 
             return str;
