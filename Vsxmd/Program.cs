@@ -40,6 +40,8 @@ namespace Vsxmd
 
                 string xmlPath = args[0];
                 string markdownPath = args.ElementAtOrDefault(1);
+                string vsxmdAutoDeleteXml = args.ElementAtOrDefault(2);
+                string assemblyPath = args.ElementAtOrDefault(3);
 
                 if (string.IsNullOrWhiteSpace(markdownPath))
                 {
@@ -48,12 +50,11 @@ namespace Vsxmd
                 }
 
                 var document = XDocument.Load(xmlPath);
-                var converter = new Converter(document);
+                var converter = new Converter(document, assemblyPath);
                 var markdown = converter.ToMarkdown();
 
                 File.WriteAllText(markdownPath, markdown);
 
-                string vsxmdAutoDeleteXml = args.ElementAtOrDefault(2);
                 if (string.IsNullOrWhiteSpace(vsxmdAutoDeleteXml))
                 {
                     return;

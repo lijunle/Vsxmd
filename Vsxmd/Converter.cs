@@ -15,14 +15,26 @@ namespace Vsxmd
     public class Converter : IConverter
     {
         private readonly XDocument document;
+        private readonly PublicApiFilter filter;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Converter"/> class.
         /// </summary>
         /// <param name="document">The XML document.</param>
         public Converter(XDocument document)
+            : this(document, null)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Converter"/> class.
+        /// </summary>
+        /// <param name="document">The XML document.</param>
+        /// <param name="assemblyPath">The path to the assembly DLL file for filtering public APIs. If null, all members are included.</param>
+        public Converter(XDocument document, string assemblyPath)
         {
             this.document = document;
+            this.filter = new PublicApiFilter(assemblyPath);
         }
 
         /// <summary>
@@ -35,12 +47,12 @@ namespace Vsxmd
 
         /// <inheritdoc/>
         public string ToMarkdown() =>
-            ToUnits(this.document.Root)
+            this.ToUnits(this.document.Root)
                 .SelectMany(x => x.ToMarkdown())
                 .Join("\n\n")
                 .Suffix("\n");
 
-        private static IEnumerable<IUnit> ToUnits(XElement docElement)
+        private IEnumerable<IUnit> ToUnits(XElement docElement)
         {
             // assembly unit
             var assemblyUnit = new AssemblyUnit(docElement.Element("assembly"));
@@ -51,6 +63,7 @@ namespace Vsxmd
                 .Elements("member")
                 .Select(element => new MemberUnit(element))
                 .Where(member => member.Kind != MemberKind.NotSupported)
+                .Where(member => this.filter.IsPublicApi(member.Name))
                 .GroupBy(unit => unit.TypeName)
                 .Select(MemberUnit.ComplementType)
                 .SelectMany(group => group)

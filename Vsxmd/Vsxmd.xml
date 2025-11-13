@@ -13,6 +13,13 @@
             </summary>
             <param name="document">The XML document.</param>
         </member>
+        <member name="M:Vsxmd.Converter.#ctor(System.Xml.Linq.XDocument,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Vsxmd.Converter"/> class.
+            </summary>
+            <param name="document">The XML document.</param>
+            <param name="assemblyPath">The path to the assembly DLL file for filtering public APIs. If null, all members are included.</param>
+        </member>
         <member name="M:Vsxmd.Converter.ToMarkdown(System.Xml.Linq.XDocument)">
             <summary>
             Convert VS XML document to Markdown syntax.
@@ -142,6 +149,24 @@
             <typeparam name="T3">Generic type 3.</typeparam>
             <typeparam name="T4">Generic type 4.</typeparam>
             <returns>Nothing.</returns>
+        </member>
+        <member name="T:Vsxmd.PublicApiFilter">
+            <summary>
+            Filter to determine if a member is part of the public API.
+            </summary>
+        </member>
+        <member name="M:Vsxmd.PublicApiFilter.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Vsxmd.PublicApiFilter"/> class.
+            </summary>
+            <param name="assemblyPath">The path to the assembly DLL file.</param>
+        </member>
+        <member name="M:Vsxmd.PublicApiFilter.IsPublicApi(System.String)">
+            <summary>
+            Determines whether the specified member name represents a public API member.
+            </summary>
+            <param name="memberName">The member name in XML documentation format (e.g., "T:Namespace.Type", "M:Namespace.Type.Method").</param>
+            <returns><c>true</c> if the member is public or if filtering is disabled; otherwise, <c>false</c>.</returns>
         </member>
         <member name="T:Vsxmd.TableOfContents">
             <summary>
@@ -557,6 +582,12 @@
             Gets the link pointing to this member unit.
             </summary>
             <value>The link pointing to this member unit.</value>
+        </member>
+        <member name="P:Vsxmd.Units.MemberUnit.Name">
+            <summary>
+            Gets the raw member name from the XML documentation.
+            </summary>
+            <value>The raw member name (e.g., "T:Namespace.Type", "M:Namespace.Type.Method").</value>
         </member>
         <member name="M:Vsxmd.Units.MemberUnit.ToMarkdown">
             <inheritdoc />
