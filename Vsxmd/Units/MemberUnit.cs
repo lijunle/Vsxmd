@@ -61,6 +61,12 @@ namespace Vsxmd.Units
         /// <value>The link pointing to this member unit.</value>
         internal string Link => this.name.Link;
 
+        /// <summary>
+        /// Gets the raw member name from the XML documentation.
+        /// </summary>
+        /// <value>The raw member name (e.g., "T:Namespace.Type", "M:Namespace.Type.Method").</value>
+        internal string Name => this.GetAttribute("name");
+
         private IEnumerable<string> InheritDoc =>
             this.GetChild("inheritdoc") == null
                 ? Enumerable.Empty<string>()
