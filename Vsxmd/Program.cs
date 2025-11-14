@@ -155,6 +155,15 @@ namespace Vsxmd
             /// </summary>
             /// <returns>Nothing.</returns>
             internal string TestSeeLangword() => null;
+
+            /// <summary>
+            /// Test see also tag.
+            /// </summary>
+            /// <returns>Nothing.</returns>
+            /// <seealso></seealso>
+            /// <seealso cref="TestSeeAlsoTag" />
+            /// <seealso href="https://github.com">GitHub</seealso>
+            internal string TestSeeAlsoTag() => null;
         }
 
         /// <summary>

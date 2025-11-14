@@ -27,11 +27,35 @@ namespace Vsxmd.Units
         }
 
         /// <inheritdoc />
-        public override IEnumerable<string> ToMarkdown() =>
-            new[]
+        public override IEnumerable<string> ToMarkdown()
+        {
+            var cref = this.GetAttribute("cref");
+            if (!string.IsNullOrEmpty(cref))
             {
-                $"- {this.GetAttribute("cref").ToReferenceLink()}",
-            };
+                return new[] { $"- {cref.ToReferenceLink()}" };
+            }
+
+            var href = this.GetAttribute("href");
+            if (!string.IsNullOrEmpty(href))
+            {
+                var text = this.ElementContent;
+                if (string.IsNullOrWhiteSpace(text))
+                {
+                    text = href;
+                }
+
+                return new[] { $"- [{text}]({href})" };
+            }
+
+            // If neither cref nor href is present, fallback to element content
+            var content = this.ElementContent;
+            if (!string.IsNullOrWhiteSpace(content))
+            {
+                return new[] { $"- {content}" };
+            }
+
+            return new[] { "- (empty reference)" };
+        }
 
         /// <summary>
         /// Convert the seealso XML element to Markdown safely.
