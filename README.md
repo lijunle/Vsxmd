@@ -64,6 +64,19 @@ A boolean flag to delete the XML documentation file after the Markdown file is g
 </PropertyGroup>
 ```
 
+### `VsxmdLineEnding`
+
+A setting to change the line endings in the Markdown file that is generated.
+Defaulting to LF, it can be one of these options: CR, LF, or CRLF
+
+#### Example
+
+```xml
+<PropertyGroup>
+    <VsxmdLineEnding>crlf</VsxmdLineEnding>
+</PropertyGroup>
+```
+
 ## Extend XML documentation
 
 There are some extended features based on XML documentation. They are not described in [XML recommended tags](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/xmldoc/recommended-tags-for-documentation-comments), but they are worth to use.

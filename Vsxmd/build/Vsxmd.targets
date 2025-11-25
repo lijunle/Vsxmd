@@ -13,7 +13,7 @@
       <VsxmdBinary Condition=" '$(VsxmdBinary)' == '' AND EXISTS('$(VsxmdBinaryDirectory)/Vsxmd') ">$(VsxmdBinaryDirectory)/Vsxmd</VsxmdBinary>
       <VsxmdBinary Condition=" '$(VsxmdBinary)' == '' AND EXISTS('$(VsxmdBinaryDirectory)/Vsxmd.exe') ">$(VsxmdBinaryDirectory)/Vsxmd.exe</VsxmdBinary>
       <VsxmdCommand Condition=" '$(VsxmdBinary)' == '' ">echo "The Vsxmd command is not currently available."</VsxmdCommand>
-      <VsxmdCommand Condition=" '$(VsxmdBinary)' != '' ">"$(VsxmdBinary)" "$(DocumentationFile)" "$(DocumentationMarkdown)" "$(VsxmdAutoDeleteXml)"</VsxmdCommand>
+      <VsxmdCommand Condition=" '$(VsxmdBinary)' != '' ">"$(VsxmdBinary)" "$(DocumentationFile)" "$(DocumentationMarkdown)" "$(VsxmdAutoDeleteXml)" "$(VsxmdLineEnding)"</VsxmdCommand>
     </PropertyGroup>
     <Message Text="Vsxmd starts to convert XML to Markdown." />
     <Exec Command="$(VsxmdCommand)" />
