@@ -51,6 +51,12 @@ namespace Vsxmd
                 var converter = new Converter(document);
                 var markdown = converter.ToMarkdown();
 
+                var outputDirectory = Path.GetDirectoryName(markdownPath);
+                if (!string.IsNullOrEmpty(outputDirectory) && !Directory.Exists(outputDirectory))
+                {
+                    Directory.CreateDirectory(outputDirectory);
+                }
+
                 File.WriteAllText(markdownPath, markdown);
 
                 string vsxmdAutoDeleteXml = args.ElementAtOrDefault(2);
